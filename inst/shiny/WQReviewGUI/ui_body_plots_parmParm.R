@@ -1,0 +1,50 @@
+###This contains all the ui elements for the parmParm plot tab.
+###It is sourced from the ui-body tab, which is eventually sourced from the ui tab.
+###These are contained in individual scripts just for organization sake.
+
+
+tabItem(tabName = "parmParmPlot",
+        fluidPage(
+                pageWithSidebar(
+                        headerPanel("Parameter vs. Paramater Plot"),
+                        sidebarPanel(
+                                dateInput("newThreshold_parmParm", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
+                                selectInput("siteSel_parmParm","Station",choices="",multiple=TRUE),
+                                selectInput("parmSel_parmParmX","X-Parameter",choices="",multiple=FALSE),
+                                selectInput("parmSel_parmParmY","Y-Parameter",choices="",multiple=FALSE),
+                                selectInput("facetSel_parmParm","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
+                                
+                                checkboxInput("fit_parmParm",label="Add linear fit",value=FALSE),
+                                checkboxGroupInput("axes_parmParm","Axis options:",
+                                                   choices = c("Log10X","Log10Y"))
+                        ),
+                        mainPanel(
+                ###This displays the primary plot interaction output
+                box(
+                        plotOutput("qwparmParmPlot", click="plot_click",brush="plot_brush"),
+                        #verbatimTextOutput("brushx"),
+                        
+                        ###Box options
+                        width=12,
+                        collapsible=TRUE),
+                
+                ###This displays the zoomed plot interaction output
+                
+                box(
+                        plotOutput("qwparmParmPlot_zoom", click="plot_click"),
+                        ###Box options
+                        width=12,
+                        collapsible=TRUE),
+                
+                ###This displays the plot interaction output
+                
+                box(
+                        DT::dataTableOutput("parmParm_clickinfo"),
+                        DT::dataTableOutput("parmParm_brushinfo"),
+                        ###Box options
+                        width=12,
+                        collapsible=TRUE)
+                        )
+        )
+)
+)

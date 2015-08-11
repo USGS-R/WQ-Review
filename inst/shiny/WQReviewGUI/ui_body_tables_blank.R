@@ -1,0 +1,19 @@
+tabItem(tabName = "blankTable",
+        fluidPage(
+                pageWithSidebar(
+                        headerPanel("Blank summary table"),
+                        sidebarPanel(
+                                dateInput("blankStartDate", "Start date for blank summary", 
+                                               value=Sys.Date() - 365*3),
+                                dateInput("blankEndDate", "end date for blank summary", 
+                                          value=Sys.Date())
+                        ),
+                        mainPanel(
+                                downloadButton('blankTableOut', 'Download tab delimited table'),
+                                
+                                DT::dataTableOutput("blankTable")
+                        )
+                )
+        )
+)
+

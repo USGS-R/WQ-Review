@@ -1,0 +1,21 @@
+---
+title: "nwisupload vignette"
+author: "T. Joe Mills"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Uploading data using WQ-Review}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+QWToolbox - data uploads
+===
+This vignette describes a workflow for uploading non-NWQL data to NWIS using the nwisupload function from the QWToolbox package.
+Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
+
+[QWToolbox Issues](https://github.com/USGS-R/WQ-Review/issues)
+
+## nwisupload function overview
+The primary function of nwisupload is to format typical sample-result datasets from non-NWQL labs into a format readable by QWData batch processing. This function will assemple "qwresult" and "qwsample" files for basic data uploads very easily. However, special result/sample specific considerations will need to be handled by the user independently. At the very least, for complicated data uploads it will provide a "bare-bones" file to work with further.
+
+#MANUAL WORK IN PROGRESS

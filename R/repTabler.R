@@ -1,0 +1,69 @@
+#' repTabler
+#' 
+#' Generates a table of environmental samples and replicates and calculates relative percent difference
+#' @param qw.data A qw.data object generater by NWIS_PullR
+#' @import plyr
+#' @export
+
+repTabler <- function(qw.data)
+{
+  ###Subset to environmental samples with a rep and no < or E
+  envData <- subset(qw.data$PlotTable,SAMP_TYPE_CD == 7 & MEDIUM_CD %in% c("WS ","WG ")  & PARM_SEQ_GRP_CD != "INF" & DQI_CD != "Q")
+  
+  ###Subset to rep samples
+  repData <- subset(qw.data$PlotTable,SAMP_TYPE_CD == 7 & MEDIUM_CD %in% c("WSQ","WGQ")  & PARM_SEQ_GRP_CD != "INF" & DQI_CD != "Q")
+  
+  if(nrow(repData) > 0 & nrow(envData) > 0)
+  {
+  ###Rename columns to indicate env or rep
+  names(envData) <- paste("Env_",names(envData),sep="")
+  names(repData) <- paste("Rep_",names(repData),sep="")
+  envData <- rename(envData,c("Env_PARM_CD" = "PARM_CD"))
+  repData <- rename(repData,c("Rep_PARM_CD" = "PARM_CD"))
+  
+  ###Make a unique ID for each sample by site id, date
+  envData$UID <- paste(envData$Env_SITE_NO,as.Date(envData$Env_SAMPLE_START_DT),sep="")
+  repData$UID <- paste(repData$Rep_SITE_NO,as.Date(repData$Rep_SAMPLE_START_DT),sep="")
+  
+  ###Join data frames by UID and pcode
+  repTable <- join(envData,repData,by=c("UID","PARM_CD"))
+  
+  
+  ###Calculate difference and RPD
+  repTable$Env_minus_Rep <- repTable$Env_RESULT_VA - repTable$Rep_RESULT_VA
+  repTable$relPercent_diff <- (repTable$Env_RESULT_VA - repTable$Rep_RESULT_VA)/((repTable$Env_RESULT_VA + repTable$Rep_RESULT_VA)/2)*100
+  ###Remove extraneous variables
+  repTable <- repTable[c("Env_RECORD_NO","Rep_RECORD_NO","Env_SITE_NO","Env_STATION_NM",
+                       "Env_SAMPLE_START_DT","Rep_SAMPLE_START_DT",
+                       "Env_MEDIUM_CD","Rep_MEDIUM_CD",
+                       "Env_LAB_NO","Rep_LAB_NO",
+                       "PARM_CD","Env_PARM_NM", 
+                       "Env_RESULT_VA","Env_REMARK_CD",
+                       "Rep_RESULT_VA","Rep_REMARK_CD",
+                       "Env_minus_Rep","relPercent_diff",
+                       "Env_RPT_LEV_VA","Rep_RPT_LEV_VA")]
+  names(repTable) <- c("Env_RECORD_NO","Rep_RECORD_NO","SITE_NO","STATION_NM",
+                       "Env_SAMPLE_START_DT","Rep_SAMPLE_START_DT",
+                       "Env_MEDIUM_CD","Rep_MEDIUM_CD",
+                       "Env_LAB_NO","Rep_LAB_NO",
+                       "PARM_CD","PARM_NM", 
+                       "Env_RESULT_VA","Env_REMARK_CD",
+                       "Rep_RESULT_VA","Rep_REMARK_CD",
+                       "Env_minus_Rep","relPercent_diff",
+                       "Env_RPT_LEV_VA","Rep_RPT_LEV_VA")
+  
+  repTable$flags <- ""
+  ###Flag pairs with RPD > 10%
+  repTable$flags[which(abs(repTable$relPercent_diff) > 10)] <- "RPD > 10%"
+  ###Flag pairs with RPD > 10% and the difference is > than the largest LRL
+  repTable$flags[which(abs(repTable$relPercent_diff) > 10 & abs(repTable$Env_minus_Rep) > as.numeric(pmax(repTable$Env_RPT_LEV_VA,repTable$Rep_RPT_LEV_VA)))] <- "RPD > 10% and > RPT_LEV"
+  ###Add flag to caution user about < and E values in calculation
+  repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")] <- paste(repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")],"Calculations effected by remark code")
+  ###Format times as character
+  #repTable$Env_SAMPLE_START_DT <- as.character(repTable$Env_SAMPLE_START_DT)
+  #repTable$Rep_SAMPLE_START_DT <- as.character(repTable$Rep_SAMPLE_START_DT)
+  
+  return(repTable)
+  }else{}
+}
+

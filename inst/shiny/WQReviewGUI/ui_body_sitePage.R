@@ -1,0 +1,50 @@
+###This contains all the ui elements for the timeseries plot tab.
+###It is sourced from the ui-body tab, which is eventually sourced from the ui tab.
+###These are contained in individual scripts just for organization sake.
+
+
+tabItem(tabName = "siteSelection",
+        fluidPage(
+                pageWithSidebar(
+                        headerPanel("Data download criteria"),
+                        sidebarPanel(
+                                selectizeInput("STAIDS",label="Site number",choices=NULL,multiple=TRUE,options=list(create=TRUE)),
+                                fileInput("siteFile",label="Site number file",accept="csv"),
+                                
+                                selectInput("dl.parms","Parameter groups",choices=c("All" = "All",
+                                                                                    "physical" = "PHY",
+                                                                                    "cations" = "INM",
+                                                                                    "anions" = "INN",
+                                                                                    "nutrients" = "NUT",
+                                                                                    "microbiological" = "MBI",
+                                                                                    "biological" = "BIO",
+                                                                                    "metals" = "IMM",
+                                                                                    "nonmetals" = "IMN",
+                                                                                    "pesticides" = "TOX",
+                                                                                    "pcbs"="OPE",
+                                                                                    "other organics" = "OPC",
+                                                                                    "radio chemicals" = "RAD",
+                                                                                    "stable isotopes" = "XXX",
+                                                                                    "sediment" = "SED",
+                                                                                    "population/community" = "POP")
+                                            ,selectize=FALSE,multiple=TRUE),
+                                fileInput("parmFile",label="pCode file",accept="csv"),
+                                
+                                dateInput(inputId = "begin.date",label="Start date",max=Sys.Date(),value=Sys.Date()-365*10),
+                                dateInput(inputId = "end.date",label="End date",max=Sys.Date(),value=Sys.Date()),
+                                
+                                textInput("DSN",label="Server name (DSN)",value="NWISCO"),
+                                textInput("env.db",label="Environment DB Number",value="01"),
+                                textInput("qa.db",label="QA DB Number",value="02"),
+                                
+                                actionButton(inputId = "dataDownload",label="Get data"),
+                                
+                                icon = icon("dashboard")
+                        ),
+                        mainPanel(
+                plotOutput("sampleCountHist"),
+                verbatimTextOutput("errors")
+        )
+)
+)
+)

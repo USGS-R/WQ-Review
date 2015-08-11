@@ -1,0 +1,15 @@
+---
+title: "WQReview GUI - working with QAQC tables"
+author: "T. Joe Mills"
+date: "`r Sys.Date()`"
+output:
+  html_vignette:
+    toc: true
+    toc_depth: 4
+            
+vignette: >
+  %\VignetteIndexEntry{WQReview GUI- working with QAQC tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
