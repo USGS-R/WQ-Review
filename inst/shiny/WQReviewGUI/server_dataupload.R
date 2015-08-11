@@ -5,7 +5,7 @@
 output$templateExport <- downloadHandler(
         filename = function() {"uploadTemplates.xlsx"},
         content = function(file) {
-                file.rename(paste0(path.package("QWToolbox"), "/shiny/uploadTemplates.xlsx"),
+                file.rename(paste0(path.package("WQReview"), "/shiny/uploadTemplates.xlsx"),
                             file)
         }
 )
