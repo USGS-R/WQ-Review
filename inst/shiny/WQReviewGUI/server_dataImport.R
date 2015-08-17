@@ -20,6 +20,14 @@ observeEvent(input$dataDownload, {
         
         siteFile <- input$siteFile
         parmFile <- input$parmFile
+        loadDataFile <- input$loadDataFile
+        
+        if(!is.null(loadDataFile))
+        {
+                load(loadDataFile$datapath)
+                source("server_header.r",local=TRUE)$value
+                
+        } else{
         
         tryCatch({
         
@@ -43,7 +51,34 @@ observeEvent(input$dataDownload, {
         
         ###Update header
         source("server_header.r",local=TRUE)$value
+        },warning = function(w) {
+                
+                ###Check for parm group input or pcode file
+                if(!(is.null(parmFile)))
+                {
+                        parm.group.check <- FALSE
+                        dl.parms <- scan(parmFile$datapath,what="character")
+                } else{parm.group.check <- TRUE
+                dl.parms <- input$dl.parms}
+                
+                ###Check for single site id input or site file
+                if(!(is.null(siteFile)))
+                {
+                        STAIDS<-scan(siteFile$datapath,what="character")
+                } else(STAIDS<-input$STAIDS)
+                
+                
+                ###Run all the data import and report generation functions
+                source("server_importandreports.r",local=TRUE)$value
+                
+                ###Update header
+                source("server_header.r",local=TRUE)$value
+        }, error = function(e) {} )
         
+        }
+        
+        tryCatch({
+                
 
         
         
@@ -52,6 +87,7 @@ observeEvent(input$dataDownload, {
         ###Until afte rthe data has been imported
         ###############################################
         source("server_tablesandplots.r",local=TRUE)$value
+        
         
         ###############################################
         ###Update side bar elements with appropriate inputs based on data import
