@@ -46,6 +46,9 @@ tabItem(tabName = "siteSelection",
                                 icon = icon("dashboard")
                         ),
                         mainPanel(
+                
+                h2(textOutput("headerReminder")),
+                                
                 h3(textOutput("importWarning")),
                 h3(textOutput("samplesRetrieved")),
                 h3(textOutput("resultsRetrieved")),
