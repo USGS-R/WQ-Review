@@ -9,7 +9,7 @@ dashboardSidebar(sidebarMenu(
                        
                 
                        ###Load the controls
-        menuItem(tabName="siteSelection","Data Import"),
+        menuItem(tabName="siteSelection","Data Import/export"),
                        
                 menuItem("Plots",
 

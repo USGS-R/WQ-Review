@@ -65,6 +65,8 @@ observe({
 })
 
 observe({
+        if(!is.null(qw.data))
+        {
         ##Have to get different data table styructure that is the same as used in the plot function
         xpp.plot.data <- 
                 subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD == dataSelections$parmSelX)
@@ -74,6 +76,7 @@ observe({
         #Join x and y data
         pp.plot.data <<- join(xpp.plot.data[,c("RECORD_NO","MEDIUM_CD","RESULT_VA","RESULT_MD","STATION_NM")], ypp.plot.data[,c("RECORD_NO","MEDIUM_CD","RESULT_VA","RESULT_MD","STATION_NM")],by="RECORD_NO")
         names(pp.plot.data) <<- c("RECORD_NO","MEDIUM_CD","RESULT_VA_X","RESULT_MD_X","STATION_NM","MEDIUM_CD","RESULT_VA_Y","RESULT_MD_Y","STATION_NM")
+        }
 })
 
 

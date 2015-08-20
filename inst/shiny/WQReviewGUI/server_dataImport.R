@@ -1,9 +1,9 @@
 ####This generates some summary plots####
 ###It goes outside the observe so that it displays errors
-output$sampleCountHist <- renderPlot({
+output$importWarning <- renderPrint({
         validate(
                 need(!is.null(input$STAIDS) | !is.null(input$siteFile), "Please enter a site number or a site ID file"),
-                need(!is.null(input$dl.parms) | !is.null(input$parmFile), "Please enter a parameter group(s) or a parameter code file")
+                need(!is.null(input$dl.parms) | !is.null(input$parmFile) | !is.null(input$dl.parms.group), "Please enter a parameter group(s) or a parameter code file")
                 
         )
 
@@ -20,16 +20,29 @@ observeEvent(input$dataDownload, {
         
         siteFile <- input$siteFile
         parmFile <- input$parmFile
+        loadDataFile <- input$loadDataFile
+        
+        if(!is.null(loadDataFile))
+        {
+                load(loadDataFile$datapath)
+                source("server_header.r",local=TRUE)$value
+                
+        } else{
         
         tryCatch({
         
         ###Check for parm group input or pcode file
+                
         if(!(is.null(parmFile)))
         {
                 parm.group.check <- FALSE
                 dl.parms <- scan(parmFile$datapath,what="character")
-        } else{parm.group.check <- TRUE
-               dl.parms <- input$dl.parms}
+        } else if (!is.null(input$dl.parms)) {
+                parm.group.check <- FALSE
+                dl.parms <- as.character(input$dl.parms)
+        } else {parm.group.check <- TRUE
+               dl.parms <- input$dl.parms.group
+               }
         
         ###Check for single site id input or site file
         if(!(is.null(siteFile)))
@@ -44,6 +57,111 @@ observeEvent(input$dataDownload, {
         ###Update header
         source("server_header.r",local=TRUE)$value
         
+        ###Print retrieval info
+                ###Print retrieval info
+                output$samplesRetrieved <- renderText({
+                        print(paste("Samples retrieved:",length(unique(qw.data$PlotTable$RECORD_NO))))
+                })
+                output$resultsRetrieved <- renderText({
+                        print(paste("Results retrieved:",length(unique(qw.data$PlotTable$RESULT_VA))))
+                })
+                output$sampleModified <- renderText({
+                        print("Most recent sample modification")
+                })
+                output$recordModified <- renderText({
+                        print(unique(paste("Record:",qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$SAMPLE_MD == max(qw.data$PlotTable$SAMPLE_MD))])))
+                })
+                output$recordModifiedDate <- renderText({
+                        print(unique(paste("Date:",max(qw.data$PlotTable$SAMPLE_MD))))
+                })
+                output$recordModifiedName <- renderText({
+                        print(unique(paste("Name:",qw.data$PlotTable$SAMPLE_MN[which(qw.data$PlotTable$SAMPLE_MD == max(qw.data$PlotTable$SAMPLE_MD))])))
+                })
+                output$resultModified <- renderText({
+                        print("Most recent result modification")
+                })
+                output$resultRecordModified <- renderText({
+                        print(unique(paste("Record:",qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                })
+                output$resultModifiedPARM <- renderText({
+                        print(unique(paste("P-Code",qw.data$PlotTable$PARM_CD[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                })
+                output$resultModifiedDate <- renderText({
+                        print(unique(paste("Date:",max(qw.data$PlotTable$RESULT_MD))))
+                })
+                output$resultModifiedName <- renderText({
+                        print(unique(paste("Name:",qw.data$PlotTable$RESULT_MN[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                })
+        },warning = function(w) {
+                
+                ###Check for parm group input or pcode file
+                
+                if(!(is.null(parmFile)))
+                {
+                        parm.group.check <- FALSE
+                        dl.parms <- scan(parmFile$datapath,what="character")
+                } else if (!is.null(input$dl.parms)) {
+                        parm.group.check <- FALSE
+                        dl.parms <- as.character(input$dl.parms)
+                } else {parm.group.check <- TRUE
+                dl.parms <- input$dl.parms.group
+                }
+                
+                ###Check for single site id input or site file
+                if(!(is.null(siteFile)))
+                {
+                        STAIDS<-scan(siteFile$datapath,what="character")
+                } else(STAIDS<-input$STAIDS)
+                
+                
+                ###Run all the data import and report generation functions
+                source("server_importandreports.r",local=TRUE)$value
+                
+                ###Update header
+                source("server_header.r",local=TRUE)$value
+                
+                ###Print retrieval info
+                output$samplesRetrieved <- renderText({
+                        print(paste("Samples retrieved:",length(unique(qw.data$PlotTable$RECORD_NO))))
+                })
+                output$resultsRetrieved <- renderText({
+                        print(paste("Results retrieved:",length(unique(qw.data$PlotTable$RESULT_VA))))
+                })
+                output$sampleModified <- renderText({
+                        print("Most recent sample modification")
+                })
+                output$recordModified <- renderText({
+                        print(unique(paste("Record:",qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$SAMPLE_MD == max(qw.data$PlotTable$SAMPLE_MD))])))
+                })
+                output$recordModifiedDate <- renderText({
+                        print(unique(paste("Date:",max(qw.data$PlotTable$SAMPLE_MD))))
+                })
+                output$recordModifiedName <- renderText({
+                        print(unique(paste("Name:",qw.data$PlotTable$SAMPLE_MN[which(qw.data$PlotTable$SAMPLE_MD == max(qw.data$PlotTable$SAMPLE_MD))])))
+                })
+                output$resultModified <- renderText({
+                        print("Most recent result modification")
+                })
+                output$resultRecordModified <- renderText({
+                        print(unique(paste("Record:",qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                })
+                output$resultModifiedPARM <- renderText({
+                        print(unique(paste("P-Code",qw.data$PlotTable$PARM_CD[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                })
+                output$resultModifiedDate <- renderText({
+                        print(unique(paste("Date:",max(qw.data$PlotTable$RESULT_MD))))
+                })
+                output$resultModifiedName <- renderText({
+                        print(unique(paste("Name:",qw.data$PlotTable$RESULT_MN[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                })
+                
+                
+        }, error = function(e) {} )
+        
+        }
+        
+        tryCatch({
+                
 
         
         
@@ -52,6 +170,7 @@ observeEvent(input$dataDownload, {
         ###Until afte rthe data has been imported
         ###############################################
         source("server_tablesandplots.r",local=TRUE)$value
+        
         
         ###############################################
         ###Update side bar elements with appropriate inputs based on data import
