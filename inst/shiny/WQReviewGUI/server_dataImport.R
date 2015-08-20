@@ -59,6 +59,9 @@ observeEvent(input$dataDownload, {
         
         ###Print retrieval info
                 ###Print retrieval info
+                output$headerReminder <- renderText({
+                        print("Please see notifications at the top-right of this page for important information regarding your data")
+                })
                 output$samplesRetrieved <- renderText({
                         print(paste("Samples retrieved:",length(unique(qw.data$PlotTable$RECORD_NO))))
                 })
@@ -121,6 +124,9 @@ observeEvent(input$dataDownload, {
                 source("server_header.r",local=TRUE)$value
                 
                 ###Print retrieval info
+                output$headerReminder <- renderText({
+                        print("Please see notifications at the top-right of this page for important information regarding your data")
+                })
                 output$samplesRetrieved <- renderText({
                         print(paste("Samples retrieved:",length(unique(qw.data$PlotTable$RECORD_NO))))
                 })
