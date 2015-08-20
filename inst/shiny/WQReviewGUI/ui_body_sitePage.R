@@ -11,7 +11,8 @@ tabItem(tabName = "siteSelection",
                                 selectizeInput("STAIDS",label="Site number",choices=NULL,multiple=TRUE,options=list(create=TRUE)),
                                 fileInput("siteFile",label="Site number file",accept="csv"),
                                 
-                                selectInput("dl.parms","Parameter groups",choices=c("All" = "All",
+                                selectizeInput("dl.parms",label="Parameter codes",choices=NULL,multiple=TRUE,options=list(create=TRUE)),
+                                selectInput("dl.parms.group","Parameter groups",choices=c("All" = "All",
                                                                                     "physical" = "PHY",
                                                                                     "cations" = "INM",
                                                                                     "anions" = "INN",
@@ -37,7 +38,7 @@ tabItem(tabName = "siteSelection",
                                 textInput("env.db",label="Environment DB Number",value="01"),
                                 textInput("qa.db",label="QA DB Number",value="02"),
                                 
-                                fileInput("loadDataFile",label="Load saved data",accept=""),
+                                #fileInput("loadDataFile",label="Load saved data",accept=""),
                                 
                                 
                                 actionButton(inputId = "dataDownload",label="Get data"),
@@ -45,7 +46,18 @@ tabItem(tabName = "siteSelection",
                                 icon = icon("dashboard")
                         ),
                         mainPanel(
-                plotOutput("sampleCountHist"),
+                h3(textOutput("importWarning")),
+                h3(textOutput("samplesRetrieved")),
+                h3(textOutput("resultsRetrieved")),
+                h3(textOutput("sampleModified")),
+                h4(textOutput("recordModified")),
+                h4(textOutput("recordModifiedDate")),
+                h4(textOutput("recordModifiedName")),
+                h3(textOutput("resultModified")),
+                h4(textOutput("resultRecordModified")),
+                h4(textOutput("resultModifiedPARM")),
+                h4(textOutput("resultModifiedDate")),
+                h4(textOutput("resultModifiedName")),
                 verbatimTextOutput("errors")
         )
 )
