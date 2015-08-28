@@ -431,9 +431,12 @@ readNWISodbc <- function(DSN = NULL,
     PlotTable <-PlotTable1
   }
   
+  remarkCodes <- c("<",">","A","E","M","N","R","S","U","V")
   
   ###Replace NAs with "Sample"
-  PlotTable$REMARK_CD[is.na(PlotTable$REMARK_CD)] <- "Sample"
+  #PlotTable$REMARK_CD[is.na(PlotTable$REMARK_CD)] <- "Sample"
+  PlotTable$REMARK_CD[which(!(PlotTable$REMARK_CD %in% remarkCodes))] <- "Sample"
+  
   ###Set remark code as factor for plotting
   PlotTable$REMARK_CD <- as.factor(PlotTable$REMARK_CD)
   ###Set factors levels
