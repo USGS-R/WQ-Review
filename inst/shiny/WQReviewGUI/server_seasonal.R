@@ -17,12 +17,12 @@ output$qwseasonalPlot <- renderPlot({
 
 output$qwseasonalPlot_zoom <- renderPlot({
         qwseasonalPlot(qw.data = qw.data,
-                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold_seasonal),
+                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold_seasonal),
                  site.selection = as.character(input$siteSel_seasonal),
                 plotparm = as.character(input$parmSel_seasonal),
                 facet = input$facetSel_seasonal,
                 highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                 printPlot = FALSE) + theme_bw() +  
+                 print = FALSE) + theme_bw() +  
                 ###This resets the axes to zoomed area, must specify origin because brushedPoints returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
            coord_cartesian(xlim = ranges$x, ylim = ranges$y)
 })

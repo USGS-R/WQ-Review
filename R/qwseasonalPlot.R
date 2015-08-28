@@ -21,7 +21,7 @@ qwseasonalPlot <- function(qw.data,
                            show.q = FALSE,
                            show.smooth = FALSE,
                            highlightrecords = " ",
-                           printPlot = TRUE){
+                           print = TRUE){
   
   
   
@@ -68,5 +68,9 @@ qwseasonalPlot <- function(qw.data,
                                        aes(x=DOY,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
           }else{}
   } else{}
+  if(print==TRUE)
+  {
+          print(p1)
+  }else {return(p1)}
   
 }
