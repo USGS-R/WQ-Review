@@ -20,14 +20,7 @@ observeEvent(input$dataDownload, {
         
         siteFile <- input$siteFile
         parmFile <- input$parmFile
-        loadDataFile <- input$loadDataFile
-        
-        if(!is.null(loadDataFile))
-        {
-                load(loadDataFile$datapath)
-                source("server_header.r",local=TRUE)$value
-                
-        } else{
+
         
         tryCatch({
         
@@ -164,7 +157,7 @@ observeEvent(input$dataDownload, {
                 
         }, error = function(e) {} )
         
-        }
+        
         
         tryCatch({
                 
