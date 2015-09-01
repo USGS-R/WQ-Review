@@ -11,7 +11,7 @@ tabItem(tabName = "seasonalPlot",
                                 ###Controls items for plot
                                 dateInput("newThreshold_seasonal", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                 selectInput("siteSel_seasonal","Station",choices="",multiple=TRUE),
-                                selectInput("parmSel_seasonal","Parameter",choices="",multiple=TRUE),
+                                selectInput("parmSel_seasonal","Parameter",choices="",multiple=FALSE),
                                 selectInput("facetSel_seasonal","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
                                 checkboxInput("fit_seasonal",label="Add LOESS",value=FALSE)
                         ),
