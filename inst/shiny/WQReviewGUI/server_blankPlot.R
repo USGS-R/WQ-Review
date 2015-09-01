@@ -16,6 +16,7 @@ output$qwblankPlot <- renderPlot({
 output$tableOut <- renderPrint(input$wideDataTable_rows_selected)
 
 output$qwblankPlot_zoom <- renderPlot({
+        validate(need(!is.null(ranges$x), "Select area in upper plot to zoom"))
         qwblankPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold_blank),
                  site.selection = as.character(input$siteSel_blank),

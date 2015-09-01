@@ -4,6 +4,8 @@
 
 
 output$qwparmParmPlot <- renderPlot({
+        validate(need(!is.null(input$siteSel_parmParm) & !is.null(input$parmSel_parmParmX) & !is.null(input$parmSel_parmParmY),
+                      "No site or parameter selected"))
         qwparmParmPlot(qw.data = qw.data,
                        new.threshold = Sys.time()-as.POSIXct(input$newThreshold_parmParm),
                        site.selection = as.character(input$siteSel_parmParm),
@@ -25,6 +27,8 @@ output$qwparmParmPlot <- renderPlot({
 
 
 output$qwparmParmPlot_zoom <- renderPlot({
+        validate(need(!is.null(ranges$x), "Select area in upper plot to zoom"))
+        
         qwparmParmPlot(qw.data = qw.data,
                        new.threshold = Sys.time()-as.POSIXct(input$newThreshold_parmParm),
                        site.selection = as.character(input$siteSel_parmParm),

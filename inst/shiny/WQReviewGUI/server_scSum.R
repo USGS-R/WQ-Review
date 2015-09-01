@@ -3,6 +3,8 @@
 #######################################
 
 output$qwscSumPlot <- renderPlot({
+        validate(need(!is.null(input$siteSel_scSum),
+                      "No site selected"))
         qwscSumPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold_scSum),
                  site.selection = as.character(input$siteSel_scSum),
@@ -14,6 +16,7 @@ output$qwscSumPlot <- renderPlot({
 output$tableOut <- renderPrint(input$wideDataTable_rows_selected)
 
 output$qwscSumPlot_zoom <- renderPlot({
+        validate(need(!is.null(ranges$x), "Select area in upper plot to zoom"))
         qwscSumPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),

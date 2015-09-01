@@ -4,6 +4,8 @@
 
 
 output$qwrepBoxPlot <- renderPlot({
+        validate(need(!is.null(input$siteSel_repBox) & !is.null(input$parmSel_repBox),
+                      "No site or parameter selected"))
         qwrepBoxPlot(reports = reports,
                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold_repBox),
                       site.selection = as.character(input$siteSel_repBox),

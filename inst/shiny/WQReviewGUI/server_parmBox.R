@@ -4,6 +4,8 @@
 
 
 output$qwparmBoxPlot <- renderPlot({
+        validate(need(!is.null(input$siteSel_parmBox) & !is.null(input$parmSel_parmBox),
+                      "No site or parameter selected"))
         qwparmBoxPlot(qw.data = qw.data,
                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold_parmBox),
                       site.selection = as.character(input$siteSel_parmBox),

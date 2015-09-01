@@ -4,6 +4,8 @@
 
 
 output$qwseasonalPlot <- renderPlot({
+        validate(need(!is.null(input$siteSel_seasonal) & !is.null(input$parmSel_seasonal),
+                      "No site or parameter selected"))
         qwseasonalPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold_seasonal),
                  site.selection = as.character(input$siteSel_seasonal),
@@ -17,6 +19,7 @@ output$qwseasonalPlot <- renderPlot({
 
 
 output$qwseasonalPlot_zoom <- renderPlot({
+        validate(need(!is.null(ranges$x), "Select area in upper plot to zoom"))
         qwseasonalPlot(qw.data = qw.data,
                   new.threshold = Sys.time()-as.POSIXct(input$newThreshold_seasonal),
                  site.selection = as.character(input$siteSel_seasonal),
@@ -72,7 +75,7 @@ output$seasonal_clickinfo <- DT::renderDataTable({
         DT::datatable(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
                                  coordinfo = input$plot_click,
                                  xvar=xvar_seasonal,
-                                 yvar=yvar_seasonal)[1:4],
+                                 yvar=yvar_seasonal),
                       
                       options=list(scrollX=TRUE)
         )

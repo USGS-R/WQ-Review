@@ -3,6 +3,8 @@
 #######################################
 
 output$qwtsPlot <- renderPlot({
+        validate(need(!is.null(input$siteSel_TS) & !is.null(input$parmSel_TS),
+                      "No site or parameter selected"))
         qwtsPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_TS),
@@ -18,6 +20,7 @@ output$qwtsPlot <- renderPlot({
 output$tableOut <- renderPrint(input$wideDataTable_rows_selected)
 
 output$qwtsPlot_zoom <- renderPlot({
+        validate(need(!is.null(ranges$x), "Select area in upper plot to zoom"))
         qwtsPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_TS),
@@ -68,6 +71,7 @@ observe({
 ###This outputs the data tables for clicked and brushed points
 
 output$timeseries_clickinfo <- DT::renderDataTable({
+        # With base graphics, need to tell it what the x and y variables are.
         DT::datatable(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
                                  coordinfo = input$plot_click,
                                  xvar=xvar_TS,
@@ -75,6 +79,7 @@ output$timeseries_clickinfo <- DT::renderDataTable({
                       
                       options=list(scrollX=TRUE)
         )
+        # nearPoints() also works with hover and dblclick events
 })
 
 
@@ -88,7 +93,7 @@ output$timeseries_brushinfo <- DT::renderDataTable({
         )
 })
 
-output$timeseries_hoverinfo <- DT::renderDataTable({
-        DT::datatable(nearPoints(qw.data$PlotTable, input$plot_hover)
-        )
-})
+#output$timeseries_hoverinfo <- DT::renderDataTable({
+#        DT::datatable(nearPoints(qw.data$PlotTable, input$plot_hover)
+#        )
+#})
