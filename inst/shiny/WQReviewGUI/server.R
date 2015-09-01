@@ -5,9 +5,10 @@ server <- function(input, output, session) {
         ###Not for additions!                                     ###
         #############################################################
         source("server_dataupload.r",local=TRUE)$value
+        source("server_saveLoad.r",local=TRUE)$value
+        
         source("server_srsSummary.r",local=TRUE)$value
         
-        ###This does the timeSeries plotting
         source("server_dataImport.r",local=TRUE)$value
         
         ###This generates reactive tables

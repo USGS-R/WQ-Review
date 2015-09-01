@@ -9,9 +9,10 @@
 output$wideDataTable <- DT::renderDataTable(
                 qw.data$DataTable,
                 server=TRUE,
+                filter='bottom',
                 options = list(
                         scrollX=TRUE,
-                        autoWidth=FALSE),
+                        autoWidth=TRUE),
 )
 
 output$wideDataTableOut <- downloadHandler(

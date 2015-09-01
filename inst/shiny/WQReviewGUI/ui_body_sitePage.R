@@ -38,9 +38,7 @@ tabItem(tabName = "siteSelection",
                                 textInput("env.db",label="Environment DB Number",value="01"),
                                 textInput("qa.db",label="QA DB Number",value="02"),
                                 
-                                #fileInput("loadDataFile",label="Load saved data",accept=""),
-                                
-                                
+
                                 actionButton(inputId = "dataDownload",label="Get data"),
                                 
                                 icon = icon("dashboard")
