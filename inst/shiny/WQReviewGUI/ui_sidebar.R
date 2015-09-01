@@ -50,7 +50,7 @@ dashboardSidebar(sidebarMenu(
                           menuSubItem(tabName="wholvevpartTable","Fil vs. Unf table"),
                           ###Other arguments ot top menu item                          
                           tabName = "Tables", icon = icon("table")
-                          ),
+                          )
                 
         #menuSubItem(tabName="dataUpload","Data upload tools"),
         #menuSubItem(tabName="srsSummary","SRS Summary tool")
