@@ -52,8 +52,8 @@ dashboardSidebar(sidebarMenu(
                           tabName = "Tables", icon = icon("table")
                           ),
                 
-        menuSubItem(tabName="dataUpload","Data upload tools"),
-        menuSubItem(tabName="srsSummary","SRS Summary tool")
+        #menuSubItem(tabName="dataUpload","Data upload tools"),
+        #menuSubItem(tabName="srsSummary","SRS Summary tool")
         
         )
 )
