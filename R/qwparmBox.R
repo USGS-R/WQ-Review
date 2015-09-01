@@ -23,8 +23,8 @@ qwparmBoxPlot <- function(qw.data,
   medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00")
   names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ")
   ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
-  qual.shapes <- c(19,0,2,5)
-  names(qual.shapes) <- c("Sample","<",">","E")
+  qual.shapes <- c(19,0,2,5,4,3,6,7,8,9,11)
+  names(qual.shapes) <- c("Sample","<",">","E","A","M","N","R","S","U","V")
   
   plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & PARM_CD%in%(plotparm) & MEDIUM_CD %in%(c("WG ","WS ","OAQ")))
   

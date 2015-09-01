@@ -7,7 +7,7 @@
 qwseasonalPlot(qw.data, new.threshold, site.selection, plotparm,
   facet = "multisite", begin.date = NULL, end.date = NULL,
   show.q = FALSE, show.smooth = FALSE, highlightrecords = " ",
-  printPlot = TRUE)
+  print = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
