@@ -22,7 +22,7 @@ Additionaly, please feel free to post any suggestions or enhancement requests.
 
 1. Download the application at
 
-https://github.com/tmills-usgs/WQ-Review_application/blob/master/Output/wqReviewSetup.exe?raw=true
+ftp://ftpint.usgs.gov/private/cr/co/lakewood/tmills/wqReviewSetup.exe
 
 2. Run wqReviewSetup.exe and follow the installation instructions.
 
