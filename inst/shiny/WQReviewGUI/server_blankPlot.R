@@ -4,7 +4,7 @@
 
 output$qwblankPlot <- renderPlot({
         qwblankPlot(qw.data = qw.data,
-                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold_blank),
+                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_blank),
                  plotparm = as.character(input$parmSel_blank),
                  facet = input$facetSel_blank,
@@ -18,7 +18,7 @@ output$tableOut <- renderPrint(input$wideDataTable_rows_selected)
 output$qwblankPlot_zoom <- renderPlot({
         validate(need(!is.null(ranges$x), "Select area in upper plot to zoom"))
         qwblankPlot(qw.data = qw.data,
-                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold_blank),
+                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_blank),
                  plotparm = as.character(input$parmSel_blank),
                  facet = input$facetSel_blank,

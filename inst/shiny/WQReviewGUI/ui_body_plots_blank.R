@@ -9,7 +9,7 @@ tabItem(tabName = "blankPlot",
                         headerPanel("Blank sample timeseries"),
                         sidebarPanel(
                                 ###Controls items for plot
-                                dateInput("newThreshold_blank", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
+                                #dateInput("newThreshold_blank", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                 selectInput("siteSel_blank","Station",choices="",multiple=TRUE),
                                 selectInput("parmSel_blank","Parameter",choices="",multiple=FALSE),
                                 selectInput("facetSel_blank","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE)

@@ -4,9 +4,9 @@ tabItem(tabName = "repTable",
                         headerPanel("Replicate summary table"),
                         sidebarPanel(
                                 selectInput("siteSel_repTable","Station",choices="",multiple=TRUE),
-                                dateInput("startDate_repTable", "Start date for blank summary", 
+                                dateInput("startDate_repTable", "Start date", 
                                           value=Sys.Date() - 365*3),
-                                dateInput("endDate_repTable", "end date for blank summary", 
+                                dateInput("endDate_repTable", "End date", 
                                           value=Sys.Date())
                         ),
                         mainPanel(

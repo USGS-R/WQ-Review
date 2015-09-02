@@ -4,9 +4,9 @@ tabItem(tabName = "balanceTable",
                         headerPanel("Chargebalance table"),
                         sidebarPanel(
                                 selectInput("siteSel_balanceTable","Station",choices="",multiple=TRUE),
-                                dateInput("startDate_balanceTable", "Start date for blank summary", 
+                                dateInput("startDate_balanceTable", "Start date", 
                                           value=Sys.Date() - 365*3),
-                                dateInput("endDate_balanceTable", "end date for blank summary", 
+                                dateInput("endDate_balanceTable", "End date", 
                                           value=Sys.Date())
                         ),
                         mainPanel(

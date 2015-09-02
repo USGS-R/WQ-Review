@@ -9,7 +9,7 @@ tabItem(tabName = "parmBoxPlot",
                         headerPanel("Parameter boxplot"),
                         sidebarPanel(
                                 ###Controls items for plot
-                                dateInput("newThreshold_parmBox", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
+                                #dateInput("newThreshold_parmBox", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                 selectInput("siteSel_parmBox","Station",choices="",multiple=TRUE),
                                 selectInput("parmSel_parmBox","Parameter",choices="",multiple=TRUE),
                                 selectInput("facetSel_parmBox","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),

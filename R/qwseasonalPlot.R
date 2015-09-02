@@ -61,7 +61,7 @@ qwseasonalPlot <- function(qw.data,
           p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=DOY,y=RESULT_VA,shape = REMARK_CD, color = MEDIUM_CD),size=7,alpha = 0.5)
   }
   
-  if(nrow(subset(plotdata, SAMPLE_MD >= (Sys.time()-new.threshold))) > 0)
+  if(nrow(subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold))) > 0)
   {
           if(all(is.finite(plotdata$perc.diff[which(plotdata$SAMPLE_MD >= (Sys.time()-new.threshold))])) &
                      

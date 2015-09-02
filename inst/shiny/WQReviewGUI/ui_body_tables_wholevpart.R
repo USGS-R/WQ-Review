@@ -4,9 +4,9 @@ tabItem(tabName = "wholvevpartTable",
                         headerPanel("Whole vs part summary table"),
                         sidebarPanel(
                                 selectInput("siteSel_wholevpartTable","Station",choices="",multiple=TRUE),
-                                dateInput("startDate_wholevpartTable", "Start date for blank summary", 
+                                dateInput("startDate_wholevpartTable", "Start date", 
                                           value=Sys.Date() - 365*3),
-                                dateInput("endDate_wholevpartTable", "end date for blank summary", 
+                                dateInput("endDate_wholevpartTable", "End date", 
                                           value=Sys.Date())
                         ),
                         mainPanel(

@@ -7,15 +7,14 @@ output$qwparmBoxPlot <- renderPlot({
         validate(need(!is.null(input$siteSel_parmBox) & !is.null(input$parmSel_parmBox),
                       "No site or parameter selected"))
         qwparmBoxPlot(qw.data = qw.data,
-                      new.threshold = Sys.time()-as.POSIXct(input$newThreshold_parmBox),
+                      new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                       site.selection = as.character(input$siteSel_parmBox),
                       plotparm = as.character(input$parmSel_parmBox),
                       log.scale = input$axes_parmBox,
                       facet = input$facetSel_parmBox,
                       show.points = input$showpoints_parmBox,
                       highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                      print=FALSE
-        ) + theme_bw()  
+                      print=FALSE)+ theme_bw()  
 })
 
 

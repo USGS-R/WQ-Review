@@ -4,16 +4,15 @@ tabItem(tabName = "wideDataTable",
                         headerPanel("Wide data table"),
                         sidebarPanel(
                                 selectInput("siteSel_wideDataTable","Station",choices="",multiple=TRUE),
-                                dateInput("startDate_wideDataTable", "Start date for blank summary", 
+                                dateInput("startDate_wideDataTable", "Start date", 
                                           value=Sys.Date() - 365*3),
-                                dateInput("endDate_wideDataTable", "end date for blank summary", 
+                                dateInput("endDate_wideDataTable", "End date", 
                                           value=Sys.Date())
                         ),
                         mainPanel(
                                 downloadButton('wideDataTableOut', 'Download tab delimited table'),
                                 
-                                DT::dataTableOutput("wideDataTable"),
-                                verbatimTextOutput("sitenoTest")
+                                DT::dataTableOutput("wideDataTable")
                         )
                 )
         )

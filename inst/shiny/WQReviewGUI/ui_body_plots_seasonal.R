@@ -9,7 +9,7 @@ tabItem(tabName = "seasonalPlot",
                         headerPanel("Seasonal plot"),
                         sidebarPanel(
                                 ###Controls items for plot
-                                dateInput("newThreshold_seasonal", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
+                                #dateInput("newThreshold_seasonal", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                 selectInput("siteSel_seasonal","Station",choices="",multiple=TRUE),
                                 selectInput("parmSel_seasonal","Parameter",choices="",multiple=FALSE),
                                 selectInput("facetSel_seasonal","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),

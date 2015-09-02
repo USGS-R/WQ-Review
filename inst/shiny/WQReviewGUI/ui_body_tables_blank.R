@@ -6,7 +6,7 @@ tabItem(tabName = "blankTable",
                                 selectInput("siteSel_blankTable","Station",choices="",multiple=TRUE),
                                 dateInput("startDate_blankTable", "Start date for blank summary", 
                                                value=Sys.Date() - 365*3),
-                                dateInput("endDate_blankTable", "end date for blank summary", 
+                                dateInput("endDate_blankTable", "End date for blank summary", 
                                           value=Sys.Date())
                         ),
                         mainPanel(

@@ -12,8 +12,10 @@ dashboardSidebar(sidebarMenu(
         menuItem(tabName="siteSelection","Data import"),
                        
                 menuItem("Plots",
+                         
+                         dateInput("newThreshold", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
 
-                                  
+                           
                          menuSubItem(tabName="timeSeries",text="Timeseries"),
                          
                          menuSubItem(tabName="seasonalPlot",text="Seasonal"),
