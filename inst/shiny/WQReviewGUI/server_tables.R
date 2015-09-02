@@ -9,10 +9,9 @@
 output$wideDataTable <- DT::renderDataTable(
                 qw.data$DataTable,
                 server=TRUE,
-                filter="bottom",
                 options = list(
                         scrollX=TRUE,
-                        autoWidth=TRUE),
+                        autoWidth=TRUE)
 )
 
 output$wideDataTableOut <- downloadHandler(
@@ -34,7 +33,6 @@ output$wideDataTableOut <- downloadHandler(
 output$longDataTable <- DT::renderDataTable(
         qw.data$PlotTable,
         server=TRUE,
-        filter="bottom",
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
@@ -56,7 +54,6 @@ output$longDataTableOut <- downloadHandler(
 output$cbTable <- DT::renderDataTable(
         reports$BalanceDataTable,
         server=TRUE,
-        filter="bottom",
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
@@ -77,7 +74,6 @@ output$BalanceDataTableOut <- downloadHandler(
 output$repTable <- DT::renderDataTable(
         reports$repTable,
         server=TRUE,
-        filter="bottom",
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
@@ -100,7 +96,6 @@ output$repTableOut <- downloadHandler(
 output$wholevpartTable <- DT::renderDataTable(
         reports$wholevpartTable,
         server=TRUE,
-        filter="bottom",
         #container = wholevpartTableContainer,
         options = list(
                 scrollX=TRUE,
