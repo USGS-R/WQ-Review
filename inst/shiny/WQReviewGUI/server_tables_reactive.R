@@ -5,7 +5,9 @@
 ###Render the table
 try({
         output$blankTable <- DT::renderDataTable(
+                
                 blankSummary(qw.data,
+                             STAIDS = as.character(input$siteSel_blankTable),
                              begin.date = input$blankStartDate, 
                              end.date = input$blankEndDate,
                              multiple = FALSE),
@@ -18,6 +20,7 @@ output$blankTableOut <- downloadHandler(
         filename = function() {"blankTableOut"},
         content = function(file) {
                 write.table(blankSummary(qw.data,
+                                         STAIDS = as.character(input$siteSel_blankTable),
                                          begin.date = input$blankStartDate, 
                                          end.date = input$blankEndDate,
                                          multiple = FALSE)

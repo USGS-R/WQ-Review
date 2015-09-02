@@ -105,19 +105,19 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
         
         incProgress(0.9,detail="Generating blank summary")
         
-        tryCatch({       
+        #tryCatch({       
         ###Run blnk table summary
-                reports$blankTable_all <<- suppressWarnings(blankSummary(qw.data, multiple = FALSE))
+        #        reports$blankTable_all <<- suppressWarnings(blankSummary(qw.data, STAIDS = unique(qw.data$PlotTable$SITE_NO), multiple = FALSE))
                 
                 
                 
-        }, warning = function(w) {
+        #}, warning = function(w) {
                 ###Run blnk table summary
-                reports$blankTable_all <<- blankSummary(qw.data, multiple = FALSE)
-                warning(w,"This caused a warning DO NOT REPORT UNLESS YOU NOTICE A PROBLEM WITH PERFORMANCE")
-        }, error = function(e) {
+        #        reports$blankTable_all <<- blankSummary(qw.data, multiple = FALSE)
+        #        warning(w,"This caused a warning DO NOT REPORT UNLESS YOU NOTICE A PROBLEM WITH PERFORMANCE")
+        #}, error = function(e) {
                                 
-                output$errors <- renderPrint("Error with blank table summary. Please check your data import criteria and QWToolbox manual and if not user error report this whole message on the github issues page and generate a bug report using the button at the top of QWToolbox")
+        #        output$errors <- renderPrint("Error with blank table summary. Please check your data import criteria and QWToolbox manual and if not user error report this whole message on the github issues page and generate a bug report using the button at the top of QWToolbox")
                 
-        })
+        #})
 })

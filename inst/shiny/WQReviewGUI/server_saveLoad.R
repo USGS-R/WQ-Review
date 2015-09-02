@@ -32,13 +32,18 @@ observeEvent(input$loadData, {
 
         loadDataFile <- input$loadDataFile
         
+        
         if(!is.null(loadDataFile))
         {
                 tryCatch({
                 load(loadDataFile$datapath)
+                        qw.data <<- qw.data
+                        reports <<- reports
                 source("server_header.r",local=TRUE)$value
                 },warning = function(w) {
                         load(loadDataFile$datapath)
+                        qw.data <<- qw.data
+                        reports <<- reports
                         source("server_header.r",local=TRUE)$value
                 },error = function(e){}
                 )
@@ -219,6 +224,14 @@ updateSelectInput(session, "parmSel_blank",
 #                     choices = setNames((parmSelData$PARM_CD),
 #                                        paste((parmSelData$PARM_CD),(parmSelData$PARM_NM),sep="-"))
 #
+
+################################
+###blank table inputs update####
+################################
+updateSelectInput(session, "siteSel_blankTable",
+                  choices = setNames((siteSelData$SITE_NO),
+                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+)
 },warning = function(w) {
         ###Print retrieval info
         output$headerReminder <- renderText({
@@ -394,6 +407,14 @@ updateSelectInput(session, "parmSel_blank",
         #                     choices = setNames((parmSelData$PARM_CD),
         #                                        paste((parmSelData$PARM_CD),(parmSelData$PARM_NM),sep="-"))
         #
+        
+        ################################
+        ###blank table inputs update####
+        ################################
+        updateSelectInput(session, "siteSel_blankTable",
+                          choices = setNames((siteSelData$SITE_NO),
+                                             paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+        )
 },error = function(e) {}
 )
 

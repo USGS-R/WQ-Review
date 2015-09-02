@@ -301,6 +301,14 @@ observeEvent(input$dataDownload, {
         #                                        paste((parmSelData$PARM_CD),(parmSelData$PARM_NM),sep="-"))
         #)
         
+        ################################
+        ###blank table inputs update####
+        ################################
+        updateSelectInput(session, "siteSel_blankTable",
+                          choices = setNames((siteSelData$SITE_NO),
+                                             paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+        )
+
         },warning = function(w) {
                 ###Check for parm group input or pcode file
                 if(!(is.null(parmFile)))
@@ -458,6 +466,14 @@ observeEvent(input$dataDownload, {
                 #                     choices = setNames((parmSelData$PARM_CD),
                 #                                        paste((parmSelData$PARM_CD),(parmSelData$PARM_NM),sep="-"))
                 #)
+                
+                ################################
+                ###blank table inputs update####
+                ################################
+                updateSelectInput(session, "siteSel_blankTable",
+                                  choices = setNames((siteSelData$SITE_NO),
+                                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                )
                 },error=function(e){})
                 
 
