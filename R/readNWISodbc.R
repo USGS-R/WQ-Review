@@ -505,6 +505,7 @@ readNWISodbc <- function(DSN = NULL,
   ###Remove trailing spaces on site IDs
   
   PlotTable$SITE_NO <- gsub(" ","",PlotTable$SITE_NO)
+  DataTable$SITE_NO <- gsub(" ","",DataTable$SITE_NO)
   
   ###Reorder columns
   PlotTable <- PlotTable[c("RECORD_NO" ,"SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_END_DT","MEDIUM_CD","PROJECT_CD",

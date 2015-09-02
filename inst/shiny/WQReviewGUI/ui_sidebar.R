@@ -44,7 +44,7 @@ dashboardSidebar(sidebarMenu(
                           ###Table types, each one will appear in dashboard
                           menuSubItem(tabName="wideDataTable","Wide data table"),
                           menuSubItem(tabName="longDataTable","Long data table"),
-                          menuSubItem(tabName="cbTable","Charge balance table"),
+                          menuSubItem(tabName="balanceTable","Charge balance table"),
                           menuSubItem(tabName="repTable","Replicate table"),
                           menuSubItem(tabName="blankTable","Blank table"),
                           menuSubItem(tabName="wholvevpartTable","Fil vs. Unf table"),

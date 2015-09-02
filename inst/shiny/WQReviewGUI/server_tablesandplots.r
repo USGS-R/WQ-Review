@@ -30,4 +30,4 @@ source("server_blankPlot.r",local=TRUE)$value
 #source("server_map.r",local=TRUE)$value
 
 ###Tables###
-source("server_tables.r",local=TRUE)$value
+source("server_tables_reactive.r",local=TRUE)$value
