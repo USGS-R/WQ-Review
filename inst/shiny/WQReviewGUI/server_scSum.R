@@ -6,7 +6,7 @@ output$qwscSumPlot <- renderPlot({
         validate(need(!is.null(input$siteSel_scSum),
                       "No site selected"))
         qwscSumPlot(qw.data = qw.data,
-                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold_scSum),
+                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
                  facet = input$facetSel_scSum,
                  highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],

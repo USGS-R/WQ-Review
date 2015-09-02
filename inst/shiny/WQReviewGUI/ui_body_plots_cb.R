@@ -9,7 +9,7 @@ tabItem(tabName = "cbPlot",
                        headerPanel("Chargebalance Timeseries"),
                        sidebarPanel(
                                ###Controls items for plot
-                               dateInput("newThreshold_cb", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
+                               #dateInput("newThreshold_cb", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                selectInput("siteSel_cb","Station",choices="",multiple=TRUE),
                                selectInput("facetSel_cb","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE)
                                

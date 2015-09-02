@@ -2,13 +2,14 @@
 #' 
 #' Generates a summary table of blank analyses for all analytes in a qw.data list from readNWISodbc.
 #' @param qw.data a qw.data list generated from readNWISodbc
+#' @param STAIDS A character vector of station IDs to summarize.
 #' @param begin.date Character string (yyyy-mm-dd) of beggining date to subset blank analyses. Leave blank for all analyses.
 #' @param end.date Character string (yyyy-mm-dd) of ending date to subset blank analyses. Leave blank for all analyses.
 #' @param multiple.levels Logical to analyze multiple reporting levels separetly. Default is TRUE.
 #' @export
 #' 
 
-blankSummary <- function(qw.data,begin.date = NA,end.date=NA,multiple.levels = FALSE)
+blankSummary <- function(qw.data,STAIDS,begin.date = NA,end.date=NA,multiple.levels = FALSE)
 {
 
 ### Various if statements to check for date range subsetting
@@ -16,23 +17,27 @@ blankSummary <- function(qw.data,begin.date = NA,end.date=NA,multiple.levels = F
   if(is.na(begin.date) & is.na(end.date))
   {
     blanks <- subset(qw.data$PlotTable, MEDIUM_CD == "OAQ" & 
+                             SITE_NO %in% STAIDS &
                        PARM_SEQ_GRP_CD !="INF" &
                        PARM_SEQ_GRP_CD != "PHY")
 } else if (is.na(begin.date) & !is.na(end.date))
 {
-  blanks <- subset(qw.data$PlotTable, MEDIUM_CD == "OAQ" & 
+  blanks <- subset(qw.data$PlotTable, MEDIUM_CD == "OAQ" &
+                           SITE_NO %in% STAIDS &
                      SAMPLE_START_DT <= as.POSIXct(end.date) &
                      PARM_SEQ_GRP_CD !="INF" &
                      PARM_SEQ_GRP_CD != "PHY")
 } else if (!is.na(begin.date) & is.na(end.date))
 {
-  blanks <- subset(qw.data$PlotTable, MEDIUM_CD == "OAQ" & 
+  blanks <- subset(qw.data$PlotTable, MEDIUM_CD = "OAQ" & 
+                           SITE_NO %in% STAIDS &
                      SAMPLE_START_DT >= as.POSIXct(begin.date) &
                      PARM_SEQ_GRP_CD !="INF" &
                      PARM_SEQ_GRP_CD != "PHY")
 } else 
 {
   blanks <- subset(qw.data$PlotTable, MEDIUM_CD == "OAQ" & 
+                           SITE_NO %in% STAIDS &
                      SAMPLE_START_DT >= as.POSIXct(begin.date) &
                      SAMPLE_START_DT <= as.POSIXct(end.date) &
                      PARM_SEQ_GRP_CD !="INF" &

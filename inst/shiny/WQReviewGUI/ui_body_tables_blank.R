@@ -3,9 +3,10 @@ tabItem(tabName = "blankTable",
                 pageWithSidebar(
                         headerPanel("Blank summary table"),
                         sidebarPanel(
-                                dateInput("blankStartDate", "Start date for blank summary", 
+                                selectInput("siteSel_blankTable","Station",choices="",multiple=TRUE),
+                                dateInput("startDate_blankTable", "Start date for blank summary", 
                                                value=Sys.Date() - 365*3),
-                                dateInput("blankEndDate", "end date for blank summary", 
+                                dateInput("endDate_blankTable", "End date for blank summary", 
                                           value=Sys.Date())
                         ),
                         mainPanel(

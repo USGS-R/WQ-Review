@@ -53,19 +53,21 @@ qwrepBoxPlot <- function(reports,
     p2 <- p1 + geom_point(aes(color=historic),size=3)
     
     ##Highlight records
-    if(nrow(subset(reports$repTable,PARM_CD%in%(plotparm) &
+    if(nrow(subset(plotdata,PARM_CD%in%(plotparm) &
                      c(Env_RECORD_NO,Rep_RECORD_NO) %in% highlightrecords)) > 0)
     {
-      p2 <- p2 + geom_point(data=subset(reports$repTable,PARM_CD%in%(plotparm) &
+      p2 <- p2 + geom_point(data=subset(plotdata,PARM_CD%in%(plotparm) &
                                           c(Env_RECORD_NO,Rep_RECORD_NO) %in% highlightrecords),aes(x=PARM_NM,y=relPercent_diff, color=historic),size=7,alpha=0.5)
     }else{}
     
     ###Label new data
-    #if(nrow(subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold))) > 0)
-    #{
-    #  p2 <- p2 + geom_text(data=subset(plotdata,RESULT_MD >= (Sys.time()-new.threshold)),
-    #                       aes(x=SAMPLE_MONTH,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
-    #}else{}
+    if(nrow(subset(plotdata,PARM_CD%in%(plotparm) &
+                   Env_SAMPLE_START_DT >= (Sys.time()-new.threshold))) > 0)
+    {
+      p2 <- p2 + geom_text(data=subset(plotdata,PARM_CD %in% (plotparm) &
+                                               Env_SAMPLE_START_DT >= (Sys.time()-new.threshold)),
+                           aes(x=PARM_NM,y=relPercent_diff,color=historic,label="New",hjust=1.1),show_guide=F)      
+    }else{}
     
  return(p2)
   }else( return(p1))

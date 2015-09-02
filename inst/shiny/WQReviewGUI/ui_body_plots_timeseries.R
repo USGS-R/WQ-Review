@@ -10,7 +10,7 @@ tabItem(tabName = "timeSeries",
                headerPanel("Timeseries"), 
                 sidebarPanel(        
                         ###Controls items for plot
-                        dateInput("newThreshold", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
+                        #dateInput("newThreshold", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                         selectInput("siteSel_TS","Station",choices="",multiple=TRUE),
                         selectInput("parmSel_TS","Parameter",choices="",multiple=FALSE),
                         selectInput("facetSel_TS","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),

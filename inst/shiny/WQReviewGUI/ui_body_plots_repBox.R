@@ -8,11 +8,13 @@ tabItem(tabName = "repBoxPlot",
                 pageWithSidebar(
                         headerPanel("Replicate RPD boxplot"),
                         sidebarPanel(
-                                dateInput("newThreshold_repBox", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
+                                #dateInput("newThreshold_repBox", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                 dateInput("newReplicates", "New replicates threshold",max=Sys.Date(),value=Sys.Date()-30),
                                 
                                 selectInput("siteSel_repBox","Station",choices="",multiple=TRUE),
-                                selectInput("parmSel_repBox","Parameter",choices="",multiple=TRUE)
+                                selectInput("parmSel_repBox","Parameter",choices="",multiple=TRUE),
+                                checkboxInput("showpoints_repBox",label="Show sample points",value=FALSE)
+                                
                         ),
                         mainPanel(
                 ###This displays the primary plot interaction output

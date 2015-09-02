@@ -1,9 +1,19 @@
-
 tabItem(tabName = "longDataTable",
         fluidPage(
-                downloadButton('longDataTableOut', 'Download tab delimited table'),
-                
-                DT::dataTableOutput("longDataTable")
+                pageWithSidebar(
+                        headerPanel("Long data table"),
+                        sidebarPanel(
+                                selectInput("siteSel_longDataTable","Station",choices="",multiple=TRUE),
+                                dateInput("startDate_longDataTable", "Start date", 
+                                          value=Sys.Date() - 365*3),
+                                dateInput("endDate_longDataTable", "End date", 
+                                          value=Sys.Date())
+                        ),
+                        mainPanel(
+                                downloadButton('longDataTableOut', 'Download tab delimited table'),
+                                
+                                DT::dataTableOutput("longDataTable")
+                        )
+                )
         )
 )
-

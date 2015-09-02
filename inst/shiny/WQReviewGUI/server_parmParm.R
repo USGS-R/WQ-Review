@@ -7,7 +7,7 @@ output$qwparmParmPlot <- renderPlot({
         validate(need(!is.null(input$siteSel_parmParm) & !is.null(input$parmSel_parmParmX) & !is.null(input$parmSel_parmParmY),
                       "No site or parameter selected"))
         qwparmParmPlot(qw.data = qw.data,
-                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold_parmParm),
+                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                        site.selection = as.character(input$siteSel_parmParm),
                        show.lm = input$fit_parmParm,
                        highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],

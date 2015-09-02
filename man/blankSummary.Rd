@@ -4,11 +4,13 @@
 \alias{blankSummary}
 \title{blankSummary Generate a summary table of blank analyses}
 \usage{
-blankSummary(qw.data, begin.date = NA, end.date = NA,
+blankSummary(qw.data, STAIDS, begin.date = NA, end.date = NA,
   multiple.levels = FALSE)
 }
 \arguments{
 \item{qw.data}{a qw.data list generated from readNWISodbc}
+
+\item{STAIDS}{A character vector of station IDs to summarize.}
 
 \item{begin.date}{Character string (yyyy-mm-dd) of beggining date to subset blank analyses. Leave blank for all analyses.}
 

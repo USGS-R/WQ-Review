@@ -20,14 +20,7 @@ observeEvent(input$dataDownload, {
         
         siteFile <- input$siteFile
         parmFile <- input$parmFile
-        loadDataFile <- input$loadDataFile
-        
-        if(!is.null(loadDataFile))
-        {
-                load(loadDataFile$datapath)
-                source("server_header.r",local=TRUE)$value
-                
-        } else{
+
         
         tryCatch({
         
@@ -164,7 +157,7 @@ observeEvent(input$dataDownload, {
                 
         }, error = function(e) {} )
         
-        }
+        
         
         tryCatch({
                 
@@ -307,6 +300,54 @@ observeEvent(input$dataDownload, {
         #                     choices = setNames((parmSelData$PARM_CD),
         #                                        paste((parmSelData$PARM_CD),(parmSelData$PARM_NM),sep="-"))
         #)
+        
+        ################################
+        ###blank table inputs update####
+        ################################
+        updateSelectInput(session, "siteSel_blankTable",
+                          choices = setNames((siteSelData$SITE_NO),
+                                             paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+        )
+        
+        ################################
+        ###balance table inputs update####
+        ################################
+        updateSelectInput(session, "siteSel_balanceTable",
+                          choices = setNames((siteSelData$SITE_NO),
+                                             paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+        )
+        
+        ################################
+        ###long table inputs update####
+        ################################
+        updateSelectInput(session, "siteSel_longDataTable",
+                          choices = setNames((siteSelData$SITE_NO),
+                                             paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+        )
+        
+        ################################
+        ###rep table inputs update####
+        ################################
+        updateSelectInput(session, "siteSel_repTable",
+                          choices = setNames((siteSelData$SITE_NO),
+                                             paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+        )
+        
+        ################################
+        ###wholevpart table inputs update####
+        ################################
+        updateSelectInput(session, "siteSel_wholevpartTable",
+                          choices = setNames((siteSelData$SITE_NO),
+                                             paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+        )
+        
+        ################################
+        ###wide table inputs update####
+        ################################
+        updateSelectInput(session, "siteSel_wideDataTable",
+                          choices = setNames((siteSelData$SITE_NO),
+                                             paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+        )
         
         },warning = function(w) {
                 ###Check for parm group input or pcode file
@@ -465,6 +506,54 @@ observeEvent(input$dataDownload, {
                 #                     choices = setNames((parmSelData$PARM_CD),
                 #                                        paste((parmSelData$PARM_CD),(parmSelData$PARM_NM),sep="-"))
                 #)
+                
+                ################################
+                ###blank table inputs update####
+                ################################
+                updateSelectInput(session, "siteSel_blankTable",
+                                  choices = setNames((siteSelData$SITE_NO),
+                                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                )
+                
+                ################################
+                ###balance table inputs update####
+                ################################
+                updateSelectInput(session, "siteSel_balanceTable",
+                                  choices = setNames((siteSelData$SITE_NO),
+                                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                )
+                
+                ################################
+                ###long table inputs update####
+                ################################
+                updateSelectInput(session, "siteSel_longDataTable",
+                                  choices = setNames((siteSelData$SITE_NO),
+                                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                )
+                
+                ################################
+                ###rep table inputs update####
+                ################################
+                updateSelectInput(session, "siteSel_repTable",
+                                  choices = setNames((siteSelData$SITE_NO),
+                                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                )
+                
+                ################################
+                ###wholevpart table inputs update####
+                ################################
+                updateSelectInput(session, "siteSel_wholevpartTable",
+                                  choices = setNames((siteSelData$SITE_NO),
+                                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                )
+                
+                ################################
+                ###wide table inputs update####
+                ################################
+                updateSelectInput(session, "siteSel_wideDataTable",
+                                  choices = setNames((siteSelData$SITE_NO),
+                                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                )
                 },error=function(e){})
                 
 

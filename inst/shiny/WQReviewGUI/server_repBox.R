@@ -7,10 +7,12 @@ output$qwrepBoxPlot <- renderPlot({
         validate(need(!is.null(input$siteSel_repBox) & !is.null(input$parmSel_repBox),
                       "No site or parameter selected"))
         qwrepBoxPlot(reports = reports,
-                      new.threshold = Sys.time()-as.POSIXct(input$newThreshold_repBox),
+                      new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                       site.selection = as.character(input$siteSel_repBox),
                       plotparm = as.character(input$parmSel_repBox),
-                      new.reps = as.POSIXct(input$newReplicates)) + theme_bw()  
+                      new.reps = as.POSIXct(input$newReplicates),
+                     show.points = input$showpoints_repBox,
+                     highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)]) + theme_bw()  
 })
 
 

@@ -11,7 +11,7 @@ output$wideDataTable <- DT::renderDataTable(
                 server=TRUE,
                 options = list(
                         scrollX=TRUE,
-                        autoWidth=FALSE),
+                        autoWidth=TRUE)
 )
 
 output$wideDataTableOut <- downloadHandler(

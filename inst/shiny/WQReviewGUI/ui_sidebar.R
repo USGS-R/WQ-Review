@@ -9,11 +9,13 @@ dashboardSidebar(sidebarMenu(
                        
                 
                        ###Load the controls
-        menuItem(tabName="siteSelection","Data Import/export"),
+        menuItem(tabName="siteSelection","Data import"),
                        
                 menuItem("Plots",
+                         
+                         dateInput("newThreshold", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
 
-                                  
+                           
                          menuSubItem(tabName="timeSeries",text="Timeseries"),
                          
                          menuSubItem(tabName="seasonalPlot",text="Seasonal"),
@@ -44,16 +46,16 @@ dashboardSidebar(sidebarMenu(
                           ###Table types, each one will appear in dashboard
                           menuSubItem(tabName="wideDataTable","Wide data table"),
                           menuSubItem(tabName="longDataTable","Long data table"),
-                          menuSubItem(tabName="cbTable","Charge balance table"),
+                          menuSubItem(tabName="balanceTable","Charge balance table"),
                           menuSubItem(tabName="repTable","Replicate table"),
                           menuSubItem(tabName="blankTable","Blank table"),
                           menuSubItem(tabName="wholvevpartTable","Fil vs. Unf table"),
                           ###Other arguments ot top menu item                          
                           tabName = "Tables", icon = icon("table")
-                          )
+                          ),
                 
         #menuSubItem(tabName="dataUpload","Data upload tools"),
         #menuSubItem(tabName="srsSummary","SRS Summary tool")
-        
+        menuItem(tabName="saveLoadTab","Save/load data")
         )
 )
