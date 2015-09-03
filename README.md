@@ -52,7 +52,7 @@ Open R-studio in 32-bit mode if it is not already open and type the following co
 
 ```R
 library(devtools)
-install_github("USGS-R/WQReview",build_vignettes = TRUE)
+install_github("USGS-R/WQ-Review",build_vignettes = TRUE)
 ```
 
 This will install the QWToolbox package as well as all other packages that QWToolbox relies on. It may take a minute to download and install the supporting packages during the first installation.
