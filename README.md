@@ -32,12 +32,33 @@ ftp://ftpint.usgs.gov/private/cr/co/lakewood/tmills/wqReviewSetup.exe
 
 
 #Installation for R users
+##Step 1. Switch over to 32-bit R.
+
+R must be run in 32-bit mode to use the ODBC driver. Open R-studio and click Tools-Global Options on the top toolbar. Under "General" in the global options dialog, you will see "R version:" at the top. Click "Change" next to the R version and select "Use your machine's default version of R (32 bit)" to change to 32-bit R. R-studio will need to restart after doing this.
+
+##Step 2. Install the "devtools" package for installing QWToolbox directly from Github.
+
+Open R-studio in 32-bit mode if it is not already open and type the following command in the console:
+```R
+install.packages(c("curl","devtools"))
 ```
+This will install the devtools package on your machine. 
+
+If an error appears about "Rtools not installed", ignore this message, Rtools is not required for the devtools functions you will use.
+
+##Step 3. Install the QWToolbox package from Github.
+
+Open R-studio in 32-bit mode if it is not already open and type the following commands in the console:
+
+```R
 library(devtools)
-install_github("USGS-R/WQ-Review")
+install_github("USGS-R/WQ-Review",build_vignettes = TRUE)
 ```
 
-###Run the app
+This will install the QWToolbox package as well as all other packages that QWToolbox relies on. It may take a minute to download and install the supporting packages during the first installation.
+
+
+##Run the app
 The shiny app is launched by loading the WQ-Review package and running the function 
 ```
 library(WQReview)
