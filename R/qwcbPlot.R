@@ -52,21 +52,22 @@ qwcbPlot <- function(qw.data,
   if(!is.null(begin.date) & !is.null(end.date))
   {
   plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
-                       !duplicated(RECORD_NO) == TRUE &
+                       #!duplicated(RECORD_NO) == TRUE &
                        SAMPLE_START_DT >= as.POSIXct(begin.date) &
                        SAMPLE_START_DT <= as.POSIXct(end.date))
   }else if (!is.null(begin.date) & is.null(end.date))
   {
           plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
-                                     !duplicated(RECORD_NO) == TRUE &
+                                     #!duplicated(RECORD_NO) == TRUE &
                                      SAMPLE_START_DT >= as.POSIXct(begin.date))
   }else if (is.null(begin.date) & !is.null(end.date))
   {
           plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
-                                     !duplicated(RECORD_NO) == TRUE &
+                                     #!duplicated(RECORD_NO) == TRUE &
                                      SAMPLE_START_DT <= as.POSIXct(end.date))
-  }else {plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
-                                    !duplicated(RECORD_NO) == TRUE)}
+  }else {plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection)  
+                                    #!duplicated(RECORD_NO) == TRUE
+                                    )}
   
   ###Set the modified date to most recent modification for that record
   
@@ -81,7 +82,7 @@ qwcbPlot <- function(qw.data,
   } else (maintitle <- "No site selected")
   
   ylabel <- "Charge balance Percent difference\n( [sum(cat)-sum(an)]/[tot. charge] * 100 )"
-  p1 <- ggplot(data=plotdata,aes(x=SAMPLE_START_DT,y=perc.diff,shape = complete.chem, color = MEDIUM_CD))
+  p1 <- ggplot(data=subset(plotdata,!duplicated(RECORD_NO) == TRUE),aes(x=SAMPLE_START_DT,y=perc.diff,shape = complete.chem, color = MEDIUM_CD))
   p1 <- p1 + geom_point(size=3)
   p1 <- p1 + ylab(paste(ylabel,"\n")) + xlab("Date")
   p1 <- p1 + scale_colour_manual("Medium code",values = medium.colors)
@@ -103,19 +104,12 @@ qwcbPlot <- function(qw.data,
   
   ###New sample labels
   
-  if(nrow(subset(plotdata, SAMPLE_MD >= (Sys.time()-new.threshold))) > 0)
-  {
-    if(all(is.finite(plotdata$perc.diff[which(plotdata$SAMPLE_MD >= (Sys.time()-new.threshold))])) &
-         
-         nrow(subset(plotdata, SAMPLE_MD >= (Sys.time()-new.threshold))) > 0)
-
-       
-       
-      {
-            p1 <- p1 + geom_text(data=subset(plotdata,SAMPLE_MD >= (Sys.time()-new.threshold)),
+if(all(is.na(subset(plotdata,RESULT_MD >= (Sys.time()-new.threshold))$perc.diff))==FALSE)
+{
+            p1 <- p1 + geom_text(data=subset(plotdata,RESULT_MD >= (Sys.time()-new.threshold)),
                          aes(x=SAMPLE_START_DT,y=perc.diff,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
       }else{}
-  } else{}
+
   
   p1 <- p1 + theme(axis.text.x = element_text(angle = 90)) + ggtitle(maintitle)
   p1 <- p1 + geom_hline(data = hline,aes(yintercept = yint,linetype=Imbalance),show_guide=TRUE) 
