@@ -4,7 +4,7 @@
 
 output$qwcbPlot <- renderPlot({
         qwcbPlot(qw.data = qw.data,
-                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold_cb),
+                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_cb),
                  facet = input$facetSel_cb,
                  highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
