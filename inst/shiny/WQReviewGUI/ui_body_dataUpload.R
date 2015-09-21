@@ -7,7 +7,7 @@ tabItem(tabName = "dataUpload",
                                 
                                 selectInput("qwsampleType", "Type of samples", 
                                             choices = c("Logged-in"="1",
-                                                        "New samples"="2")),
+                                                        "New samples"="3")),
                                 conditionalPanel(
                                         condition = "input.qwsampleType == '1'",
                                         textInput("uploadDSN",label="Server name (DSN)",value="NWISCO"),
