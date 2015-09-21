@@ -59,6 +59,7 @@ tabItem(tabName = "siteSelection",
                 h4(textOutput("resultModifiedPARM")),
                 h4(textOutput("resultModifiedDate")),
                 h4(textOutput("resultModifiedName")),
+                verbatimTextOutput("shinyErrors"),
                 verbatimTextOutput("errors")
         )
 )
