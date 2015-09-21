@@ -43,7 +43,7 @@ qwseasonalPlot <- function(qw.data,
   
   ylabel <- str_wrap(unique(qw.data$PlotTable$PARM_DS[which(qw.data$PlotTable$PARM_CD==(plotparm))]), width = 25)
   p1 <- ggplot(data=plotdata)
-  p1 <- p1 + geom_point(aes(x=DOY,y=RESULT_VA, color=MEDIUM_CD,shape = REMARK_CD, color = MEDIUM_CD))
+  p1 <- p1 + geom_point(aes(x=DOY,y=RESULT_VA, color=MEDIUM_CD,shape = REMARK_CD))
   
   if ( facet == "Facet")
   {

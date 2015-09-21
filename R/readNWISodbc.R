@@ -79,8 +79,8 @@ readNWISodbc <- function(DSN = NULL,
   
   ##Check if samples were pulled and quit if no
   if(nrow(Samples) == 0) {
-          print("No samples exist in your local NWIS database, check data criteria")
-          stop("No samples exist in your local NWIS database, check data criteria")
+          #print("No samples exist in your local NWIS database for site number specified, check data criteria")
+          stop("No samples exist in your local NWIS database site number specified, check data criteria")
   }
   
   
@@ -92,6 +92,10 @@ readNWISodbc <- function(DSN = NULL,
     Samples <- subset(Samples, SAMPLE_START_DT >= as.POSIXct(begin.date) & SAMPLE_START_DT <= as.POSIXct(end.date))
   }else {} 
   
+  if(nrow(Samples) == 0) {
+          print("No samples exist in your local NWIS database for the date range specified, check data criteria")
+          stop("No samples exist in your local NWIS database for the date range specified, check data criteria")
+  }
   #get the QWResult file using the record numbers
   ##SQL is limited to 1000 entries in querry
   ##Get the number of 1000 bins in querry
@@ -266,6 +270,10 @@ readNWISodbc <- function(DSN = NULL,
       Samples <- subset(Samples, SAMPLE_START_DT >= begin.date & SAMPLE_START_DT <= end.date)
     }else {} 
     
+    ###Check for samples. If no samples then skip QA database
+    if(nrow(Samples) > 0)
+    {
+    
     #get the QWResult file using the record numbers
     ##SQL is limited to 1000 entries in querry
     ##Get the number of 1000 bins in querry
@@ -420,7 +428,8 @@ readNWISodbc <- function(DSN = NULL,
       PlotTable2 <- join(Results,Sample_meta,by="RECORD_NO")
     }else{}
     
-  }
+    }
+  } else{}
   ###Check that data was pulled from Database 2
   if(exists("DataTable2"))
   {

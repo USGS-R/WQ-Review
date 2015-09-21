@@ -18,6 +18,10 @@ output$importWarning <- renderPrint({
 
 observeEvent(input$dataDownload, {
         
+        qw.data <<- NULL
+        reports <<- NULL
+        errors <<- ""
+        
         siteFile <- input$siteFile
         parmFile <- input$parmFile
 
@@ -47,6 +51,10 @@ observeEvent(input$dataDownload, {
         ###Run all the data import and report generation functions
         source("server_importandreports.r",local=TRUE)$value
         
+        ###Check for succesful data import
+        if(!is.null(qw.data))
+        {
+                
         ###Update header
         source("server_header.r",local=TRUE)$value
         
@@ -88,7 +96,8 @@ observeEvent(input$dataDownload, {
                 output$resultModifiedName <- renderText({
                         print(unique(paste("Name:",qw.data$PlotTable$RESULT_MN[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
                 })
-        },warning = function(w) {
+        } else{output$shinyErrors <- renderPrint("Problem with data import, please check import criteria")}
+                },warning = function(w) {
                 
                 ###Check for parm group input or pcode file
                 
@@ -112,6 +121,10 @@ observeEvent(input$dataDownload, {
                 
                 ###Run all the data import and report generation functions
                 source("server_importandreports.r",local=TRUE)$value
+                        
+                ###Check for succesful data import
+                if(!is.null(qw.data))
+                {
                 
                 ###Update header
                 source("server_header.r",local=TRUE)$value
@@ -154,9 +167,13 @@ observeEvent(input$dataDownload, {
                         print(unique(paste("Name:",qw.data$PlotTable$RESULT_MN[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
                 })
                 
-                
+                } else{output$shinyErrors <- renderPrint("Problem with data import, please check import criteria")}
         }, error = function(e) {} )
         
+        
+        ###Check for succesful data import
+        if(!is.null(qw.data))
+        {
         
         
         tryCatch({
@@ -555,7 +572,13 @@ observeEvent(input$dataDownload, {
                                                      paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
                 )
                 },error=function(e){})
-                
+        
+        ###Clear error messages on successful data import
+        output$errors <- renderPrint("")
+        output$shinyErrors <- renderPrint("")
+        
+        } else{output$shinyErrors <- renderPrint("Problem with data import, please check import criteria")}
 
 })
+
 
