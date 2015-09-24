@@ -10,7 +10,7 @@
 #' @import RODBC
 #' @import plyr
 #' @import reshape2
-
+#' @import Rcpp
 WQReviewGUI <- function() {
   appDir <- system.file("shiny", "WQReviewGUI",package = "WQReview")
   if (appDir == "") {
