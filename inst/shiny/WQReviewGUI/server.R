@@ -17,6 +17,7 @@ server <- function(input, output, session) {
         ###Different functional elements of the dashboard,        ###
         ###plotting, tables, etc. add items here if desired       ###
         #############################################################
+        source("server_dataUpload.r",local=TRUE)$value
         
         session$onSessionEnded(function() {
                 stopApp()
