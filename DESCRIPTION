@@ -18,7 +18,8 @@ Imports:
     shiny,
     shinydashboard,
 	lubridate,
-    DT
+    DT,
+    Rcpp
 Suggests:
     knitr
 VignetteBuilder: knitr
