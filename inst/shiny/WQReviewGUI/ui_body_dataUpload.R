@@ -7,7 +7,8 @@ tabItem(tabName = "dataUpload",
                                 
                                 selectInput("qwsampleType", "Type of samples", 
                                             choices = c("Logged-in"="1",
-                                                        "New samples"="3")),
+                                                        "New samples- no QWSample file"="2",
+                                                        "New samples- with QWSample file" = "3")),
                                 conditionalPanel(
                                         condition = "input.qwsampleType == '1'",
                                         textInput("uploadDSN",label="Server name (DSN)",value="NWISCO"),
@@ -22,7 +23,7 @@ tabItem(tabName = "dataUpload",
                                 fileInput("pcodeFile",label="Parameter file upload",accept="text/csv"),
                                 
                                 conditionalPanel(
-                                        condition = "input.qwSampleType == '2'",
+                                        condition = "input.qwsampleType == '3'",
                                         fileInput("qwsampleFile",label="QWSample file",accept="text/csv")
                                 ),
                                 checkboxInput(inputId = "censor",label="Censor lab values to lrl",value=FALSE),
