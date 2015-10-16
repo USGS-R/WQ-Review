@@ -72,10 +72,10 @@ waitingCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_STAR
                                                     & qw.data$PlotTable$DQI_CD %in% c("I","S","P")])/totalResultCount*100
 }, warning = function(w) {
         reviewedCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
-                                                            & (qw.data$PlotTable$DQI_CD %in% c("R","Q"))])/totalResultCount*100
+                                                            & (qw.data$PlotTable$DQI_CD %in% c("R","Q","O","X","U","A"))])/totalResultCount*100
         
         waitingCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
-                                                           & qw.data$PlotTable$DQI_CD %in% c("I","S")])/totalResultCount*100
+                                                           & qw.data$PlotTable$DQI_CD %in% c("I","S","P")])/totalResultCount*100
 }, error = function(e) {
         reviewedCount <- ""
         waitingCount <- ""
