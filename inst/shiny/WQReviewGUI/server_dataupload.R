@@ -30,14 +30,14 @@ outputOptions(output, 'templateExport', suspendWhenHidden=FALSE)
                     uploadFiles <<- NULL
         uploadFiles <<- dataUpload(
                     qwsampletype = as.numeric(input$qwsampleType),
-                    #DSN = input$uploadDSN,
-                    #env.db = input$uploadenv.db,
-                    #qa.db = input$uploadqa.db,
+                    DSN = input$uploadDSN,
+                    env.db = input$uploadenv.db,
+                    qa.db = input$uploadqa.db,
                     labfile = labFile$datapath,
                     pcodefile = pcodeFile$datapath,
-                    #qwsamplefile = qwsampleFile,
-                    #qwresultname = input$qwresultName,
-                    #qwsamplename = input$qwsampleName,
+                    qwsamplefile = qwsampleFile,
+                    qwresultname = input$qwresultName,
+                    qwsamplename = input$qwsampleName,
                     qwsample.begin.date = as.character(input$qwsampleBeginDate),
                     qwsample.end.date = as.character(input$qwsampleEndDate),
                     censor = input$censor
