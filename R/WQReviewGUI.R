@@ -5,6 +5,7 @@
 #' @import shinydashboard
 #' @import shiny
 #' @import stringr
+#' @import stringi
 #' @import lubridate
 #' @import DT
 #' @import RODBC
