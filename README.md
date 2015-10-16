@@ -1,5 +1,5 @@
 #Overview
-Toolbox for discrete water-quality data review and exploration. This is an initial beta version for testing purposes with limited documentation or support. Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
+Toolbox for discrete water-quality data review and exploration.Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
 
 [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues).
 
@@ -65,7 +65,7 @@ library(WQReview)
 WQReviewGUI()
 ```
 #Guidance for setting up ODBC connection to NWIS
-Your database administrator or IT specialist will need to assist for these steps.
+Your database administrator or IT specialist will may need to assist for these steps.
 
 ##Step 1
 You need to setup a user Data Source Name (User DSN).
@@ -73,17 +73,17 @@ On Windows 7 and 8, run "C:/Windows/SysWOW64/odbcad32.exe".
 
 In the User DSN tab, if you do not see a connection with the same name as your NWIS server of interest, you must add a new connection. Click "Add" on the right.
 
-<img src="vignettes/ODBC_UserDSN.png" alt="Drawing" style="width: 400px;"/>
+(vignettes/ODBC_UserDSN.png)
 
 ##Step 2
 Scroll down until you see a driver named "Oracle in OraClient11g_home1" and click "Finish". **IF YOU DO NOT SEE THE ABOVE DRIVER LISTED, IT IS NOT INSTALLED AND YOU WILL NEED ASSISTANCE FROM AN IT SPECIALIST TO INSTALL IT, THE LINK TO GUIDANCE IS PROVIDED BELOW**
 
-<img src="vignettes/ODBC_CreateUserDSN.png" alt="Drawing" style="width: 400px;"/>
+(vignettes/ODBC_CreateUserDSN.png)
 
 ##Step 3
 A new dialogue will appear. Click the dropdown box next to "TNS Service Name" and select the NWIS server you would like to connect to. After selecting the server, type in the server name into the "Data Source Name" text box at the top. **DO NOT ENTER A USER ID, LEAVE THIS FIELD BLANK**. You are finished, click OK to close the dialogue and then click OK in the main ODBC Data Source Administrator application to close the application.
 
-<img src="vignettes/ODBC_SelectDSN.png" alt="Drawing" style="width: 400px;"/>
+(vignettes/ODBC_SelectDSN.png)
 
 ##If you do not have the driver installed
 Install the Oracle client by following the instructions here:
