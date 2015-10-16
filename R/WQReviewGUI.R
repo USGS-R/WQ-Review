@@ -6,6 +6,7 @@
 #' @import shiny
 #' @import stringr
 #' @import stringi
+#' @import curl
 #' @import lubridate
 #' @import DT
 #' @import RODBC
