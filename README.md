@@ -5,6 +5,8 @@ Toolbox for discrete water-quality data review and exploration.Users are encoura
 
 This package facilitates data review and exploration of discrete water-quality data through rapid and easy-to-use plotting functions and tabular data summaries. Data is imported with user-specified options for single or multiple sites and parameter codes using an ODBC connection to the user's local NWIS server. A graphical user interface allows the user to easily explore their data through a variety of graphical and tabular outputs. 
 
+![Screenshot](vignettes/screenshot1.PNG)
+
 #Requirements
 * This application requires a functioning 32 bit ODBC connection to an NWIS server. Guidance for setting up ODBC access is provided at the bottom of this page.
 * A system default internet browser, preferably Google Chrome. The application will launch in your PC's default browser.
