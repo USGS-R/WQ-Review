@@ -74,7 +74,7 @@ qwscSumPlot <- function(qw.data,
       ###Highlight records
       if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) > 0)
       {
-        p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=RESULT_VA,y=value,shape = complete.chem,color = variable),size=7,alpha=0.5)
+        p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=RESULT_VA,y=value),size=7,alpha=0.5, color = "#F0E442",shape=19)
         #p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=RESULT_VA,y=sum_an,shape = complete.chem,color = "Anions"),size=7,alpha=0.5)
       }
       
@@ -107,7 +107,7 @@ qwscSumPlot <- function(qw.data,
     #p1 <- p1 + labs(linetype="Acceptable sum(ion)/Sc range")
     
     
-    p1 <- p1 + ggtitle(maintitle)
+    p1 <- p1 + ggtitle(maintitle) + theme_bw()
     
   if(printPlot == TRUE)
   {

@@ -4,12 +4,10 @@
 \alias{summaryStats}
 \title{Sum ions vs conductance plot}
 \usage{
-summaryStats(qw.data, new.threshold = 60 * 60 * 24 * 30, parameterCd = NULL)
+summaryStats(qw.data, parameterCd = NULL)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
-
-\item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
 \item{parameterCd}{A character vector of parameter codes to summarize. Defaults to all pcodes if unspecified.}
 }

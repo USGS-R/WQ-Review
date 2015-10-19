@@ -1,10 +1,11 @@
 #' Function to flag samples if values are out of range of historic data
 #' @param qw.data A qw.data list generated from readNWISodbc
+#' @param returnAll logical, return dataframe containing all results or only return flagged samples. Defualt is FALSE
 #' @import plyr
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 
-historicCheck <- function(qw.data)
+historicCheck <- function(qw.data, returnAll = FALSE)
 {
         #subset to in review and approved data, removing information pcodes
         inReviewData <- subset(qw.data$PlotTable, DQI_CD %in% c("I","S","P") &
@@ -71,6 +72,7 @@ historicCheck <- function(qw.data)
                                          "MEDIUM_CD",
                                          "PARM_CD",
                                          "PARM_NM",
+                                         "PARM_SEQ_GRP_CD",
                                          "min",
                                          "max",
                                          "quant99",
@@ -80,4 +82,14 @@ historicCheck <- function(qw.data)
                                          "greaterQuant99_30.15",
                                          "lessQuant01_30.16"
                                          )]
+        if(returnAll == FALSE)
+        {
+        #remove NAs from result flags
+        flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[14]) |
+                                                            !is.na(flaggedSamples[15]) |
+                                                            !is.na(flaggedSamples[16]) |
+                                                            !is.na(flaggedSamples[17])
+        ),]) 
+        } else {}
+        return(flaggedSamples)
 }

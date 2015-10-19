@@ -9,8 +9,12 @@ output$qwscSumPlot <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
                  facet = input$facetSel_scSum,
-                 highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                 print=FALSE) + theme_bw()  
+                 if(input$recordSelect == "")
+                 {
+                         highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                              reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                 } else{highlightrecords = input$recordSelect},
+                 print=FALSE)
 })
 
 output$tableOut <- renderPrint(input$wideDataTable_rows_selected)
@@ -21,8 +25,12 @@ output$qwscSumPlot_zoom <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
                  facet = input$facetSel_scSum,
-                 highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                 printPlot = FALSE) + theme_bw() +  
+                 if(input$recordSelect == "")
+                 {
+                         highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                              reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                 } else{highlightrecords = input$recordSelect},
+                 printPlot = FALSE) + 
                 ###This resescSum the axes to zoomed area, must specify origin because brushedPoinscSum returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = ranges$x, ylim = ranges$y)
 })

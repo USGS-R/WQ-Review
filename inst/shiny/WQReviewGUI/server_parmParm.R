@@ -7,13 +7,12 @@ output$qwparmParmPlot <- renderPlot({
         validate(need(!is.null(input$siteSel_parmParm) & !is.null(input$parmSel_parmParmX) & !is.null(input$parmSel_parmParmY),
                       "No site or parameter selected"))
         qwparmParmPlot(qw.data = qw.data,
-                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                        site.selection = as.character(input$siteSel_parmParm),
-                       show.lm = input$fit_parmParm,
-                       highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                       facet = input$facetSel_parmParm,
                        xparm = as.character(input$parmSel_parmParmX),
                        yparm = as.character(input$parmSel_parmParmY),
+                       facet = input$facetSel_parmParm,
+                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
+                       show.lm = input$fit_parmParm,
                        if("Log10X" %in% input$axes_parmParm)
                        {
                                log.scaleX = TRUE
@@ -21,8 +20,15 @@ output$qwparmParmPlot <- renderPlot({
                        if("Log10Y" %in% input$axes_parmParm)
                        {
                               log.scaleY = TRUE 
-                       } else(log.scaleY = FALSE)
-        ) + theme_bw()  
+                       } else(log.scaleY = FALSE),
+                       if(input$recordSelect == "")
+                       {
+                               highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                                    reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                       } else{highlightrecords = input$recordSelect}
+                       
+                       
+        ) 
 })
 
 
@@ -30,13 +36,12 @@ output$qwparmParmPlot_zoom <- renderPlot({
         validate(need(!is.null(ranges$x), "Select area in upper plot to zoom"))
         
         qwparmParmPlot(qw.data = qw.data,
-                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold_parmParm),
                        site.selection = as.character(input$siteSel_parmParm),
-                       show.lm = input$fit_parmParm,
-                       highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                       facet = input$facetSel_parmParm,
                        xparm = as.character(input$parmSel_parmParmX),
                        yparm = as.character(input$parmSel_parmParmY),
+                       facet = input$facetSel_parmParm,
+                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
+                       show.lm = input$fit_parmParm,
                        if("Log10X" %in% input$axes_parmParm)
                        {
                                log.scaleX = TRUE
@@ -44,8 +49,15 @@ output$qwparmParmPlot_zoom <- renderPlot({
                        if("Log10Y" %in% input$axes_parmParm)
                        {
                                log.scaleY = TRUE 
-                       } else(log.scaleY = FALSE)
-        ) + theme_bw() +  
+                       } else(log.scaleY = FALSE),
+                       if(input$recordSelect == "")
+                       {
+                               highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                                    reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                       } else{highlightrecords = input$recordSelect}
+                       
+                       
+        ) +  
                 ###This resets the axes to zoomed area, must specify origin because brushedPoints returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = ranges$x, ylim = ranges$y)
 })

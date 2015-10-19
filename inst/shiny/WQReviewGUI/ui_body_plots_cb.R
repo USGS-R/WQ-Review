@@ -11,7 +11,9 @@ tabItem(tabName = "cbPlot",
                                ###Controls items for plot
                                #dateInput("newThreshold_cb", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                selectInput("siteSel_cb","Station",choices="",multiple=TRUE),
-                               selectInput("facetSel_cb","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE)
+                               selectInput("facetSel_cb","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
+                               ###Sidebar options
+                               width=3
                                
                        ),
                        mainPanel(

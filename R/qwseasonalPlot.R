@@ -12,12 +12,10 @@
 #' @export
 
 qwseasonalPlot <- function(qw.data,
-                           new.threshold,
+                           new.threshold = 60*60*24*30,
                            site.selection,
                            plotparm,
                            facet = "multisite",
-                           begin.date = NULL,
-                           end.date = NULL,
                            show.q = FALSE,
                            show.smooth = FALSE,
                            highlightrecords = " ",
@@ -43,38 +41,33 @@ qwseasonalPlot <- function(qw.data,
   
   ylabel <- str_wrap(unique(qw.data$PlotTable$PARM_DS[which(qw.data$PlotTable$PARM_CD==(plotparm))]), width = 25)
   p1 <- ggplot(data=plotdata)
-  p1 <- p1 + geom_point(aes(x=DOY,y=RESULT_VA, color=MEDIUM_CD,shape = REMARK_CD))
+  p1 <- p1 + geom_point(aes(x=DOY,y=RESULT_VA, color=MEDIUM_CD,shape = REMARK_CD),size=3)
   
   if ( facet == "Facet")
   {
           p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales="free_y")
   }else{}
   
+  ##Check for new samples and label them. Tried ifelse statement for hte label but it did no recognize new.threshol as a variable for some reason
+  if(nrow(subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold))) > 0)
+  {
+          p1 <- p1 + geom_text(data=subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold)),
+                               aes(x=DOY,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
+  }else{}
+  
+  if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) >0 )
+  {
+          p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=DOY,y=RESULT_VA),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+  }
+ 
   #p1 <- p1 + scale_x_discrete("Month", breaks=levels(qw.data$PlotTable$SAMPLE_MONTH), drop=FALSE)
   p1 <- p1 + scale_color_manual("Medium code",values = medium.colors)
   p1 <- p1 + scale_shape_manual("Remark code",values = qual.shapes)
   p1 <- p1 + ylab(paste(ylabel,"\n"))
-  p1 <- p1 + ggtitle(maintitle)
+  p1 <- p1 + ggtitle(maintitle) + theme_bw()
   
-  if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) >0 )
-  {
-          p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=DOY,y=RESULT_VA,shape = REMARK_CD, color = MEDIUM_CD),size=7,alpha = 0.5)
-  }
-  
-  if(nrow(subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold))) > 0)
-  {
-          if(all(is.finite(plotdata$perc.diff[which(plotdata$SAMPLE_MD >= (Sys.time()-new.threshold))])) &
-                     
-                     nrow(subset(plotdata, SAMPLE_MD >= (Sys.time()-new.threshold))) > 0)
-                  
-                  
-                  
-          {
-                  p1 <- p1 + geom_text(data=subset(plotdata,SAMPLE_MD >= (Sys.time()-new.threshold)),
-                                       aes(x=DOY,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
-          }else{}
-  } else{}
-  
+
+
   ###Add smooth if checked
   if((show.smooth)==TRUE){
           p1 <- p1 + geom_smooth(data = subset(plotdata, REMARK_CD=="Sample" & 

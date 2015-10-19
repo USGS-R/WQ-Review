@@ -61,6 +61,12 @@ qwparmParmPlot <- function(qw.data,
   p1 <- ggplot(data=pp.plot.data)
   p1 <- p1 + geom_point(aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD),size=3)
   p1 <- p1 + ylab(paste(ylabel,"\n")) + xlab(paste("\n",xlabel))
+  #Highlight records
+  if(nrow(subset(pp.plot.data,RECORD_NO %in% highlightrecords)) > 0)
+  {
+          p1 <- p1 + geom_point(data=subset(pp.plot.data,RECORD_NO %in% highlightrecords),aes(x=RESULT_VA_X,y=RESULT_VA_Y),size=7,alpha=0.5, color = "#F0E442",shape=19)
+  } else{}
+  
   p1 <- p1 + scale_colour_manual("Medium code",values = medium.colors)
   if ( facet == "Facet")
   {
@@ -75,12 +81,7 @@ qwparmParmPlot <- function(qw.data,
   {
     p1 <- p1 + scale_x_log10()
   }
-  #Highlight records
-  if(nrow(subset(pp.plot.data,RECORD_NO %in% highlightrecords)) > 0)
-  {
-  p1 <- p1 + geom_point(data=subset(pp.plot.data,RECORD_NO %in% highlightrecords),aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD),size=7,alpha=0.5)
-  } else{}
-  
+
   ##Check for new samples and label them. Tried ifelse statement for hte label but it did no recognize new.threshol as a variable for some reason
   if(nrow(subset(pp.plot.data, RESULT_MD_X >= (Sys.time()-new.threshold) | RESULT_MD_Y >= (Sys.time()-new.threshold))) > 0)
   {
@@ -88,7 +89,7 @@ qwparmParmPlot <- function(qw.data,
                          aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
   }else{}
   
-  p1 <- p1 + ggtitle(maintitle)
+  p1 <- p1 + ggtitle(maintitle) + theme_bw()
   
   
   

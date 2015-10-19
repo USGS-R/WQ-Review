@@ -18,8 +18,6 @@ qwcbPlot <- function(qw.data,
                     site.selection,
                     facet = "multisite",
                     new.threshold = 60*60*24*30,
-                    begin.date = NULL,
-                    end.date = NULL,
                     show.smooth = FALSE,
                     highlightrecords = NULL,
                     printPlot = TRUE){
@@ -49,25 +47,9 @@ qwcbPlot <- function(qw.data,
   qual.shapes <- c(19,0,2,5)
   names(qual.shapes) <- c("Complete","Incomplete")
   
-  if(!is.null(begin.date) & !is.null(end.date))
-  {
   plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
-                       #!duplicated(RECORD_NO) == TRUE &
-                       SAMPLE_START_DT >= as.POSIXct(begin.date) &
-                       SAMPLE_START_DT <= as.POSIXct(end.date))
-  }else if (!is.null(begin.date) & is.null(end.date))
-  {
-          plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
-                                     #!duplicated(RECORD_NO) == TRUE &
-                                     SAMPLE_START_DT >= as.POSIXct(begin.date))
-  }else if (is.null(begin.date) & !is.null(end.date))
-  {
-          plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
-                                     #!duplicated(RECORD_NO) == TRUE &
-                                     SAMPLE_START_DT <= as.POSIXct(end.date))
-  }else {plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection)  
-                                    #!duplicated(RECORD_NO) == TRUE
-                                    )}
+                                    !duplicated(RECORD_NO) == TRUE
+                                    )
   
   ###Set the modified date to most recent modification for that record
   
@@ -97,21 +79,29 @@ qwcbPlot <- function(qw.data,
   ##Highlighted records labels
   if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) >0 )
   {
-    p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=perc.diff,shape = complete.chem, color = MEDIUM_CD),size=7,alpha = 0.5)
+    p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=perc.diff),size=7,alpha = 0.5, color = "#F0E442",shape=19)
   }
   
   
   
   ###New sample labels
-  
-if(all(is.na(subset(plotdata,RESULT_MD >= (Sys.time()-new.threshold))$perc.diff))==FALSE)
-{
-            p1 <- p1 + geom_text(data=subset(plotdata,RESULT_MD >= (Sys.time()-new.threshold)),
-                         aes(x=SAMPLE_START_DT,y=perc.diff,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
-      }else{}
 
+
+  if(nrow(subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold))) > 0)
+  {
+          if(all(is.finite(plotdata$perc.diff[which(plotdata$SAMPLE_MD >= (Sys.time()-new.threshold))])) &
+             
+             nrow(subset(plotdata, SAMPLE_MD >= (Sys.time()-new.threshold))) > 0)
+                  
+                  
+                  
+          {
+                  p1 <- p1 + geom_text(data=subset(plotdata,RESULT_MD >= (Sys.time()-new.threshold)),
+                                       aes(x=SAMPLE_START_DT,y=perc.diff,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
+          }else{}
+  } else{}
   
-  p1 <- p1 + theme(axis.text.x = element_text(angle = 90)) + ggtitle(maintitle)
+  p1 <- p1 + ggtitle(maintitle)
   p1 <- p1 + geom_hline(data = hline,aes(yintercept = yint,linetype=Imbalance),show_guide=TRUE) 
   p1 <- p1 + theme_bw()
   

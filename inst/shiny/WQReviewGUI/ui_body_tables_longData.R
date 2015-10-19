@@ -7,8 +7,9 @@ tabItem(tabName = "longDataTable",
                                 dateInput("startDate_longDataTable", "Start date", 
                                           value=Sys.Date() - 365*3),
                                 dateInput("endDate_longDataTable", "End date", 
-                                          value=Sys.Date())
-                        ),
+                                          value=Sys.Date()),
+                                ###sidebar options
+                                width=3),
                         mainPanel(
                                 downloadButton('longDataTableOut', 'Download tab delimited table'),
                                 

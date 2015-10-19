@@ -18,7 +18,9 @@ tabItem(tabName = "timeSeries",
                         checkboxInput("fit_timeseries",label="Add LOESS",value=FALSE),
                         tags$div(title="Plot interactions won't work with hydrograph display",
                                  checkboxInput("showQ",label="Display hydrograph",value=FALSE)
-                        )
+                        ),
+                        ###Sidebar options
+                        width=3
                 ),
                mainPanel(
                 box(

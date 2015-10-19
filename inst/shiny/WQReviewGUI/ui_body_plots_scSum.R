@@ -11,7 +11,9 @@ tabItem(tabName = "scSumPlot",
                                 ###Controls items for plot
                                 #dateInput("newThreshold_scSum", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                 selectInput("siteSel_scSum","Station",choices="",multiple=TRUE),
-                                selectInput("facetSel_scSum","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE)
+                                selectInput("facetSel_scSum","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
+                                ###Sidebar options
+                                width=3
                                 
                         ),
                         mainPanel(

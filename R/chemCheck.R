@@ -1,12 +1,18 @@
 #' Function to flag samples if basic chemistry is unreasonable
 #' @param qw.data A qw.data list generated from readNWISodbc
+#' @param returnAll logical, return dataframe containing all results or only return flagged samples. Defualt is FALSE
 #' @import plyr
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 
-chemCheck <- function(qw.data) {
+chemCheck <- function(qw.data, returnAll = FALSE) {
         #Make data frame of all samples
         inReviewData <- subset(qw.data$PlotTable, DQI_CD %in% c("I","S","P"))
+        inReviewData$phTooLow_30.01 <- NA
+        inReviewData$phTooHigh_30.02 <- NA
+        inReviewData$O2TooHigh_30.03 <- NA
+        inReviewData$BadCB_30.21 <- NA
+        
         flaggedSamples <- unique(inReviewData[c("RECORD_NO",
                                               "SITE_NO",
                                               "STATION_NM",
@@ -17,16 +23,17 @@ chemCheck <- function(qw.data) {
         
         ##Subset data to pH results
         pHData <- subset(inReviewData, PARM_CD == "00400")
-        
+
+
         ##Flag samples that are too low
         ###Make empty vector for flags
-        pHData$phTooLow_30.01 <- NA
+        #pHData$phTooLow_30.01 <- NA
         ###Flag samples
         pHData$phTooLow_30.01[which(pHData$RESULT_VA < 4.5)] <- paste("flag",
                                                                      pHData$RESULT_VA[which(pHData$RESULT_VA < 4.5)])
         ##Flag samples that are too high
         ###Make empty vector for flags
-        pHData$phTooHigh_30.02 <- NA
+        #pHData$phTooHigh_30.02 <- NA
         ###Flag samples
         pHData$phTooHigh_30.02[which(pHData$RESULT_VA > 9)] <- paste("flag",
                                                                       pHData$RESULT_VA[which(pHData$RESULT_VA > 9)])
@@ -39,7 +46,7 @@ chemCheck <- function(qw.data) {
         
         ##Flag samples that are too high
         ###Make empty vector for flags
-        O2Data$O2TooHigh_30.03 <- NA
+        #O2Data$O2TooHigh_30.03 <- NA
         ###Flag samples
         O2Data$O2TooHigh_30.03[which(O2Data$RESULT_VA > 25)] <- paste("flag",
                                                                      O2Data$RESULT_VA[which(O2Data$RESULT_VA > 25)])
@@ -51,7 +58,7 @@ chemCheck <- function(qw.data) {
         cbData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ")
         
         ##Make empty vector for flags
-        cbData$BadCB_30.21 <- NA
+        #cbData$BadCB_30.21 <- NA
         ###Flag samples
         cbData$BadCB_30.21[which(cbData$RESULT_VA <= 100 & 
                                          abs(cbData$perc.diff) > 15)] <- paste("flag",
@@ -106,6 +113,17 @@ chemCheck <- function(qw.data) {
                                cbData[c("RECORD_NO","BadCB_30.21")], 
                                by = "RECORD_NO")
         flaggedSamples <- unique(flaggedSamples)
+        
+        if(returnAll == FALSE)
+        {
+                #remove NAs from result flags
+                flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[7]) |
+                                                                      !is.na(flaggedSamples[8]) |
+                                                                      !is.na(flaggedSamples[9]) |
+                                                                      !is.na(flaggedSamples[10])
+                ),]) 
+        } else {}
+        
         return(flaggedSamples)
 }
         

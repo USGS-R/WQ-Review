@@ -3,13 +3,22 @@
 #######################################
 
 output$qwcbPlot <- renderPlot({
+        validate(need(!is.null(input$siteSel_cb),
+                      "No site selected"))
+        
         qwcbPlot(qw.data = qw.data,
-                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_cb),
                  facet = input$facetSel_cb,
-                 highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                 print=FALSE
-        ) + theme_bw()  
+                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
+                 show.smooth = FALSE,
+                 if(input$recordSelect == "")
+                 {
+                         highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                              reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                 } else{highlightrecords = input$recordSelect},
+                 printPlot = FALSE)
+        
+ 
 })
 
 output$tableOut <- renderPrint(input$wideDataTable_rows_selected)
@@ -17,11 +26,16 @@ output$tableOut <- renderPrint(input$wideDataTable_rows_selected)
 output$qwcbPlot_zoom <- renderPlot({
         validate(need(!is.null(ranges$x), "Select area in upper plot to zoom"))
         qwcbPlot(qw.data = qw.data,
-                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_cb),
                  facet = input$facetSel_cb,
-                 highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                 printPlot = FALSE) + theme_bw() +  
+                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
+                 show.smooth = FALSE,
+                 if(input$recordSelect == "")
+                 {
+                         highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                              reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                 } else{highlightrecords = input$recordSelect},
+                 printPlot = FALSE) +  
                 ###This resecb the axes to zoomed area, must specify origin because brushedPoincb returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = as.POSIXct(ranges$x,origin="1970-01-01 00:00.00 UTC"), ylim = ranges$y)
 })

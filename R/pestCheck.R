@@ -1,15 +1,17 @@
 #' Function to flag pesticide samples
 #' @param qw.data A qw.data list generated from readNWISodbc
+#' @param returnAll logical, return dataframe containing all results or only return flagged samples. Defualt is FALSE
 #' @import plyr
 #' @import smwrBase
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 
-pestCheck <- function(qw.data)
+pestCheck <- function(qw.data, returnAll = FALSE)
 {
         #subset data to schedule 2437 parameters collected after WY2013
         pestData <- subset(qw.data$PlotTable, PARM_CD %in% schedule2437 & 
                                    waterYear(SAMPLE_START_DT) >= 2013)
+        
         
         #Split data into approved and in review
         inReviewData <- subset(pestData, DQI_CD %in% c("I","S","P") &
@@ -19,7 +21,9 @@ pestCheck <- function(qw.data)
                                        PARM_SEQ_GRP_CD != "INF" &
                                        MEDIUM_CD %in% c("WS ","WG ", "OA "))
         
-        
+        if(nrow(inReviewData) > 0 & nrow(approvedData) > 0)
+        {
+                
         #Get max number of hits in approved data at each site
         detects <- subset(approvedData, REMARK_CD != "<")
         siteStats <- ddply(detects,c("SITE_NO","RECORD_NO"),summarize,
@@ -64,7 +68,32 @@ pestCheck <- function(qw.data)
                                              "MEDIUM_CD")]),sampleHits,
                            by="RECORD_NO",
                            type="right")
+        } else {
+                sampleHits <- unique(qw.data$PlotTable[c("RECORD_NO",
+                                                "STATION_NM",
+                                                "SAMPLE_START_DT",
+                                                "SAMPLE_END_DT",
+                                                "MEDIUM_CD",
+                                                "SITE_NO")])
+                sampleHits$numHits <- NA
+                sampleHits$maxHits <- NA
+                sampleHits$minHits <- NA
+                sampleHits$N <- NA
+                sampleHits$newMaxHits_30.13 <- NA
+                sampleHits$newMinHits_30.14 <- NA
+                warning("Insufficient pesticide data to auto check")}
+        
+        if(returnAll == FALSE)
+        {
+                #remove NAs from result flags
+                sampleHits <- unique(sampleHits[which(!is.na(sampleHits[11]) |
+                                                                      !is.na(sampleHits[12])
+                                                      
+                ),]) 
+        } else {}
+        
         return(sampleHits)
+        
 }
         
         

@@ -9,7 +9,9 @@ tabItem(tabName = "matrixPlot",
                         headerPanel("Matrix Plot"),
                         sidebarPanel(         ###Controls items for plot
                                 selectInput("siteSel_matrix","Station",choices="",multiple=TRUE),
-                                selectInput("parmSel_matrix","Parameter",choices="",multiple=TRUE)
+                                selectInput("parmSel_matrix","Parameter",choices="",multiple=TRUE),
+                                ###Sidebar options
+                                width=3
                         ),
                         mainPanel(
                 ###This displays the primary plot interaction output

@@ -6,28 +6,40 @@
 output$qwseasonalPlot <- renderPlot({
         validate(need(!is.null(input$siteSel_seasonal) & !is.null(input$parmSel_seasonal),
                       "No site or parameter selected"))
+        
+        
         qwseasonalPlot(qw.data = qw.data,
-                 new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
-                 site.selection = as.character(input$siteSel_seasonal),
-                 plotparm = as.character(input$parmSel_seasonal),
-                 facet = input$facetSel_seasonal,
-                 highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                 show.smooth = input$fit_seasonal,
-                 print=FALSE
-                ) + theme_bw()  
+                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
+                       site.selection = as.character(input$siteSel_seasonal),
+                       plotparm = as.character(input$parmSel_seasonal),
+                       facet = input$facetSel_seasonal,
+                       show.q = FALSE,
+                       show.smooth = input$fit_seasonal,
+                       if(input$recordSelect == "")
+                       {
+                               highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                                    reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                       } else{highlightrecords = input$recordSelect},
+                       print = FALSE)
+ 
 })
 
 
 output$qwseasonalPlot_zoom <- renderPlot({
         validate(need(!is.null(ranges$x), "Select area in upper plot to zoom"))
         qwseasonalPlot(qw.data = qw.data,
-                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
-                 site.selection = as.character(input$siteSel_seasonal),
-                plotparm = as.character(input$parmSel_seasonal),
-                facet = input$facetSel_seasonal,
-                highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
-                show.smooth = input$fit_seasonal,
-                 print = FALSE) + theme_bw() +  
+                       new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
+                       site.selection = as.character(input$siteSel_seasonal),
+                       plotparm = as.character(input$parmSel_seasonal),
+                       facet = input$facetSel_seasonal,
+                       show.q = FALSE,
+                       show.smooth = input$fit_seasonal,
+                       if(input$recordSelect == "")
+                       {
+                               highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                                    reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                       } else{highlightrecords = input$recordSelect},
+                       print = FALSE) + 
                 ###This resets the axes to zoomed area, must specify origin because brushedPoints returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
            coord_cartesian(xlim = ranges$x, ylim = ranges$y)
 })

@@ -16,33 +16,33 @@ totalResultCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_
                                                                               &!duplicated(qw.data$PlotTable$RECORD_NO)])
                          newResultCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$RESULT_CR > Sys.time() - 60*60*24*7])
                          modifiedCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$RESULT_MD > Sys.time() - 60*60*24*7])
-                         totalSampleCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
-                                                                                &!duplicated(qw.data$PlotTable$RECORD_NO)])
-                         totalResultCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3])
+
 },error = function(e) {
         newSampleCount <- ""
         newResultCount <- ""
         modifiedCount <- ""
-        totalSampleCount <- ""
-        totalResultCount <- ""
 })
 
 alertData <- data.frame(
         text = c(paste(newSampleCount,"New samples in past 7 days"),
                  paste(newResultCount,"New results in past 7 days"),
                  paste(modifiedCount,"Modified results in past 7 days"),
-                 paste("3-year sample count",totalSampleCount),
-                 paste("3-year result count",totalResultCount)),
-        icon = c("exclamation-triangle",
-                 "exclamation-triangle",
-                 "exclamation-triangle",
+                 paste(nrow(reports$chemFlagTable),"Chemical check flags"),
+                 paste(nrow(reports$pestFlagTable),"Pesticide flags"),
+                 paste(nrow(reports$resultFlagTable),"High/low value flags")
+                 ),
+        icon = c("info",
                  "info",
-                 "info"),
-        status = c("warning",
-                   "warning",
-                   "warning",
+                 "info",
+                 "exclamation-triangle",
+                 "exclamation-triangle",
+                 "exclamation-triangle"),
+        status = c("info",
                    "info",
-                   "info"),
+                   "info",
+                   "warning",
+                   "warning",
+                   "warning"),
         stringsAsFactors = FALSE
 )
 

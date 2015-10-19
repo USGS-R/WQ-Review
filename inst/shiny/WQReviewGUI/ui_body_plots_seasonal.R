@@ -13,7 +13,9 @@ tabItem(tabName = "seasonalPlot",
                                 selectInput("siteSel_seasonal","Station",choices="",multiple=TRUE),
                                 selectInput("parmSel_seasonal","Parameter",choices="",multiple=FALSE),
                                 selectInput("facetSel_seasonal","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
-                                checkboxInput("fit_seasonal",label="Add LOESS",value=FALSE)
+                                checkboxInput("fit_seasonal",label="Add LOESS",value=FALSE),
+                                ###Sidebar options
+                                width=3
                         ),
                         mainPanel(
                 ###This displays the primary plot interaction output

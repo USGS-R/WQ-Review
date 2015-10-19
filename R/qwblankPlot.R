@@ -58,7 +58,7 @@ qwblankPlot <- function(qw.data,
         ##Highlighted records labels
         if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) >0 )
         {
-                p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=RESULT_VA,shape = REMARK_CD, color = MEDIUM_CD),size=7,alpha = 0.5)
+                p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=RESULT_VA),size=7,alpha = 0.5, color = "#F0E442",shape=19)
         }
         
         

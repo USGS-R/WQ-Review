@@ -16,7 +16,9 @@ tabItem(tabName = "parmParmPlot",
                                 
                                 checkboxInput("fit_parmParm",label="Add linear fit",value=FALSE),
                                 checkboxGroupInput("axes_parmParm","Axis options:",
-                                                   choices = c("Log10X","Log10Y"))
+                                                   choices = c("Log10X","Log10Y")),
+                                ###Sidebar options
+                                width=3
                         ),
                         mainPanel(
                 ###This displays the primary plot interaction output

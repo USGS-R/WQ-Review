@@ -13,7 +13,9 @@ tabItem(tabName = "repBoxPlot",
                                 
                                 selectInput("siteSel_repBox","Station",choices="",multiple=TRUE),
                                 selectInput("parmSel_repBox","Parameter",choices="",multiple=TRUE),
-                                checkboxInput("showpoints_repBox",label="Show sample points",value=FALSE)
+                                checkboxInput("showpoints_repBox",label="Show sample points",value=FALSE),
+                                ###Sidebar options
+                                width=3
                                 
                         ),
                         mainPanel(

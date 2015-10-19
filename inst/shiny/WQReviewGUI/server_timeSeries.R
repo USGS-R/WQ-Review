@@ -9,12 +9,16 @@ output$qwtsPlot <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_TS),
                  plotparm = as.character(input$parmSel_TS),
-                 highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
+                 if(input$recordSelect == "")
+                 {
+                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                     reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                 } else{highlightrecords = input$recordSelect},
                  show.smooth = input$fit_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,
                  print=FALSE
-        ) + theme_bw()  
+        ) 
 })
 
 output$tableOut <- renderPrint(input$wideDataTable_rows_selected)
@@ -25,10 +29,16 @@ output$qwtsPlot_zoom <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_TS),
                  plotparm = as.character(input$parmSel_TS),
-                 highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)],
+                 if(input$recordSelect == "")
+                 {
+                         highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
+                                              reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
+                 } else{highlightrecords = input$recordSelect},
                  show.smooth = input$fit_timeseries,
                  facet = input$facetSel_TS,
-                 printPlot = FALSE) + theme_bw() +  
+                 show.q = input$showQ,
+                 print=FALSE
+        ) + 
                 ###This resets the axes to zoomed area, must specify origin because brushedPoints returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = as.POSIXct(ranges$x,origin="1970-01-01 00:00.00 UTC"), ylim = ranges$y)
 })

@@ -7,7 +7,9 @@ tabItem(tabName = "balanceTable",
                                 dateInput("startDate_balanceTable", "Start date", 
                                           value=Sys.Date() - 365*3),
                                 dateInput("endDate_balanceTable", "End date", 
-                                          value=Sys.Date())
+                                          value=Sys.Date()),
+                                ###sidebar options
+                                width=3
                         ),
                         mainPanel(
                                 downloadButton('BalanceDataTableOut', 'Download tab delimited table'),

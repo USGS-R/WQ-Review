@@ -10,11 +10,13 @@ dashboardSidebar(sidebarMenu(
                 
                        ###Load the controls
         menuItem(tabName="siteSelection","Data import"),
-                       
+        menuItem(tabName="flagPage","Auto-flagged samples"),
+        
                 menuItem("Plots",
                          
                          dateInput("newThreshold", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
-
+                         textInput("recordSelect", "Highlight record #"),
+                         
                            
                          menuSubItem(tabName="timeSeries",text="Timeseries"),
                          

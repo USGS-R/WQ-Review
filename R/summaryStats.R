@@ -2,12 +2,11 @@
 #' 
 #' Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance. Requires charge balance = TRUE in NWISPullR
 #' @param qw.data A qw.data object generated from readNWISodbc
-#' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param parameterCd A character vector of parameter codes to summarize. Defaults to all pcodes if unspecified.
 #' @import plyr
 #' @export
 #' 
-summaryStats <- function(qw.data, new.threshold = 60*60*24*30, parameterCd = NULL) {
+summaryStats <- function(qw.data, parameterCd = NULL) {
   data <- qw.data$PlotTable
   
  
