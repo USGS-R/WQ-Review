@@ -14,13 +14,14 @@ tabItem(tabName = "seasonalPlot",
                                 selectInput("parmSel_seasonal","Parameter",choices="",multiple=FALSE),
                                 selectInput("facetSel_seasonal","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
                                 checkboxInput("fit_seasonal",label="Add LOESS",value=FALSE),
+                                verbatimTextOutput("seasonal_hoverinfo"),
                                 ###Sidebar options
                                 width=3
                         ),
                         mainPanel(
                 ###This displays the primary plot interaction output
                 box(
-                        plotOutput("qwseasonalPlot", click="plot_click",brush="plot_brush"),
+                        plotOutput("qwseasonalPlot", click="plot_click",brush="plot_brush",hover="plot_hover"),
                         #verbatimTextOutput("brushx"),
                         
                         ###Box options
@@ -30,7 +31,7 @@ tabItem(tabName = "seasonalPlot",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwseasonalPlot_zoom", click="plot_click"),
+                        plotOutput("qwseasonalPlot_zoom", click="plot_click",hover="plot_hover"),
                         ###Box options
                         width=12,
                         collapsible=TRUE),

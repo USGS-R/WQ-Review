@@ -19,12 +19,14 @@ tabItem(tabName = "timeSeries",
                         tags$div(title="Plot interactions won't work with hydrograph display",
                                  checkboxInput("showQ",label="Display hydrograph",value=FALSE)
                         ),
+                        verbatimTextOutput("timeseries_hoverinfo"),
+                        
                         ###Sidebar options
                         width=3
                 ),
                mainPanel(
                 box(
-                        plotOutput("qwtsPlot", click="plot_click",brush="plot_brush"),
+                        plotOutput("qwtsPlot", click="plot_click",brush="plot_brush",hover="plot_hover"),
                         #verbatimTextOutput("tableOut"),
                         
                         ###Box options
@@ -35,7 +37,7 @@ tabItem(tabName = "timeSeries",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwtsPlot_zoom", click="plot_click"),
+                        plotOutput("qwtsPlot_zoom", click="plot_click",hover="plot_hover"),
                         #dataTableOutput("hoverinfo"),
                         ###Box options
                         width=12,

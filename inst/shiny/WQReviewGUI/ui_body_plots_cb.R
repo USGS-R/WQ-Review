@@ -12,6 +12,8 @@ tabItem(tabName = "cbPlot",
                                #dateInput("newThreshold_cb", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                selectInput("siteSel_cb","Station",choices="",multiple=TRUE),
                                selectInput("facetSel_cb","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
+                               verbatimTextOutput("cb_hoverinfo"),
+                               
                                ###Sidebar options
                                width=3
                                
@@ -20,7 +22,7 @@ tabItem(tabName = "cbPlot",
                                
                 ###This displays the primary plot interaction output
                 box(
-                        plotOutput("qwcbPlot", click="plot_click",brush="plot_brush"),
+                        plotOutput("qwcbPlot", click="plot_click",brush="plot_brush", hover="plot_hover"),
                         #verbatimTextOutput("brushx"),
                         
                         ###Box options
@@ -30,7 +32,7 @@ tabItem(tabName = "cbPlot",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwcbPlot_zoom", click="plot_click"),
+                        plotOutput("qwcbPlot_zoom", click="plot_click", hover="plot_hover"),
                         ###Box options
                         width=12,
                         collapsible=TRUE),

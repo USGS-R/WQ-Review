@@ -85,8 +85,8 @@ observe({
         ypp.plot.data <- 
                 subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD == dataSelections$parmSelY)
         #Join x and y data
-        pp.plot.data <<- join(xpp.plot.data[,c("RECORD_NO","MEDIUM_CD","RESULT_VA","RESULT_MD","STATION_NM")], ypp.plot.data[,c("RECORD_NO","MEDIUM_CD","RESULT_VA","RESULT_MD","STATION_NM")],by="RECORD_NO")
-        names(pp.plot.data) <<- c("RECORD_NO","MEDIUM_CD","RESULT_VA_X","RESULT_MD_X","STATION_NM","MEDIUM_CD","RESULT_VA_Y","RESULT_MD_Y","STATION_NM")
+        pp.plot.data <<- join(xpp.plot.data[,c("RECORD_NO","SITE_NO","MEDIUM_CD","RESULT_VA","RESULT_MD","STATION_NM")], ypp.plot.data[,c("RECORD_NO","MEDIUM_CD","RESULT_VA","RESULT_MD","STATION_NM")],by="RECORD_NO")
+        names(pp.plot.data) <<- c("RECORD_NO","SITE_NO","MEDIUM_CD","RESULT_VA_X","RESULT_MD_X","STATION_NM","MEDIUM_CD","RESULT_VA_Y","RESULT_MD_Y","STATION_NM")
         }
 })
 
@@ -142,9 +142,67 @@ output$parmParm_brushinfo <- DT::renderDataTable({
         # nearPoints() also works with hover and dblclick events
 })
 
-#output$parmParm_hoverinfo <- DT::renderDataTable({
-#        # With base graphics, need to tell it what the x and y variables are.
-#        DT::datatable(nearPoints(qw.data$PlotTable, input$plot_hover)
-#        )
-#        # nearPoints() also works with hover and dblclick events
-#})
+###This prints info about the hovered point. It is very messy with the code in places. 
+###Basically it uses nearPoints() to get the dataframe and then extracts the information 
+###from that dataframe. For the flag results, it pulls the record number from the 
+###nearPoints() dataframe and then uses that ot subset the flag table.
+###It then returns the column names of columns that have flags in them.
+
+output$parmParm_hoverinfo <- renderPrint({
+        
+        cat("Record #:",unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                          coordinfo = input$plot_hover,
+                                          xvar=xvar_parmParm,
+                                          yvar=yvar_parmParm)$RECORD_NO),
+            "\n"
+        );
+        
+        cat("Site #:",unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                        coordinfo = input$plot_hover,
+                                        xvar=xvar_parmParm,
+                                        yvar=yvar_parmParm)$SITE_NO),
+            "\n");
+        
+        cat("Station:",unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                         coordinfo = input$plot_hover,
+                                         xvar=xvar_parmParm,
+                                         yvar=yvar_parmParm)$STATION_NM),
+            "\n");
+        cat("Date/time:",format(unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                           coordinfo = input$plot_hover,
+                                           xvar=xvar_parmParm,
+                                           yvar=yvar_parmParm)$SAMPLE_START_DT),"%Y-%m-%d %H:%M"),
+            "\n");
+        cat("Chemical flags:",
+            names(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                                                              coordinfo = input$plot_hover,
+                                                                              xvar=xvar_parmParm,
+                                                                              yvar=yvar_parmParm)$RECORD_NO))[7:10])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                                                                                                                                                                              coordinfo = input$plot_hover,
+                                                                                                                                                                                              xvar=xvar_parmParm,
+                                                                                                                                                                                              yvar=yvar_parmParm)$RECORD_NO))[7:10], function(x)all(is.na(x))) == FALSE)],
+            "\n");
+        
+        cat("Pesticide flags:",
+            names(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                                                              coordinfo = input$plot_hover,
+                                                                              xvar=xvar_parmParm,
+                                                                              yvar=yvar_parmParm)$RECORD_NO))[11:12])[which(sapply(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                                                                                                                                                                               coordinfo = input$plot_hover,
+                                                                                                                                                                                               xvar=xvar_parmParm,
+                                                                                                                                                                                               yvar=yvar_parmParm)$RECORD_NO))[11:12], function(x)all(is.na(x))) == FALSE)],
+            "\n");
+        
+        cat("Result flags:",
+            names(subset(reports$resultFlagTable,PARM_CD == dataSelections$parmSel & RECORD_NO == unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                                                                                                    coordinfo = input$plot_hover,
+                                                                                                                    xvar=xvar_parmParm,
+                                                                                                                    yvar=yvar_parmParm)$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == dataSelections$parmSel & RECORD_NO == unique(nearPoints(df=na.omit(subset(pp.plot.data,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel)),
+                                                                                                                                                                                                                                                                           coordinfo = input$plot_hover,
+                                                                                                                                                                                                                                                                           xvar=xvar_parmParm,
+                                                                                                                                                                                                                                                                           yvar=yvar_parmParm)$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
+            "\n");
+        
+        
+        
+})

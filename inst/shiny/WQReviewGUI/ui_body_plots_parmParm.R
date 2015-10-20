@@ -17,6 +17,8 @@ tabItem(tabName = "parmParmPlot",
                                 checkboxInput("fit_parmParm",label="Add linear fit",value=FALSE),
                                 checkboxGroupInput("axes_parmParm","Axis options:",
                                                    choices = c("Log10X","Log10Y")),
+                                verbatimTextOutput("parmParm_hoverinfo"),
+                                
                                 #verbatimTextOutput("parmParm_hoverinfo"),
                                 ###Sidebar options
                                 width=3

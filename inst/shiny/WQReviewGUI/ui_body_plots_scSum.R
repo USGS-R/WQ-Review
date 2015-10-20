@@ -12,6 +12,8 @@ tabItem(tabName = "scSumPlot",
                                 #dateInput("newThreshold_scSum", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                 selectInput("siteSel_scSum","Station",choices="",multiple=TRUE),
                                 selectInput("facetSel_scSum","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
+                                verbatimTextOutput("scSum_hoverinfo"),
+                                
                                 ###Sidebar options
                                 width=3
                                 
@@ -19,7 +21,7 @@ tabItem(tabName = "scSumPlot",
                         mainPanel(
                 ###This displays the primary plot interaction output
                 box(
-                        plotOutput("qwscSumPlot", click="plot_click",brush="plot_brush"),
+                        plotOutput("qwscSumPlot", click="plot_click",brush="plot_brush", hover="plot_hover"),
                         #verbatimTextOutput("brushx"),
                         
                         ###Box options
@@ -29,7 +31,7 @@ tabItem(tabName = "scSumPlot",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwscSumPlot_zoom", click="plot_click"),
+                        plotOutput("qwscSumPlot_zoom", click="plot_click", hover="plot_hover"),
                         ###Box options
                         width=12,
                         collapsible=TRUE),

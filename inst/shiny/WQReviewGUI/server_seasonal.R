@@ -74,6 +74,8 @@ observe({
         }
 })
 
+
+
 ###This outputs the data tables for clicked and brushed points
 
 output$seasonal_clickinfo <- DT::renderDataTable({
@@ -101,9 +103,67 @@ output$seasonal_brushinfo <- DT::renderDataTable({
         # nearPoints() also works with hover and dblclick events
 })
 
-output$seasonal_hoverinfo <- DT::renderDataTable({
-        # With base graphics, need to tell it what the x and y variables are.
-        DT::datatable(nearPoints(qw.data$PlotTable, input$plot_hover)
-        )
-        # nearPoints() also works with hover and dblclick events
+###This prints info about the hovered point. It is very messy with the code in places. 
+###Basically it uses nearPoints() to get the dataframe and then extracts the information 
+###from that dataframe. For the flag results, it pulls the record number from the 
+###nearPoints() dataframe and then uses that ot subset the flag table.
+###It then returns the column names of columns that have flags in them.
+
+output$seasonal_hoverinfo <- renderPrint({
+        
+        cat("Record #:",unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                              coordinfo = input$plot_hover,
+                                              xvar=xvar_seasonal,
+                                              yvar=yvar_seasonal)$RECORD_NO),
+            "\n"
+            );
+        
+        cat("Site #:",unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                       coordinfo = input$plot_hover,
+                                       xvar=xvar_seasonal,
+                                       yvar=yvar_seasonal)$SITE_NO),
+            "\n");
+        
+        cat("Station:",unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                       coordinfo = input$plot_hover,
+                                       xvar=xvar_seasonal,
+                                       yvar=yvar_seasonal)$STATION_NM),
+            "\n");
+        cat("Date/time:",format(unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                         coordinfo = input$plot_hover,
+                                         xvar=xvar_seasonal,
+                                         yvar=yvar_seasonal)$SAMPLE_START_DT,"%Y-%m-%d %H:%M")),
+            "\n");
+        cat("Chemical flags:",
+            names(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                                                      coordinfo = input$plot_hover,
+                                                                      xvar=xvar_seasonal,
+                                                                      yvar=yvar_seasonal)$RECORD_NO))[7:10])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                                                                                                                                                                            coordinfo = input$plot_hover,
+                                                                                                                                                                                            xvar=xvar_seasonal,
+                                                                                                                                                                                            yvar=yvar_seasonal)$RECORD_NO))[7:10], function(x)all(is.na(x))) == FALSE)],
+            "\n");
+        
+        cat("Pesticide flags:",
+            names(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                                                      coordinfo = input$plot_hover,
+                                                                      xvar=xvar_seasonal,
+                                                                      yvar=yvar_seasonal)$RECORD_NO))[11:12])[which(sapply(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                                                                                                                                                                            coordinfo = input$plot_hover,
+                                                                                                                                                                                            xvar=xvar_seasonal,
+                                                                                                                                                                                            yvar=yvar_seasonal)$RECORD_NO))[11:12], function(x)all(is.na(x))) == FALSE)],
+            "\n");
+        
+        cat("Result flags:",
+            names(subset(reports$resultFlagTable,PARM_CD == dataSelections$parmSel & RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                                                      coordinfo = input$plot_hover,
+                                                                      xvar=xvar_seasonal,
+                                                                      yvar=yvar_seasonal)$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == dataSelections$parmSel & RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+                                                                                                                                                                                            coordinfo = input$plot_hover,
+                                                                                                                                                                                            xvar=xvar_seasonal,
+                                                                                                                                                                                            yvar=yvar_seasonal)$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
+            "\n");
+        
+        
+            
 })

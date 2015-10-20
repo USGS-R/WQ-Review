@@ -13,6 +13,8 @@ tabItem(tabName = "blankPlot",
                                 selectInput("siteSel_blank","Station",choices="",multiple=TRUE),
                                 selectInput("parmSel_blank","Parameter",choices="",multiple=FALSE),
                                 selectInput("facetSel_blank","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
+                                verbatimTextOutput("blank_hoverinfo"),
+                                
                                 ###Sidebar options
                                 width=3
                                 
@@ -20,7 +22,7 @@ tabItem(tabName = "blankPlot",
                         mainPanel(
                                 ###This displays the primary plot interaction output
                                 box(
-                                        plotOutput("qwblankPlot", click="plot_click",brush="plot_brush"),
+                                        plotOutput("qwblankPlot", click="plot_click",brush="plot_brush", hover="plot_hover"),
                                         #verbatimTextOutput("brushx"),
                                         
                                         ###Box options
@@ -30,7 +32,7 @@ tabItem(tabName = "blankPlot",
                                 ###This displays the zoomed plot interaction output
                                 
                                 box(
-                                        plotOutput("qwblankPlot_zoom", click="plot_click"),
+                                        plotOutput("qwblankPlot_zoom", click="plot_click", hover="plot_hover"),
                                         ###Box options
                                         width=12,
                                         collapsible=TRUE),
