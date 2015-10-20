@@ -21,11 +21,9 @@ output$qwparmParmPlot <- renderPlot({
                        {
                               log.scaleY = TRUE 
                        } else(log.scaleY = FALSE),
-                       if(input$recordSelect == "")
-                       {
-                               highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
-                                                    reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
-                       } else{highlightrecords = input$recordSelect}
+                       highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                                                    reports$resultFlagTable$RECORD_NO)
+                       
                        
                        
         ) 
@@ -50,11 +48,8 @@ output$qwparmParmPlot_zoom <- renderPlot({
                        {
                                log.scaleY = TRUE 
                        } else(log.scaleY = FALSE),
-                       if(input$recordSelect == "")
-                       {
-                               highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
-                                                    reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
-                       } else{highlightrecords = input$recordSelect}
+                       highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                                            reports$resultFlagTable$RECORD_NO)
                        
                        
         ) +  

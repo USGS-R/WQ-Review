@@ -13,11 +13,8 @@ output$qwparmBoxPlot <- renderPlot({
                       log.scale = input$axes_parmBox,
                       facet = input$facetSel_parmBox,
                       show.points = input$showpoints_parmBox,
-                      if(input$recordSelect == "")
-                      {
-                              highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
-                                                   reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
-                      } else{highlightrecords = input$recordSelect},
+                      highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                                           reports$resultFlagTable$RECORD_NO),
                       print=FALSE)+ theme_bw()  
 })
 

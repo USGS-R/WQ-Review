@@ -9,11 +9,8 @@ output$qwtsPlot <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_TS),
                  plotparm = as.character(input$parmSel_TS),
-                 if(input$recordSelect == "")
-                 {
-                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
-                                     reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
-                 } else{highlightrecords = input$recordSelect},
+                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                                      reports$resultFlagTable$RECORD_NO),
                  show.smooth = input$fit_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,
@@ -29,11 +26,8 @@ output$qwtsPlot_zoom <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_TS),
                  plotparm = as.character(input$parmSel_TS),
-                 if(input$recordSelect == "")
-                 {
-                         highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
-                                              reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
-                 } else{highlightrecords = input$recordSelect},
+                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                                      reports$resultFlagTable$RECORD_NO),
                  show.smooth = input$fit_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,

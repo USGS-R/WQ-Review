@@ -8,11 +8,8 @@ output$qwblankPlot <- renderPlot({
                  site.selection = as.character(input$siteSel_blank),
                  plotparm = as.character(input$parmSel_blank),
                  facet = input$facetSel_blank,
-                 if(input$recordSelect == "")
-                 {
-                         highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
-                                              reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
-                 } else{highlightrecords = input$recordSelect},
+                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                                      reports$resultFlagTable$RECORD_NO),
                  print=FALSE
         ) + theme_bw()  
 })
@@ -26,11 +23,8 @@ output$qwblankPlot_zoom <- renderPlot({
                  site.selection = as.character(input$siteSel_blank),
                  plotparm = as.character(input$parmSel_blank),
                  facet = input$facetSel_blank,
-                 if(input$recordSelect == "")
-                 {
-                         highlightrecords = c(reports$sampleFlagTable$RECORD_NO[as.numeric(input$sampleFlagTable_rows_selected)],
-                                              reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)])
-                 } else{highlightrecords = input$recordSelect},
+                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                                      reports$resultFlagTable$RECORD_NO),
                  printPlot = FALSE) + theme_bw() +  
                 ###This resets the axes to zoomed area, must specify origin because brushedPoints returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = as.POSIXct(ranges$x,origin="1970-01-01 00:00.00 UTC"), ylim = ranges$y)
