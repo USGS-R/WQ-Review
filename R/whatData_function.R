@@ -2,7 +2,7 @@
 #' 
 #' Searches for missing data and returns a dataframe of missing data by record number.
 #' @param qw.data A qw.data object generater by readNWISodbc
-#' @param searchParms A character vector of searchParms codes to search for if groups = FALSE, otherwise a dataframe of parameter codes in character format to search for grouped by named columns if groups= TRUE. Maximum number of columns(groups) is 10
+#' @param searchParms A character vector of parameter codes to search for if groups = FALSE, otherwise a dataframe of parameter codes in character format to search for grouped by named columns if groups= TRUE. Maximum number of columns(groups) is 10
 #' @param begin.date Subset data to begin date
 #' @param end.date Subset data to end date.
 #' @param groups Search for searchParms by groups instead of one long vector. 

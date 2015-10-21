@@ -46,7 +46,7 @@ qwrepBoxPlot <- function(reports,
   p1 <- p1 + geom_hline(data = hline,aes(yintercept = yint,linetype=RPD),show_guide=TRUE) 
   p1 <- p1 + facet_wrap(~ PARM_NM, nrow = 1, scales="free") 
   p1 <- p1 + theme_update(axis.text.x=element_blank(), axis.ticks.x = element_blank(), axis.line.x = element_blank(), axis.title.x=element_blank())
-  p1 <- p1 + ggtitle(maintitle)
+  p1 <- p1 + ggtitle(maintitle) + theme_bw()
   
 
   if((show.points)==TRUE){
@@ -57,7 +57,7 @@ qwrepBoxPlot <- function(reports,
                      c(Env_RECORD_NO,Rep_RECORD_NO) %in% highlightrecords)) > 0)
     {
       p2 <- p2 + geom_point(data=subset(plotdata,PARM_CD%in%(plotparm) &
-                                          c(Env_RECORD_NO,Rep_RECORD_NO) %in% highlightrecords),aes(x=PARM_NM,y=relPercent_diff, color=historic),size=7,alpha=0.5)
+                                          c(Env_RECORD_NO,Rep_RECORD_NO) %in% highlightrecords),aes(x=PARM_NM,y=relPercent_diff),size=7,alpha=0.5, color = "#F0E442",shape=19)
     }else{}
     
     ###Label new data

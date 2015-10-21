@@ -12,7 +12,9 @@ output$qwrepBoxPlot <- renderPlot({
                       plotparm = as.character(input$parmSel_repBox),
                       new.reps = as.POSIXct(input$newReplicates),
                      show.points = input$showpoints_repBox,
-                     highlightrecords = qw.data$DataTable$RECORD_NO[as.numeric(input$wideDataTable_rows_selected)]) + theme_bw()  
+                     highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                                          reports$resultFlagTable$RECORD_NO) 
+        )
 })
 
 

@@ -5,8 +5,8 @@
 \title{Chargebalance timeseries plot}
 \usage{
 qwcbPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60 *
-  60 * 24 * 30, begin.date = NULL, end.date = NULL, show.smooth = FALSE,
-  highlightrecords = NULL, printPlot = TRUE)
+  60 * 24 * 30, show.smooth = FALSE, highlightrecords = NULL,
+  printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}
@@ -15,15 +15,15 @@ qwcbPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60 *
 
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
-\item{begin.date}{Character string of begining date range to plot (yyyy-mm-dd)}
-
-\item{end.date}{Character string of ending date range to plot (yyyy-mm-dd)}
-
 \item{show.smooth}{Add a loess smooth to plot}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
 
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
+
+\item{begin.date}{Character string of begining date range to plot (yyyy-mm-dd)}
+
+\item{end.date}{Character string of ending date range to plot (yyyy-mm-dd)}
 }
 \description{
 Takes output list from readNWISodbc and prints a plot of charge balance vs time. Requires charge balance = TRUE in NWISPullR

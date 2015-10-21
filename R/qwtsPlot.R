@@ -59,11 +59,11 @@ qwtsPlot <- function(qw.data,
     nrow((data=subset(plotdata, RECORD_NO %in% highlightrecords))) > 0
   ){
     
-    p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=RESULT_VA,shape = REMARK_CD, color = MEDIUM_CD),size = 7,alpha=0.5)
+    p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=RESULT_VA),size = 7,alpha=0.5, color = "#F0E442",shape=19)
   }
   
   
-  ##Check for new samples and label them. Tried ifelse statement for hte label but it did no recognize new.threshol as a variable for some reason
+  ##Check for new samples and label them. 
   if(nrow(subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold))) > 0)
   {
     p1 <- p1 + geom_text(data=subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold)),

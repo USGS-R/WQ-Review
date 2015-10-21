@@ -10,7 +10,7 @@ whatData(qw.data, searchParms, begin.date = NULL, end.date = NULL,
 \arguments{
 \item{qw.data}{A qw.data object generater by readNWISodbc}
 
-\item{searchParms}{A character vector of searchParms codes to search for if groups = FALSE, otherwise a dataframe of parameter codes in character format to search for grouped by named columns if groups= TRUE. Maximum number of columns(groups) is 10}
+\item{searchParms}{A character vector of parameter codes to search for if groups = FALSE, otherwise a dataframe of parameter codes in character format to search for grouped by named columns if groups= TRUE. Maximum number of columns(groups) is 10}
 
 \item{begin.date}{Subset data to begin date}
 

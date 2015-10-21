@@ -7,7 +7,9 @@ tabItem(tabName = "wideDataTable",
                                 dateInput("startDate_wideDataTable", "Start date", 
                                           value=Sys.Date() - 365*3),
                                 dateInput("endDate_wideDataTable", "End date", 
-                                          value=Sys.Date())
+                                          value=Sys.Date()),
+                                ###sidebar options
+                                width=3
                         ),
                         mainPanel(
                                 downloadButton('wideDataTableOut', 'Download tab delimited table'),

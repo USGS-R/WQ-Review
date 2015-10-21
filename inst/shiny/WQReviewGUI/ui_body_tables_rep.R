@@ -7,7 +7,9 @@ tabItem(tabName = "repTable",
                                 dateInput("startDate_repTable", "Start date", 
                                           value=Sys.Date() - 365*3),
                                 dateInput("endDate_repTable", "End date", 
-                                          value=Sys.Date())
+                                          value=Sys.Date()),
+                                ###sidebar options
+                                width=3
                         ),
                         mainPanel(
                                 downloadButton('repTableOut', 'Download tab delimited table'),

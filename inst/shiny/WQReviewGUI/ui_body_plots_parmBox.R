@@ -15,7 +15,9 @@ tabItem(tabName = "parmBoxPlot",
                                 selectInput("facetSel_parmBox","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
                                 
                                 checkboxInput("axes_parmBox",label="Log10Y",value=FALSE),
-                                checkboxInput("showpoints_parmBox",label="Show sample points",value=FALSE)
+                                checkboxInput("showpoints_parmBox",label="Show sample points",value=FALSE),
+                                ###Sidebar options
+                                width=3
                         ),
                         mainPanel(
                 

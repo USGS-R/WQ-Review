@@ -16,12 +16,17 @@ tabItem(tabName = "parmParmPlot",
                                 
                                 checkboxInput("fit_parmParm",label="Add linear fit",value=FALSE),
                                 checkboxGroupInput("axes_parmParm","Axis options:",
-                                                   choices = c("Log10X","Log10Y"))
+                                                   choices = c("Log10X","Log10Y")),
+                                verbatimTextOutput("parmParm_hoverinfo"),
+                                
+                                #verbatimTextOutput("parmParm_hoverinfo"),
+                                ###Sidebar options
+                                width=3
                         ),
                         mainPanel(
                 ###This displays the primary plot interaction output
                 box(
-                        plotOutput("qwparmParmPlot", click="plot_click",brush="plot_brush"),
+                        plotOutput("qwparmParmPlot", click="plot_click_parmParm",brush="plot_brush_parmParm",hover="plot_hover"),
                         #verbatimTextOutput("brushx"),
                         
                         ###Box options
@@ -31,7 +36,7 @@ tabItem(tabName = "parmParmPlot",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwparmParmPlot_zoom", click="plot_click"),
+                        plotOutput("qwparmParmPlot_zoom", click="plot_click_parmParm",hover="plot_hover"),
                         ###Box options
                         width=12,
                         collapsible=TRUE),
@@ -41,6 +46,8 @@ tabItem(tabName = "parmParmPlot",
                 box(
                         DT::dataTableOutput("parmParm_clickinfo"),
                         DT::dataTableOutput("parmParm_brushinfo"),
+                        
+                        
                         ###Box options
                         width=12,
                         collapsible=TRUE)

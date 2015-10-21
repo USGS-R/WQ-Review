@@ -12,7 +12,6 @@ server <- function(input, output, session) {
         source("server_dataImport.r",local=TRUE)$value
         
         ###This generates reactive tables
-        #source("server_tables_reactive.r",local=TRUE)$value
         #############################################################
         ###Different functional elements of the dashboard,        ###
         ###plotting, tables, etc. add items here if desired       ###

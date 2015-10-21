@@ -2,18 +2,23 @@
 % Please edit documentation in R/summaryStats.R
 \name{summaryStats}
 \alias{summaryStats}
-\title{Sum ions vs conductance plot}
+\title{Summary stats function}
 \usage{
-summaryStats(qw.data, new.threshold = 60 * 60 * 24 * 30, parameterCd = NULL)
+summaryStats(qw.data, STAIDS = NULL, parameterCd = NULL, begin.date,
+  end.date)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
 
-\item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
+\item{STAIDS}{A character vector of sites to summarize. Defaults to all sites in qw.data if unspecified.}
 
 \item{parameterCd}{A character vector of parameter codes to summarize. Defaults to all pcodes if unspecified.}
+
+\item{begin.date}{A character string of optional begin date range to summarize in "YYYY-MM-DD" format. Defaults to all if unspecified.}
+
+\item{end.date}{A character string of optional end date range to summarize in "YYYY-MM-DD" format. Defaults to all if unspecified.}
 }
 \description{
-Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance. Requires charge balance = TRUE in NWISPullR
+Takes output data object from readNWISodbc and generates a table of summary statistcs
 }
 

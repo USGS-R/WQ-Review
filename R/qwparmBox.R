@@ -57,7 +57,7 @@ qwparmBoxPlot <- function(qw.data,
     p2 <- p1 + geom_point(aes(color = MEDIUM_CD,shape=REMARK_CD),size=3)
     if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) > 0)
     {
-    p2 <- p2 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=PARM_NM,y=RESULT_VA, color=MEDIUM_CD),size=7,alpha=0.5)
+    p2 <- p2 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=PARM_NM,y=RESULT_VA),size=7,alpha=0.5, color = "#F0E442",shape=19)
     }else{}
     
     

@@ -7,7 +7,9 @@ tabItem(tabName = "wholvevpartTable",
                                 dateInput("startDate_wholevpartTable", "Start date", 
                                           value=Sys.Date() - 365*3),
                                 dateInput("endDate_wholevpartTable", "End date", 
-                                          value=Sys.Date())
+                                          value=Sys.Date()),
+                                ###sidebar options
+                                width=3
                         ),
                         mainPanel(
                                 downloadButton('wholevpartTableOut', 'Download tab delimited table'),

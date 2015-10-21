@@ -19,9 +19,10 @@ Imports:
     scales,
     shiny,
     shinydashboard,
-	lubridate,
+        lubridate,
     DT,
-    Rcpp
+    Rcpp,
+    smwrBase
 Suggests:
     knitr
 VignetteBuilder: knitr

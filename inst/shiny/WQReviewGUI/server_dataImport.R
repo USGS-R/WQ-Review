@@ -192,6 +192,9 @@ observeEvent(input$dataDownload, {
         ###Update side bar elements with appropriate inputs based on data import
         ###############################################
         parmSelData <- unique(qw.data$PlotTable[c("PARM_CD","PARM_NM")])
+        ###Reorder by parm_cd
+        parmSelData <- parmSelData[order(parmSelData$PARM_CD,parmSelData$PARM_NM),]
+        
         siteSelData <- unique(qw.data$PlotTable[c("SITE_NO","STATION_NM")])
         
         updateSelectInput(session, "siteSel_TS",
