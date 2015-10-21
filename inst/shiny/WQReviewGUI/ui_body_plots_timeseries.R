@@ -26,7 +26,7 @@ tabItem(tabName = "timeSeries",
                 ),
                mainPanel(
                 box(
-                        plotOutput("qwtsPlot", click="plot_click",brush="plot_brush",hover="plot_hover"),
+                        plotOutput("qwtsPlot", click="plot_click_timeseries",brush="plot_brush_timeseries",hover="plot_hover"),
                         #verbatimTextOutput("tableOut"),
                         
                         ###Box options
@@ -37,7 +37,7 @@ tabItem(tabName = "timeSeries",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwtsPlot_zoom", click="plot_click",hover="plot_hover"),
+                        plotOutput("qwtsPlot_zoom", click="plot_click_timeseries",hover="plot_hover"),
                         #dataTableOutput("hoverinfo"),
                         ###Box options
                         width=12,

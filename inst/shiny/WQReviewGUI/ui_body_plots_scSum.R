@@ -21,7 +21,7 @@ tabItem(tabName = "scSumPlot",
                         mainPanel(
                 ###This displays the primary plot interaction output
                 box(
-                        plotOutput("qwscSumPlot", click="plot_click",brush="plot_brush", hover="plot_hover"),
+                        plotOutput("qwscSumPlot", click="plot_click_scSum",brush="plot_brush_scSum", hover="plot_hover"),
                         #verbatimTextOutput("brushx"),
                         
                         ###Box options
@@ -31,7 +31,7 @@ tabItem(tabName = "scSumPlot",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwscSumPlot_zoom", click="plot_click", hover="plot_hover"),
+                        plotOutput("qwscSumPlot_zoom", click="plot_click_scSum", hover="plot_hover"),
                         ###Box options
                         width=12,
                         collapsible=TRUE),

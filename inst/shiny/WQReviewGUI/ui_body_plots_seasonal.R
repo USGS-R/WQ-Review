@@ -21,7 +21,7 @@ tabItem(tabName = "seasonalPlot",
                         mainPanel(
                 ###This displays the primary plot interaction output
                 box(
-                        plotOutput("qwseasonalPlot", click="plot_click",brush="plot_brush",hover="plot_hover"),
+                        plotOutput("qwseasonalPlot", click="plot_click_seasonal",brush="plot_brush_seasonal",hover="plot_hover"),
                         #verbatimTextOutput("brushx"),
                         
                         ###Box options
@@ -31,7 +31,7 @@ tabItem(tabName = "seasonalPlot",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwseasonalPlot_zoom", click="plot_click",hover="plot_hover"),
+                        plotOutput("qwseasonalPlot_zoom", click="plot_click_seasonal",hover="plot_hover"),
                         ###Box options
                         width=12,
                         collapsible=TRUE),

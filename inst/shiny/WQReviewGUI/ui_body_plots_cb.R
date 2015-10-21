@@ -22,7 +22,7 @@ tabItem(tabName = "cbPlot",
                                
                 ###This displays the primary plot interaction output
                 box(
-                        plotOutput("qwcbPlot", click="plot_click",brush="plot_brush", hover="plot_hover"),
+                        plotOutput("qwcbPlot", click="plot_click_cb",brush="plot_brush_cb", hover="plot_hover"),
                         #verbatimTextOutput("brushx"),
                         
                         ###Box options
@@ -32,7 +32,7 @@ tabItem(tabName = "cbPlot",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwcbPlot_zoom", click="plot_click", hover="plot_hover"),
+                        plotOutput("qwcbPlot_zoom", click="plot_click_cb", hover="plot_hover"),
                         ###Box options
                         width=12,
                         collapsible=TRUE),

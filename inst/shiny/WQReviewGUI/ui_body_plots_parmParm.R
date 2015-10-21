@@ -26,7 +26,7 @@ tabItem(tabName = "parmParmPlot",
                         mainPanel(
                 ###This displays the primary plot interaction output
                 box(
-                        plotOutput("qwparmParmPlot", click="plot_click",brush="plot_brush",hover="plot_hover"),
+                        plotOutput("qwparmParmPlot", click="plot_click_parmParm",brush="plot_brush_parmParm",hover="plot_hover"),
                         #verbatimTextOutput("brushx"),
                         
                         ###Box options
@@ -36,7 +36,7 @@ tabItem(tabName = "parmParmPlot",
                 ###This displays the zoomed plot interaction output
                 
                 box(
-                        plotOutput("qwparmParmPlot_zoom", click="plot_click",hover="plot_hover"),
+                        plotOutput("qwparmParmPlot_zoom", click="plot_click_parmParm",hover="plot_hover"),
                         ###Box options
                         width=12,
                         collapsible=TRUE),
