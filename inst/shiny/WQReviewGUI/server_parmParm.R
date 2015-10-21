@@ -22,7 +22,8 @@ output$qwparmParmPlot <- renderPlot({
                               log.scaleY = TRUE 
                        } else(log.scaleY = FALSE),
                        highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                                    reports$resultFlagTable$RECORD_NO)
+                                            reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmX) |
+                                                                                            reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmY))])
                        
                        
                        

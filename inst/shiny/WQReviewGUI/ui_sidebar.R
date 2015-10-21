@@ -15,7 +15,7 @@ dashboardSidebar(sidebarMenu(
                 menuItem("Plots",
                          
                          dateInput("newThreshold", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
-                         textInput("recordSelect", "Highlight record #"),
+                         #textInput("recordSelect", "Highlight record #"),
                          
                            
                          menuSubItem(tabName="timeSeries",text="Timeseries"),

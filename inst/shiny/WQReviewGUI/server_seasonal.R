@@ -16,7 +16,7 @@ output$qwseasonalPlot <- renderPlot({
                        show.q = FALSE,
                        show.smooth = input$fit_seasonal,
                        highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                            reports$resultFlagTable$RECORD_NO),
+                                            reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_seasonal))]),
                        print = FALSE)
  
 })

@@ -10,7 +10,7 @@ output$qwtsPlot <- renderPlot({
                  site.selection = as.character(input$siteSel_TS),
                  plotparm = as.character(input$parmSel_TS),
                  highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                      reports$resultFlagTable$RECORD_NO),
+                                      reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_TS))]),
                  show.smooth = input$fit_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,

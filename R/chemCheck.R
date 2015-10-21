@@ -141,7 +141,8 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                 flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[7]) |
                                                                       !is.na(flaggedSamples[8]) |
                                                                       !is.na(flaggedSamples[9]) |
-                                                                      !is.na(flaggedSamples[10])
+                                                                      !is.na(flaggedSamples[10]) |
+                                                                                     !is.na(flaggedSamples[11])
                 ),]) 
         } else {}
         

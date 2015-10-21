@@ -9,7 +9,7 @@ output$qwblankPlot <- renderPlot({
                  plotparm = as.character(input$parmSel_blank),
                  facet = input$facetSel_blank,
                  highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                      reports$resultFlagTable$RECORD_NO),
+                                      reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_blank))]),
                  print=FALSE
         ) + theme_bw()  
 })

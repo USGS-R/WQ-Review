@@ -11,8 +11,7 @@ output$qwcbPlot <- renderPlot({
                  facet = input$facetSel_cb,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  show.smooth = FALSE,
-                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                      reports$resultFlagTable$RECORD_NO),
+                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO),
                  printPlot = FALSE)
         
  

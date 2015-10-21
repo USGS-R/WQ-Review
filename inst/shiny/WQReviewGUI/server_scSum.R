@@ -9,8 +9,7 @@ output$qwscSumPlot <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
                  facet = input$facetSel_scSum,
-                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                      reports$resultFlagTable$RECORD_NO),
+                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO),
                  print=FALSE)
 })
 
