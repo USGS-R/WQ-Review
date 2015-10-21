@@ -15,7 +15,7 @@ flagSummary <- function(qw.data)
         pestFlags <- pestCheck(qw.data)
         
         #Join tables
-        flagSummary <- join(flagSummary, chemFlags[c(1,7:10)],by="RECORD_NO")
+        flagSummary <- join(flagSummary, chemFlags[c(1,7:11)],by="RECORD_NO")
         flagSummary <- join(flagSummary,pestFlags[c(1,11,12)],by="RECORD_NO")
 
         #remove NAs
@@ -24,7 +24,8 @@ flagSummary <- function(qw.data)
                                                  !is.na(flagSummary[9]) |
                                                  !is.na(flagSummary[10]) |
                                                  !is.na(flagSummary[11]) |
-                                                 !is.na(flagSummary[12])
+                                                 !is.na(flagSummary[12])|
+                                                 !is.na(flagSummary[13])
         ),])
         
         return(flagSummary)

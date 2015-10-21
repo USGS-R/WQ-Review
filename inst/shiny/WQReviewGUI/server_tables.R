@@ -1,4 +1,53 @@
 ############################
+###sampleFlagTable
+############################
+
+
+###Render the table
+output$sampleFlagTable <- DT::renderDataTable(
+        reports$sampleFlagTable,
+        #extensions = list(FixedColumns = list(leftColumns = 5)),
+        server=TRUE,
+        options = list(
+                scrollX=TRUE,
+                autoWidth=TRUE)
+)
+
+output$sampleFlagTableOut <- downloadHandler(
+        filename = function() {"sampleFlagTableOut"},
+        content = function(file) {
+                write.table(reports$sampleFlagTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                            file)
+        }
+)
+
+############################
+###resultFlagTable
+############################
+
+###Render the table
+
+output$resultFlagTable <- DT::renderDataTable(
+        reports$resultFlagTable,
+        extensions = list(FixedColumns = list(leftColumns = 5)),
+        server=TRUE,
+        options = list(
+                scrollX=TRUE,
+                autoWidth=TRUE)
+)
+
+
+
+output$resultFlagTableOut <- downloadHandler(
+        filename = function() {"resultFlagTableOut"},
+        content = function(file) {
+                write.table(reports$resultFlagTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                            file)
+        }
+)
+
+
+############################
 ###Wide Data table
 ############################
 
@@ -167,50 +216,3 @@ try({
 })
 
 
-############################
-###sampleFlagTable
-############################
-
-
-###Render the table
-output$sampleFlagTable <- DT::renderDataTable(
-        reports$sampleFlagTable,
-        #extensions = list(FixedColumns = list(leftColumns = 5)),
-        server=TRUE,
-        options = list(
-                scrollX=TRUE,
-                autoWidth=TRUE)
-)
-
-output$sampleFlagTableOut <- downloadHandler(
-        filename = function() {"sampleFlagTableOut"},
-        content = function(file) {
-                write.table(reports$sampleFlagTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
-                            file)
-        }
-)
-
-############################
-###resultFlagTable
-############################
-
-###Render the table
-
-        output$resultFlagTable <- DT::renderDataTable(
-                reports$resultFlagTable,
-                extensions = list(FixedColumns = list(leftColumns = 5)),
-                server=TRUE,
-                options = list(
-                        scrollX=TRUE,
-                        autoWidth=TRUE)
-        )
-
-
-
-output$resultFlagTableOut <- downloadHandler(
-        filename = function() {"resultFlagTableOut"},
-        content = function(file) {
-                write.table(reports$resultFlagTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
-                            file)
-        }
-)

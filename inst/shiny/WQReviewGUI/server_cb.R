@@ -128,10 +128,10 @@ output$cb_hoverinfo <- renderPrint({
             names(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel),
                                                                               coordinfo = input$plot_hover,
                                                                               xvar=xvar_cb,
-                                                                              yvar=yvar_cb)$RECORD_NO))[7:10])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel),
+                                                                              yvar=yvar_cb)$RECORD_NO))[7:11])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel),
                                                                                                                                                                                               coordinfo = input$plot_hover,
                                                                                                                                                                                               xvar=xvar_cb,
-                                                                                                                                                                                              yvar=yvar_cb)$RECORD_NO))[7:10], function(x)all(is.na(x))) == FALSE)],
+                                                                                                                                                                                              yvar=yvar_cb)$RECORD_NO))[7:11], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         cat("Pesticide flags:",

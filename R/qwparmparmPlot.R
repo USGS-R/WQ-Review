@@ -51,8 +51,9 @@ qwparmParmPlot <- function(qw.data,
   
   ###Assigned to global environment to make it work with ggplot2, I don't like doing this since it is not a persistant variable
   ###but this is hte fastest fix for now
-  pp.plot.data <- join(xpp.plot.data[c("RECORD_NO","MEDIUM_CD","RESULT_VA","RESULT_MD","STATION_NM")], ypp.plot.data[c("RECORD_NO","MEDIUM_CD","RESULT_VA","RESULT_MD","STATION_NM")],by="RECORD_NO")
-  names(pp.plot.data) <- c("RECORD_NO","MEDIUM_CD","RESULT_VA_X","RESULT_MD_X","STATION_NM","MEDIUM_CD","RESULT_VA_Y","RESULT_MD_Y","STATION_NM")
+  pp.plot.data <- join(xpp.plot.data[,c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA","RESULT_MD")], 
+                        ypp.plot.data[,c("RECORD_NO","RESULT_VA","RESULT_MD")],by="RECORD_NO")
+  names(pp.plot.data) <- c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA_X","RESULT_MD_X","RESULT_VA_Y","RESULT_MD_Y")
   remove(xpp.plot.data)
   remove(ypp.plot.data)
   

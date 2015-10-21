@@ -128,11 +128,11 @@ output$scSum_hoverinfo <- renderPrint({
                                                                                       id.vars=c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","complete.chem","perc.diff")),
                                                                               coordinfo = input$plot_click,
                                                                               xvar=xvar_scSum,
-                                                                              yvar=yvar_scSum)$RECORD_NO))[7:10])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=melt(subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD== "00095")[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","sum_cat","sum_an","complete.chem","perc.diff")],
+                                                                              yvar=yvar_scSum)$RECORD_NO))[7:11])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=melt(subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD== "00095")[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","sum_cat","sum_an","complete.chem","perc.diff")],
                                                                                                                                                                                                    id.vars=c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","complete.chem","perc.diff")),
                                                                                                                                                                                            coordinfo = input$plot_click,
                                                                                                                                                                                            xvar=xvar_scSum,
-                                                                                                                                                                                           yvar=yvar_scSum)$RECORD_NO))[7:10], function(x)all(is.na(x))) == FALSE)],
+                                                                                                                                                                                           yvar=yvar_scSum)$RECORD_NO))[7:11], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         cat("Pesticide flags:",
@@ -147,18 +147,7 @@ output$scSum_hoverinfo <- renderPrint({
                                                                                                                                                                                             yvar=yvar_scSum)$RECORD_NO))[11:12], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
-        cat("Result flags:",
-            names(subset(reports$resultFlagTable,PARM_CD == dataSelections$parmSel & RECORD_NO == unique(nearPoints(df=melt(subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD== "00095")[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","sum_cat","sum_an","complete.chem","perc.diff")],
-                                                                                                                            id.vars=c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","complete.chem","perc.diff")),
-                                                                                                                    coordinfo = input$plot_click,
-                                                                                                                    xvar=xvar_scSum,
-                                                                                                                    yvar=yvar_scSum)$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == dataSelections$parmSel & RECORD_NO == unique(nearPoints(df=melt(subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD== "00095")[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","sum_cat","sum_an","complete.chem","perc.diff")],
-                                                                                                                                                                                                                                                                                id.vars=c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","complete.chem","perc.diff")),
-                                                                                                                                                                                                                                                                        coordinfo = input$plot_click,
-                                                                                                                                                                                                                                                                        xvar=xvar_scSum,
-                                                                                                                                                                                                                                                                        yvar=yvar_scSum)$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
-            "\n");
-        
+
         
         
 })

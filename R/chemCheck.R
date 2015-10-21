@@ -8,6 +8,7 @@
 chemCheck <- function(qw.data, returnAll = FALSE) {
         #Make data frame of all samples
         inReviewData <- subset(qw.data$PlotTable, DQI_CD %in% c("I","S","P"))
+        inReviewData$SC_badLabVSField <- NA
         inReviewData$phTooLow_30.01 <- NA
         inReviewData$phTooHigh_30.02 <- NA
         inReviewData$O2TooHigh_30.03 <- NA
@@ -19,7 +20,27 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                                               "SAMPLE_START_DT",
                                               "SAMPLE_END_DT",
                                               "MEDIUM_CD")])
-        #Flag samples with bad pH ranges
+        #Flag samples with bad field vs lab SC
+        ##Subset data to field and lab SC results
+        fieldSCData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ")
+        labSCData <- subset(inReviewData, PARM_CD == "90095" & MEDIUM_CD != "OAQ")
+
+        SCData <- join(fieldSCData[c("RECORD_NO","RESULT_VA")], labSCData[c("RECORD_NO","RESULT_VA","SC_badLabVSField")], by="RECORD_NO")
+        rm(fieldSCData)
+        rm(labSCData)
+        
+        colnames(SCData) <- c("RECORD_NO","fieldSC","labSC","SC_badLabVSField")
+        #SCData <- na.omit(SCData)
+        
+        SCData$perc.diff <- (SCData$labSC - SCData$fieldSC)/SCData$fieldSC * 100
+     
+        ###Flag samples
+        SCData$SC_badLabVSField[which(abs(SCData$perc.diff) > 10)] <- paste("flag",
+                                                                            "field=",SCData$fieldSC[which(abs(SCData$perc.diff) > 10)],
+                                                                            "lab=",SCData$labSC[which(abs(SCData$perc.diff) > 10)],
+                                                                            "percDiff=",SCData$perc.diff[which(abs(SCData$perc.diff) > 10)])
+        
+                              
         
         ##Subset data to pH results
         pHData <- subset(inReviewData, PARM_CD == "00400")
@@ -27,13 +48,11 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
 
         ##Flag samples that are too low
         ###Make empty vector for flags
-        #pHData$phTooLow_30.01 <- NA
         ###Flag samples
         pHData$phTooLow_30.01[which(pHData$RESULT_VA < 4.5)] <- paste("flag",
                                                                      pHData$RESULT_VA[which(pHData$RESULT_VA < 4.5)])
         ##Flag samples that are too high
         ###Make empty vector for flags
-        #pHData$phTooHigh_30.02 <- NA
         ###Flag samples
         pHData$phTooHigh_30.02[which(pHData$RESULT_VA > 9)] <- paste("flag",
                                                                       pHData$RESULT_VA[which(pHData$RESULT_VA > 9)])
@@ -46,7 +65,6 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
         
         ##Flag samples that are too high
         ###Make empty vector for flags
-        #O2Data$O2TooHigh_30.03 <- NA
         ###Flag samples
         O2Data$O2TooHigh_30.03[which(O2Data$RESULT_VA > 25)] <- paste("flag",
                                                                      O2Data$RESULT_VA[which(O2Data$RESULT_VA > 25)])
@@ -58,7 +76,6 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
         cbData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ")
         
         ##Make empty vector for flags
-        #cbData$BadCB_30.21 <- NA
         ###Flag samples
         cbData$BadCB_30.21[which(cbData$RESULT_VA <= 100 & 
                                          abs(cbData$perc.diff) > 15)] <- paste("flag",
@@ -98,6 +115,10 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                                                                                                              abs(cbData$perc.diff) > 5)]
                                                                               )
         #Join flagged samples together into one dataframe
+        flaggedSamples <- join(flaggedSamples, 
+                               SCData[c("RECORD_NO","SC_badLabVSField")], 
+                               by = "RECORD_NO")
+        
         flaggedSamples <- join(flaggedSamples, 
                                pHData[c("RECORD_NO","phTooLow_30.01")], 
                                by = "RECORD_NO")

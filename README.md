@@ -71,7 +71,9 @@ Your database administrator or IT specialist will may need to assist for these s
 
 ##Step 1
 You need to setup a user Data Source Name (User DSN).
-On Windows 7 and 8, run "C:/Windows/SysWOW64/odbcad32.exe".
+On 64bit Windows 7 and 8, run "C:/Windows/SysWOW64/odbcad32.exe".
+
+On 32bit Windows 7 and 8, run "C:/Windows/System32/odbcad32.exe".
 
 In the User DSN tab, if you do not see a connection with the same name as your NWIS server of interest, you must add a new connection. Click "Add" on the right.
 

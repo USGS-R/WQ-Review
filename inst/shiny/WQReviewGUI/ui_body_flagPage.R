@@ -4,7 +4,12 @@
 
 tabItem(tabName = "flagPage",
         fluidPage(
-                        headerPanel("Automated sample and result checks"), 
+                        headerPanel("Automated sample and result checks"),
+                        helpText(a("Click Here for description of checks",
+                                   target="_blank",href="flagDescriptions.htm"
+                                   )
+                                 ),
+
 
                          
                        
