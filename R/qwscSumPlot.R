@@ -41,6 +41,7 @@ qwscSumPlot <- function(qw.data,
         
   ###Subset to plot data
   plotdata <- subset(qw.data$PlotTable,SITE_NO %in% site.selection & PARM_CD== "00095")
+  
   plotdata <- melt(plotdata[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","sum_cat","sum_an","complete.chem","perc.diff")],
                    id.vars=c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","complete.chem","perc.diff"))
   ##New data subset for new modified samples. Used for labelling points as "NEW"

@@ -21,7 +21,7 @@ output$qwparmParmPlot <- renderPlot({
                        {
                               log.scaleY = TRUE 
                        } else(log.scaleY = FALSE),
-                       highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                       highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                             reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmX) |
                                                                                             reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmY))])
                        
@@ -49,8 +49,9 @@ output$qwparmParmPlot_zoom <- renderPlot({
                        {
                                log.scaleY = TRUE 
                        } else(log.scaleY = FALSE),
-                       highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                            reports$resultFlagTable$RECORD_NO)
+                       highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
+                                            reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmX) |
+                                                                                            reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmY))])
                        
                        
         ) +  
@@ -196,13 +197,13 @@ output$parmParm_hoverinfo <- renderPrint({
             "\n");
         
         cat("Result flags:",
-            names(subset(reports$resultFlagTable,PARM_CD == dataSelections_parmParm$parmSelX | PARM_CD == dataSelections_parmParm$parmSelY & RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
-                                                                                                                    coordinfo = input$plot_hover,
-                                                                                                                    xvar=xvar_parmParm,
-                                                                                                                    yvar=yvar_parmParm)$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == dataSelections_parmParm$parmSelX | PARM_CD == dataSelections_parmParm$parmSelY & RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
-                                                                                                                                                                                                                                                                           coordinfo = input$plot_hover,
-                                                                                                                                                                                                                                                                           xvar=xvar_parmParm,
-                                                                                                                                                                                                                                                                           yvar=yvar_parmParm)$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$resultFlagTable, RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
+                                                                                  coordinfo = input$plot_hover,
+                                                                                  xvar=xvar_parmParm,
+                                                                                  yvar=yvar_parmParm)$RECORD_NO) & (PARM_CD == dataSelections_parmParm$parmSelX | PARM_CD == dataSelections_parmParm$parmSelY))[14:17])[which(sapply(subset(reports$resultFlagTable, RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
+                                                                                                                                                                                                                                                                                                  coordinfo = input$plot_hover,
+                                                                                                                                                                                                                                                                                                  xvar=xvar_parmParm,
+                                                                                                                                                                                                                                                                                                  yvar=yvar_parmParm)$RECORD_NO) & (PARM_CD == dataSelections_parmParm$parmSelX | PARM_CD == dataSelections_parmParm$parmSelY))[14:17], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         

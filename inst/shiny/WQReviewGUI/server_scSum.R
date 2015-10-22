@@ -9,7 +9,7 @@ output$qwscSumPlot <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
                  facet = input$facetSel_scSum,
-                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO),
+                 highlightrecords = reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                  print=FALSE)
 })
 
@@ -21,8 +21,7 @@ output$qwscSumPlot_zoom <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
                  facet = input$facetSel_scSum,
-                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                      reports$resultFlagTable$RECORD_NO),
+                 highlightrecords = reports$sampleFlagTable$RECORD_NO[which(!is.na(reports$sampleFlagTable$BadCB_30.21))],
                  printPlot = FALSE) + 
                 ###This resescSum the axes to zoomed area, must specify origin because brushedPoinscSum returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = ranges_scSum$x, ylim = ranges_scSum$y)

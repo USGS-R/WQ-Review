@@ -15,7 +15,7 @@ output$qwseasonalPlot <- renderPlot({
                        facet = input$facetSel_seasonal,
                        show.q = FALSE,
                        show.smooth = input$fit_seasonal,
-                       highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                       highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                             reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_seasonal))]),
                        print = FALSE)
  
@@ -31,8 +31,8 @@ output$qwseasonalPlot_zoom <- renderPlot({
                        facet = input$facetSel_seasonal,
                        show.q = FALSE,
                        show.smooth = input$fit_seasonal,
-                       highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                            reports$resultFlagTable$RECORD_NO),
+                       highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
+                                            reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_seasonal))]),
                        print = FALSE) + 
                 ###This resets the axes to zoomed area, must specify origin because brushedPoints returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
            coord_cartesian(xlim = ranges_seasonal$x, ylim = ranges_seasonal$y)
