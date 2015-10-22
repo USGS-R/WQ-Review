@@ -10,6 +10,7 @@
 #' @param show.smooth Add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
+#' @param wySymbol Make current water-year highlighted.
 #' @export
 
 qwblankPlot <- function(qw.data,
@@ -20,6 +21,7 @@ qwblankPlot <- function(qw.data,
                        show.smooth = FALSE,
                        highlightrecords = " ",
                        facet = "multisite",
+                       wySymbol = FALSE,
                        printPlot = TRUE){
         
         ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
@@ -78,6 +80,13 @@ qwblankPlot <- function(qw.data,
                                              aes(x=SAMPLE_START_DT,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
                 }else{}
         } else{}
+        
+        if(wySymbol = TRUE)
+        {
+                p1 <- p1 + geom_point(data=subset(plotdata, waterYear(SAMPLE_START_DT) == waterYear(Sys.time())),
+                                      aes(x=SAMPLE_START_DT,y=RESULT_VA),size=5,alpha = 0.5, color = "#D55E00",shape=19)
+        }
+        
         
         p1 <- p1 + theme_bw() + theme(axis.text.x = element_text(angle = 90)) + ggtitle(maintitle)
         
