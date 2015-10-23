@@ -8,6 +8,7 @@
 #' @param show.points Show samples points
 #' @param log.scale Plot y axis on a log scale
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param printPlot Logical. Prints plot to graphics device if TRUE
 
 #' @export
 
@@ -17,7 +18,8 @@ qwrepBoxPlot <- function(reports,
                     new.threshold = 60*60*24*30,
                     show.points = FALSE,
                     highlightrecords = NULL,
-                    new.reps = Sys.time() - 60*60*24*30){
+                    new.reps = Sys.time() - 60*60*24*30,
+                    printPlot = TRUE){
 
   hline <- data.frame(yint=c(-5,5,-10,10),RPD=c("+/- 5%","+/- 5%","+/- 10%","+/- 10%"))
     
@@ -69,6 +71,16 @@ qwrepBoxPlot <- function(reports,
                            aes(x=PARM_NM,y=relPercent_diff,color=historic,label="New",hjust=1.1),show_guide=F)      
     }else{}
     
- return(p2)
-  }else( return(p1))
+    if(printPlot)
+    {print (p2)}
+    else{return(p2)}
+
+    
+  }else{
+          if(printPlot)
+                  {
+                  print(p1)
+          }else{return(p1)}
+  }
+
 }

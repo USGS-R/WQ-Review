@@ -14,7 +14,7 @@ output$qwtsPlot <- renderPlot({
                  show.smooth = input$fit_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,
-                 print=FALSE
+                 printPlot=FALSE
         ) 
 })
 
@@ -31,7 +31,7 @@ output$qwtsPlot_zoom <- renderPlot({
                  show.smooth = input$fit_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,
-                 print=FALSE
+                 printPlot=FALSE
         ) + 
                 ###This resets the axes to zoomed area, must specify origin because brushedPoints returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = as.POSIXct(ranges_timeseries$x,origin="1970-01-01 00:00.00 UTC"), ylim = ranges_timeseries$y)

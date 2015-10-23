@@ -15,7 +15,7 @@ output$qwparmBoxPlot <- renderPlot({
                       show.points = input$showpoints_parmBox,
                       highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                              reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmBox))]),
-                      print=FALSE)+ theme_bw()  
+                      printPlot=FALSE)+ theme_bw()  
 })
 
 

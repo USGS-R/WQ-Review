@@ -10,7 +10,7 @@ output$qwblankPlot <- renderPlot({
                  facet = input$facetSel_blank,
                  highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                       reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_blank))]),
-                 print=FALSE
+                 printPlot=FALSE
         ) + theme_bw()  
 })
 

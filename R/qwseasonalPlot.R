@@ -19,7 +19,7 @@ qwseasonalPlot <- function(qw.data,
                            show.q = FALSE,
                            show.smooth = FALSE,
                            highlightrecords = " ",
-                           print = TRUE){
+                           printPlot = TRUE){
   
         ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
         medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00","#D55E00")
@@ -75,7 +75,7 @@ qwseasonalPlot <- function(qw.data,
                                  aes(x=DOY,y=RESULT_VA))
   } 
   
-  if(print==TRUE)
+  if(printPlot==TRUE)
   {
           print(p1)
   }else {return(p1)}

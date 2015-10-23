@@ -23,7 +23,8 @@ output$qwparmParmPlot <- renderPlot({
                        } else(log.scaleY = FALSE),
                        highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                             reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmX) |
-                                                                                            reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmY))])
+                                                                                            reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmY))]),
+                       printPlot = FALSE
                        
                        
                        
@@ -51,7 +52,8 @@ output$qwparmParmPlot_zoom <- renderPlot({
                        } else(log.scaleY = FALSE),
                        highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                             reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmX) |
-                                                                                            reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmY))])
+                                                                                            reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmY))]),
+                       printPlot = FALSE
                        
                        
         ) +  

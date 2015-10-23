@@ -7,7 +7,7 @@
 qwrepBoxPlot(reports, site.selection = "401723105400000",
   plotparm = "00915", new.threshold = 60 * 60 * 24 * 30,
   show.points = FALSE, highlightrecords = NULL, new.reps = Sys.time() - 60
-  * 60 * 24 * 30)
+  * 60 * 24 * 30, printPlot = TRUE)
 }
 \arguments{
 \item{reports}{A reports object generated from readNWISodbc}
@@ -21,6 +21,8 @@ qwrepBoxPlot(reports, site.selection = "401723105400000",
 \item{show.points}{Show samples points}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
+
+\item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 
 \item{log.scale}{Plot y axis on a log scale}
 }

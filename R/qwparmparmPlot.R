@@ -21,7 +21,7 @@ qwparmParmPlot <- function(qw.data,
                       log.scaleY = FALSE,
                       log.scaleX = FALSE,
                       highlightrecords = " ",
-                      print=TRUE){
+                      printPlot=TRUE){
   
   lm_eqn = function(df){
     m = lm(RESULT_VA_Y ~ RESULT_VA_X, df);
@@ -99,12 +99,12 @@ qwparmParmPlot <- function(qw.data,
     p2 <- p1 + geom_smooth(data=subset(pp.plot.data, MEDIUM_CD %in%c("WS ","WG ")),aes(x=RESULT_VA_X,y=RESULT_VA_Y),method="lm",formula=y~x)
     p2 <- p2 + xlab(paste("\n",xlabel,"\n",lm_eqn(subset(pp.plot.data, MEDIUM_CD %in%c("WS ","WG ")))))
     
-    if(print == TRUE)
+    if(printPlot == TRUE)
     {
             print(p2)
     }else{return(p2)}
     
-    } else{if(print == TRUE)
+    } else{if(printPlot == TRUE)
         {
         print(p1)
         }else{return(p1)}}  

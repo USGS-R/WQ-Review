@@ -13,7 +13,8 @@ output$qwrepBoxPlot <- renderPlot({
                       new.reps = as.POSIXct(input$newReplicates),
                      show.points = input$showpoints_repBox,
                      highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
-                                          reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD %in% as.character(input$parmSel_repBox))]) 
+                                          reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD %in% as.character(input$parmSel_repBox))]),
+                     printPlot=FALSE
         )
 })
 
