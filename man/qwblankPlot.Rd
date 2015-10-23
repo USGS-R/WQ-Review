@@ -6,7 +6,7 @@
 \usage{
 qwblankPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
   30, show.q = FALSE, show.smooth = FALSE, highlightrecords = " ",
-  facet = "multisite", printPlot = TRUE)
+  facet = "multisite", wySymbol = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}
@@ -20,6 +20,8 @@ qwblankPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
 \item{show.smooth}{Add a loess smooth to plot}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
+
+\item{wySymbol}{Make current water-year highlighted.}
 
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 

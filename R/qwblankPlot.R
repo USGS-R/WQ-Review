@@ -81,7 +81,7 @@ qwblankPlot <- function(qw.data,
                 }else{}
         } else{}
         
-        if(wySymbol = TRUE)
+        if(wySymbol == TRUE)
         {
                 p1 <- p1 + geom_point(data=subset(plotdata, waterYear(SAMPLE_START_DT) == waterYear(Sys.time())),
                                       aes(x=SAMPLE_START_DT,y=RESULT_VA),size=5,alpha = 0.5, color = "#D55E00",shape=19)
