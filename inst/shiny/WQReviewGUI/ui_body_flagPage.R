@@ -14,13 +14,19 @@ tabItem(tabName = "flagPage",
                          
                        
 
-                        box(title = "Sample Level Flags",
-                            downloadButton('sampleFlagTableOut', 'Download tab delimited table'),
-                            DT::dataTableOutput("sampleFlagTable"),
+                        box(title = "Basic Chemical Flags",
+                            downloadButton('chemFlagTableOut', 'Download tab delimited table'),
+                            DT::dataTableOutput("chemFlagTable"),
                             ###Box options
                             width=12,
                             collapsible=TRUE),
-                        box(title = "Result Level Flags",
+                        box(title = "Pesticide Flags",
+                            downloadButton('pestFlagTableOut', 'Download tab delimited table'),
+                            DT::dataTableOutput("pestFlagTable"),
+                            ###Box options
+                            width=12,
+                            collapsible=TRUE),
+                        box(title = "Result Flags",
                             downloadButton('resultFlagTableOut', 'Download tab delimited table'),
                             DT::dataTableOutput("resultFlagTable"),
                             ###Box options

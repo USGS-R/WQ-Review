@@ -73,7 +73,7 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
         #Flag samples with bad charge balance
         
         ##Subset to samples with SC data
-        cbData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ")
+        cbData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ" & complete.chem == "Complete")
         
         ##Make empty vector for flags
         ###Flag samples
@@ -84,8 +84,6 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                                                                                                               abs(cbData$perc.diff) > 15)],
                                                                                "perc diff=",
                                                                                cbData$perc.diff[which(cbData$RESULT_VA <= 100 & 
-                                                                                                              abs(cbData$perc.diff) > 15)],
-                                                                               cbData$complete.chem[which(cbData$RESULT_VA <= 100 & 
                                                                                                               abs(cbData$perc.diff) > 15)]
                                                                                )
         cbData$BadCB_30.21[which(cbData$RESULT_VA > 100 &
@@ -98,9 +96,6 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                                                                                "perc diff=",
                                                                                cbData$perc.diff[which(cbData$RESULT_VA > 100 &
                                                                                                               cbData$RESULT_VA <= 1000 &
-                                                                                                              abs(cbData$perc.diff) > 10)],
-                                                                               cbData$complete.chem[which(cbData$RESULT_VA > 100 &
-                                                                                                              cbData$RESULT_VA <= 1000 &
                                                                                                               abs(cbData$perc.diff) > 10)]
                                                                                )
         cbData$BadCB_30.21[which(cbData$RESULT_VA > 1000 & 
@@ -110,9 +105,7 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                                                                                                              abs(cbData$perc.diff) > 5)],
                                                                               "perc diff=",
                                                                                cbData$perc.diff[which(cbData$RESULT_VA > 1000 & 
-                                                                                                              abs(cbData$perc.diff) > 5)],
-                                                                              cbData$complete.chem[which(cbData$RESULT_VA > 1000 & 
-                                                                                                             abs(cbData$perc.diff) > 5)]
+                                                                                                              abs(cbData$perc.diff) > 5)]
                                                                               )
         #Join flagged samples together into one dataframe
         flaggedSamples <- join(flaggedSamples, 

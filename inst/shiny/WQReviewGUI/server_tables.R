@@ -1,11 +1,11 @@
 ############################
-###sampleFlagTable
+###chemFlagTable
 ############################
 
 
 ###Render the table
-output$sampleFlagTable <- DT::renderDataTable(
-        reports$sampleFlagTable,
+output$chemFlagTable <- DT::renderDataTable(
+        reports$chemFlagTable,
         #extensions = list(FixedColumns = list(leftColumns = 5)),
         server=TRUE,
         options = list(
@@ -13,10 +13,33 @@ output$sampleFlagTable <- DT::renderDataTable(
                 autoWidth=TRUE)
 )
 
-output$sampleFlagTableOut <- downloadHandler(
-        filename = function() {"sampleFlagTableOut"},
+output$chemFlagTableOut <- downloadHandler(
+        filename = function() {"chemFlagTableOut"},
         content = function(file) {
-                write.table(reports$sampleFlagTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                write.table(reports$chemFlagTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                            file)
+        }
+)
+
+############################
+###sampleFlagTable
+############################
+
+
+###Render the table
+output$pestFlagTable <- DT::renderDataTable(
+        reports$pestFlagTable,
+        #extensions = list(FixedColumns = list(leftColumns = 5)),
+        server=TRUE,
+        options = list(
+                scrollX=TRUE,
+                autoWidth=TRUE)
+)
+
+output$pestFlagTableOut <- downloadHandler(
+        filename = function() {"pestFlagTableOut"},
+        content = function(file) {
+                write.table(reports$pestFlagTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
                             file)
         }
 )

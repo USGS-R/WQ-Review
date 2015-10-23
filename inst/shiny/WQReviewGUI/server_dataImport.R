@@ -3,8 +3,8 @@
 output$importWarning <- renderPrint({
         validate(
                 need(!is.null(input$STAIDS) | !is.null(input$siteFile), "Please enter a site number or a site ID file"),
-                need(!is.null(input$dl.parms) | !is.null(input$parmFile) | !is.null(input$dl.parms.group), "Please enter a parameter group(s) or a parameter code file")
-                
+                need(!is.null(input$dl.parms) | !is.null(input$parmFile) | !is.null(input$dl.parms.group), "Please enter a parameter group(s) or a parameter code file"),
+                need(input$DSN != "", "Please enter your DSN name for your NWIS server")
         )
 
         #sampleCountHist <- ggplot(data=qw.data$PlotTable[!duplicated(qw.data$PlotTable$RECORD_NO),],aes(x=year(SAMPLE_START_DT)))
