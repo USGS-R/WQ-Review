@@ -9,7 +9,7 @@ This package facilitates data review and exploration of discrete water-quality d
 
 #Requirements
 * This application requires a functioning 32 bit ODBC connection to an NWIS server. Guidance for setting up ODBC access is provided at the bottom of this page.
-* A system default internet browser, preferably Google Chrome. The application will launch in your PC's default browser.
+* **Google Chrome is required and must be set as the system default browser.**
 
 #Bug reporting and enhancements
 Please report any issues with the application or R package on the issues page at:

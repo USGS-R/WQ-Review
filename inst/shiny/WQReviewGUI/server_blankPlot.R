@@ -8,9 +8,9 @@ output$qwblankPlot <- renderPlot({
                  site.selection = as.character(input$siteSel_blank),
                  plotparm = as.character(input$parmSel_blank),
                  facet = input$facetSel_blank,
-                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
+                 highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                       reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_blank))]),
-                 print=FALSE
+                 printPlot=FALSE
         ) + theme_bw()  
 })
 
@@ -23,8 +23,8 @@ output$qwblankPlot_zoom <- renderPlot({
                  site.selection = as.character(input$siteSel_blank),
                  plotparm = as.character(input$parmSel_blank),
                  facet = input$facetSel_blank,
-                 highlightrecords = c(reports$sampleFlagTable$RECORD_NO,
-                                      reports$resultFlagTable$RECORD_NO),
+                 highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
+                                      reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_blank))]),
                  printPlot = FALSE) + theme_bw() +  
                 ###This resets the axes to zoomed area, must specify origin because brushedPoints returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = as.POSIXct(ranges_blank$x,origin="1970-01-01 00:00.00 UTC"), ylim = ranges_blank$y)

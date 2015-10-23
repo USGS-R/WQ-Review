@@ -14,10 +14,10 @@
 #' @import plyr
 #' @export
 
-readNWISodbc <- function(DSN = NULL,
+readNWISodbc <- function(DSN,
                          env.db = "01",
                          qa.db = "02",
-                         STAIDS = NULL,
+                         STAIDS ,
                          dl.parms = "All",
                          parm.group.check = TRUE,
                          begin.date = NA,
