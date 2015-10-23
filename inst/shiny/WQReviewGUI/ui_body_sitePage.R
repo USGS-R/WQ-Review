@@ -34,7 +34,7 @@ tabItem(tabName = "siteSelection",
                                 dateInput(inputId = "begin.date",label="Start date",max=Sys.Date(),value=Sys.Date()-365*10),
                                 dateInput(inputId = "end.date",label="End date",max=Sys.Date(),value=Sys.Date()),
                                 
-                                textInput("DSN",label="Server name (DSN)",value="NWISCO"),
+                                textInput("DSN",label="Server name (DSN)",value=""),
                                 textInput("env.db",label="Environment DB Number",value="01"),
                                 textInput("qa.db",label="QA DB Number",value="02"),
                                 
