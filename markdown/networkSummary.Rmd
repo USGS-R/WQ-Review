@@ -1,0 +1,122 @@
+---
+title: "`r paste(network,' Network Summary',sep='')`"
+author: "WQ-Review"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+```{r setup, include=FALSE}
+###Load libraries and setup options
+
+require(WQReview)
+require(plyr)
+require(knitr)
+opts_chunk$set(dev = 'png',out.width='1024px',out.height='750px',dpi=60)
+```
+
+```{r,echo=FALSE}
+###Load up the data
+load("data.rda")
+###Subset to site network
+qw.data$PlotTable <- subset(qw.data$PlotTable,SITE_NO %in% sites)
+reports$chemFlagTable <- subset(reports$chemFlagTable, SITE_NO %in% sites)
+reports$pestFlagTable <- subset(reports$pestFlagTable, SITE_NO %in% sites)   
+reports$resultFlagTable <- subset(reports$resultFlagTable, SITE_NO %in% sites)  
+
+```
+
+#Network Data Summary
+* ###Most recent data modification: `r format(max(qw.data$PlotTable$RESULT_MD),"%Y-%m-%d %H:%M","\n")`
+
++ Site:`r unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])`
+
++ Parameters modified:`r qw.data$PlotTable$PARM_CD[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))]`
+
++ Who:`r qw.data$PlotTable$RESULT_MN[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))]`
+
+* ###Total Samples waiting for review:
++ Records with DQI of **I**:`r length(unique(qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$DQI_CD == "I")]))`
+
++ Records with DQI of **S**:`r length(unique(qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$DQI_CD == "S")]))`
+
+
++ Total number of records:`r length(unique(qw.data$PlotTable$RECORD_NO))`
+
+#Flagged tables
+##Basic chemical flags
+```{r,echo=FALSE}
+require(DT)
+############################
+###chemFlagTable
+############################
+
+
+###Render the table
+datatable(
+        reports$chemFlagTable,
+        extensions = list(FixedColumns = list(leftColumns = 5)),
+        options = list(
+                scrollX=TRUE,
+                autoWidth=TRUE)
+)
+#kable(reports$chemFalgTable)
+```
+
+##Pesticide flags
+```{r,echo=FALSE}
+require(DT)
+############################
+###pestFlagTable
+############################
+
+
+###Render the table
+datatable(
+        reports$pestFlagTable,
+        extensions = list(FixedColumns = list(leftColumns = 5)),
+        options = list(
+                scrollX=TRUE,
+                autoWidth=TRUE)
+)
+```
+
+##Result flags
+
+```{r,echo=FALSE}
+require(DT)
+
+############################
+###resultFlagTable
+############################
+
+###Render the table
+
+datatable(
+        reports$resultFlagTable,
+        extensions = list(FixedColumns = list(leftColumns = 5)),
+        options = list(
+                scrollX=TRUE,
+                autoWidth=TRUE)
+)
+
+#kable(reports$resultFlagTable)
+
+```
+
+
+```{r, echo=FALSE, results='asis',message=FALSE,warning=FALSE}
+###Make links for each site
+cat("\n\n")
+for(l in 1:length(sites))
+    {
+    cat("#[",
+        unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$SITE_NO == sites[l])]),
+        " ",
+        unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$SITE_NO == sites[l])]),
+        "](",
+        unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$SITE_NO == sites[l])]),
+        ".htm)",
+        "\n",
+        sep=""
+    )
+        
+}
+```
