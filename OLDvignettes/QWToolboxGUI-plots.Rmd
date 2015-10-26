@@ -13,10 +13,9 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-This vignette will describe the plot types available in the WQReview GUI and the various ways to manipulate them.
 
-#Overview
-After importing data, the main plotting tab will be populated with numerous subtabs for each type of plot. The main plotting pane contains some global controls at the top and a notebook containing all individual plot types underneath.
+#Plot descriptions
+This vignette will describe the plot types available in the WQReview GUI and the various ways to manipulate them.
 
 ##Symbology
 The symbology in all plots is sensitive to the medium code and remark code. Data colors are mapped to the medium code and point data symbols are mapped to the remark code. 
@@ -37,35 +36,36 @@ Currently supported remark codes include:
 1. '>'
 1. E
 
-
-<img src="plots_symbology.png" alt="Drawing" style="width: 400px;"/>
-
 ##Labelling conventions
 All axis pertaining to a particular pcode will be labelled with that pcode's NWIS parameter name, which includes the units of measurement. The main title of the plot will either by labelled with the NWIS station name if only one station is plotted, or "multi-site plot" if multiple stations are displayed.
 
 ##Selecting data to plot
-Generally, plots are controlled by selecting a site and then a data type (e.g. a parameter) from a table. In most cases the plot will be displayed or refreshed automatically. However, in some instances the user needs to press the "refresh plot button" at the bottom of the plotting window to display new data or modifications to the data display. **PLOTS WILL NOT BE DISPLAYED IF A SITE AND DATA TYPE ARE NOT SELECTED EVEN IF ONLY ONE SITE OR DATA TYPE IS PRESENT**. Additionally, a plot will not be displayed if there are no data to plot, for example if a particular parameter was not measured at a selected site. Multiple sites of multiple parameters can be plotted on certain plot types by selecting multiple table entries using cntrl-click or shift-click.
+Generally, plots are controlled by selecting a site and then a data type from an input box or pick list. In most cases the plot will be displayed or refreshed automatically. **PLOTS WILL NOT BE DISPLAYED IF A SITE AND DATA TYPE ARE NOT SELECTED EVEN IF ONLY ONE SITE OR DATA TYPE IS PRESENT**. Additionally, a plot will not be displayed if there are no data to plot, for example if a particular parameter was not measured at a selected site but is selected for plotting. Multiple sites of multiple parameters can be plotted on certain plot types.
 
-#Global plot controls
+##Global plot controls
 
-<img src="plots_global.png" alt="Drawing" style="width: 400px;"/>
+###New data threshold
+Point data in all plots can be labeled as "New" data based off of when that data was last modified using the "New data threshold" slider. Any data modified after the date indicated on the slider will be labeled as "New". This helps identify data that has not been reviewed from historic data when the data are not displayed as a timeseries. Note that the "New data threshold" is set off of when the data were last **modified** for result-level plots (e.g. timeseries, seasonal, etc.) not when they were created. Sample-level plots (e.g. charge balance) are labeled new according to the sample collection date.
 
-##Opening the plot device
-The first global control button is the "Open plot device" button. This will open up a separate window that will contain all plots. **If we do not open this window plots will be displayed in the default device**. The default device is typically the window in R-Studio. The plot device used in the WQReview GUI has a number of functions, such as saving plots, resizing them, and copying them to the clipboard.
+###Record highlights
+Samples or results will be hilighted with a red halo if that sample or result has been flagged for one or more of the data checks listed in the data check table.
 
-##New data threshold
-Point data in all plots can be labeled as "New" data based off of when that data was last modified using the "New data threshold" slider. Any data modified after the date indicated on the slider will be labeled as "New". This helps identify data that has not been reviewed from historic data when the data are not displayed as a timeseries. Note that the "New data threshold" is set off of when the data were last **modified** not when they were created.
+###Plot clicking, brushing, and hovering
+Most plots are interactive in that the user can click on a point, or zoom into specific areas of the plot. Boxplots are not interactive. 
 
-##Record highlighter
-The record highlighter is a tool for tracking samples through multiple types of plots. Clicking the record highlighter will open another window containing a table of all samples pulled from NWIS. This table is sortable on all columns so that records can be sorted by record number, station name, start date, or medium code. clicking on an entry in the table will select it. This record will now be highlighted in all point data plots. This is helpful for tracking an outlier in one plot through others to accumulate multiple lines of evidence.
+####Clicking
+Clicking on a datapoint will populate a table with all data pertaining to that point. This table will persist until another point is clicked. 
 
-<img src="plots_highlight.png" alt="Drawing" style="width: 800px;"/>
+####Brushing
+The user may also select and area of the plot by holding down a mouse click and drawing a rectangle around hte area of interest. A new plot will appear below, zoomed into the area of interest. Additionaly, a table will be displayed below with all data pertaining to the points within the zoomed area. Points in the zoomed plot can also be click to get information. 
 
-#Plot types
+####Hovering
+Hovering the mouse over any given data point will display basic information about the data point on the left sidebar of the plot frame.
+
+##Plot types
 
 This section will describe the details of each different plot type and how to control them in the WQReview GUI.
 
-##General characteristics
 ###Timeseries
 
 This pane generates of plot of a selected parameter through time. 

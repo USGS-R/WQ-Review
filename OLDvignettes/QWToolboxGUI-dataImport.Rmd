@@ -12,7 +12,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-This will describe the process for importing data into the WQReview GUI. We will start by importing data for a 
+This will describe the process for importing data into the WQReview Graphical User Interface (GUI). We will start by importing data for a 
 single site using predefined NWIS parameter groups. At the end we will see how to import data for multiple sites
 and custom parameter lists.
 
@@ -24,27 +24,35 @@ and custom parameter lists.
 library(WQReview)
 ```
 
-1. You must specify your server name and the environmental and QA database numbers for your data when you start the WQReview GUI. For most environmental data the database number is "01" and for most QA data it is "02". These are the default values in WQReview and if these are the database numbers for your data you do not need to change them. To open the GUI run the WQReview() function with the database arguments for your data. For example at the CO WSC you would type the following into your R script or command window.
+1. To open the GUI run the WQReviewGUI() function.
 
 ```R
-WQReview(dlserver.name = "NWISCO", env.db.num = "01", qa.db.num = "02")
+WQReviewGUI()
 ```
 
-The GUI window will open with the server and database information stored and you may now work entirely from this window.
+The GUI window will open in your system's default internet browser. **It is recommended that hte GUI be run in Google Chrome.** If the GUI opens in internet explorer, you need to change your system's default browser to Google Chrome by opening Google Chrome and going to settings -> default browser (bottom of page).
 
 ## Importing data
 
-The data import tab has 5 main panes:
+The data import tab has 10 main inputs:
 
-1. Site Selection: This pane selects the method of site ID input using a radio button. You can manually type in a single site ID, you can pick from a favorites list imported when you started WQReview, or you can read IDs in directly from a csv file.
+1. Site number: This input takes a manually entered site number(s). Type the site number in and click "add". You may add as many site numbers as you would like. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry.
     
-1. pCode selection: This pane selects the method of pCode input using a radio button. You can select from NWIS parameter groups, you can pick from a favorites list imported when you started WQReview, or you can read pCodes in directly from a csv file.
+1. Site number file: This input takes a file of site IDs. The file must be a single column text file of site numbers.Make sure leading zero's have not been removed if using excel to generate the file.
 
-1. Favorite site list: A list of siteIDs will appear here if you started WQReview by reading in a list of favorite sites using the "siteids" argument. You can import data for one or multiple of your favorites by clicking them to highlight. You can select multiple sites from the list using ctrl-click or shift-click. 
+1. Parameter codes: This input takes a manually entered parameter codes (pcodes). This behaves the same as the site number input.
 
-1. Favorite pcode list: A list of pcodes will appear here if you started WQReview by reading in a list of favorite pcodes using the "pcodes" argument. You can import data for one or multiple of your favorites by clicking them to highlight. You can select multiple sites from the list using ctrl-click or shift-click. 
+1. pCode file: This input takes a file of pcodes. The file must be a single column text file of pcodes. Make sure leading zero's have not been removed if using excel to generate the file.
 
-1. Date range. You may specify a date range to import data for in yyyy-mm-dd format. If the range is left unchanged it will pull the entire period of record.
+1. Start date: The start date for the data pull. Samples collected after this date will be retrieved. The default value is 10 years before the current date.
+
+1. End date: The end date for the data pull. Samples collected before this date will be retrieved. The default is the current date.
+
+1. Server name (DSN): The name of your nwis server data source name (DSN) that was established during ODBC setup.
+
+1. Environmental DB number: The number cooresponding to the environmental database. Default is "01"
+
+1. QA DB Number: The number cooresponding to the QA sample database. Default is "02"
 
 #A basic data import
 We will start with a basic data import for a single site by parameter groups.
