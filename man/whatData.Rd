@@ -16,7 +16,7 @@ whatData(qw.data, searchParms, begin.date = NULL, end.date = NULL,
 
 \item{end.date}{Subset data to end date.}
 
-\item{groups}{Search for searchParms by groups instead of one long vector.}
+\item{groups}{Logical. Search for searchParms by groups instead of one long vector.}
 }
 \description{
 Searches for missing data and returns a dataframe of missing data by record number.
