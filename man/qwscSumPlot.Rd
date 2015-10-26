@@ -5,7 +5,8 @@
 \title{Sum ions vs conductance plot}
 \usage{
 qwscSumPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60
-  * 60 * 24 * 30, highlightrecords = NULL, printPlot = TRUE)
+  * 60 * 24 * 30, highlightrecords = NULL, wySymbol = FALSE,
+  printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
@@ -15,6 +16,8 @@ qwscSumPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
+
+\item{wySymbol}{Make current water-year highlighted.}
 
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 

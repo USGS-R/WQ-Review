@@ -6,7 +6,7 @@
 \usage{
 qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30, site.selection,
   plotparm, facet = "multisite", show.q = FALSE, show.smooth = FALSE,
-  highlightrecords = " ", printPlot = TRUE)
+  highlightrecords = " ", wySymbol = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
@@ -18,6 +18,10 @@ qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30, site.selection,
 \item{plotparm}{A character vector of parameters to plot}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
+
+\item{wySymbol}{Make current water-year highlighted.}
+
+\item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 
 \item{show.points}{A logical to show points on plot}
 

@@ -8,6 +8,7 @@
 #' @param end.date Character string of ending date range to plot (yyyy-mm-dd)
 #' @param show.smooth Add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @import stringr 
 #' @import ggplot2
@@ -20,6 +21,7 @@ qwcbPlot <- function(qw.data,
                     new.threshold = 60*60*24*30,
                     show.smooth = FALSE,
                     highlightrecords = NULL,
+                    wySymbol = FALSE,
                     printPlot = TRUE){
   
         ###Run ion balance function if not run already and join to qw.data$PlotTable
@@ -79,7 +81,7 @@ qwcbPlot <- function(qw.data,
   ##Highlighted records labels
   if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) >0 )
   {
-    p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=perc.diff),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+    p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=perc.diff),size=7,alpha = 0.5, color = "#D55E00",shape=19)
   }
   
   
@@ -100,6 +102,13 @@ qwcbPlot <- function(qw.data,
                                        aes(x=SAMPLE_START_DT,y=perc.diff,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
           }else{}
   } else{}
+  
+  ##highlight this water year's data
+  if(wySymbol == TRUE) 
+  {
+          p1 <- p1 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
+                                aes(x=SAMPLE_START_DT,y=perc.diff),size=5,alpha = 0.5, color ="#F0E442" ,shape=19)
+  }
   
   p1 <- p1 + ggtitle(maintitle)
   p1 <- p1 + geom_hline(data = hline,aes(yintercept = yint,linetype=Imbalance),show_guide=TRUE) 

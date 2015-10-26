@@ -10,6 +10,8 @@
 #' @param show.q Logical to plot instantaneous hydrograph
 #' @param show.smooth Logical to add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param wySymbol Make current water-year highlighted.
+#' @param printPlot Logical. Prints plot to graphics device if TRUE
 
 #' @export
 
@@ -21,6 +23,7 @@ qwtsPlot <- function(qw.data,
                      show.q = FALSE,
                      show.smooth = FALSE,
                      highlightrecords = " ",
+                     wySymbol = FALSE,
                      printPlot = TRUE){
   ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
   medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00","#D55E00")
@@ -59,7 +62,7 @@ qwtsPlot <- function(qw.data,
     nrow((data=subset(plotdata, RECORD_NO %in% highlightrecords))) > 0
   ){
     
-    p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=RESULT_VA),size = 7,alpha=0.5, color = "#F0E442",shape=19)
+    p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=RESULT_VA),size = 7,alpha=0.5, color ="#D55E00" ,shape=19)
   }
   
   
@@ -69,6 +72,13 @@ qwtsPlot <- function(qw.data,
     p1 <- p1 + geom_text(data=subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold)),
                          aes(x=SAMPLE_START_DT,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
   }else{}
+  
+  ##highlight this water year's data
+  if(wySymbol == TRUE)
+  {
+          p1 <- p1 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
+                                aes(x=SAMPLE_START_DT,y=RESULT_VA),size=5,alpha = 0.5, color = "#F0E442",shape=19)
+  }
   
   p1 <- p1 + theme(axis.text.x = element_text(angle = 90)) #+ ggtitle(maintitle)
   

@@ -9,8 +9,8 @@
 #' @param end.date Character string of ending date range to plot (yyyy-mm-dd)
 #' @param show.smooth Add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
-#' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @param wySymbol Make current water-year highlighted.
+#' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @export
 
 qwblankPlot <- function(qw.data,
@@ -60,7 +60,7 @@ qwblankPlot <- function(qw.data,
         ##Highlighted records labels
         if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) >0 )
         {
-                p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=RESULT_VA),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+                p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=SAMPLE_START_DT,y=RESULT_VA),size=7,alpha = 0.5, color ="#D55E00" ,shape=19)
         }
         
         
@@ -84,7 +84,7 @@ qwblankPlot <- function(qw.data,
         if(wySymbol == TRUE)
         {
                 p1 <- p1 + geom_point(data=subset(plotdata, waterYear(SAMPLE_START_DT) == waterYear(Sys.time())),
-                                      aes(x=SAMPLE_START_DT,y=RESULT_VA),size=5,alpha = 0.5, color = "#D55E00",shape=19)
+                                      aes(x=SAMPLE_START_DT,y=RESULT_VA),size=5,alpha = 0.5, color = "#F0E442",shape=19)
         }
         
         

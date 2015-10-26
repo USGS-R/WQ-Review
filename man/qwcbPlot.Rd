@@ -6,7 +6,7 @@
 \usage{
 qwcbPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60 *
   60 * 24 * 30, show.smooth = FALSE, highlightrecords = NULL,
-  printPlot = TRUE)
+  wySymbol = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}
@@ -18,6 +18,8 @@ qwcbPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60 *
 \item{show.smooth}{Add a loess smooth to plot}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
+
+\item{wySymbol}{Make current water-year highlighted.}
 
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 

@@ -6,7 +6,8 @@
 \usage{
 qwparmBoxPlot(qw.data, site.selection, plotparm, facet = "multisite",
   new.threshold = 60 * 60 * 24 * 30, show.points = FALSE,
-  log.scale = FALSE, highlightrecords = NULL, printPlot = TRUE)
+  log.scale = FALSE, highlightrecords = NULL, wySymbol = FALSE,
+  printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
@@ -22,6 +23,10 @@ qwparmBoxPlot(qw.data, site.selection, plotparm, facet = "multisite",
 \item{log.scale}{Plot y axis on a log scale}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
+
+\item{wySymbol}{Make current water-year highlighted.}
+
+\item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 }
 \description{
 Takes output list from readNWISodbc and prints a boxplot of parameters

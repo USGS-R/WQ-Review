@@ -4,26 +4,24 @@
 \alias{flagReport}
 \title{flagReport}
 \usage{
-flagReport(DSN, env.db = "01", qa.db = "02", STAIDS,
-  begin.date = Sys.Date() - 365 * 10, end.date = Sys.Date(),
-  outputFile = "flagReport.pdf", outputDir = "output")
+flagReport(stationFile, DSN, env.db = "01", qa.db = "02",
+  begin.date = as.character(Sys.Date() - 365 * 10),
+  end.date = as.character(Sys.Date()), outputDir)
 }
 \arguments{
-\item{DSN}{A character string containing the DSN for your local server}
+\item{stationFile}{Filename of csv file containing network names in 1st column and station IDs in second column.}
 
-\item{env.db}{A character string containing the database number of environmental samples}
+\item{DSN}{A character string containing the DSN for your local server.}
 
-\item{qa.db}{A character string containing the database number of QA samples}
+\item{env.db}{A character string containing the database number of environmental samples.}
 
-\item{STAIDS}{A character vector of stations IDs}
+\item{qa.db}{A character string containing the database number of QA samples.}
 
 \item{begin.date}{Character string containing beginning date of data pull (yyyy-mm-dd). Default is 10 years from current date.}
 
 \item{end.date}{Character string containing ending date of data pull (yyyy-mm-dd). Default is current date.}
 
-\item{outputFile}{Filename of report output.}
-
-\item{outputDir}{Directory to store output files.}
+\item{outputDir}{Directory to store output files. Must be an absolute path, e.g. "D:/flagReports"}
 }
 \description{
 Pulls data from internal NWIS server and runs automated data checks, generates tables, and produces

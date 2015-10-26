@@ -2,14 +2,13 @@
 #' 
 #' Pulls data from internal NWIS server and runs automated data checks, generates tables, and produces
 #' an indexed notebook of flagged samples, tables, and plots for all sites entered.
-#' @param DSN A character string containing the DSN for your local server
-#' @param env.db A character string containing the database number of environmental samples
-#' @param qa.db A character string containing the database number of QA samples
-#' @param STAIDS A character vector of stations IDs 
+#' @param stationFile Filename of csv file containing network names in 1st column and station IDs in second column.
+#' @param DSN A character string containing the DSN for your local server.
+#' @param env.db A character string containing the database number of environmental samples.
+#' @param qa.db A character string containing the database number of QA samples.
 #' @param begin.date Character string containing beginning date of data pull (yyyy-mm-dd). Default is 10 years from current date.
 #' @param end.date Character string containing ending date of data pull (yyyy-mm-dd). Default is current date.
-#' @param outputFile Filename of report output.
-#' @param outputDir Directory to store output files.
+#' @param outputDir Directory to store output files. Must be an absolute path, e.g. "D:/flagReports"
 #' @export
 
 
@@ -19,12 +18,19 @@ flagReport <- function(stationFile,
                        qa.db = "02",
                        begin.date = as.character(Sys.Date()-365*10),
                        end.date = as.character(Sys.Date()),
-                       outputDir = "output")
+                       outputDir)
         {
+        
+        markdownDir <- system.file("markdown", package = "WQReview")
+        if (markdownDir == "") {
+                stop("Could not find GUI directory. Try re-installing `WQReview`.", call. = FALSE)
+        }
+
         stations <- read.csv(stationFile,header=FALSE,colClasses = "character")
         colnames(stations) <- c("network","SITE_NO")
         
         ###Make directory to hold output
+        #outputDir <- paste(getwd(),"/",outputDir,sep="")
         dir.create(outputDir)
         
         ##Make subdirectories for each network
@@ -169,10 +175,18 @@ flagReport <- function(stationFile,
         ########################################################################
         
         ###Save data file for use in markdown
-        save(list=c("qw.data","reports"),file="markdown/data.rda")
+        save(list=c("qw.data","reports"),file=paste0(outputDir,"/data.rda",sep=""))
         
         ###Remove stations with no data from station list
         stations <- subset(stations, SITE_NO %in% unique(qw.data$PlotTable$SITE_NO))
+        
+        ###Run markdown fto make index.htm
+        rmarkdown::render(paste(markdownDir,"/networkIndex.rmd",sep=""),params = list(networks=networks,outputDir = outputDir),
+                          output_file="networkIndex.htm",
+                          output_dir=(outputDir)
+        )
+        
+        
         ###Run markdown for each site and create seperate html file
 
         for(i in 1:length(networks))
@@ -181,7 +195,7 @@ flagReport <- function(stationFile,
             sites <- subset(stations,network == networks[i])$SITE_NO
             network <- networks[i]
             
-            rmarkdown::render("markdown/networkSummary.rmd",params = list(sites = sites, network=network),
+            rmarkdown::render(paste(markdownDir,"/networkSummary.rmd",sep=""),params = list(sites = sites, network=network,outputDir = outputDir),
                               output_file="networkSummary.htm",
                               output_dir=paste0(outputDir,"/",networks[i],sep="")
             )
@@ -190,7 +204,7 @@ flagReport <- function(stationFile,
             {
             site <- subset(stations,network == networks[i])$SITE_NO[k]
             siteName <- unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$SITE_NO == site)])
-            rmarkdown::render("markdown/flagReport.rmd",params = list(site = site,siteName=siteName),
+            rmarkdown::render(paste(markdownDir,"/flagReport.rmd",sep=""),params = list(site = site,siteName=siteName,outputDir = outputDir),
                           output_file=paste(site,".htm",sep=""),
                           output_dir=paste0(outputDir,"/",networks[i],sep="")
                           )

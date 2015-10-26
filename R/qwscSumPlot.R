@@ -6,6 +6,7 @@
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character string of ions to plot. Options are "Cations", "Anions", "Both"
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @import stringr 
 #' @import ggplot2
@@ -19,6 +20,7 @@ qwscSumPlot <- function(qw.data,
                        facet = "multisite",
                        new.threshold = 60*60*24*30,
                        highlightrecords = NULL,
+                       wySymbol = FALSE,
                        printPlot = TRUE
                        ) {
   
@@ -75,7 +77,7 @@ qwscSumPlot <- function(qw.data,
       ###Highlight records
       if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) > 0)
       {
-        p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=RESULT_VA,y=value),size=7,alpha=0.5, color = "#F0E442",shape=19)
+        p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=RESULT_VA,y=value),size=7,alpha=0.5, color ="#D55E00" ,shape=19)
         #p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=RESULT_VA,y=sum_an,shape = complete.chem,color = "Anions"),size=7,alpha=0.5)
       }
       
@@ -84,10 +86,15 @@ qwscSumPlot <- function(qw.data,
       {
         p1 <- p1 + geom_text(data=newflagdata,
                              aes(x=RESULT_VA,y=value,color=variable,label="New",hjust=1.1),show_guide=F)      
-        #p1 <- p1 + geom_text(data=newflagdata,
-         #                    aes(x=RESULT_VA,y=sum_an,label="New",hjust=1.1),show_guide=F)      
+        
       }else{}
       
+      ##highlight this water year's data
+      if(wySymbol == TRUE) 
+      {
+              p1 <- p1 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
+                                    aes(x=RESULT_VA,y=value),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+      }
       
     p1 <- p1 + ylab(paste(ylabel,"\n")) + xlab("Specific conducatance")
     p1 <- p1 + labs(color='Sum ions')
