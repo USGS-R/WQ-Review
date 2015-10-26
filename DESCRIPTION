@@ -13,7 +13,6 @@ Imports:
     plyr,
     RODBC,
     stringr,
-    stringi,
     curl,
     ggplot2,
     scales,

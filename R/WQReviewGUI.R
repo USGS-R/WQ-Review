@@ -5,7 +5,6 @@
 #' @import shinydashboard
 #' @import shiny
 #' @import stringr
-#' @import stringi
 #' @import curl
 #' @import lubridate
 #' @import DT
