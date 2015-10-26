@@ -8,6 +8,8 @@
 #' @param yparm Character string of parameter to plot on y axis
 #' @param show.lm Add a linear fit to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param wySymbol Make current water-year highlighted.
+#' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @export
 
 
@@ -21,6 +23,7 @@ qwparmParmPlot <- function(qw.data,
                       log.scaleY = FALSE,
                       log.scaleX = FALSE,
                       highlightrecords = " ",
+                      wySymbol = FALSE,
                       printPlot=TRUE){
   
   lm_eqn = function(df){
@@ -66,7 +69,7 @@ qwparmParmPlot <- function(qw.data,
   #Highlight records
   if(nrow(subset(pp.plot.data,RECORD_NO %in% highlightrecords)) > 0)
   {
-          p1 <- p1 + geom_point(data=subset(pp.plot.data,RECORD_NO %in% highlightrecords),aes(x=RESULT_VA_X,y=RESULT_VA_Y),size=7,alpha=0.5, color = "#F0E442",shape=19)
+          p1 <- p1 + geom_point(data=subset(pp.plot.data,RECORD_NO %in% highlightrecords),aes(x=RESULT_VA_X,y=RESULT_VA_Y),size=7,alpha=0.5, color = "#D55E00",shape=19)
   } else{}
   
   p1 <- p1 + scale_colour_manual("Medium code",values = medium.colors)
@@ -90,6 +93,13 @@ qwparmParmPlot <- function(qw.data,
     p1 <- p1 + geom_text(data=subset(pp.plot.data, RESULT_MD_X >= (Sys.time()-new.threshold) | RESULT_MD_Y >= (Sys.time()-new.threshold)),
                          aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
   }else{}
+  
+  ##highlight this water year's data
+  if(wySymbol == TRUE) 
+  {
+          p1 <- p1 + geom_point(data=subset(pp.plot.data, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
+                                aes(x=RESULT_VA_X,y=RESULT_VA_Y),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+  }
   
   p1 <- p1 + ggtitle(maintitle) + theme_bw()
   

@@ -1,0 +1,22 @@
+---
+title: "Water-quality networks"
+author: "WQ-Review"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r, echo=FALSE, results='asis',message=FALSE,warning=FALSE}
+###Make links for each site
+cat("\n\n")
+for(m in 1:length(networks))
+    {
+    cat("#[",
+        networks[m],
+        "](",
+        paste0(networks[m],"/networkSummary.htm"),
+        ")",
+        "\n",
+        sep=""
+    )
+        
+}
+```

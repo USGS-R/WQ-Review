@@ -8,6 +8,8 @@
 #' @param show.points Show samples points
 #' @param log.scale Plot y axis on a log scale
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param wySymbol Make current water-year highlighted.
+#' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @export
 
 qwparmBoxPlot <- function(qw.data,
@@ -18,6 +20,7 @@ qwparmBoxPlot <- function(qw.data,
                      show.points = FALSE,
                      log.scale = FALSE,
                      highlightrecords = NULL,
+                     wySymbol = FALSE,
                      printPlot = TRUE){
   
   medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00")
@@ -57,7 +60,7 @@ qwparmBoxPlot <- function(qw.data,
     p2 <- p1 + geom_point(aes(color = MEDIUM_CD,shape=REMARK_CD),size=3)
     if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) > 0)
     {
-    p2 <- p2 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=PARM_NM,y=RESULT_VA),size=7,alpha=0.5, color = "#F0E442",shape=19)
+    p2 <- p2 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=PARM_NM,y=RESULT_VA),size=7,alpha=0.5, color ="#D55E00" ,shape=19)
     }else{}
     
     
@@ -66,6 +69,14 @@ qwparmBoxPlot <- function(qw.data,
       p2 <- p2 + geom_text(data=subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold)),
                            aes(x=PARM_NM,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
     }else{}
+    
+    ##highlight this water year's data
+    if(wySymbol == TRUE) 
+    {
+            p2 <- p2 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
+                                  aes(x=PARM_NM,y=RESULT_VA),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+    }
+    
     if(printPlot)
     {
     print(p2)

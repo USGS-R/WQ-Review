@@ -8,6 +8,8 @@
 #' @param show.points A logical to show points on plot
 #' @param log.scale A logical to plot y axis on log scale
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param wySymbol Make current water-year highlighted.
+#' @param printPlot Logical. Prints plot to graphics device if TRUE
 
 #' @export
 
@@ -19,6 +21,7 @@ qwseasonalPlot <- function(qw.data,
                            show.q = FALSE,
                            show.smooth = FALSE,
                            highlightrecords = " ",
+                           wySymbol = FALSE,
                            printPlot = TRUE){
   
         ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
@@ -57,9 +60,16 @@ qwseasonalPlot <- function(qw.data,
   
   if(nrow(subset(plotdata, RECORD_NO %in% highlightrecords)) >0 )
   {
-          p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=DOY,y=RESULT_VA),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+          p1 <- p1 + geom_point(data=subset(plotdata, RECORD_NO %in% highlightrecords),aes(x=DOY,y=RESULT_VA),size=7,alpha = 0.5, color ="#D55E00" ,shape=19)
   }
  
+  ##highlight this water year's data
+  if(wySymbol == TRUE) 
+  {
+          p1 <- p1 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
+                                aes(x=DOY,y=RESULT_VA),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+  }
+  
   #p1 <- p1 + scale_x_discrete("Month", breaks=levels(qw.data$PlotTable$SAMPLE_MONTH), drop=FALSE)
   p1 <- p1 + scale_color_manual("Medium code",values = medium.colors)
   p1 <- p1 + scale_shape_manual("Remark code",values = qual.shapes)

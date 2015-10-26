@@ -6,7 +6,7 @@
 \usage{
 qwtsPlot(qw.data, site.selection, plotparm, facet = "multisite",
   new.threshold = 60 * 60 * 24 * 30, show.q = FALSE, show.smooth = FALSE,
-  highlightrecords = " ", printPlot = TRUE)
+  highlightrecords = " ", wySymbol = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
@@ -22,6 +22,10 @@ qwtsPlot(qw.data, site.selection, plotparm, facet = "multisite",
 \item{show.smooth}{Logical to add a loess smooth to plot}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
+
+\item{wySymbol}{Make current water-year highlighted.}
+
+\item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 
 \item{begin.date}{Character string of begining date range to plot (yyyy-mm-dd)}
 
