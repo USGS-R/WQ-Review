@@ -9,12 +9,21 @@
 #' @param log.scale Plot y axis on a log scale
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
-
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' qwrepBoxPlot <- function(reports = reports,
+#'                        site.selection = "06733000",
+#'                        plotparm = "00915",
+#'                        new.threshold = 60*60*24*30,
+#'                        show.points = FALSE,
+#'                        highlightrecords = NULL,
+#'                        new.reps = Sys.time() - 60*60*24*30,
+#'                        printPlot = TRUE)
 #' @export
 
 qwrepBoxPlot <- function(reports,
-                    site.selection = "401723105400000",
-                    plotparm = "00915",
+                    site.selection,
+                    plotparm,
                     new.threshold = 60*60*24*30,
                     show.points = FALSE,
                     highlightrecords = NULL,

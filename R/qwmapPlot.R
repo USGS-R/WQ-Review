@@ -1,14 +1,13 @@
-#' Parameter matrix plot
-#' 
-#' Takes output data object from readNWISodbc and prints a parameter matrix plot
-#' @param qw.data A qw.data object generated from readNWISodbc
-#' @param site.selection A character vector of site IDs to plot
-#' @param plotparm A character vector of parameters to plot
-#' @param map A ggmap object to plot data on, not required
-#' @param begin.date Data range to subset data to
-#' @param end.date Data range to subset data to
+# Parameter matrix plot - IN PROGRESS NOT EXPORTED
+# 
+# Takes output data object from readNWISodbc and prints a parameter matrix plot
+# @param qw.data A qw.data object generated from readNWISodbc
+# @param site.selection A character vector of site IDs to plot
+# @param plotparm A character vector of parameters to plot
+# @param map A ggmap object to plot data on, not required
+# @param begin.date Data range to subset data to
+# @param end.date Data range to subset data to
 
-#' @export
 
 qwmapPlot <- function(qw.data,
                       site.selection,

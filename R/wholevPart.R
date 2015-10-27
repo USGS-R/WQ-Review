@@ -1,10 +1,13 @@
-#' ionBalance
+#' Part vs whole analysis
 #' 
 #' Takes output list from readNWISodbc and checks whole vs part concentrations
 #' @param qw.data A qw.data object generated from readNWISodbc
+#' @examples
+#' data("exampleData",package="WQReview")
+#' wholevPart(qw.data=qw.data)
 #' @import plyr
 #' @export
-#' 
+
 
 
 wholevPart <- function(qw.data)

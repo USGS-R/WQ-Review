@@ -4,9 +4,9 @@
 \alias{qwtsPlot}
 \title{Parameter timeseries plot}
 \usage{
-qwtsPlot(qw.data, site.selection, plotparm, facet = "multisite",
-  new.threshold = 60 * 60 * 24 * 30, show.q = FALSE, show.smooth = FALSE,
-  highlightrecords = " ", wySymbol = FALSE, printPlot = TRUE)
+qwtsPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 * 30,
+  show.q = FALSE, show.smooth = FALSE, highlightrecords = " ",
+  facet = "multisite", wySymbol = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
@@ -33,5 +33,18 @@ qwtsPlot(qw.data, site.selection, plotparm, facet = "multisite",
 }
 \description{
 Takes output data object from readNWISodbc and prints a plot of parameter vs time.
+}
+\examples{
+data("exampleData",package="WQReview")
+qwtsPlot <- function(qw.data = qw.data,
+                       site.selection = "06733000",
+                       plotparm = "00915",
+                       new.threshold = 60*60*24*30,
+                       show.q = FALSE,
+                       show.smooth = FALSE,
+                       highlightrecords = " ",
+                       facet = "multisite",
+                       wySymbol = FALSE,
+                       printPlot = TRUE)
 }
 

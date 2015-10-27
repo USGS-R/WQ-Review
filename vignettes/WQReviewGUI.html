@@ -10,9 +10,9 @@
 
 <meta name="author" content="T. Joe Mills" />
 
-<meta name="date" content="2015-10-26" />
+<meta name="date" content="2015-10-27" />
 
-<title>WQReview GUI - importing data</title>
+<title>WQReview GUI</title>
 
 
 
@@ -52,9 +52,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 
 <div id="header">
-<h1 class="title">WQReview GUI - importing data</h1>
+<h1 class="title">WQReview GUI</h1>
 <h4 class="author"><em>T. Joe Mills</em></h4>
-<h4 class="date"><em>2015-10-26</em></h4>
+<h4 class="date"><em>2015-10-27</em></h4>
 </div>
 
 <div id="TOC">
@@ -79,6 +79,35 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#importing-data">Importing Data</a><ul>
 <li><a href="#data-import-options">Data import options</a></li>
 <li><a href="#a-basic-data-import">A basic data import</a></li>
+</ul></li>
+<li><a href="#plot-descriptions">Plot descriptions</a><ul>
+<li><a href="#symbology">Symbology</a></li>
+<li><a href="#labelling-conventions">Labelling conventions</a></li>
+<li><a href="#selecting-data-to-plot">Selecting data to plot</a></li>
+<li><a href="#global-plot-controls">Global plot controls</a><ul>
+<li><a href="#new-data-threshold">New data threshold</a></li>
+<li><a href="#record-highlights">Record highlights</a></li>
+<li><a href="#plot-clicking-brushing-and-hovering">Plot clicking, brushing, and hovering</a></li>
+</ul></li>
+<li><a href="#plot-types">Plot types</a><ul>
+<li><a href="#timeseries">Timeseries</a></li>
+<li><a href="#seasonal-plot">Seasonal plot</a></li>
+<li><a href="#parameter-box-plot">Parameter box plot</a></li>
+<li><a href="#parameter-parameter-plot">Parameter-parameter plot</a></li>
+<li><a href="#matrix-plot">Matrix plot</a></li>
+<li><a href="#chargebalance-timeseries">Chargebalance timeseries</a></li>
+<li><a href="#ions-vs-conductance">Ions vs conductance</a></li>
+<li><a href="#rep-parm-boxplot">Rep-parm boxplot</a></li>
+<li><a href="#blank-sample-timeseries">Blank sample timeseries</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#tables">Tables</a><ul>
+<li><a href="#auto-flagged-samples">Auto-flagged samples</a><ul>
+<li><a href="#basic-chemical-flags">Basic chemical flags</a></li>
+<li><a href="#pesticide-flags">Pesticide flags</a></li>
+<li><a href="#results-flags">Results flags</a></li>
+</ul></li>
+<li><a href="#data-and-qaqc-tables">Data and QAQC tables</a></li>
 </ul></li>
 </ul>
 </div>
@@ -216,6 +245,321 @@ WQReviewGUI()</code></pre>
 </ol>
 <p>If you encounter issues with the data import, send an email to <a href="mailto:tmills@usgs.gov">tmills@usgs.gov</a> and/or post an issue on the WQReview GitHub page at <a href="https://github.com/USGS-R/WQ-Review/issues">WQ-Review Issues</a></p>
 <p>We can now begin to work with the data.</p>
+</div>
+</div>
+<div id="plot-descriptions" class="section level1">
+<h1>Plot descriptions</h1>
+<p>This section will describe the plot types available in the WQReview GUI and the various ways to manipulate them.</p>
+<div id="symbology" class="section level2">
+<h2>Symbology</h2>
+<p>The symbology in all plots is sensitive to the medium code and remark code. Data colors are mapped to the medium code and point data symbols are mapped to the remark code.</p>
+<p>Currently supported medium codes include:</p>
+<ol style="list-style-type: decimal">
+<li>WS</li>
+<li>WG</li>
+<li>OA</li>
+<li>WSQ</li>
+<li>WGQ</li>
+<li>OAQ</li>
+</ol>
+<p>Currently supported remark codes include:</p>
+<ol style="list-style-type: decimal">
+<li>No remark code (listed as “Sample” in legend)</li>
+<li>&lt;</li>
+<li>‘&gt;’</li>
+<li>E</li>
+</ol>
+</div>
+<div id="labelling-conventions" class="section level2">
+<h2>Labelling conventions</h2>
+<p>All axis pertaining to a particular pcode will be labelled with that pcode’s NWIS parameter name, which includes the units of measurement. The main title of the plot will either by labelled with the NWIS station name if only one station is plotted, or “multi-site plot” if multiple stations are displayed.</p>
+</div>
+<div id="selecting-data-to-plot" class="section level2">
+<h2>Selecting data to plot</h2>
+<p>Generally, plots are controlled by selecting a site and then a data type from an input box or pick list. In most cases the plot will be displayed or refreshed automatically. <strong>PLOTS WILL NOT BE DISPLAYED IF A SITE AND DATA TYPE ARE NOT SELECTED EVEN IF ONLY ONE SITE OR DATA TYPE IS PRESENT</strong>. Additionally, a plot will not be displayed if there are no data to plot, for example if a particular parameter was not measured at a selected site but is selected for plotting. Multiple sites of multiple parameters can be plotted on certain plot types.</p>
+</div>
+<div id="global-plot-controls" class="section level2">
+<h2>Global plot controls</h2>
+<div id="new-data-threshold" class="section level3">
+<h3>New data threshold</h3>
+<p>Point data in all plots can be labeled as “New” data based off of when that data was last modified using the “New data threshold” slider. Any data modified after the date indicated on the slider will be labeled as “New”. This helps identify data that has not been reviewed from historic data when the data are not displayed as a timeseries. Note that the “New data threshold” is set off of when the data were last <strong>modified</strong> for result-level plots (e.g. timeseries, seasonal, etc.) not when they were created. Sample-level plots (e.g. charge balance) are labeled new according to the sample collection date.</p>
+</div>
+<div id="record-highlights" class="section level3">
+<h3>Record highlights</h3>
+<p>Samples or results will be hilighted with a red halo if that sample or result has been flagged for one or more of the data checks listed in the data check table.</p>
+</div>
+<div id="plot-clicking-brushing-and-hovering" class="section level3">
+<h3>Plot clicking, brushing, and hovering</h3>
+<p>Most plots are interactive in that the user can click on a point, or zoom into specific areas of the plot. Boxplots are not interactive.</p>
+<div id="clicking" class="section level4">
+<h4>Clicking</h4>
+<p>Clicking on a datapoint will populate a table with all data pertaining to that point. This table will persist until another point is clicked.</p>
+</div>
+<div id="brushing" class="section level4">
+<h4>Brushing</h4>
+<p>The user may also select and area of the plot by holding down a mouse click and drawing a rectangle around hte area of interest. A new plot will appear below, zoomed into the area of interest. Additionaly, a table will be displayed below with all data pertaining to the points within the zoomed area. Points in the zoomed plot can also be click to get information.</p>
+</div>
+<div id="hovering" class="section level4">
+<h4>Hovering</h4>
+<p>Hovering the mouse over any given data point will display basic information about the data point on the left sidebar of the plot frame.</p>
+</div>
+</div>
+</div>
+<div id="plot-types" class="section level2">
+<h2>Plot types</h2>
+<p>This section will describe the details of each different plot type and how to control them in the WQReview GUI.</p>
+<div id="timeseries" class="section level3">
+<h3>Timeseries</h3>
+<p>This tab generates of plot of a selected parameter through time.</p>
+<div id="uses" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Identifying general trends at a site through time.</li>
+<li>Identifying temporal outliers.</li>
+</ul>
+</div>
+<div id="data-selection-options" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+<li>Select only one parameter</li>
+</ul>
+</div>
+<div id="plot-controls" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+<li>Add LOESS: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth</li>
+<li>Display hydrograph: displays the instantaneous hydrograph if data are available under parameter code “00061”</li>
+</ul>
+</div>
+</div>
+<div id="seasonal-plot" class="section level3">
+<h3>Seasonal plot</h3>
+<p>This pane generates a seasonal timeseries of parameter value by day of year (DOY) to examine seasonality in parameter values.</p>
+<div id="uses-1" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Identifying seasonality in parameter values.</li>
+<li>Identifying seasonal outliers.</li>
+</ul>
+</div>
+<div id="data-selection-options-1" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+<li>Select only one parameter</li>
+</ul>
+</div>
+<div id="plot-controls-1" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+<li>Add LOESS: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth</li>
+</ul>
+</div>
+</div>
+<div id="parameter-box-plot" class="section level3">
+<h3>Parameter box plot</h3>
+<p>This pane generates a box plot of one or more parameters for one or more sites. <strong>Note that this is not an appropriate censored boxplot. Censored results are given the censored value for quantile calculations.</strong></p>
+<div id="uses-2" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Comparing parameter values at a site(s).</li>
+<li>Identifying outliers in a parameter.</li>
+</ul>
+</div>
+<div id="data-selection-options-2" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+<li>Select one or multiple parameters</li>
+</ul>
+</div>
+<div id="plot-controls-2" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Log 10 scale: This plots parameter values on a log10 scale.</li>
+<li>Show sample points: This displays individual sample points.</li>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+</ul>
+</div>
+</div>
+<div id="parameter-parameter-plot" class="section level3">
+<h3>Parameter-parameter plot</h3>
+<p>This pane generates an x-y plot of a selected parameter vs another selected parameter.</p>
+<div id="uses-3" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Identifying relationships between parameters.</li>
+<li>Identifying outliers in related parameters.</li>
+</ul>
+</div>
+<div id="data-selection-options-3" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+<li>Select only one parameter per axis</li>
+</ul>
+</div>
+<div id="plot-controls-3" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+<li>Add linear fit: Add a linear regression line to the x-y data.</li>
+<li>Log 10 scale: This plots parameter values on a log10 scale.</li>
+</ul>
+</div>
+</div>
+<div id="matrix-plot" class="section level3">
+<h3>Matrix plot</h3>
+<p>This pane generates a plot matrix of one or more parameters for one or more sites. Essentially, this is a parameter-parameter plot for multiple parameters. The lower triangular quadrant of panels are parameter-parameter plots, the diagonal contains a histogram of values and the labelled pcodes, and the upper triangular quadrant of panels contains the correlation coefficients.</p>
+<div id="uses-4" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Data exploration.</li>
+<li>Site characterization.</li>
+</ul>
+</div>
+<div id="data-selection-options-4" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+<li>Select one or multiple parameters</li>
+</ul>
+</div>
+<div id="plot-controls-4" class="section level4">
+<h4>Plot controls</h4>
+<p>*None</p>
+</div>
+</div>
+<div id="chargebalance-timeseries" class="section level3">
+<h3>Chargebalance timeseries</h3>
+<p>This pane generates a timeseries plot of charge balance percent difference. The plot is annotated with a horizontal dashed line indicating the range of +- 5% and a solid line indicating the range of +- 10%. Symbol type indicates if enough major elements were analyzed to constitute a roughly complete balance. For example, a sample missing calcium would be given a symbol of “Incomplete” because it is a major constituent in the charge balance, but a sample missing fluoride would still be given a “Complete” symbol because it is only a minor constituent of the charge balance.</p>
+<div id="uses-5" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Obtaining a quick visual snapshot of charge imbalance at a site.</li>
+<li>Identifying charge imbalance issues with current data and comparing to historic chargebalance behavior.</li>
+</ul>
+</div>
+<div id="data-selection-options-5" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+</ul>
+</div>
+<div id="plot-controls-5" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+</ul>
+</div>
+</div>
+<div id="ions-vs-conductance" class="section level3">
+<h3>Ions vs conductance</h3>
+<p>This pane generates a x-y plot of sum of cations or anions vs conductance. The ratio of the sum of cations or anions vs specific conductance generally falls within a range of 0.92 - 1.24 for natural waters. The shaded region on the plot indicates this typical range. These are the values used in QWData for alert limits, see QWData documentation and references therein for further explanation.</p>
+<p>At many sites, there will be a roughly linear relationship between the sum of cations or anions vs. conductance. If a point falls above or below the general trend line, this is an indication that the particular group of ions is either to low or too high.</p>
+<div id="uses-6" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Identifying samples that fall outside of the typical range of rations of ions/specific conductance.</li>
+<li>Identifying which group of ions, cations or anions, are responsible for charge imbalance issues.</li>
+</ul>
+</div>
+<div id="data-selection-options-6" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+</ul>
+</div>
+<div id="plot-controls-6" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+</ul>
+</div>
+</div>
+<div id="rep-parm-boxplot" class="section level3">
+<h3>Rep-parm boxplot</h3>
+<p>This pane generates a plot of replicate relative percent difference for all replicates analyzed at a given site. <strong>READ THE FOLLOWING ON REPLICATE PAIRING</strong></p>
+<p>Replicate pairs are identified as follows:</p>
+<ol style="list-style-type: decimal">
+<li>An environmental sample is a sample with medium code of WS or WG and a sample type of 7.</li>
+<li>A replicate sample is a sample with a medium code of WSQ or WGQ and a sample type of 7.</li>
+<li>An environmental-replicate pair is defined as a replicate sample collected at the same site as an environmental sample on the same day.</li>
+</ol>
+<p><strong>NOTE THAT CENSORED RESULTS ARE GIVEN THE CENSORED VALUE FOR CALCULATIONS. DO NOT INTERPRET REPLICATE ANALYSES BASED ENTIRELY OFF OF THE RELATIVE PERCENT DIFFERENCE PLOT. SEE REPLICATE TABLE AS WELL.</strong></p>
+<p>Boxplots can be grouped by time frame to compare current replicate agreement to historic using the “New replicate threshold” data input at the top of the page. This functions exactly the same as the “New data threshold” described in the Global Controls section of this vignette.</p>
+<div id="uses-7" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Assessing general replicate agreement at a site for multiple parameters.</li>
+<li>Comparing current replicate analyses to historic agreement.</li>
+</ul>
+</div>
+<div id="data-selection-options-7" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+<li>Select one or multiple parameters</li>
+</ul>
+</div>
+<div id="plot-controls-7" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>New replicate threshold: Sets the date break for historic vs new replicate analyses.</li>
+<li>Show sample points: This displays individual sample points.</li>
+</ul>
+</div>
+</div>
+<div id="blank-sample-timeseries" class="section level3">
+<h3>Blank sample timeseries</h3>
+<p>This pane generates a plot of parameter values for blank samples over time.</p>
+<div id="uses-8" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Identifying systematic detections in blank samples at a given time, for example during a change in field or laboratory method or reporting level.</li>
+</ul>
+</div>
+<div id="data-selection-options-8" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+<li>Select only one parameter</li>
+</ul>
+</div>
+<div id="plot-controls-8" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="tables" class="section level1">
+<h1>Tables</h1>
+<p>This section will describe the various tables generated by the WQReview GUI. The WQ-Review GUI produces 2 general classes of tables: Auto-flag results, and data/QAQC tables. All tables can be downloaded as tab-delimited text files by clicking on the download button above each table. All tables are sortable by clicking on the header, and the number of entries per table page is adjusted using hte “show entries” dropdown. Additionally, all tables can be filtered using the search bar. Typing a value into the searchbar will search the table columns for that value and subset the table to only those rows containing the search value. For example, typing “WSQ” into the search bar will filter the table to only replicate samples.</p>
+<div id="auto-flagged-samples" class="section level2">
+<h2>Auto-flagged samples</h2>
+<p>During data import, samples or results are auto-flagged following criteria developed by NAWQA for all water-quality data, and are defined <a href="AutomatedDataflags.htm">here</a>. For any flags comparing a current sample to historic data, the current sample is compared to all REVIEWED AND ACCEPTED data rather than prior samples in time. This is because data that have not been reviewed and accepted could themselves be problematic.</p>
+<div id="basic-chemical-flags" class="section level3">
+<h3>Basic chemical flags</h3>
+<p>This table contains basic chemical checks similar to those provided by the QWDATA unix software. The first 6 columns contain sample-level information and the remaining columns contain flags wit hthe column name coorresponding to the particular data check. If a sample fails a given data check, a flag is applied to the respective column for that sample.</p>
+</div>
+<div id="pesticide-flags" class="section level3">
+<h3>Pesticide flags</h3>
+<p>This table contains flags for evaluating number of pesticide hits in schedule 2437. If there are too many or too few hits in the current sample compared to historic data, the sample gets flagged.</p>
+</div>
+<div id="results-flags" class="section level3">
+<h3>Results flags</h3>
+<p>This table contains flags for results that are either suspisously high or low compared to historic data.</p>
+</div>
+</div>
+<div id="data-and-qaqc-tables" class="section level2">
+<h2>Data and QAQC tables</h2>
+<p>These tables are controlled similarly to the auto-flagged tables except that they can be generated according to site and date selection criteria. These tables include standard data tables, a wide (sample-result) and a long (by result) format table. 4 QAQC tables are also presented, including a chargebalance table, a table of replicate agreement, a summary table of blank detections, and a table comparing filtered ot unfiltered values. The last column of each of these QAQC tables contains a column with flags if a particular sample violates some standard QAQC measure. For example, a sample with a charge imbalance &gt; 10% would get a flag in the final column of hte chargebalance table. <strong>The blank summary table is calculated on the fly given the input criteria</strong> For example, leaving the default date range (last 3 years) in the blank table input and selecting a site would summarize the blank detections for that 3 year period for that site.</p>
 </div>
 </div>
 

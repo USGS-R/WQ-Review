@@ -13,6 +13,15 @@
 #' @import grid
 #' @import gridExtra 
 #' @import plyr
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' qwscSumPlot(qw.data = qw.data,
+#'               site.selection = "06733000",
+#'               facet = "multisite",
+#'               new.threshold = 60*60*24*30,
+#'               highlightrecords = NULL,
+#'               wySymbol = FALSE,
+#'               printPlot = TRUE)
 #' @export
 
 qwscSumPlot <- function(qw.data,

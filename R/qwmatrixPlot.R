@@ -4,6 +4,11 @@
 #' @param qw.data A qw.data object generated from readNWISodbc
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character vector of parameters to plot
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' qwmatrixPlot(qw.data=qw.data, 
+#'              site.selection = "06733000", 
+#'              plotparm = c("00915","00945","00095")) 
 #' @export
 
 qwmatrixPlot <- function(qw.data,

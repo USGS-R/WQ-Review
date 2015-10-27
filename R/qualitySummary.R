@@ -1,9 +1,9 @@
-#' qualitySummary
-#' 
-#' Takes output data object from readNWISodbc and generates a summary of data quality.
-#' @param qw.data A qw.data object generated from readNWISodbc
-#' @export
-#' 
+# qualitySummary - IN PROGRESS, NOT EXPORTED
+# 
+# Takes output data object from readNWISodbc and generates a summary of data quality.
+# @param qw.data A qw.data object generated from readNWISodbc
+#
+#
 
 qualitySummary <- function(qw.data,reports = NULL) 
 {

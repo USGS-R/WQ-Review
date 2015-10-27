@@ -1,4 +1,4 @@
-#' Companion function to readNWISodbc to convert dates to proper time zone
+# Companion function to readNWISodbc to convert dates to proper time zone
 convertTime <- function(datetime,timezone,daylight)
 {
 

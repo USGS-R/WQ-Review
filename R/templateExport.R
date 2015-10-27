@@ -1,7 +1,9 @@
-#' templateExport exports templates for use with the nwisupload function
+#' templateExport exports templates for use with the dataUpload function
 #' 
 #' exports templates for use with the nwisupload function. Files exported to working directory as tab-delimited files.
-#' @param  There are no arguments to this function. Just run to export templates
+#' @param  There are no arguments to this function. Just run to export templates to your working directory.
+#' @examples 
+#' templateExport()
 #' @export
 #' 
 

@@ -68,7 +68,7 @@ This section will describe the details of each different plot type and how to co
 
 ###Timeseries
 
-This pane generates of plot of a selected parameter through time. 
+This tab generates of plot of a selected parameter through time. 
 
 ####Uses
 * Identifying general trends at a site through time.
@@ -80,13 +80,12 @@ This pane generates of plot of a selected parameter through time.
 * Select only one parameter
 
 ####Plot controls
+* Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
+* Add LOESS: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth
+* Display hydrograph: displays the instantaneous hydrograph if data are available under parameter code "00061"
 
-* Data range slide: "Zoom" plot to a specific date range
-* Add loess smooth: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth
-* Show instantaneous hydrograph: displays the instantaneous hydrograph if data are available under parameter code "00061"
-
-###Seasonal box plot
-This pane generate a boxplot of parameter value by month to examine seasonality in parameter values. **Note that this is not an appropriate censored boxplot. Censored results are given the censored value for quantile calculations.**
+###Seasonal plot
+This pane generates a seasonal timeseries of parameter value by day of year (DOY) to examine seasonality in parameter values.
 
 ####Uses
 * Identifying seasonality in parameter values.
@@ -97,18 +96,17 @@ This pane generate a boxplot of parameter value by month to examine seasonality 
 * Select one or multiple sites
 * Select only one parameter
 
-
 ####Plot controls
 
-* Show sample points: This displays individual sample points.
-* Log 10 scale: This plots parameter values on a log10 scale.
+* Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
+* Add LOESS: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth
 
 ###Parameter box plot
 This pane generates a box plot of one or more parameters for one or more sites. **Note that this is not an appropriate censored boxplot. Censored results are given the censored value for quantile calculations.**
 
 ####Uses
 * Comparing parameter values at a site(s).
-* Identifying outliers in a parameter relative to other parameters at the site. 
+* Identifying outliers in a parameter. 
 
 ####Data selection options
 
@@ -117,9 +115,9 @@ This pane generates a box plot of one or more parameters for one or more sites. 
 
 
 ####Plot controls
-
-* Show sample points: This displays individual sample points.
 * Log 10 scale: This plots parameter values on a log10 scale.
+* Show sample points: This displays individual sample points.
+* Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
 
 ###Parameter-parameter plot
 This pane generates an x-y plot of a selected parameter vs another selected parameter. 
@@ -134,8 +132,9 @@ This pane generates an x-y plot of a selected parameter vs another selected para
 * Select only one parameter per axis
 
 ####Plot controls
-
+* Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
 * Add linear fit: Add a linear regression line to the x-y data.
+* Log 10 scale: This plots parameter values on a log10 scale.
 
 ###Matrix plot
 This pane generates a plot matrix of one or more parameters for one or more sites. Essentially, this is a parameter-parameter plot for multiple parameters. The lower triangular quadrant of panels are parameter-parameter plots, the diagonal contains a histogram of values and the labelled pcodes, and the upper triangular quadrant of panels contains the correlation coefficients.
@@ -151,9 +150,8 @@ This pane generates a plot matrix of one or more parameters for one or more site
 
 ####Plot controls
 
-* Make plot: Generates the plot after data selection.
+*None
 
-##Chemical logic
 ###Chargebalance timeseries
 This pane generates a timeseries plot of charge balance percent difference. The plot is annotated with a horizontal dashed line indicating the range of +- 5% and a solid line indicating the range of +- 10%. Symbol type indicates if enough major elements were analyzed to constitute a roughly complete balance. For example, a sample missing calcium would be given a symbol of "Incomplete" because it is a major constituent in the charge balance, but a sample missing fluoride would still be given a "Complete" symbol because it is only a minor constituent of the charge balance.  
 
@@ -166,9 +164,7 @@ This pane generates a timeseries plot of charge balance percent difference. The 
 * Select one or multiple sites
 
 ####Plot controls
-
-* Data range slide: "Zoom" plot to a specific date range
-* Add loess smooth: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth
+* Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
 
 ###Ions vs conductance
 This pane generates a x-y plot of sum of cations or anions vs conductance. The ratio of the sum of cations or anions vs specific conductance generally falls within a range of 0.92 - 1.24 for natural waters. The shaded region on the plot indicates this typical range. These are the values used in QWData for alert limits, see QWData documentation and references therein for further explanation. 
@@ -182,29 +178,12 @@ At many sites, there will be a roughly linear relationship between the sum of ca
 ####Data selection options
 
 * Select one or multiple sites
-* Select anions, cations, or both
 
 ####Plot controls
 
-* None.
+* Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
 
-###Charge balance vs. parameter
-This pane generates a plot of charge imbalance vs a parameter value. Sometimes charge imbalance has a relationship with a parameter, for example with specific conductance. In dilute waters with low specific conductance charge imbalance can increase due to increased analytical uncertainty. Charge imbalance may also increase with the concentration of certain redox sensitive metals. In this case, a speciated charge balance may be necessary. 
 
-####Uses
-* Identifying relationships between charge imbalance and parameters.
-* Identifying potential additional analytes to include in custom charge balance calculations.
-
-####Data selection options
-
-* Select one or multiple sites
-* Select only one parameter
-
-####Plot controls
-
-* None.
-
-##Quality control samples
 ###Rep-parm boxplot
 This pane generates a plot of replicate relative percent difference for all replicates analyzed at a given site. **READ THE FOLLOWING ON REPLICATE PAIRING**
 
@@ -216,7 +195,7 @@ Replicate pairs are identified as follows:
 
 **NOTE THAT CENSORED RESULTS ARE GIVEN THE CENSORED VALUE FOR CALCULATIONS. DO NOT INTERPRET REPLICATE ANALYSES BASED ENTIRELY OFF OF THE RELATIVE PERCENT DIFFERENCE PLOT. SEE REPLICATE TABLE AS WELL.**
 
-Boxplots can be grouped by time frame to compare current replicate agreement to historic using the "New replicate threshold" slider at the bottom of the page. This functions exactly the same as the "New data threshold" described in the Global Controls section of this vignette.
+Boxplots can be grouped by time frame to compare current replicate agreement to historic using the "New replicate threshold" data input at the top of the page. This functions exactly the same as the "New data threshold" described in the Global Controls section of this vignette.
 
 ####Uses
 * Assessing general replicate agreement at a site for multiple parameters.
@@ -230,6 +209,7 @@ Boxplots can be grouped by time frame to compare current replicate agreement to 
 ####Plot controls
 
 * New replicate threshold: Sets the date break for historic vs new replicate analyses.
+* Show sample points: This displays individual sample points.
 
 ###Blank sample timeseries
 This pane generates a plot of parameter values for blank samples over time. 
@@ -244,5 +224,4 @@ This pane generates a plot of parameter values for blank samples over time.
 
 ####Plot controls
 
-* Data range slide: "Zoom" plot to a specific date range
-* Add loess smooth: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth
+* Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).

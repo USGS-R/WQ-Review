@@ -1,6 +1,13 @@
 #' Function to flag samples if values are out of range of historic data
 #' @param qw.data A qw.data list generated from readNWISodbc
 #' @param returnAll logical, return dataframe containing all results or only return flagged samples. Defualt is FALSE
+#' @details Compares each sample with DQI code of "I","S", or "P" to ranges of all prior approved data ("R","O","A"),
+#' and flags samples that are suspisciously high or low. 
+#' Definitions of checks can be found at http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' historicCheck(qw.data=qw.data,
+#'              returnAll = FALSE)
 #' @import plyr
 #' @export
 #' @return A dataframe containing all samples with applicable flags

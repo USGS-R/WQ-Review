@@ -2,14 +2,14 @@
 % Please edit documentation in R/flagReport.R
 \name{flagReport}
 \alias{flagReport}
-\title{flagReport}
+\title{Auto-generates a QAQC report website in html}
 \usage{
-flagReport(stationFile, DSN, env.db = "01", qa.db = "02",
+flagReport(networkList, DSN, env.db = "01", qa.db = "02",
   begin.date = as.character(Sys.Date() - 365 * 10),
   end.date = as.character(Sys.Date()), outputDir)
 }
 \arguments{
-\item{stationFile}{Filename of csv file containing network names in 1st column and station IDs in second column.}
+\item{networkList}{A dataframe containing network names in 1st column and station IDs in second column. Both columns must be of class character}
 
 \item{DSN}{A character string containing the DSN for your local server.}
 
@@ -26,5 +26,26 @@ flagReport(stationFile, DSN, env.db = "01", qa.db = "02",
 \description{
 Pulls data from internal NWIS server and runs automated data checks, generates tables, and produces
 an indexed notebook of flagged samples, tables, and plots for all sites entered.
+}
+\details{
+flagReport uses the readNWISodbc function to pull data for sites in networkList. Sites are grouped by the cooresponding network name
+in the first column of networkList. Reports for each site are generated and written to subfolders by network name. A top-level index
+is then generated to navigate between networks. Reports consist of automated data checks defined in  http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html and plots.
+Panels containing a timeseries, seasonal, parameter vs discharge and parameter vs SC plot are generated and indexed.
+This function can be used to auto-generate network QAQC reports overnight using R in batch mode with a script and Windows task scheduler.
+}
+\examples{
+*This will not run if not connected to NWISCO server
+networkList <- data.frame(network = c("BigThompson","BigThompson","Gunnison River"),
+                          site = c("06733000","06741520","09109850"),
+                          stringsAsFactors=FALSE)
+flagReport(networkList = networkList,
+          DSN = "NWISCO",
+          env.db="01",
+          qa.db="02",
+          begin.date = as.character(Sys.Date()-365*10),
+          end.date = as.character(Sys.Date()),
+          outputDir = "C:/networkReportExample"
+          )
 }
 

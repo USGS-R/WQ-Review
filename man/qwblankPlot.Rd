@@ -2,11 +2,11 @@
 % Please edit documentation in R/qwblankPlot.R
 \name{qwblankPlot}
 \alias{qwblankPlot}
-\title{Chargebalance timeseries plot}
+\title{Blank sample timeseries}
 \usage{
 qwblankPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
-  30, show.q = FALSE, show.smooth = FALSE, highlightrecords = " ",
-  facet = "multisite", wySymbol = FALSE, printPlot = TRUE)
+  30, show.smooth = FALSE, highlightrecords = " ", facet = "multisite",
+  wySymbol = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}
@@ -16,8 +16,6 @@ qwblankPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
 \item{plotparm}{A character vector of the parameter to plot.}
 
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
-
-\item{show.smooth}{Add a loess smooth to plot}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
 
@@ -30,6 +28,19 @@ qwblankPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
 \item{end.date}{Character string of ending date range to plot (yyyy-mm-dd)}
 }
 \description{
-Takes output data object from readNWISodbc and prints a plot of charge balance vs time. Requires charge balance = TRUE in NWISPullR
+Takes output data object from readNWISodbc and prints a timeseries plot of blanks
+}
+\examples{
+data("exampleData",package="WQReview")
+qwblankPlot <- function(qw.data = qw.data,
+                       site.selection = "06733000",
+                       plotparm = "00915",
+                       new.threshold = 60*60*24*30,
+                       show.q = FALSE,
+                       show.smooth = FALSE,
+                       highlightrecords = " ",
+                       facet = "multisite",
+                       wySymbol = FALSE,
+                       printPlot = TRUE)
 }
 

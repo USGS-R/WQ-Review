@@ -21,4 +21,12 @@ blankSummary(qw.data, STAIDS, begin.date = NA, end.date = NA,
 \description{
 Generates a summary table of blank analyses for all analytes in a qw.data list from readNWISodbc.
 }
+\examples{
+data("exampleData",package="WQReview")
+blankSummary(qw.data = qw.data,
+             STAIDS = unique(qw.data$PlotTable$SITE_NO),
+             begin.date = "2009-01-01",
+             end.date = "2013-01-01",
+             multiple.levels = FALSE)
+}
 
