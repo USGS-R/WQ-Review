@@ -30,4 +30,17 @@ qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30, site.selection,
 \description{
 Takes output data object from readNWISodbc and prints a boxplot of a parameter by month.
 }
+\examples{
+data("exampleData",package="WQReview")
+qwseasonalPlot(qw.data = qw.data,
+               site.selection = "06733000",
+               plotparm = "00095",
+               facet = "multisite",
+               new.threshold = 60*60*24*30,
+               show.q = FALSE,
+               show.smooth = FALSE,
+               highlightrecords = " ",
+               wySymbol = FALSE,
+               printPlot = TRUE)
+}
 

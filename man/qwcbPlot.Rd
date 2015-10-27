@@ -30,4 +30,14 @@ qwcbPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60 *
 \description{
 Takes output list from readNWISodbc and prints a plot of charge balance vs time. Requires charge balance = TRUE in NWISPullR
 }
+\examples{
+data("exampleData",package="WQReview")
+qwcbPlot <- function(qw.data = qw.data,
+                       site.selection = "06733000",
+                       facet = "multisite",
+                       new.threshold = 60*60*24*30,
+                       highlightrecords = NULL,
+                       wySymbol = FALSE,
+                       printPlot = TRUE)
+}
 

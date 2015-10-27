@@ -77,17 +77,17 @@ On 32bit Windows 7 and 8, run "C:/Windows/System32/odbcad32.exe".
 
 In the User DSN tab, if you do not see a connection with the same name as your NWIS server of interest, you must add a new connection. Click "Add" on the right.
 
-![Screenshot](vignettes/ODBC_UserDSN.PNG)
+![Screenshot](vignettes/screenshots/ODBC/ODBC_UserDSN.PNG)
 
 ##Step 2
 Scroll down until you see a driver named "Oracle in OraClient11g_home1" and click "Finish". **IF YOU DO NOT SEE THE ABOVE DRIVER LISTED, IT IS NOT INSTALLED AND YOU WILL NEED ASSISTANCE FROM AN IT SPECIALIST TO INSTALL IT, THE LINK TO GUIDANCE IS PROVIDED BELOW**
 
-![Screenshot](vignettes/ODBC_CreateUserDSN.PNG)
+![Screenshot](vignettes/screenshots/ODBC/ODBC_CreateUserDSN.PNG)
 
 ##Step 3
 A new dialogue will appear. Click the dropdown box next to "TNS Service Name" and select the NWIS server you would like to connect to. After selecting the server, type in the server name into the "Data Source Name" text box at the top. **DO NOT ENTER A USER ID, LEAVE THIS FIELD BLANK**. You are finished, click OK to close the dialogue and then click OK in the main ODBC Data Source Administrator application to close the application.
 
-![Screenshot](vignettes/ODBC_SelectDSN.PNG)
+![Screenshot](vignettes/screenshots/ODBC/ODBC_SelectDSN.PNG)
 
 ##If you do not have the driver installed
 Install the Oracle client by following the instructions here:

@@ -1,5 +1,6 @@
 #' Function to open the WQReview GUI
-#' 
+#' @examples 
+#' WQReviewGUI()
 #' @export
 #' @import ggplot2
 #' @import shinydashboard

@@ -16,4 +16,10 @@ qwmatrixPlot(qw.data, site.selection, plotparm)
 \description{
 Takes output data object from readNWISodbc and prints a parameter matrix plot
 }
+\examples{
+data("exampleData",package="WQReview")
+qwmatrixPlot(qw.data=qw.data,
+             site.selection = "06733000",
+             plotparm = c("00915","00945","00095"))
+}
 

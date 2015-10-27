@@ -115,13 +115,13 @@ tryCatch({
 overdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*30*3
                                                     & qw.data$PlotTable$DQI_CD %in% c("I","S")])
 
-wayOverdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365
+wayOverdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT < Sys.time() - 60*60*24*30*3
                                                    & qw.data$PlotTable$DQI_CD %in% c("I","S")])
 },warning = function(w) {
         overdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*30*3
                                                            & qw.data$PlotTable$DQI_CD %in% c("I","S")])
         
-        wayOverdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365
+        wayOverdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT < Sys.time() - 60*60*24*30*3
                                                               & qw.data$PlotTable$DQI_CD %in% c("I","S")])
 }, error = function(e) {
         
@@ -134,7 +134,7 @@ output$messages <- renderMenu({
 
         messageItem(
                 from="DQI Police",
-                message = paste(overdueCount,"results in DQI of I or S > 3 months."),
+                message = paste(overdueCount,"results in DQI of I or S < 90 days."),
                 icon = icon("exclamation-triangle")
                 ),
         
@@ -142,7 +142,7 @@ output$messages <- renderMenu({
         
                 messageItem(
                         from="DQI Police",
-                        message = paste(wayOverdueCount,"results in DQI of I or S > 1 year!."),
+                        message = paste(wayOverdueCount,"results in DQI of I or S > 90 days!"),
                         icon = icon("exclamation-triangle")
                         )
         

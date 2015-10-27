@@ -1,4 +1,4 @@
-#' whatData
+#' Look for missing data for a set of samples
 #' 
 #' Searches for missing data and returns a dataframe of missing data by record number.
 #' @param qw.data A qw.data object generater by readNWISodbc
@@ -6,6 +6,17 @@
 #' @param begin.date Subset data to begin date
 #' @param end.date Subset data to end date.
 #' @param groups Logical. Search for searchParms by groups instead of one long vector. 
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' searchParms <- data.frame(cations = c("00915","00930","00925","00935","01123"),
+#'                           anions = c("00945","00940","99220",NA,NA),
+#'                           nutrients = c("00608","00631",NA,NA,NA),
+#'                           stringsAsFactors = FALSE)
+#' whatData(qw.data = qw.data,
+#'         searchParms = searchParms,
+#'         begin.date = NULL,
+#'         end.date = NULL,
+#'         groups=TRUE)
 #' @import plyr
 #' @export
 

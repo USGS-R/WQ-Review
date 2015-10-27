@@ -10,6 +10,18 @@
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' qwparmBoxPlot(qw.data = qw.data,
+#'               site.selection = "06733000",
+#'               plotparm = c("00915","00095","00400"),
+#'               facet = "multisite",
+#'               new.threshold = 60*60*24*30,
+#'               show.points = FALSE,
+#'               log.scale = TRUE,
+#'               highlightrecords = NULL,
+#'               wySymbol = FALSE,
+#'               printPlot = TRUE)
 #' @export
 
 qwparmBoxPlot <- function(qw.data,

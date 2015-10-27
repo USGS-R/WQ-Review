@@ -3,7 +3,7 @@ title: "`r paste(network,' Network Summary',sep='')`"
 author: "WQ-Review"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
-```{r setup, include=FALSE}
+```{r setup, include=FALSE,message=FALSE,warning=FALSE}
 ###Load libraries and setup options
 
 require(WQReview)
@@ -12,7 +12,7 @@ require(knitr)
 opts_chunk$set(dev = 'png',out.width='1024px',out.height='750px',dpi=60)
 ```
 
-```{r,echo=FALSE}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 ###Load up the data
 load(paste(outputDir,"/data.rda",sep=""))
 ###Subset to site network
@@ -42,7 +42,7 @@ reports$resultFlagTable <- subset(reports$resultFlagTable, SITE_NO %in% sites)
 
 #Flagged tables
 ##Basic chemical flags
-```{r,echo=FALSE}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 require(DT)
 ############################
 ###chemFlagTable
@@ -61,7 +61,7 @@ datatable(
 ```
 
 ##Pesticide flags
-```{r,echo=FALSE}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 require(DT)
 ############################
 ###pestFlagTable
@@ -80,7 +80,7 @@ datatable(
 
 ##Result flags
 
-```{r,echo=FALSE}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 require(DT)
 
 ############################

@@ -2,7 +2,7 @@
 % Please edit documentation in R/wholevPart.R
 \name{wholevPart}
 \alias{wholevPart}
-\title{ionBalance}
+\title{Part vs whole analysis}
 \usage{
 wholevPart(qw.data)
 }
@@ -11,5 +11,9 @@ wholevPart(qw.data)
 }
 \description{
 Takes output list from readNWISodbc and checks whole vs part concentrations
+}
+\examples{
+data("exampleData",package="WQReview")
+wholevPart(qw.data=qw.data)
 }
 

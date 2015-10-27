@@ -31,4 +31,17 @@ qwparmBoxPlot(qw.data, site.selection, plotparm, facet = "multisite",
 \description{
 Takes output list from readNWISodbc and prints a boxplot of parameters
 }
+\examples{
+data("exampleData",package="WQReview")
+qwparmBoxPlot(qw.data = qw.data,
+              site.selection = "06733000",
+              plotparm = c("00915","00095","00400"),
+              facet = "multisite",
+              new.threshold = 60*60*24*30,
+              show.points = FALSE,
+              log.scale = TRUE,
+              highlightrecords = NULL,
+              wySymbol = FALSE,
+              printPlot = TRUE)
+}
 

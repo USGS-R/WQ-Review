@@ -9,4 +9,7 @@ WQReviewGUI()
 \description{
 Function to open the WQReview GUI
 }
+\examples{
+WQReviewGUI()
+}
 

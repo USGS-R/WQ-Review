@@ -2,7 +2,8 @@
 % Please edit documentation in R/chemCheck.R
 \name{chemCheck}
 \alias{chemCheck}
-\title{Function to flag samples if basic chemistry is unreasonable}
+\title{chemCheck
+Function to flag samples if basic chemistry is unreasonable}
 \usage{
 chemCheck(qw.data, returnAll = FALSE)
 }
@@ -15,6 +16,15 @@ chemCheck(qw.data, returnAll = FALSE)
 A dataframe containing all samples with applicable flags
 }
 \description{
+chemCheck
 Function to flag samples if basic chemistry is unreasonable
+}
+\details{
+Performs chemical checks for expected ranges of O2, pH, Sc, and chargebalance. Definitions of checks can be found at http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
+}
+\examples{
+data("exampleData",package="WQReview")
+chemCheck(qw.data=qw.data,
+             returnAll = FALSE)
 }
 

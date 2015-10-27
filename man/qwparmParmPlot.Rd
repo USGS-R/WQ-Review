@@ -31,4 +31,19 @@ qwparmParmPlot(qw.data, site.selection, xparm, yparm, facet = "multisite",
 \description{
 Takes output data object from readNWISodbc and returns a plot of parameter vs parameter.
 }
+\examples{
+data("exampleData",package="WQReview")
+qwparmParmPlot(qw.data = qw.data,
+              site.selection = "06733000",
+              xparm = "00915",
+              yparm = "00061",
+              facet = "multisite",
+              new.threshold = 60*60*24*30,
+              show.lm=FALSE,
+              log.scaleY = FALSE,
+              log.scaleX = FALSE,
+              highlightrecords = NULL,
+              wySymbol = FALSE,
+              printPlot = TRUE)
+}
 

@@ -12,17 +12,28 @@
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
-
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' qwtsPlot <- function(qw.data = qw.data,
+#'                        site.selection = "06733000",
+#'                        plotparm = "00915",
+#'                        new.threshold = 60*60*24*30,
+#'                        show.q = FALSE,
+#'                        show.smooth = FALSE,
+#'                        highlightrecords = " ",
+#'                        facet = "multisite",
+#'                        wySymbol = FALSE,
+#'                        printPlot = TRUE)
 #' @export
 
 qwtsPlot <- function(qw.data,
                      site.selection,
                      plotparm,
-                     facet = "multisite",
                      new.threshold = 60*60*24*30,
                      show.q = FALSE,
                      show.smooth = FALSE,
                      highlightrecords = " ",
+                     facet = "multisite",
                      wySymbol = FALSE,
                      printPlot = TRUE){
   ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data

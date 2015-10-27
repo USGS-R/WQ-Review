@@ -1,23 +1,33 @@
-#' Chargebalance timeseries plot
-#' 
-#' Takes output data object from readNWISodbc and prints a plot of charge balance vs time. Requires charge balance = TRUE in NWISPullR
+#'Blank sample timeseries
+#'
+#' Takes output data object from readNWISodbc and prints a timeseries plot of blanks
 #' @param qw.data A qw.data list generated from readNWISodbc
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param plotparm A character vector of the parameter to plot.
 #' @param site.selection A character vector of site IDs to plot
 #' @param begin.date Character string of begining date range to plot (yyyy-mm-dd)
 #' @param end.date Character string of ending date range to plot (yyyy-mm-dd)
-#' @param show.smooth Add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' qwblankPlot <- function(qw.data = qw.data,
+#'                        site.selection = "06733000",
+#'                        plotparm = "00915",
+#'                        new.threshold = 60*60*24*30,
+#'                        show.q = FALSE,
+#'                        show.smooth = FALSE,
+#'                        highlightrecords = " ",
+#'                        facet = "multisite",
+#'                        wySymbol = FALSE,
+#'                        printPlot = TRUE)
 #' @export
 
 qwblankPlot <- function(qw.data,
                        site.selection,
                        plotparm,
                        new.threshold = 60*60*24*30,
-                       show.q = FALSE,
                        show.smooth = FALSE,
                        highlightrecords = " ",
                        facet = "multisite",

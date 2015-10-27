@@ -6,6 +6,13 @@
 #' @param begin.date Character string (yyyy-mm-dd) of beggining date to subset blank analyses. Leave blank for all analyses.
 #' @param end.date Character string (yyyy-mm-dd) of ending date to subset blank analyses. Leave blank for all analyses.
 #' @param multiple.levels Logical to analyze multiple reporting levels separetly. Default is TRUE.
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' blankSummary(qw.data = qw.data,
+#'              STAIDS = unique(qw.data$PlotTable$SITE_NO),
+#'              begin.date = "2009-01-01",
+#'              end.date = "2013-01-01",
+#'              multiple.levels = FALSE)
 #' @export
 #' 
 

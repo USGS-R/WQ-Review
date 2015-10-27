@@ -2,14 +2,18 @@
 % Please edit documentation in R/ionBalance.R
 \name{ionBalance}
 \alias{ionBalance}
-\title{ionBalance}
+\title{Calculate ion balance}
 \usage{
 ionBalance(qw.data, wide = FALSE)
 }
 \arguments{
-\item{qw.data}{A qw.data object generated from NWISPullR}
+\item{qw.data}{A qw.data object generated from readNWISodbc}
 }
 \description{
-Takes output data object from NWISPullR and calculates a QWData standard ion charge balance.
+Takes output data object from readNWISodbc and calculates a standard ion charge balance.
+}
+\examples{
+data("exampleData",package="WQReview")
+ionBalance(qw.data=qw.data)
 }
 

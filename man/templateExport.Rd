@@ -2,14 +2,17 @@
 % Please edit documentation in R/templateExport.R
 \name{templateExport}
 \alias{templateExport}
-\title{templateExport exports templates for use with the nwisupload function}
+\title{templateExport exports templates for use with the dataUpload function}
 \usage{
 templateExport()
 }
 \arguments{
-\item{There}{are no arguments to this function. Just run to export templates}
+\item{There}{are no arguments to this function. Just run to export templates to your working directory.}
 }
 \description{
 exports templates for use with the nwisupload function. Files exported to working directory as tab-delimited files.
+}
+\examples{
+templateExport()
 }
 

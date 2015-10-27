@@ -1,16 +1,16 @@
-#' Function to pull data from NWIS
-#' 
-#' Pulls data from NWIS WEB servers using functions from the dataRetrieval package.
-#' @param STAIDS A character vector of stations IDs to pull data
-#' @param dl.parms A character vector of pcodes to pull data
-#' @param parm.group.check A logical of weather or not to use NWIS parameter groups. If TRUE, must use NWIS parameter group names in dl.parms
-#' @param begin.date Character string containing beginning date of data pull (yyyy-mm-dd)
-#' @param end.date Character string containing ending date of data pull (yyyy-mm-dd)
-#' @import dataRetrieval 
-#' @import reshape2 
-#' @import plyr
-#' @import lubridate
-#' @export
+# Function to pull data from NWIS
+# IN PROGRESS, NOT EXPORTED
+# Pulls data from NWIS WEB servers using functions from the dataRetrieval package.
+# @param STAIDS A character vector of stations IDs to pull data
+# @param dl.parms A character vector of pcodes to pull data
+# @param parm.group.check A logical of weather or not to use NWIS parameter groups. If TRUE, must use NWIS parameter group names in dl.parms
+# @param begin.date Character string containing beginning date of data pull (yyyy-mm-dd)
+# @param end.date Character string containing ending date of data pull (yyyy-mm-dd)
+# @import dataRetrieval 
+# @import reshape2 
+# @import plyr
+# @import lubridate
+
 publicData <- function(STAIDS,dl.parms = "All",parm.group.check = TRUE,begin.date ="",end.date="")
 {
 

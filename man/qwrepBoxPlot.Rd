@@ -4,10 +4,9 @@
 \alias{qwrepBoxPlot}
 \title{Boxplot of replicate relative percent difference}
 \usage{
-qwrepBoxPlot(reports, site.selection = "401723105400000",
-  plotparm = "00915", new.threshold = 60 * 60 * 24 * 30,
-  show.points = FALSE, highlightrecords = NULL, new.reps = Sys.time() - 60
-  * 60 * 24 * 30, printPlot = TRUE)
+qwrepBoxPlot(reports, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
+  30, show.points = FALSE, highlightrecords = NULL, new.reps = Sys.time()
+  - 60 * 60 * 24 * 30, printPlot = TRUE)
 }
 \arguments{
 \item{reports}{A reports object generated from readNWISodbc}
@@ -28,5 +27,16 @@ qwrepBoxPlot(reports, site.selection = "401723105400000",
 }
 \description{
 Takes output data object from readNWISodbc and prints a boxplot of replicate RPD
+}
+\examples{
+data("exampleData",package="WQReview")
+qwrepBoxPlot <- function(reports = reports,
+                       site.selection = "06733000",
+                       plotparm = "00915",
+                       new.threshold = 60*60*24*30,
+                       show.points = FALSE,
+                       highlightrecords = NULL,
+                       new.reps = Sys.time() - 60*60*24*30,
+                       printPlot = TRUE)
 }
 

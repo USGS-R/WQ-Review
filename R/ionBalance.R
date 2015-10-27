@@ -1,7 +1,10 @@
-#' ionBalance
+#' Calculate ion balance
 #' 
-#' Takes output data object from NWISPullR and calculates a QWData standard ion charge balance.
-#' @param qw.data A qw.data object generated from NWISPullR
+#' Takes output data object from readNWISodbc and calculates a standard ion charge balance.
+#' @param qw.data A qw.data object generated from readNWISodbc
+#' @examples
+#' data("exampleData",package="WQReview")
+#' ionBalance(qw.data=qw.data)
 #' @import plyr
 #' @export
 #' 

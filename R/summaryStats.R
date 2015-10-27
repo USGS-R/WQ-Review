@@ -4,12 +4,19 @@
 #' @param qw.data A qw.data object generated from readNWISodbc
 #' @param STAIDS A character vector of sites to summarize. Defaults to all sites in qw.data if unspecified.
 #' @param parameterCd A character vector of parameter codes to summarize. Defaults to all pcodes if unspecified.
-#' @param begin.date A character string of optional begin date range to summarize in "YYYY-MM-DD" format. Defaults to all if unspecified.
-#' @param end.date A character string of optional end date range to summarize in "YYYY-MM-DD" format. Defaults to all if unspecified.
+#' @param begin.date A character string of optional begin date range to summarize over in "YYYY-MM-DD" format. Defaults to all if unspecified.
+#' @param end.date A character string of optional end date range to summarize over in "YYYY-MM-DD" format. Defaults to all if unspecified.
+#' @examples 
+#' data("exampleData",package="WQReview")
+#' summaryStats(qw.data = qw.data,
+#'              STAIDS=NULL, 
+#'              parameterCd = NULL, 
+#'              begin.date = "2010-01-01", 
+#'              end.date = "2011-12-31")
 #' @import plyr
 #' @export
 #' 
-summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date, end.date) {
+summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date = NA, end.date = NA) {
         
         ###Subset to STIADS
         if(is.null(STAIDS))

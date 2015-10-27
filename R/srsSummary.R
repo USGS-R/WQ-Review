@@ -1,7 +1,7 @@
-#' srsSummary
+#' Summarize SRS sample agreement
 #' 
-#' Takes output data object from NWISPullR and calculates a QWData standard ion charge balance.
-#' @param srsValues A dataframe containing the SRS values. The first column contained the SRS sample ID,the second column contains the SRS analyte parameter code, the third columns contains the SRS analyte name, and the fourth column contains the SRS MPV
+#' Summarizes standard reference sample (SRS) results and automatically flags bad SRS results.
+#' @param srsValues A dataframe containing the SRS values. The first column contains the SRS sample ID,the second column contains the SRS analyte parameter code, the third column contains the SRS analyte name, and the fourth column contains the SRS MPV
 #' @param srsResults A dataframe containing the results of the SRS analyses from the lab. The first column containssample descriptions (e.g. date and time), the second column contains the SRS sample ID, and the remaining columns containthe SRS results. SRS Result columns must be named with the cooresponding paramter code.
 #' @param reportingLevels A dataframe containing the reporting levels for each analyte. The first column contains the parameter code and the second column contains hte associated reporting level
 #' @import plyr
