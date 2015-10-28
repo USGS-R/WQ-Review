@@ -22,7 +22,7 @@ Additionaly, please feel free to post any suggestions or enhancement requests.
 **Your participation will make this a better tool for everyone!**
 
 #Frequently asked questions
-[FAQ](vignettes/faq.rmd)
+[FAQ](vignettes/faq.Rmd)
 
 #Installation for stand alone application (non-R users)
 
