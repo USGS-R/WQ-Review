@@ -21,8 +21,8 @@ Additionaly, please feel free to post any suggestions or enhancement requests.
 
 **Your participation will make this a better tool for everyone!**
 
-#GUI User Guide
-[User guide](vignettes/WQReviewGUI.Rmd)
+#Frequently asked questions
+[FAQ](vignettes/faq.rmd)
 
 #Installation for stand alone application (non-R users)
 
@@ -38,7 +38,7 @@ ftp://ftpint.usgs.gov/private/cr/co/lakewood/tmills/wqReviewSetup.exe
 
 4. Make sure Google Chrome is set as the system default browser (settings -> Default browser)
 
-5. Launch WQ-Review from the start-menu or desktop icon.
+5. Launch WQ-Review from the start-menu or desktop icon. A DOS window will appear first and then the application should launch in Google Chrome. **DO NOT CLOSE THIS DOS PROMPT, IT IS PART OF THE APPLICATION**
 
 
 #Installation for R users
