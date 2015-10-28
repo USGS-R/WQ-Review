@@ -1,7 +1,9 @@
 ---
 title: "Automated Data flags"
 date: "October 21, 2015"
-output: html_document
+output:
+  html_vignette:
+    toc: true
 ---
 #SC_badLabVSField
 The difference between Lab SC (90095) and field SC (00095) is greater than 10%
