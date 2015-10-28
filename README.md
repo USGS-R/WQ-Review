@@ -22,7 +22,7 @@ Additionaly, please feel free to post any suggestions or enhancement requests.
 **Your participation will make this a better tool for everyone!**
 
 #GUI User Guide
-[User guide](vignettes/WQReviewGUI.html)
+[User guide](https://github.com/USGS-R/WQ-Review/blob/master/vignettes/WQReviewGUI.html)
 
 #Installation for stand alone application (non-R users)
 
