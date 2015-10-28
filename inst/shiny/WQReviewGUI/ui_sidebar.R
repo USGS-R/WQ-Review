@@ -64,7 +64,7 @@ dashboardSidebar(sidebarMenu(
         #menuSubItem(tabName="dataUpload","Data upload tools"),
         #menuSubItem(tabName="srsSummary","SRS Summary tool"),
         menuItem(tabName="saveLoadTab","Save/load data"),
-        menuItem(tabName="helpTab","FAQ and User Guide",
+        menuItem(tabName="helpTab","Help",
                 menuSubItem(href="FAQ.htm",text="FAQ"),
                 menuSubItem(href="WQReviewGUI.html",text="User Guide")
         )
