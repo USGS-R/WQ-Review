@@ -6,7 +6,7 @@
 ###Render the table
 output$chemFlagTable <- DT::renderDataTable(
         reports$chemFlagTable,
-        #extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         options = list(
                 scrollX=TRUE,
@@ -29,7 +29,7 @@ output$chemFlagTableOut <- downloadHandler(
 ###Render the table
 output$pestFlagTable <- DT::renderDataTable(
         reports$pestFlagTable,
-        #extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         options = list(
                 scrollX=TRUE,
@@ -52,7 +52,7 @@ output$pestFlagTableOut <- downloadHandler(
 
 output$resultFlagTable <- DT::renderDataTable(
         reports$resultFlagTable,
-        extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         options = list(
                 scrollX=TRUE,
@@ -82,7 +82,7 @@ try({
                                as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
                                as.Date(SAMPLE_START_DT) <= input$endDate_wideDataTable
                 ),
-                extensions = list(FixedColumns = list(leftColumns = 5)),
+                extensions = list(FixedColumns = list(leftColumns = 1)),
                 server=TRUE,
                 options = list(
                         scrollX=TRUE,
@@ -111,7 +111,7 @@ output$longDataTable <- DT::renderDataTable(
                        as.Date(SAMPLE_START_DT) >= input$startDate_longDataTable &
                        as.Date(SAMPLE_START_DT) <= input$endDate_longDataTable
         ),
-        extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         options = list(
                 scrollX=TRUE,
@@ -137,7 +137,7 @@ output$balanceTable <- DT::renderDataTable(
                        as.Date(SAMPLE_START_DT) >= input$startDate_balanceTable &
                        as.Date(SAMPLE_START_DT) <= input$endDate_balanceTable
         ),
-        extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         options = list(
                 scrollX=TRUE,
@@ -162,7 +162,7 @@ output$repTable <- DT::renderDataTable(
                        as.Date(Env_SAMPLE_START_DT) <= input$endDate_repTable
         ),
         server=TRUE,
-        extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = list(FixedColumns = list(leftColumns = 1)),
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
@@ -187,7 +187,7 @@ output$wholevpartTable <- DT::renderDataTable(
                        as.Date(SAMPLE_START_DT) >= input$startDate_wholevpartTable &
                        as.Date(SAMPLE_START_DT) <= input$endDate_wholevpartTable
         ),
-        extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         #container = wholevpartTableContainer,
         options = list(
@@ -218,7 +218,7 @@ try({
                              end.date = input$endDate_blankTable,
                              multiple = FALSE)),
                 server=TRUE,
-                extensions = list(FixedColumns = list(leftColumns = 5)),
+                extensions = list(FixedColumns = list(leftColumns = 1)),
                 options = list(
                         scrollX=TRUE,
                         autoWidth=TRUE)
