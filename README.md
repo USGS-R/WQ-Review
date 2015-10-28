@@ -9,6 +9,7 @@ This package facilitates data review and exploration of discrete water-quality d
 
 #Requirements
 * This application requires a functioning 32 bit ODBC connection to an NWIS server. Guidance for setting up ODBC access is provided at the bottom of this page.
+* Windows 7 or 8
 * **Google Chrome is required and must be set as the system default browser.**
 
 #Bug reporting and enhancements
@@ -19,6 +20,9 @@ Please report any issues with the application or R package on the issues page at
 Additionaly, please feel free to post any suggestions or enhancement requests.
 
 **Your participation will make this a better tool for everyone!**
+
+#GUI User Guide
+[User guide](vignettes/WQReviewGUI.html)
 
 #Installation for stand alone application (non-R users)
 
@@ -31,6 +35,10 @@ ftp://ftpint.usgs.gov/private/cr/co/lakewood/tmills/wqReviewSetup.exe
 **DO NOT INSTALL WQ-REVIEW INTO YOUR PROGRAM FILES DIRECTORY OR THE APPLICATION WILL NOT RUN. INSTALL TO C DRIVE OR YOUR DOCUMENTS FOLDER.**
 
 3. Update WQ-Review to the latest version either by clicking the checkbox at the end of the setup, or by going to Startmenu->Programs->WQ-Review->Update. A command prompt window will appear and stay open until the update is complete. When the update is complete it will close with no other prompts.
+
+4. Make sure Google Chrome is set as the system default browser (settings -> Default browser)
+
+5. Launch WQ-Review from the start-menu or desktop icon.
 
 
 #Installation for R users
