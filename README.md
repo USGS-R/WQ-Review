@@ -1,6 +1,10 @@
 #Overview
 Toolbox for discrete water-quality data review and exploration.Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
 
+[![Travis-CI Build Status](https://travis-ci.org/tmills-usgs/WQ-Review.svg?branch=master)](https://travis-ci.org/tmills-usgs/WQ-Review)
+
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tmills-usgs/WQ-Review?branch=master&svg=true)](https://ci.appveyor.com/project/tmills-usgs/WQ-Review)
+
 [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues).
 
 This package facilitates data review and exploration of discrete water-quality data through rapid and easy-to-use plotting functions and tabular data summaries. Data is imported with user-specified options for single or multiple sites and parameter codes using an ODBC connection to the user's local NWIS server. A graphical user interface allows the user to easily explore their data through a variety of graphical and tabular outputs. 
