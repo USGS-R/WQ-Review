@@ -22,7 +22,6 @@ Imports:
         stringi,
     DT,
     Rcpp,
-    smwrBase
 Suggests:
     knitr
 VignetteBuilder: knitr

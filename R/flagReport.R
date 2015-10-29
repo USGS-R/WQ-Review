@@ -27,6 +27,7 @@
 #'           end.date = as.character(Sys.Date()),
 #'           outputDir = "C:/networkReportExample"
 #'           )
+#' @import gridExtra
 #'           
 #' @export
 

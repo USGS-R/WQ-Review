@@ -9,7 +9,6 @@
 #' pestCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
 #' @import plyr
-#' @import smwrBase
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 
