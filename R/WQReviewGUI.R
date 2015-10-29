@@ -1,6 +1,8 @@
 #' Function to open the WQReview GUI
-#' @examples 
+#' @examples
+#' \dontrun{ 
 #' WQReviewGUI()
+#' }
 #' @export
 #' @import ggplot2
 #' @import shinydashboard
