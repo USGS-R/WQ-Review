@@ -22,7 +22,8 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                        PARM_SEQ_GRP_CD != "INF" &
                                        MEDIUM_CD %in% c("WS ","WG ", "OA "))
         
-        
+        if(nrow(inReviewData > 0))
+        {
         #Get stats by parm for each site
         siteStats <- ddply(approvedData,c("SITE_NO","PARM_CD"),summarize,
                         min = min(RESULT_VA,na.rm=TRUE),
@@ -98,5 +99,8 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                             !is.na(flaggedSamples[17])
         ),]) 
         } else {}
+        
         return(flaggedSamples)
+        
+        } else{ print("No in-review data for comparison to approved data")}
 }
