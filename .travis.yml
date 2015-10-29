@@ -1,5 +1,6 @@
 # Sample .travis.yml for R projects
-
+before_install:
+  - sudo port install unixodbc
 language: r
 warnings_are_errors: true
 sudo: required
