@@ -2,9 +2,9 @@
 #' 
 #' Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance. Requires charge balance = TRUE in NWISPullR
 #' @param qw.data A qw.data object generated from readNWISodbc
+#' @param facet Logical. Should sites be plotted together on one plot or on separate plots using faceting.
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
-#' @param plotparm A character string of ions to plot. Options are "Cations", "Anions", "Both"
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE

@@ -4,8 +4,7 @@
 #' @param qw.data A qw.data list generated from readNWISodbc
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
-#' @param begin.date Character string of begining date range to plot (yyyy-mm-dd)
-#' @param end.date Character string of ending date range to plot (yyyy-mm-dd)
+#' @param facet Logical. Should sites be plotted together on one plot or on separate plots using faceting.
 #' @param show.smooth Add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.

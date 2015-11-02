@@ -21,9 +21,9 @@ qwrepBoxPlot(reports, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
 
-\item{printPlot}{Logical. Prints plot to graphics device if TRUE}
+\item{new.reps}{The threshold value in seconds from current system time for "new" replicate samples.}
 
-\item{log.scale}{Plot y axis on a log scale}
+\item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 }
 \description{
 Takes output data object from readNWISodbc and prints a boxplot of replicate RPD

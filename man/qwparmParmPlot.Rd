@@ -18,9 +18,15 @@ qwparmParmPlot(qw.data, site.selection, xparm, yparm, facet = "multisite",
 
 \item{yparm}{Character string of parameter to plot on y axis}
 
+\item{facet}{Logical. Should sites be plotted together on one plot or on separate plots using faceting.}
+
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
 \item{show.lm}{Add a linear fit to plot}
+
+\item{log.scaleY}{Logical. Plot y parameter on a log scale.}
+
+\item{log.scaleX}{Logical. Plot x parameter on a log scale.}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
 

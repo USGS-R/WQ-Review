@@ -17,15 +17,15 @@ qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30, site.selection,
 
 \item{plotparm}{A character vector of parameters to plot}
 
+\item{facet}{Logical. Should sites be plotted together on one plot or on separate plots using faceting.}
+
+\item{show.smooth}{Logical to add a loess smooth to plot}
+
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
 
 \item{wySymbol}{Make current water-year highlighted.}
 
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
-
-\item{show.points}{A logical to show points on plot}
-
-\item{log.scale}{A logical to plot y axis on log scale}
 }
 \description{
 Takes output data object from readNWISodbc and prints a boxplot of a parameter by month.
@@ -37,7 +37,6 @@ qwseasonalPlot(qw.data = qw.data,
                plotparm = "00095",
                facet = "multisite",
                new.threshold = 60*60*24*30,
-               show.q = FALSE,
                show.smooth = FALSE,
                highlightrecords = " ",
                wySymbol = FALSE,

@@ -5,11 +5,10 @@
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character vector of parameters to plot
-#' @param begin.date Character string of begining date range to plot (yyyy-mm-dd)
-#' @param end.date Character string of ending date range to plot (yyyy-mm-dd)
 #' @param show.q Logical to plot instantaneous hydrograph
 #' @param show.smooth Logical to add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param facet Logical. Should sites be plotted together on one plot or on separate plots using faceting.
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 

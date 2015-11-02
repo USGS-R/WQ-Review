@@ -8,6 +8,8 @@ ionBalance(qw.data, wide = FALSE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
+
+\item{wide}{Logical, return the ionbalance table in wide format.}
 }
 \description{
 Takes output data object from readNWISodbc and calculates a standard ion charge balance.

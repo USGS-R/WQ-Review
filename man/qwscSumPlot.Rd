@@ -13,6 +13,8 @@ qwscSumPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60
 
 \item{site.selection}{A character vector of site IDs to plot}
 
+\item{facet}{Logical. Should sites be plotted together on one plot or on separate plots using faceting.}
+
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
@@ -20,8 +22,6 @@ qwscSumPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60
 \item{wySymbol}{Make current water-year highlighted.}
 
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
-
-\item{plotparm}{A character string of ions to plot. Options are "Cations", "Anions", "Both"}
 }
 \description{
 Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance. Requires charge balance = TRUE in NWISPullR

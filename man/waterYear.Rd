@@ -2,11 +2,22 @@
 % Please edit documentation in R/waterYear.R
 \name{waterYear}
 \alias{waterYear}
-\title{Stolen from smwrBase to remove dependency on that package}
+\title{Stolen from smwrBase to remove dependency on that package
+Takes a date and returns the water year}
 \usage{
 waterYear(x, numeric = FALSE)
 }
+\arguments{
+\item{x}{a vector of dates in yyyy-mm-dd format}
+}
+\value{
+A dataframe containing all samples with applicable flags
+}
 \description{
 Stolen from smwrBase to remove dependency on that package
+Takes a date and returns the water year
+}
+\examples{
+waterYear("2015-01-01")
 }
 

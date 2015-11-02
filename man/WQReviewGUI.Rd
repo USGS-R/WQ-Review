@@ -10,6 +10,8 @@ WQReviewGUI()
 Function to open the WQReview GUI
 }
 \examples{
+\dontrun{
 WQReviewGUI()
+}
 }
 

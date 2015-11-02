@@ -5,8 +5,8 @@
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character vector of parameters to plot
-#' @param show.points A logical to show points on plot
-#' @param log.scale A logical to plot y axis on log scale
+#' @param facet Logical. Should sites be plotted together on one plot or on separate plots using faceting.
+#' @param show.smooth Logical to add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
@@ -17,7 +17,6 @@
 #'                plotparm = "00095",
 #'                facet = "multisite",
 #'                new.threshold = 60*60*24*30,
-#'                show.q = FALSE,
 #'                show.smooth = FALSE,
 #'                highlightrecords = " ",
 #'                wySymbol = FALSE,

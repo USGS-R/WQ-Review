@@ -16,6 +16,8 @@ qwparmBoxPlot(qw.data, site.selection, plotparm, facet = "multisite",
 
 \item{plotparm}{A character vector of pcodes to plot}
 
+\item{facet}{Logical. Should sites be plotted together on one plot or on separate plots using faceting.}
+
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
 \item{show.points}{Show samples points}

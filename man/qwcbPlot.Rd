@@ -13,6 +13,8 @@ qwcbPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60 *
 
 \item{site.selection}{A character vector of site IDs to plot}
 
+\item{facet}{Logical. Should sites be plotted together on one plot or on separate plots using faceting.}
+
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
 \item{show.smooth}{Add a loess smooth to plot}
@@ -22,10 +24,6 @@ qwcbPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60 *
 \item{wySymbol}{Make current water-year highlighted.}
 
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
-
-\item{begin.date}{Character string of begining date range to plot (yyyy-mm-dd)}
-
-\item{end.date}{Character string of ending date range to plot (yyyy-mm-dd)}
 }
 \description{
 Takes output list from readNWISodbc and prints a plot of charge balance vs time. Requires charge balance = TRUE in NWISPullR
