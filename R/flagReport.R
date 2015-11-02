@@ -78,6 +78,10 @@ flagReport <- function(networkList,
                                                  end.date=end.date)
         )
         
+        ###Remove parameters that have not been modified for 3 years
+        modParms <- unique(qw.data$PlotTable$PARM_CD[which(qw.data$PlotTable$RESULT_MD > Sys.time() - 60*60*24*365*3)])
+        qw.data$PlotTable <- subset(qw.data$PlotTable, PARM_CD %in% modParms)
+        
         ###Run report generation on qw.data 
         reports <- NULL
         
