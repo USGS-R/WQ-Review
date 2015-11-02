@@ -4,18 +4,8 @@
 #' WQReviewGUI()
 #' }
 #' @export
-#' @import ggplot2
 #' @import shinydashboard
 #' @import shiny
-#' @import stringr
-#' @import curl
-#' @import lubridate
-#' @import DT
-#' @import RODBC
-#' @import plyr
-#' @import reshape2
-#' @import Rcpp
-#' @import stringi
 WQReviewGUI <- function() {
   appDir <- system.file("shiny", "WQReviewGUI",package = "WQReview")
   if (appDir == "") {

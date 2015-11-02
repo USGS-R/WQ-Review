@@ -25,9 +25,12 @@
 #'                              begin.date = "2005-01-01",
 #'                              end.date = "2015-10-27")
 #'                              }
-#' @import RODBC
-#' @import reshape2
-#' @import plyr
+#' @importFrom RODBC sqlQuery
+#' @importFrom RODBC odbcCloseAll
+#' @importFrom RODBC odbcConnect
+#' @importFrom reshape2 dcast
+#' @importFrom reshape2 melt
+#' @importFrom plyr join
 #' @export
 
 readNWISodbc <- function(DSN,

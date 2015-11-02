@@ -8,7 +8,8 @@
 #' data("exampleData",package="WQReview")
 #' historicCheckOut <- historicCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
-#' @import plyr
+#' @importFrom plyr join
+#' @importFrom plyr ddply
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 

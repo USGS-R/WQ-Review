@@ -27,6 +27,9 @@
 #'               highlightrecords = NULL,
 #'               wySymbol = FALSE,
 #'               printPlot = TRUE)
+#' @import ggplot2
+#' @importFrom stringr str_wrap
+#' @importFrom plyr join
 #' @export
 
 

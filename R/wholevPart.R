@@ -5,7 +5,8 @@
 #' @examples
 #' data("exampleData",package="WQReview")
 #' wholevPartOut <- wholevPart(qw.data=qw.data)
-#' @import plyr
+#' @importFrom plyr join
+#' @importFrom plyr rename
 #' @export
 
 

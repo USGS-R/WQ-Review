@@ -5,7 +5,8 @@
 #' @examples 
 #' data("exampleData",package="WQReview")
 #' repTablerOut <- repTabler(qw.data=qw.data)
-#' @import plyr
+#' @importFrom plyr join
+#' @importFrom plyr rename
 #' @export
 
 repTabler <- function(qw.data)

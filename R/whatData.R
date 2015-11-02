@@ -17,7 +17,8 @@
 #'         begin.date = NULL,
 #'         end.date = NULL,
 #'         groups=TRUE)
-#' @import plyr
+#' @importFrom plyr ddply
+#' @importFrom plyr join
 #' @export
 
 

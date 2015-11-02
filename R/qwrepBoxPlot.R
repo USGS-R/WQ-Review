@@ -19,6 +19,8 @@
 #'                        highlightrecords = NULL,
 #'                        new.reps = Sys.time() - 60*60*24*30,
 #'                        printPlot = TRUE)
+#' @import ggplot2
+#' @importFrom stringr str_wrap
 #' @export
 
 qwrepBoxPlot <- function(reports,

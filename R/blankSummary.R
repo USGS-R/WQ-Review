@@ -13,6 +13,8 @@
 #'              begin.date = "2009-01-01",
 #'              end.date = "2013-01-01",
 #'              multiple.levels = FALSE)
+#' @importFrom plyr join
+#' @importFrom plyr ddply
 #' @export
 #' 
 

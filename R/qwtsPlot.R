@@ -23,6 +23,8 @@
 #'                        facet = "multisite",
 #'                        wySymbol = FALSE,
 #'                        printPlot = TRUE)
+#' @import ggplot2
+#' @importFrom stringr str_wrap
 #' @export
 
 qwtsPlot <- function(qw.data,

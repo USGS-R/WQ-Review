@@ -21,6 +21,8 @@
 #'                highlightrecords = " ",
 #'                wySymbol = FALSE,
 #'                printPlot = TRUE)
+#' @import ggplot2
+#' @importFrom stringr str_wrap
 #' @export
 
 qwseasonalPlot <- function(qw.data,

@@ -4,7 +4,6 @@
 #' @param numeric numeric a logical value that indicates whether the returned values should be numeric TRUE or an ordered factor FALSE. The default value is FALSE.
 #' @examples 
 #' waterYear("2015-01-01")
-#' @import plyr
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 waterYear <- function (x, numeric = FALSE) 

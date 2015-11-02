@@ -19,9 +19,9 @@
 #'                        highlightrecords = NULL,
 #'                        wySymbol = FALSE,
 #'                        printPlot = TRUE)
-#' @import stringr 
+#' @importFrom stringr str_wrap
 #' @import ggplot2
-#' @import plyr
+#' @importFrom plyr join
 #' @export
 
 qwcbPlot <- function(qw.data,

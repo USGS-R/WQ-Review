@@ -30,8 +30,9 @@
 #'           outputDir = "C:/networkReportExample"
 #'           )
 #'           }
-#' @import gridExtra
-#' @import rmarkdown
+#' @importFrom gridExtra grid.arrange
+#' @importFrom rmarkdown render
+#' @import ggplot2
 #'           
 #' @export
 

@@ -29,6 +29,12 @@
 #' @param timedatum Manual qwsample entry
 #' @param datumreliability Manual qwsample entry
 #' @param colagencycode Manual qwsample entry
+#' @importFrom reshape2 melt
+#' @importFrom reshape2 dcast
+#' @importFrom plyr join
+#' @importFrom RODBC sqlQuery
+#' @importFrom RODBC odbcCloseAll
+#' @importFrom RODBC odbcConnect 
 #' @export
 #' 
 dataUpload <- function(qwsampletype,

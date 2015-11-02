@@ -6,7 +6,9 @@
 #' @examples
 #' data("exampleData",package="WQReview")
 #' ionBalanceOut <- ionBalance(qw.data=qw.data)
-#' @import plyr
+#' @importFrom plyr join
+#' @importFrom plyr ddply
+#' @importFrom reshape2 dcast
 #' @export
 #' 
 

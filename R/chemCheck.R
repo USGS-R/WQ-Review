@@ -7,7 +7,7 @@
 #' data("exampleData",package="WQReview")
 #' chemCheckOut <- chemCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
-#' @import plyr
+#' @importFrom plyr join
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 

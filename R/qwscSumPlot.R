@@ -8,11 +8,6 @@
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
-#' @import stringr 
-#' @import ggplot2
-#' @import grid
-#' @import gridExtra 
-#' @import plyr
 #' @examples 
 #' data("exampleData",package="WQReview")
 #' qwscSumPlot(qw.data = qw.data,
@@ -22,6 +17,9 @@
 #'               highlightrecords = NULL,
 #'               wySymbol = FALSE,
 #'               printPlot = TRUE)
+#' @import ggplot2
+#' @importFrom stringr str_wrap
+#' @importFrom reshape2 melt             
 #' @export
 
 qwscSumPlot <- function(qw.data,
