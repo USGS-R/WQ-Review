@@ -1,6 +1,7 @@
 #'Stolen from smwrBase to remove dependency on that package
 #' Takes a date and returns the water year
-#' @param x a vector of dates in yyyy-mm-dd format
+#' @param x an object of class "Date" or "POSIXt." Missing values are permitted and result in corresponding missing values in the output.
+#' @param numeric numeric a logical value that indicates whether the returned values should be numeric TRUE or an ordered factor FALSE. The default value is FALSE.
 #' @examples 
 #' waterYear("2015-01-01")
 #' @import plyr

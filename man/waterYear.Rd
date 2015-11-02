@@ -8,7 +8,9 @@ Takes a date and returns the water year}
 waterYear(x, numeric = FALSE)
 }
 \arguments{
-\item{x}{a vector of dates in yyyy-mm-dd format}
+\item{x}{an object of class "Date" or "POSIXt." Missing values are permitted and result in corresponding missing values in the output.}
+
+\item{numeric}{numeric a logical value that indicates whether the returned values should be numeric TRUE or an ordered factor FALSE. The default value is FALSE.}
 }
 \value{
 A dataframe containing all samples with applicable flags

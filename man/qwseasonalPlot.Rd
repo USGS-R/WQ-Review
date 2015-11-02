@@ -5,7 +5,7 @@
 \title{Seasonal plot}
 \usage{
 qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30, site.selection,
-  plotparm, facet = "multisite", show.q = FALSE, show.smooth = FALSE,
+  plotparm, facet = "multisite", show.smooth = FALSE,
   highlightrecords = " ", wySymbol = FALSE, printPlot = TRUE)
 }
 \arguments{
