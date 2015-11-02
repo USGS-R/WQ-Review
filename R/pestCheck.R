@@ -10,6 +10,7 @@
 #'              returnAll = FALSE)
 #' @importFrom plyr join
 #' @importFrom plyr ddply
+#' @importFrom plyr summarize
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 

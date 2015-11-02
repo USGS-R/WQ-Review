@@ -15,6 +15,7 @@
 #'              end.date = "2011-12-31")
 #' @importFrom plyr join
 #' @importFrom plyr ddply
+#' @importFrom plyr summarize
 #' @export
 #' 
 summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date = NA, end.date = NA) {

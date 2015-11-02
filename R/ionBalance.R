@@ -8,6 +8,7 @@
 #' ionBalanceOut <- ionBalance(qw.data=qw.data)
 #' @importFrom plyr join
 #' @importFrom plyr ddply
+#' @importFrom plyr summarize
 #' @importFrom reshape2 dcast
 #' @export
 #' 

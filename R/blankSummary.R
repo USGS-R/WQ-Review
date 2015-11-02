@@ -15,6 +15,7 @@
 #'              multiple.levels = FALSE)
 #' @importFrom plyr join
 #' @importFrom plyr ddply
+#' @importFrom plyr summarize
 #' @export
 #' 
 
