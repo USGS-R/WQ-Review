@@ -29,6 +29,7 @@
 #' @importFrom reshape2 dcast
 #' @importFrom reshape2 melt
 #' @importFrom plyr join
+#' @importFrom lubridate yday
 #' @export
 
 readNWISodbc <- function(DSN,

@@ -20,15 +20,11 @@ Imports:
     plyr,
     RODBC,
     stringr,
-    curl,
     ggplot2,
-    scales,
     shiny,
     shinydashboard,
     lubridate,
-    stringi,
     DT,
-    Rcpp,
     gridExtra,
     rmarkdown
 Suggests:
