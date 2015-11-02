@@ -7,7 +7,7 @@
 #' @param site.selection A character vector of site IDs to plot
 #' @param show.smooth Logical to add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
-#' @param facet Logical. Should sites be plotted together on one plot or on separate plots using faceting.
+#' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 

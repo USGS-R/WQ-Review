@@ -18,7 +18,7 @@ qwparmParmPlot(qw.data, site.selection, xparm, yparm, facet = "multisite",
 
 \item{yparm}{Character string of parameter to plot on y axis}
 
-\item{facet}{Logical. Should sites be plotted together on one plot or on separate plots using faceting.}
+\item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
 
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 

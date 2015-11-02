@@ -23,7 +23,7 @@ qwtsPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 * 30,
 
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
 
-\item{facet}{Logical. Should sites be plotted together on one plot or on separate plots using faceting.}
+\item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
 
 \item{wySymbol}{Make current water-year highlighted.}
 

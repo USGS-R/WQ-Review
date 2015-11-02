@@ -17,7 +17,7 @@ qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30, site.selection,
 
 \item{plotparm}{A character vector of parameters to plot}
 
-\item{facet}{Logical. Should sites be plotted together on one plot or on separate plots using faceting.}
+\item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
 
 \item{show.smooth}{Logical to add a loess smooth to plot}
 

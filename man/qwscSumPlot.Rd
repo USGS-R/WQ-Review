@@ -13,7 +13,7 @@ qwscSumPlot(qw.data, site.selection, facet = "multisite", new.threshold = 60
 
 \item{site.selection}{A character vector of site IDs to plot}
 
-\item{facet}{Logical. Should sites be plotted together on one plot or on separate plots using faceting.}
+\item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
 
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 

@@ -2,7 +2,7 @@
 #' 
 #' Takes output list from readNWISodbc and prints a boxplot of parameters
 #' @param qw.data A qw.data object generated from readNWISodbc
-#' @param facet Logical. Should sites be plotted together on one plot or on separate plots using faceting.
+#' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character vector of pcodes to plot
