@@ -31,6 +31,7 @@
 #'           )
 #'           }
 #' @import gridExtra
+#' @import rmarkdown
 #'           
 #' @export
 

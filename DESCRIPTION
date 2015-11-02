@@ -22,7 +22,8 @@ Imports:
         stringi,
     DT,
     Rcpp,
-    gridExtra
+    gridExtra,
+    rmarkdown
 Suggests:
     knitr
 VignetteBuilder: knitr

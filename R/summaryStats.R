@@ -35,7 +35,7 @@ summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date = 
                 data <- subset(qw.data$PlotTable, SAMPLE_START_DT >= as.POSIXct(begin.date) & SAMPLE_START_DT <= as.POSIXct(end.date))
         }else {} 
 
-        if(nrow(data == 0))
+        if(nrow(data) == 0)
         {
                 stop("No data to summarize. Check parameter codes and data pull criteria.")
         } else{}
