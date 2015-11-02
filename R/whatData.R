@@ -52,13 +52,13 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   	###For some reason plyr fails when you don't put the ""plyr" library in front of the function
   	if(ncol(searchParms)==1)
   	{
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(searchParms[which(!(searchParms[,1] %in% PARM_CD)),1],collapse = ","))
   		names(missingData) <- c("RECORD_NO",names(searchParms))
   	} 
   	else if(ncol(searchParms) == 2)
   	{
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,1]) %in% PARM_CD)),1]),collapse = ","),
   												 group2 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,2]) %in% PARM_CD)),2]),collapse = ","))
   		
@@ -66,7 +66,7 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   		names(missingData) <- c("RECORD_NO",names(searchParms))
   	} else if(ncol(searchParms) == 3)
   	{
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,1]) %in% PARM_CD)),1]),collapse = ","),
   												 group2 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,2]) %in% PARM_CD)),2]),collapse = ","),
   												 group3 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,3]) %in% PARM_CD)),3]),collapse = ","))
@@ -75,7 +75,7 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   	} else if(ncol(searchParms) == 4)
   	{
   		
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,1]) %in% PARM_CD)),1]),collapse = ","),
   												 group2 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,2]) %in% PARM_CD)),2]),collapse = ","),
   												 group3 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,3]) %in% PARM_CD)),3]),collapse = ","),
@@ -85,7 +85,7 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   		names(missingData) <- c("RECORD_NO",names(searchParms))
   	} else if(ncol(searchParms) == 5)
   	{
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,1]) %in% PARM_CD)),1]),collapse = ","),
   												 group2 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,2]) %in% PARM_CD)),2]),collapse = ","),
   												 group3 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,3]) %in% PARM_CD)),3]),collapse = ","),
@@ -95,7 +95,7 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   		names(missingData) <- c("RECORD_NO",names(searchParms))
   	} else if(ncol(searchParms) == 6)
   	{
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,1]) %in% PARM_CD)),1]),collapse = ","),
   												 group2 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,2]) %in% PARM_CD)),2]),collapse = ","),
   												 group3 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,3]) %in% PARM_CD)),3]),collapse = ","),
@@ -105,7 +105,7 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   		names(missingData) <- c("RECORD_NO",names(searchParms))
   	} else if(ncol(searchParms) == 7)
   	{
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,1]) %in% PARM_CD)),1]),collapse = ","),
   												 group2 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,2]) %in% PARM_CD)),2]),collapse = ","),
   												 group3 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,3]) %in% PARM_CD)),3]),collapse = ","),
@@ -117,7 +117,7 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   		names(missingData) <- c("RECORD_NO",names(searchParms))
   	} else if(ncol(searchParms) == 8)
   	{
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,1]) %in% PARM_CD)),1]),collapse = ","),
   												 group2 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,2]) %in% PARM_CD)),2]),collapse = ","),
   												 group3 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,3]) %in% PARM_CD)),3]),collapse = ","),
@@ -130,7 +130,7 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   		names(missingData) <- c("RECORD_NO",names(searchParms))
   	} else if(ncol(searchParms) == 9)
   	{
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,1]) %in% PARM_CD)),1]),collapse = ","),
   												 group2 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,2]) %in% PARM_CD)),2]),collapse = ","),
   												 group3 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,3]) %in% PARM_CD)),3]),collapse = ","),
@@ -144,7 +144,7 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   		names(missingData) <- c("RECORD_NO",names(searchParms))
   	} else if(ncol(searchParms) == 10)
   	{
-  		missingData <- ddply(checkTable,"RECORD_NO", summarise,
+  		missingData <- ddply(checkTable,"RECORD_NO", summarize,
   												 group1 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,1]) %in% PARM_CD)),1]),collapse = ","),
   												 group2 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,2]) %in% PARM_CD)),2]),collapse = ","),
   												 group3 = paste(na.omit(searchParms[which(!(na.omit(searchParms[,3]) %in% PARM_CD)),3]),collapse = ","),
