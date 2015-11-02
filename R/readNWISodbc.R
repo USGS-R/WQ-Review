@@ -25,9 +25,7 @@
 #'                              begin.date = "2005-01-01",
 #'                              end.date = "2015-10-27")
 #'                              }
-#' @importFrom RODBC sqlQuery
-#' @importFrom RODBC odbcCloseAll
-#' @importFrom RODBC odbcConnect
+#' @import RODBC
 #' @importFrom reshape2 dcast
 #' @importFrom reshape2 melt
 #' @importFrom plyr join

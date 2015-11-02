@@ -32,9 +32,7 @@
 #' @importFrom reshape2 melt
 #' @importFrom reshape2 dcast
 #' @importFrom plyr join
-#' @importFrom RODBC sqlQuery
-#' @importFrom RODBC odbcCloseAll
-#' @importFrom RODBC odbcConnect 
+#' @import RODBC 
 #' @export
 #' 
 dataUpload <- function(qwsampletype,
