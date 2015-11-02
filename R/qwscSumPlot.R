@@ -2,17 +2,12 @@
 #' 
 #' Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance. Requires charge balance = TRUE in NWISPullR
 #' @param qw.data A qw.data object generated from readNWISodbc
+#' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
-#' @param plotparm A character string of ions to plot. Options are "Cations", "Anions", "Both"
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
-#' @import stringr 
-#' @import ggplot2
-#' @import grid
-#' @import gridExtra 
-#' @import plyr
 #' @examples 
 #' data("exampleData",package="WQReview")
 #' qwscSumPlot(qw.data = qw.data,
@@ -22,6 +17,9 @@
 #'               highlightrecords = NULL,
 #'               wySymbol = FALSE,
 #'               printPlot = TRUE)
+#' @import ggplot2
+#' @importFrom stringr str_wrap
+#' @importFrom reshape2 melt             
 #' @export
 
 qwscSumPlot <- function(qw.data,
@@ -32,24 +30,7 @@ qwscSumPlot <- function(qw.data,
                        wySymbol = FALSE,
                        printPlot = TRUE
                        ) {
-  
-        ###Run ion balance function if not run already and join to qw.data$PlotTable
-        #if(is.null(qw.data$PlotTable$perc.diff))
-        #{
-        #        tryCatch({       
-        #                chargebalance.table <- ionBalance(qw.data = qw.data,wide=FALSE)
-        #                
-        #                ###Check that a balance was calculated
-        #                ###Join charge balance table to plot table
-        #                chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
-        #                qw.data$PlotTable <- join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")           
-        #        }, warning = function(w) {
-        #        }, error = function(e) {
-        #                stop("Insufficient data to calculate charge balance. Check your qw.data$PlotTable data")
-        #        })
-        #        
-        #} else {}
-        
+
   ###Subset to plot data
   plotdata <- subset(qw.data$PlotTable,SITE_NO %in% site.selection & PARM_CD== "00095")
   
@@ -94,7 +75,7 @@ qwscSumPlot <- function(qw.data,
       if(nrow(newflagdata) > 0 & all(!is.na(newflagdata[c("value")])))
       {
         p1 <- p1 + geom_text(data=newflagdata,
-                             aes(x=RESULT_VA,y=value,color=variable,label="New",hjust=1.1),show_guide=F)      
+                             aes(x=RESULT_VA,y=value,color=variable,label="New",hjust=1.1),show_guide=FALSE)      
         
       }else{}
       
@@ -116,7 +97,7 @@ qwscSumPlot <- function(qw.data,
     #p1 <- p1 + geom_abline(aes(slope = 0.0092, intercept=0),linetype="dashed",show_guide=TRUE) 
     #p1 <- p1 + geom_abline(aes(slope = 0.0124, intercept=0),linetype="dashed" ,show_guide=TRUE) 
   p1 <- p1+geom_ribbon(data = plotdata,
-                       aes(x=RESULT_VA,ymin=0.0092*RESULT_VA,ymax=0.0124*RESULT_VA,fill="gray",inherit.aes=F),
+                       aes(x=RESULT_VA,ymin=0.0092*RESULT_VA,ymax=0.0124*RESULT_VA,fill="gray",inherit.aes=FALSE),
                        alpha=0.5,show_guide=TRUE)
   p1 <- p1 + scale_fill_manual(name = "Acceptable sum/Sc range",values="gray",labels="")
     ###Remove lines from symbol and color legends

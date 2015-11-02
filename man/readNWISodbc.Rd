@@ -34,7 +34,8 @@ Dataframe names will be changed to more appropriate values in future package upd
 Pulls data from NWIS internal servers using ODBC connection and returns a list containing dataframes.
 }
 \examples{
-*Will not run unless connected to NWISCO
+\dontrun{
+#Will not run unless connected to NWISCO
 qw.data <- readNWISodbc(DSN="NWISCO",
                              env.db = "01",
                              qa.db = "02",
@@ -43,5 +44,6 @@ qw.data <- readNWISodbc(DSN="NWISCO",
                              parm.group.check=TRUE,
                              begin.date = "2005-01-01",
                              end.date = "2015-10-27")
+                             }
 }
 

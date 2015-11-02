@@ -6,9 +6,12 @@
 #' Definitions of checks can be found at http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' historicCheck(qw.data=qw.data,
+#' historicCheckOut <- historicCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
-#' @import plyr
+#' @importFrom plyr join
+#' @importFrom plyr ddply
+#' @importFrom plyr summarize
+
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 
@@ -22,7 +25,8 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                        PARM_SEQ_GRP_CD != "INF" &
                                        MEDIUM_CD %in% c("WS ","WG ", "OA "))
         
-        
+        if(nrow(inReviewData > 0))
+        {
         #Get stats by parm for each site
         siteStats <- ddply(approvedData,c("SITE_NO","PARM_CD"),summarize,
                         min = min(RESULT_VA,na.rm=TRUE),
@@ -98,5 +102,8 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                             !is.na(flaggedSamples[17])
         ),]) 
         } else {}
+        
         return(flaggedSamples)
+        
+        } else{ print("No in-review data for comparison to approved data")}
 }

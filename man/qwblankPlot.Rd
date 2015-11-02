@@ -17,15 +17,15 @@ qwblankPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
 
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
+\item{show.smooth}{Logical to add a loess smooth to plot}
+
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
+
+\item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
 
 \item{wySymbol}{Make current water-year highlighted.}
 
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
-
-\item{begin.date}{Character string of begining date range to plot (yyyy-mm-dd)}
-
-\item{end.date}{Character string of ending date range to plot (yyyy-mm-dd)}
 }
 \description{
 Takes output data object from readNWISodbc and prints a timeseries plot of blanks

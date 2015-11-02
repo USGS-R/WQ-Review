@@ -38,7 +38,35 @@ dataUpload(qwsampletype, DSN = "NWISCO", env.db = "01", qa.db = "02",
 
 \item{censor}{Logical. If TRUE results are censored to lrl provided in pcode file}
 
-\item{...}{other arguments passed to function for manual QWSample file generation. See arguments in function call for list.}
+\item{agencycode}{Manual qwsample entry}
+
+\item{labid}{Manual qwsample entry}
+
+\item{projectcode}{Manual qwsample entry}
+
+\item{aquifercode}{Manual qwsample entry}
+
+\item{analysisstatus}{Manual qwsample entry}
+
+\item{analysissource}{Manual qwsample entry}
+
+\item{hydrologiccond}{Manual qwsample entry}
+
+\item{hydrologicevent}{Manual qwsample entry}
+
+\item{tissue}{Manual qwsample entry}
+
+\item{bodypart}{Manual qwsample entry}
+
+\item{labcomment}{Manual qwsample entry}
+
+\item{fieldcomment}{Manual qwsample entry}
+
+\item{timedatum}{Manual qwsample entry}
+
+\item{datumreliability}{Manual qwsample entry}
+
+\item{colagencycode}{Manual qwsample entry}
 }
 \description{
 Assists in formatting data for upload into QWData. Use templateExport to generate spreadsheet templates to create labfile and pcode file.

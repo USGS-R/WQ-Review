@@ -2,10 +2,14 @@
 #' 
 #' Takes output data object from readNWISodbc and calculates a standard ion charge balance.
 #' @param qw.data A qw.data object generated from readNWISodbc
+#' @param wide Logical, return the ionbalance table in wide format.
 #' @examples
 #' data("exampleData",package="WQReview")
-#' ionBalance(qw.data=qw.data)
-#' @import plyr
+#' ionBalanceOut <- ionBalance(qw.data=qw.data)
+#' @importFrom plyr join
+#' @importFrom plyr ddply
+#' @importFrom plyr summarize
+#' @importFrom reshape2 dcast
 #' @export
 #' 
 

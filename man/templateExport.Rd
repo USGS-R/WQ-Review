@@ -6,9 +6,6 @@
 \usage{
 templateExport()
 }
-\arguments{
-\item{There}{are no arguments to this function. Just run to export templates to your working directory.}
-}
 \description{
 exports templates for use with the nwisupload function. Files exported to working directory as tab-delimited files.
 }

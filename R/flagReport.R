@@ -15,7 +15,9 @@
 #' is then generated to navigate between networks. Reports consist of automated data checks defined in  http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html and plots.
 #' Panels containing a timeseries, seasonal, parameter vs discharge and parameter vs SC plot are generated and indexed.
 #' This function can be used to auto-generate network QAQC reports overnight using R in batch mode with a script and Windows task scheduler.
-#' @examples *This will not run if not connected to NWISCO server
+#' @examples 
+#'\dontrun{
+#' #This will not run if not connected to NWISCO server
 #' networkList <- data.frame(network = c("BigThompson","BigThompson","Gunnison River"),
 #'                           site = c("06733000","06741520","09109850"),
 #'                           stringsAsFactors=FALSE)
@@ -27,6 +29,10 @@
 #'           end.date = as.character(Sys.Date()),
 #'           outputDir = "C:/networkReportExample"
 #'           )
+#'           }
+#' @importFrom gridExtra grid.arrange
+#' @importFrom rmarkdown render
+#' @import ggplot2
 #'           
 #' @export
 
@@ -72,6 +78,10 @@ flagReport <- function(networkList,
                                                  begin.date=begin.date,
                                                  end.date=end.date)
         )
+        
+        ###Remove parameters that have not been modified for 3 years
+        modParms <- unique(qw.data$PlotTable$PARM_CD[which(qw.data$PlotTable$RESULT_MD > Sys.time() - 60*60*24*365*3)])
+        qw.data$PlotTable <- subset(qw.data$PlotTable, PARM_CD %in% modParms)
         
         ###Run report generation on qw.data 
         reports <- NULL

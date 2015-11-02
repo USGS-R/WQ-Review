@@ -8,12 +8,14 @@
 #' @param end.date A character string of optional end date range to summarize over in "YYYY-MM-DD" format. Defaults to all if unspecified.
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' summaryStats(qw.data = qw.data,
-#'              STAIDS=NULL, 
-#'              parameterCd = NULL, 
+#' summaryStatsOut <- summaryStats(qw.data = qw.data,
+#'              STAIDS="06733000", 
+#'              parameterCd = c("00095","00915","00945"), 
 #'              begin.date = "2010-01-01", 
 #'              end.date = "2011-12-31")
-#' @import plyr
+#' @importFrom plyr join
+#' @importFrom plyr ddply
+#' @importFrom plyr summarize
 #' @export
 #' 
 summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date = NA, end.date = NA) {
@@ -35,7 +37,7 @@ summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date = 
                 data <- subset(qw.data$PlotTable, SAMPLE_START_DT >= as.POSIXct(begin.date) & SAMPLE_START_DT <= as.POSIXct(end.date))
         }else {} 
 
-        if(nrow(data == 0))
+        if(nrow(data) == 0)
         {
                 stop("No data to summarize. Check parameter codes and data pull criteria.")
         } else{}

@@ -9,6 +9,7 @@
 #' qwmatrixPlot(qw.data=qw.data, 
 #'              site.selection = "06733000", 
 #'              plotparm = c("00915","00945","00095")) 
+#' @importFrom stringr str_wrap
 #' @export
 
 qwmatrixPlot <- function(qw.data,

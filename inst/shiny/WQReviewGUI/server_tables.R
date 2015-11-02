@@ -8,6 +8,7 @@ output$chemFlagTable <- DT::renderDataTable(
         reports$chemFlagTable,
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        rownames= FALSE,
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
@@ -31,6 +32,7 @@ output$pestFlagTable <- DT::renderDataTable(
         reports$pestFlagTable,
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        rownames= FALSE,
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
@@ -54,6 +56,7 @@ output$resultFlagTable <- DT::renderDataTable(
         reports$resultFlagTable,
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        rownames= FALSE,
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
@@ -84,6 +87,7 @@ try({
                 ),
                 extensions = list(FixedColumns = list(leftColumns = 1)),
                 server=TRUE,
+                rownames= FALSE,
                 options = list(
                         scrollX=TRUE,
                         autoWidth=TRUE)
@@ -113,6 +117,7 @@ output$longDataTable <- DT::renderDataTable(
         ),
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        rownames= FALSE,
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
@@ -139,6 +144,7 @@ output$balanceTable <- DT::renderDataTable(
         ),
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        rownames= FALSE,
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
@@ -162,6 +168,7 @@ output$repTable <- DT::renderDataTable(
                        as.Date(Env_SAMPLE_START_DT) <= input$endDate_repTable
         ),
         server=TRUE,
+        rownames= FALSE,
         extensions = list(FixedColumns = list(leftColumns = 1)),
         options = list(
                 scrollX=TRUE,
@@ -189,6 +196,7 @@ output$wholevpartTable <- DT::renderDataTable(
         ),
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        rownames= FALSE,
         #container = wholevpartTableContainer,
         options = list(
                 scrollX=TRUE,
@@ -218,6 +226,7 @@ try({
                              end.date = input$endDate_blankTable,
                              multiple = FALSE)),
                 server=TRUE,
+                rownames= FALSE,
                 extensions = list(FixedColumns = list(leftColumns = 1)),
                 options = list(
                         scrollX=TRUE,

@@ -6,8 +6,8 @@
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character vector of pcodes to plot
 #' @param show.points Show samples points
-#' @param log.scale Plot y axis on a log scale
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param new.reps The threshold value in seconds from current system time for "new" replicate samples.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
@@ -19,6 +19,8 @@
 #'                        highlightrecords = NULL,
 #'                        new.reps = Sys.time() - 60*60*24*30,
 #'                        printPlot = TRUE)
+#' @import ggplot2
+#' @importFrom stringr str_wrap
 #' @export
 
 qwrepBoxPlot <- function(reports,

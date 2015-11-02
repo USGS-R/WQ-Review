@@ -35,7 +35,8 @@ Panels containing a timeseries, seasonal, parameter vs discharge and parameter v
 This function can be used to auto-generate network QAQC reports overnight using R in batch mode with a script and Windows task scheduler.
 }
 \examples{
-*This will not run if not connected to NWISCO server
+\dontrun{
+#This will not run if not connected to NWISCO server
 networkList <- data.frame(network = c("BigThompson","BigThompson","Gunnison River"),
                           site = c("06733000","06741520","09109850"),
                           stringsAsFactors=FALSE)
@@ -47,5 +48,6 @@ flagReport(networkList = networkList,
           end.date = as.character(Sys.Date()),
           outputDir = "C:/networkReportExample"
           )
+          }
 }
 

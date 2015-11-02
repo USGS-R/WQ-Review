@@ -24,7 +24,7 @@ Definitions of checks can be found at http://internal.cida.usgs.gov/NAWQA/data_c
 }
 \examples{
 data("exampleData",package="WQReview")
-historicCheck(qw.data=qw.data,
+historicCheckOut <- historicCheck(qw.data=qw.data,
              returnAll = FALSE)
 }
 

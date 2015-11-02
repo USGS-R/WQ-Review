@@ -6,7 +6,10 @@
 #' @param site.selection A character vector of site IDs to plot
 #' @param xparm Character string of parameter to plot on x axis
 #' @param yparm Character string of parameter to plot on y axis
+#' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
 #' @param show.lm Add a linear fit to plot
+#' @param log.scaleX Logical. Plot x parameter on a log scale.
+#' @param log.scaleY Logical. Plot y parameter on a log scale.
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
@@ -24,6 +27,9 @@
 #'               highlightrecords = NULL,
 #'               wySymbol = FALSE,
 #'               printPlot = TRUE)
+#' @import ggplot2
+#' @importFrom stringr str_wrap
+#' @importFrom plyr join
 #' @export
 
 

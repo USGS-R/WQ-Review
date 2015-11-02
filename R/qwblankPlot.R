@@ -5,9 +5,9 @@
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param plotparm A character vector of the parameter to plot.
 #' @param site.selection A character vector of site IDs to plot
-#' @param begin.date Character string of begining date range to plot (yyyy-mm-dd)
-#' @param end.date Character string of ending date range to plot (yyyy-mm-dd)
+#' @param show.smooth Logical to add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
+#' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
 #' @param wySymbol Make current water-year highlighted.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
@@ -22,6 +22,8 @@
 #'                        facet = "multisite",
 #'                        wySymbol = FALSE,
 #'                        printPlot = TRUE)
+#' @import ggplot2
+#' @importFrom stringr str_wrap
 #' @export
 
 qwblankPlot <- function(qw.data,

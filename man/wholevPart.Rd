@@ -14,6 +14,6 @@ Takes output list from readNWISodbc and checks whole vs part concentrations
 }
 \examples{
 data("exampleData",package="WQReview")
-wholevPart(qw.data=qw.data)
+wholevPartOut <- wholevPart(qw.data=qw.data)
 }
 

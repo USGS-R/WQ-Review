@@ -44,20 +44,32 @@ dashboardSidebar(sidebarMenu(
                           icon = icon("bar-chart"),selected=FALSE
                          ),
                  ###Next sidebar entry
-                 menuItem("Tables", 
+                 menuItem("QAQC Tables", 
                           ###Table types, each one will appear in dashboard
-                          menuSubItem(tabName="wideDataTable","Wide data table"),
-                          menuSubItem(tabName="longDataTable","Long data table"),
+                          
                           menuSubItem(tabName="balanceTable","Charge balance table"),
                           menuSubItem(tabName="repTable","Replicate table"),
                           menuSubItem(tabName="blankTable","Blank table"),
                           menuSubItem(tabName="wholvevpartTable","Fil vs. Unf table"),
                           ###Other arguments ot top menu item                          
-                          tabName = "Tables", icon = icon("table")
+                          tabName = "QAQCTables", icon = icon("table")
                           ),
+                menuItem("Data Tables",
+                         menuSubItem(tabName="wideDataTable","Wide data table"),
+                         menuSubItem(tabName="longDataTable","Long data table"),
+                         tabName = "dataTables", icon = icon("table")
+                ),
+                         
                 
         #menuSubItem(tabName="dataUpload","Data upload tools"),
         #menuSubItem(tabName="srsSummary","SRS Summary tool"),
-        menuItem(tabName="saveLoadTab","Save/load data")
+        menuItem(tabName="saveLoadTab","Save/load data"),
+        menuItem(tabName="helpTab","Help",
+                menuSubItem(href="FAQ.htm",text="FAQ"),
+                menuSubItem(href="WQReviewGUI.html",text="User Guide")
+        )
+        
+       
+        
         )
 )

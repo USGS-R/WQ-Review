@@ -13,7 +13,9 @@
 #' PlotTable contains all data pulled from NWIS along with all assosciated metadata in by-result format. 
 #' DataTable contains all data pulled from NWIS in wide (sample-result) format, an easier format for import into spreadsheet programs.
 #' Dataframe names will be changed to more appropriate values in future package updates.
-#' @examples *Will not run unless connected to NWISCO
+#' @examples
+#' \dontrun{
+#' #Will not run unless connected to NWISCO
 #' qw.data <- readNWISodbc(DSN="NWISCO",
 #'                              env.db = "01",
 #'                              qa.db = "02",
@@ -22,9 +24,11 @@
 #'                              parm.group.check=TRUE,
 #'                              begin.date = "2005-01-01",
 #'                              end.date = "2015-10-27")
+#'                              }
 #' @import RODBC
-#' @import reshape2
-#' @import plyr
+#' @importFrom reshape2 dcast
+#' @importFrom reshape2 melt
+#' @importFrom plyr join
 #' @export
 
 readNWISodbc <- function(DSN,
