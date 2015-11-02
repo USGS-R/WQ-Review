@@ -5,7 +5,7 @@
 #' @param wide Logical, return the ionbalance table in wide format.
 #' @examples
 #' data("exampleData",package="WQReview")
-#' ionBalance(qw.data=qw.data)
+#' ionBalanceOut <- ionBalance(qw.data=qw.data)
 #' @import plyr
 #' @export
 #' 

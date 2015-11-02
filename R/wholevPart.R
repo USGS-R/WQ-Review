@@ -4,7 +4,7 @@
 #' @param qw.data A qw.data object generated from readNWISodbc
 #' @examples
 #' data("exampleData",package="WQReview")
-#' wholevPart(qw.data=qw.data)
+#' wholevPartOut <- wholevPart(qw.data=qw.data)
 #' @import plyr
 #' @export
 

@@ -5,7 +5,7 @@
 #' @details Performs chemical checks for expected ranges of O2, pH, Sc, and chargebalance. Definitions of checks can be found at http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' chemCheck(qw.data=qw.data,
+#' chemCheckOut <- chemCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
 #' @import plyr
 #' @export

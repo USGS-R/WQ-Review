@@ -6,7 +6,7 @@
 #' Definitions of checks can be found at http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' pestCheck(qw.data=qw.data,
+#' pestCheckOut <- pestCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
 #' @import plyr
 #' @export

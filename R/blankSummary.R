@@ -8,7 +8,7 @@
 #' @param multiple.levels Logical to analyze multiple reporting levels separetly. Default is TRUE.
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' blankSummary(qw.data = qw.data,
+#' blankSummaryOut <- blankSummary(qw.data = qw.data,
 #'              STAIDS = unique(qw.data$PlotTable$SITE_NO),
 #'              begin.date = "2009-01-01",
 #'              end.date = "2013-01-01",

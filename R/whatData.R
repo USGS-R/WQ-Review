@@ -12,7 +12,7 @@
 #'                           anions = c("00945","00940","99220",NA,NA),
 #'                           nutrients = c("00608","00631",NA,NA,NA),
 #'                           stringsAsFactors = FALSE)
-#' whatData(qw.data = qw.data,
+#' whatDataOut <- whatData(qw.data = qw.data,
 #'         searchParms = searchParms,
 #'         begin.date = NULL,
 #'         end.date = NULL,

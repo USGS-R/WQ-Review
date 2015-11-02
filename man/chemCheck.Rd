@@ -24,7 +24,7 @@ Performs chemical checks for expected ranges of O2, pH, Sc, and chargebalance. D
 }
 \examples{
 data("exampleData",package="WQReview")
-chemCheck(qw.data=qw.data,
+chemCheckOut <- chemCheck(qw.data=qw.data,
              returnAll = FALSE)
 }
 

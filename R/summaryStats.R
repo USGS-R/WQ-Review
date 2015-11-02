@@ -8,7 +8,7 @@
 #' @param end.date A character string of optional end date range to summarize over in "YYYY-MM-DD" format. Defaults to all if unspecified.
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' summaryStats(qw.data = qw.data,
+#' summaryStatsOut <- summaryStats(qw.data = qw.data,
 #'              STAIDS="06733000", 
 #'              parameterCd = c("00095","00915","00945"), 
 #'              begin.date = "2010-01-01", 

@@ -23,7 +23,7 @@ Takes output data object from readNWISodbc and generates a table of summary stat
 }
 \examples{
 data("exampleData",package="WQReview")
-summaryStats(qw.data = qw.data,
+summaryStatsOut <- summaryStats(qw.data = qw.data,
              STAIDS="06733000",
              parameterCd = c("00095","00915","00945"),
              begin.date = "2010-01-01",

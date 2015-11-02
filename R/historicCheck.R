@@ -6,7 +6,7 @@
 #' Definitions of checks can be found at http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' historicCheck(qw.data=qw.data,
+#' historicCheckOut <- historicCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
 #' @import plyr
 #' @export
