@@ -1,4 +1,4 @@
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/USGS-R/WQ-Review?branch=master&svg=true)](https://ci.appveyor.com/project/USGS-R/WQ-Review)
+[![Build status](https://ci.appveyor.com/api/projects/status/liv8ghjlk9ilp59n?svg=true)](https://ci.appveyor.com/project/tmills-usgs/wq-review-2ehib)
 
 #Overview
 Toolbox for discrete water-quality data review and exploration.Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
