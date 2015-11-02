@@ -4,6 +4,7 @@ Title: Discrete water-quality data review and exploration toolbox
 Version: 1.0
 Date: 2015-11-02
 Author: T. Joe Mills <tmills@usgs.gov>
+Maintainer: T. Joe Mills <tmills@usgs.gov>
 Description: Facilitates rapid review and exploration of data stored in
     internal, local NWIS servers.
 License: CC0
