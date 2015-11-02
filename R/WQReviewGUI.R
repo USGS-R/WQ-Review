@@ -6,6 +6,8 @@
 #' @export
 #' @import shinydashboard
 #' @import shiny
+#' @importFrom DT renderDataTable
+#' @importFrom DT dataTableOutput
 WQReviewGUI <- function() {
   appDir <- system.file("shiny", "WQReviewGUI",package = "WQReview")
   if (appDir == "") {
