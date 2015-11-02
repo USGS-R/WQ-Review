@@ -1,13 +1,15 @@
 Package: WQReview
 Type: Package
-Title: Discrete water-quality data review and exploration toolbox.
-Version: 0.1
-Date: 2015-08-03
-Author: T. Joe Mills
-Maintainer: T. Joe Mills <tmills@usgs.gov>
+Title: Discrete water-quality data review and exploration toolbox
+Version: 1.0
+Date: 2015-11-02
+Authors@R: c( person("T. Joe", "Mills", role = c("aut","cre"),
+    email = "tmills@usgs.gov"),
 Description: Facilitates rapid review and exploration of data stored in
     internal, local NWIS servers.
 License: CC0
+LazyLoad: yes
+LazyData: yes
 Imports:
     reshape2,
     plyr,
@@ -18,8 +20,8 @@ Imports:
     scales,
     shiny,
     shinydashboard,
-        lubridate,
-        stringi,
+    lubridate,
+    stringi,
     DT,
     Rcpp,
     gridExtra,
@@ -27,3 +29,9 @@ Imports:
 Suggests:
     knitr
 VignetteBuilder: knitr
+BuildVignettes: true
+Copyright: This software is in the public domain because it contains materials
+    that originally came from the United States Geological Survey, an agency of
+    the United States Department of Interior. For more information, see the
+    official USGS copyright policy at
+    http://www.usgs.gov/visual-id/credit_usgs.html#copyright
