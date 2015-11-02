@@ -10,6 +10,8 @@ Description: Facilitates rapid review and exploration of data stored in
 License: CC0
 LazyLoad: yes
 LazyData: yes
+Depends:
+    R (>= 3.0)
 Imports:
     reshape2,
     plyr,
