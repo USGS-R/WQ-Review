@@ -14,7 +14,21 @@
 #' @param qwsample.begin.date Character string (yyyy-mm-dd) of beggining date to subset qwsample file to
 #' @param qwsample.end.date Character string (yyyy-mm-dd) of ending date to subset qwsample file to
 #' @param censor Logical. If TRUE results are censored to lrl provided in pcode file
-#' @param ... other arguments passed to function for manual QWSample file generation. See arguments in function call for list.
+#' @param agencycode Manual qwsample entry
+#' @param labid Manual qwsample entry
+#' @param projectcode Manual qwsample entry
+#' @param aquifercode Manual qwsample entry
+#' @param analysisstatus Manual qwsample entry
+#' @param analysissource Manual qwsample entry
+#' @param hydrologiccond Manual qwsample entry
+#' @param hydrologicevent Manual qwsample entry
+#' @param tissue Manual qwsample entry
+#' @param bodypart Manual qwsample entry
+#' @param labcomment Manual qwsample entry   
+#' @param fieldcomment Manual qwsample entry
+#' @param timedatum Manual qwsample entry
+#' @param datumreliability Manual qwsample entry
+#' @param colagencycode Manual qwsample entry
 #' @export
 #' 
 dataUpload <- function(qwsampletype,
