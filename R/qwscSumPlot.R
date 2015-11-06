@@ -94,12 +94,10 @@ qwscSumPlot <- function(qw.data,
           p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales="free")
   } else {}
     ###Line for sum/conductunce ratio acceptable bounds
-    #p1 <- p1 + geom_abline(aes(slope = 0.0092, intercept=0),linetype="dashed",show_guide=TRUE) 
-    #p1 <- p1 + geom_abline(aes(slope = 0.0124, intercept=0),linetype="dashed" ,show_guide=TRUE) 
-  p1 <- p1+geom_ribbon(data = plotdata,
-                       aes(x=RESULT_VA,ymin=0.0092*RESULT_VA,ymax=0.0124*RESULT_VA,fill="gray",inherit.aes=FALSE),
-                       alpha=0.5,show_guide=TRUE)
-  p1 <- p1 + scale_fill_manual(name = "Acceptable sum/Sc range",values="gray",labels="")
+  #p1 <- p1+geom_ribbon(data = plotdata,
+   #                    aes(x=RESULT_VA,ymin=0.0092*RESULT_VA,ymax=0.0124*RESULT_VA,fill="gray",inherit.aes=FALSE),
+    #                   alpha=0.5,show_guide=TRUE)
+  #p1 <- p1 + scale_fill_manual(name = "Acceptable sum/Sc range",values="gray",labels="")
     ###Remove lines from symbol and color legends
     p1 <- p1 + guides(shape = guide_legend(override.aes = list(fill = NA))) + guides(color = guide_legend(override.aes = list(fill = NA)))
     #p1 <- p1 + labs(linetype="Acceptable sum(ion)/Sc range")
