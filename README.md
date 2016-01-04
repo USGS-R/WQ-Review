@@ -100,4 +100,4 @@ Then follow the instructions to setup the system DSN
 
 http://nwis.usgs.gov/IT/INSTRUCT/HOWTO/DB_oracle_odbc.html
 
-The ODBC connection must be setup for Oracle and in 32-bit mode. 
+The ODBC connection must be setup for Oracle and in 32-bit mode
