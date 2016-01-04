@@ -5,7 +5,7 @@
 #' @param env.db A character string containing the database number of environmental samples
 #' @param qa.db A character string containing the database number of QA samples
 #' @param STAIDS A character vector of stations IDs 
-#' @param dl.parms A character vector of pcodes to pull data, e.g. c("00300","00915")
+#' @param dl.parms A character vector of pcodes to pull data, e.g. c("00300","00915") or NWIS parameter groups specified in details section.
 #' @param parm.group.check A logical of weather or not to use NWIS parameter groups. If TRUE, must use NWIS parameter group names in dl.parms
 #' @param begin.date Character string containing beginning date of data pull (yyyy-mm-dd)
 #' @param end.date Character string containing ending date of data pull (yyyy-mm-dd)
@@ -13,6 +13,23 @@
 #' PlotTable contains all data pulled from NWIS along with all assosciated metadata in by-result format. 
 #' DataTable contains all data pulled from NWIS in wide (sample-result) format, an easier format for import into spreadsheet programs.
 #' Dataframe names will be changed to more appropriate values in future package updates.
+#' @details 
+#' NWIS parameter groups are as follows: All = "All",
+#'physical = "PHY",
+#'cations = "INM",
+#'anions = "INN",
+#'nutrients = "NUT",
+#'microbiological = "MBI",
+#'biological = "BIO",
+#'metals = "IMM",
+#'nonmetals = "IMN",
+#'pesticides = "TOX",
+#'pcbs="OPE",
+#'other organics = "OPC",
+#'radio chemicals = "RAD",
+#'stable isotopes = "XXX",
+#'sediment = "SED",
+#'population/community = "POP"
 #' @examples
 #' \dontrun{
 #' #Will not run unless connected to NWISCO
