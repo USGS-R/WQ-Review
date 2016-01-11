@@ -105,7 +105,7 @@ readNWISodbc <- function(DSN,
   
   if(nrow(SiteFile) == 0){
           print("Site does not exist in sitefile, check site number input")
-          stop("Site does not exist in sitefile, check site number input")
+          warning("Site does not exist in environmantal database sitefile, check site number input")
   }
   
   #get the QWSample file
@@ -115,7 +115,7 @@ readNWISodbc <- function(DSN,
   ##Check if samples were pulled and quit if no
   if(nrow(Samples) == 0) {
           #print("No samples exist in your local NWIS database for site number specified, check data criteria")
-          stop("No samples exist in your local NWIS database site number specified, check data criteria")
+          warning("No samples exist in your local environmantal NWIS database for site number specified, check data criteria")
   }
   
   
@@ -290,11 +290,30 @@ readNWISodbc <- function(DSN,
   ##################
   # First get the site info--need column SITE_ID
   Query <- paste("select * from ", DSN, ".SITEFILE_",qa.db," where site_no IN (", STAID.list, ")", sep="")
-  SiteFile <- sqlQuery(Chan1, Query, as.is=T)
+  QASiteFile <- sqlQuery(Chan1, Query, as.is=T)
   
   #get the record numbers
   Query <- paste("select * from ", DSN, ".QW_SAMPLE_",qa.db," where site_no IN (", STAID.list, ")", sep="")
-  Samples <- sqlQuery(Chan1, Query, as.is=T)
+  QASamples <- sqlQuery(Chan1, Query, as.is=T)
+  
+  if(nrow(SiteFile) == 0 & nrow(QASiteFile) == 0){
+          print("Site does not exist in sitefile, check site number input")
+          stop("Site does not exist in environmantal or QA database sitefile, check site number input")
+  }
+  
+
+  ##Check if samples were pulled and quit if no
+  if(nrow(Samples) == 0 & nrow(QASamples) == 0) {
+          #print("No samples exist in your local NWIS database for site number specified, check data criteria")
+          stop("No samples exist in your local environmantal or QA NWIS database for site number specified, check data criteria")
+  }
+  
+  ###Rename to SiteFile and Samples variable names, QA distinction was coded in later and this 
+  ###Makes it so I do not have to change the code below
+  
+  SiteFile <- QASiteFile
+  Samples <- QASamples
+  
   
   if(nrow(SiteFile) > 0 & nrow(Samples) > 0)
   {
