@@ -16,7 +16,7 @@ readNWISodbc(DSN, env.db = "01", qa.db = "02", STAIDS, dl.parms = "All",
 
 \item{STAIDS}{A character vector of stations IDs}
 
-\item{dl.parms}{A character vector of pcodes to pull data, e.g. c("00300","00915")}
+\item{dl.parms}{A character vector of pcodes to pull data, e.g. c("00300","00915") or NWIS parameter groups specified in details section.}
 
 \item{parm.group.check}{A logical of weather or not to use NWIS parameter groups. If TRUE, must use NWIS parameter group names in dl.parms}
 
@@ -32,6 +32,24 @@ Dataframe names will be changed to more appropriate values in future package upd
 }
 \description{
 Pulls data from NWIS internal servers using ODBC connection and returns a list containing dataframes.
+}
+\details{
+NWIS parameter groups are as follows: All = "All",
+physical = "PHY",
+cations = "INM",
+anions = "INN",
+nutrients = "NUT",
+microbiological = "MBI",
+biological = "BIO",
+metals = "IMM",
+nonmetals = "IMN",
+pesticides = "TOX",
+pcbs="OPE",
+other organics = "OPC",
+radio chemicals = "RAD",
+stable isotopes = "XXX",
+sediment = "SED",
+population/community = "POP"
 }
 \examples{
 \dontrun{
