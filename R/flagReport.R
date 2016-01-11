@@ -223,20 +223,23 @@ flagReport <- function(networkList,
             
             sites <- subset(stations,network == networks[i])$SITE_NO
             network <- networks[i]
-            
+            try(
             rmarkdown::render(paste(markdownDir,"/networkSummary.rmd",sep=""),params = list(sites = sites, network=network,outputDir = outputDir),
                               output_file="networkSummary.htm",
                               output_dir=paste0(outputDir,"/",networks[i],sep="")
+            )
             )
         
             for(k in 1:length(sites))
             {
             site <- subset(stations,network == networks[i])$SITE_NO[k]
             siteName <- unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$SITE_NO == site)])
+            try(
             rmarkdown::render(paste(markdownDir,"/flagReport.rmd",sep=""),params = list(site = site,siteName=siteName,outputDir = outputDir),
                           output_file=paste(site,".htm",sep=""),
                           output_dir=paste0(outputDir,"/",networks[i],sep="")
                           )
+            )
             
             }
         }
