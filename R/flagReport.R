@@ -32,6 +32,7 @@
 #'           }
 #' @importFrom gridExtra grid.arrange
 #' @importFrom rmarkdown render
+#' @importFrom plyr rbind.fill
 #' @import ggplot2
 #'           
 #' @export
