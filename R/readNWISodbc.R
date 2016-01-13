@@ -4,7 +4,7 @@
 #' @param DSN A character string containing the DSN for your local server
 #' @param env.db A character string containing the database number of environmental samples
 #' @param qa.db A character string containing the database number of QA samples
-#' @param STAIDS A character vector of stations IDs 
+#' @param STAIDS A character vector of stations IDs. Agency code defaults to "USGS" unless appended to the beginning of station ID with a dash, e.g. "USGS-123456". 
 #' @param dl.parms A character vector of pcodes to pull data, e.g. c("00300","00915") or NWIS parameter groups specified in details section.
 #' @param parm.group.check A logical of weather or not to use NWIS parameter groups. If TRUE, must use NWIS parameter group names in dl.parms
 #' @param begin.date Character string containing beginning date of data pull (yyyy-mm-dd)
@@ -75,20 +75,51 @@ readNWISodbc <- function(DSN,
         }
         
   odbcCloseAll()
-  ###Pad Station IDs with spaces to make 15 characters long
   
-  
-  STAIDS <-  lapply(STAIDS,FUN=function(x){
-    pad <- rep(" ",15-nchar(x))
-    pad <- paste(pad,sep="",collapse="")
-    x <- paste(x,pad,sep="")
-    return(x)
-  })
-  
-  STAIDS <- as.character(STAIDS)
-  
-  #Change to a list that SQL can understand. SQL requires a parenthesized list of expressions, so must look like c('05325000', '05330000') for example
-  STAID.list <- paste("'", STAIDS, "'", sep="", collapse=",")
+
+          ##parse out agency code from station ID
+          agencySTAIDS <- read.delim(text=STAIDS,header=FALSE,sep="-",fill=TRUE,colClasses = "character")
+          
+          
+          if(ncol(agencySTAIDS) > 1)
+          {
+                  
+          ###Fill in empty fields with USGS agency code if ommitted
+          agencySTAIDS[which(agencySTAIDS[2] == ""),2] <- NA
+          agencySTAIDS[is.na(agencySTAIDS[2]),2] <- as.character(agencySTAIDS[is.na(agencySTAIDS[2]),1])
+          agencySTAIDS[!is.na(suppressWarnings(as.numeric(agencySTAIDS[,1]))),1] <- "USGS"
+          
+          ###Pad Station IDs with spaces to make 15 characters long
+          agencySTAIDS[,2] <-  as.character(
+                  lapply(agencySTAIDS[,2],FUN=function(x){
+                  pad <- rep(" ",15-nchar(x))
+                  pad <- paste(pad,sep="",collapse="")
+                  x <- paste(x,pad,sep="")
+                  return(x)
+                  })
+          )
+                  
+                uniqueSTAIDS <- paste0(agencySTAIDS[,1],agencySTAIDS[,2])
+                
+                
+                #Change to a list that SQL can understand. SQL requires a parenthesized list of expressions, so must look like c('05325000', '05330000') for example
+                STAID.list <- paste("'", agencySTAIDS[,2], "'", sep="", collapse=",")
+                
+          } else{STAIDS <-  as.character(
+                  lapply(STAIDS,FUN=function(x){
+                          pad <- rep(" ",15-nchar(x))
+                          pad <- paste(pad,sep="",collapse="")
+                          x <- paste(x,pad,sep="")
+                          return(x)
+                  })
+                  )
+                  uniqueSTAIDS <- paste0("USGS",STAIDS)
+                  
+                  #Change to a list that SQL can understand. SQL requires a parenthesized list of expressions, so must look like c('05325000', '05330000') for example
+                  STAID.list <- paste("'", STAIDS, "'", sep="", collapse=",")
+                  }
+
+
   
   
   
@@ -100,9 +131,16 @@ readNWISodbc <- function(DSN,
   ###Env Database###
   ##################
   # First get the site info--need column SITE_ID
-  Query <- paste("select * from ", DSN, ".SITEFILE_",env.db," where site_no IN (", STAID.list, ")", sep="")
+  Query <- paste("select * from ", DSN, ".SITEFILE_",env.db," where site_no IN (", STAID.list, ")",sep="")
   SiteFile <- sqlQuery(Chan1, Query, as.is=T)
   
+  #Make unique AgencyCd/sitefile key
+  SiteFile$agencySTAID <- gsub(" ","",paste0(SiteFile$AGENCY_CD,SiteFile$SITE_NO))
+  
+  ##Subset SiteFile to unique agency code site ID pair
+  SiteFile <- subset(SiteFile,agencySTAID %in% gsub(" ","",uniqueSTAIDS))
+  
+  ##Check for samples and throw warning if none
   if(nrow(SiteFile) == 0){
           print("Site does not exist in sitefile, check site number input")
           warning("Site does not exist in environmantal database sitefile, check site number input")
@@ -111,6 +149,12 @@ readNWISodbc <- function(DSN,
   #get the QWSample file
   Query <- paste("select * from ", DSN, ".QW_SAMPLE_",env.db," where site_no IN (", STAID.list, ")", sep="")
   Samples <- sqlQuery(Chan1, Query, as.is=T)
+  
+  ##Make unique AgencyCd/sitefile key
+  Samples$agencySTAID <- gsub(" ","",paste0(Samples$AGENCY_CD,Samples$SITE_NO))
+  
+  ##Subset Samples to unique agency code site ID pair
+  Samples <- subset(Samples,agencySTAID %in% gsub(" ","",uniqueSTAIDS))
   
   ##Check if samples were pulled and quit if no
   if(nrow(Samples) == 0) {
@@ -292,9 +336,21 @@ readNWISodbc <- function(DSN,
   Query <- paste("select * from ", DSN, ".SITEFILE_",qa.db," where site_no IN (", STAID.list, ")", sep="")
   QASiteFile <- sqlQuery(Chan1, Query, as.is=T)
   
+  ##Make unique AgencyCd/sitefile key
+  QASiteFile$agencySTAID <- gsub(" ","",paste0(SiteFile$AGENCY_CD,SiteFile$SITE_NO))
+  
+  ##Subset SiteFile to unique agency code site ID pair
+  QASiteFile <- subset(SiteFile,agencySTAID %in% gsub(" ","",uniqueSTAIDS))
+  
   #get the record numbers
   Query <- paste("select * from ", DSN, ".QW_SAMPLE_",qa.db," where site_no IN (", STAID.list, ")", sep="")
   QASamples <- sqlQuery(Chan1, Query, as.is=T)
+  
+  ##Make unique AgencyCd/sitefile key
+  Samples$agencySTAID <- gsub(" ","",paste0(Samples$AGENCY_CD,Samples$SITE_NO))
+  
+  ##Subset Samples to unique agency code site ID pair
+  Samples <- subset(Samples,agencySTAID %in% gsub(" ","",uniqueSTAIDS))
   
   if(nrow(SiteFile) == 0 & nrow(QASiteFile) == 0){
           print("Site does not exist in sitefile, check site number input")
