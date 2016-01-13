@@ -7,8 +7,7 @@
 #' data("exampleData",package="WQReview")
 #' ionBalanceOut <- ionBalance(qw.data=qw.data)
 #' @importFrom plyr join
-#' @importFrom plyr ddply
-#' @importFrom plyr summarize
+#' @importFrom dplyr do
 #' @importFrom reshape2 dcast
 #' @export
 #' 
@@ -19,6 +18,8 @@ ionBalance <- function(qw.data, wide = FALSE)
   
   ###join charge balance info to plot table by parameter code
   ion.charges <- join(qw.data$PlotTable,ion.balance.data, by = "PARM_CD")
+  ##Remove parameters that do not have a charge
+  ion.charges <- subset(ion.charges, is.na(ION_BAL_MEQ_FC) == FALSE)
   
   ###Make some collumns numeric for operations
   ion.charges$ION_BAL_MEQ_FC <- as.numeric(ion.charges$ION_BAL_MEQ_FC)
@@ -133,11 +134,11 @@ ionBalance <- function(qw.data, wide = FALSE)
 
 ###Use ddply to apply function to data-frame by record number
 
-ion.charges <- subset(ion.charges, PARM_CD %in% ion.balance.data$PARM_CD)
+#ion.charges <- subset(ion.charges, PARM_CD %in% ion.balance.data$PARM_CD)
 
 if(nrow(ion.charges) > 0)
 {
-chargebalance.table  <- ddply(ion.charges,"RECORD_NO",chargeCalc)
+chargebalance.table  <- dplyr::do(ion.charges,chargeCalc(.))
 chargebalance.table$perc.diff <- (chargebalance.table$sum_cat-chargebalance.table$sum_an)/(chargebalance.table$sum_cat+chargebalance.table$sum_an)*100
 
 ###Make element column for dcast table
