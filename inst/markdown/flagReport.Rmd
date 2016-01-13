@@ -56,9 +56,12 @@ require(gridExtra)
         cat("##Major anions","\n")
         for(j in 1:nrow(parms))
                 {
-               try({ 
-                cat("###",parms$PARM_CD[j],parms$PARM_NM[j],"\n")
-                
+               try({
+                       if(length(unique(reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == parms$PARM_CD[j])]) > 0 )
+                          ){
+                cat("###*FLAG*",parms$PARM_CD[j],parms$PARM_NM[j],"*FLAG*\n")
+                       } else (cat("###",parms$PARM_CD[j],parms$PARM_NM[j],"\n"))
+                       
                 tsPlot <- qwtsPlot(qw.data = qw.data,
                    site.selection = site,
                    plotparm = parms$PARM_CD[j],
@@ -103,8 +106,10 @@ require(gridExtra)
         for(j in 1:nrow(parms))
                 {
                 try({
-                cat("###",parms$PARM_CD[j],parms$PARM_NM[j],"\n")
-                
+                        if(length(unique(reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == parms$PARM_CD[j])]) > 0 )
+                          ){
+                cat("###*FLAG*",parms$PARM_CD[j],parms$PARM_NM[j],"*FLAG*\n")
+                        } else(cat("###",parms$PARM_CD[j],parms$PARM_NM[j],"\n"))
                 tsPlot <- qwtsPlot(qw.data = qw.data,
                    site.selection = site,
                    plotparm = parms$PARM_CD[j],
@@ -146,8 +151,10 @@ require(gridExtra)
         for(j in 1:nrow(parms))
                 {
                 try({
-                cat("###",parms$PARM_CD[j],parms$PARM_NM[j],"\n")
-                
+                        if(length(unique(reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == parms$PARM_CD[j])]) > 0 )
+                          ){
+                cat("###*FLAG*",parms$PARM_CD[j],parms$PARM_NM[j],"*FLAG*\n")
+                        }else (cat("###",parms$PARM_CD[j],parms$PARM_NM[j],"\n"))
                 tsPlot <- qwtsPlot(qw.data = qw.data,
                    site.selection = site,
                    plotparm = parms$PARM_CD[j],
@@ -189,7 +196,10 @@ require(gridExtra)
         for(j in 1:nrow(parms))
                 {
                 try({
-                cat("###",parms$PARM_CD[j],parms$PARM_NM[j],"\n")
+                        if(length(unique(reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == parms$PARM_CD[j])]) > 0 )
+                          ){
+                cat("###*FLAG*",parms$PARM_CD[j],parms$PARM_NM[j],"*FLAG*\n")
+                        }else (cat("###",parms$PARM_CD[j],parms$PARM_NM[j],"\n"))
                 
                 tsPlot <- qwtsPlot(qw.data = qw.data,
                    site.selection = site,

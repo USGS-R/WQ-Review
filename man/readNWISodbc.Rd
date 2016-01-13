@@ -14,7 +14,7 @@ readNWISodbc(DSN, env.db = "01", qa.db = "02", STAIDS, dl.parms = "All",
 
 \item{qa.db}{A character string containing the database number of QA samples}
 
-\item{STAIDS}{A character vector of stations IDs}
+\item{STAIDS}{A character vector of stations IDs. Agency code defaults to "USGS" unless appended to the beginning of station ID with a dash, e.g. "USGS-123456".}
 
 \item{dl.parms}{A character vector of pcodes to pull data, e.g. c("00300","00915") or NWIS parameter groups specified in details section.}
 
