@@ -31,7 +31,7 @@
 #' @param colagencycode Manual qwsample entry
 #' @importFrom reshape2 melt
 #' @importFrom reshape2 dcast
-#' @importFrom plyr join
+#' @importFrom dplyr left_join
 #' @import RODBC 
 #' @export
 #' 
@@ -312,7 +312,7 @@ dataUpload <- function(qwsampletype,
   ###Make a unique sample ID out of ID date time medium code
   meltdata$UID <- paste(meltdata$USGS.SID,meltdata$Sample.start.date..yyyymmdd.,meltdata$Sample.start.time..hhmm.,meltdata$medium,sep="")
   ###Join the lab data to the pcode meta data in the pcode file
-  mergeddata <- (join(meltdata, pcodedata, by = 'pcode'))
+  mergeddata <- (dplyr::left_join(meltdata, pcodedata, by = 'pcode'))
   ###Make an empty QWresult dataframe
   qwresult <- matrix(nrow=nrow(mergeddata),ncol=20)
   qwresult <- (as.data.frame(qwresult))
@@ -380,7 +380,7 @@ dataUpload <- function(qwsampletype,
   }else{}
   
   ###Matchup sample integers between the qwsample and qwresult file
-  qwresult <- join(qwresult, qwsample[c("UID","sample.integer")], by = "UID")
+  qwresult <- dplyr::left_join(qwresult, qwsample[c("UID","sample.integer")], by = "UID")
   ###Fill in missing sample integers with UID to track down missing/mislabeled samples
   qwresult$sample.integer[which(is.na(qwresult$sample.integer))] <- qwresult$UID[which(is.na(qwresult$sample.integer))]
   

@@ -26,7 +26,8 @@ Imports:
     lubridate,
     DT,
     gridExtra,
-    rmarkdown
+    rmarkdown,
+    dplyr
 Suggests:
     knitr
 VignetteBuilder: knitr

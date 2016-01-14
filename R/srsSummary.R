@@ -4,7 +4,7 @@
 #' @param srsValues A dataframe containing the SRS values. The first column contains the SRS sample ID,the second column contains the SRS analyte parameter code, the third column contains the SRS analyte name, and the fourth column contains the SRS MPV
 #' @param srsResults A dataframe containing the results of the SRS analyses from the lab. The first column containssample descriptions (e.g. date and time), the second column contains the SRS sample ID, and the remaining columns containthe SRS results. SRS Result columns must be named with the cooresponding paramter code.
 #' @param reportingLevels A dataframe containing the reporting levels for each analyte. The first column contains the parameter code and the second column contains hte associated reporting level
-#' @importFrom plyr join
+#' @importFrom dplyr left_join
 #' @importFrom reshape2 melt
 #' @export
 #' 
@@ -35,10 +35,10 @@ srsSummary <- function(srsValues,srsResults,reportingLevels) {
         srsResults$PARM_CD <- (gsub("X", "", srsResults$PARM_CD))
         
         ###Join results to mpvs
-        srsSummary <- join(srsResults,srsValues,by=c("srsID","PARM_CD"))
+        srsSummary <- dplyr::left_join(srsResults,srsValues,by=c("srsID","PARM_CD"))
         
         ###bring in lrls
-        srsSummary <- join(srsSummary,reportingLevels,by="PARM_CD")
+        srsSummary <- dplyr::left_join(srsSummary,reportingLevels,by="PARM_CD")
         
         ###Make columns numeric
         srsSummary$value <- as.numeric(srsSummary$value)

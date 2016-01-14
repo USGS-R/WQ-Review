@@ -13,9 +13,9 @@
 #'              begin.date = "2009-01-01",
 #'              end.date = "2013-01-01",
 #'              multiple.levels = FALSE)
-#' @importFrom plyr join
-#' @importFrom plyr ddply
-#' @importFrom plyr summarize
+#' @importFrom dplyr left_join
+#' @importFrom dplyr group_by
+#' @importFrom dplyr summarize
 #' @export
 #' 
 
@@ -70,51 +70,54 @@ if(multiple.levels)
 {
   
   ###Make blank summary dataframe using pcodes
-  blanksummary <- data.frame(PARM_CD = unique(blanks$PARM_CD))
-  blanksummary <- join(blanksummary, blanks[c("PARM_CD","PARM_SEQ_GRP_CD","PARM_DS","RPT_LEV_VA")],by="PARM_CD")
+  blanksummary <- data.frame(PARM_CD = unique(blanks$PARM_CD),stringsAsFactors=FALSE)
+  blanksummary <- dplyr::left_join(blanksummary, blanks[c("PARM_CD","PARM_SEQ_GRP_CD","PARM_DS","RPT_LEV_VA")],by="PARM_CD")
   blanksummary <- unique(blanksummary)
   
-summary <- ddply(blanks, c("PARM_CD","RPT_LEV_VA"), function(x) {
-			num_blanks <- length(x$RESULT_VA)
-			num_detects <- length(x$RESULT_VA[which(x$REMARK_CD == "Sample")])
-      
-      ###Change how the estimated code is displayed or provide better documentation
-			num_e_detects <- length(x$RESULT_VA[which(x$REMARK_CD == "E")])
-			
-      num_detects_10xRL <- length(x$RESULT_VA[which(x$RESULT_VA >= 10*as.numeric(x$RPT_LEV_VA) & x$REMARK_CD == "Sample")])
-			median_detected_value <- median(x$RESULT_VA[which(x$REMARK_CD == "Sample")])
-			max_detected_value <- max(x$RESULT_VA[which(x$REMARK_CD == "Sample")],na.rm=TRUE)
-			
-      ##Calculate BD9090 for detections
-      #if(length(x$RESULT_VA[which(x$REMARK_CD == "Sample")]) > 1)
-			#{
-      #sorteddetects <- sort(x$RESULT_VA[which(x$REMARK_CD == "Sample")]) 
-      #BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
-			#} else{BD90.90 <- NA}
-      
-      ##make a date frame out of the summary vectors
-      data.frame(num_blanks = num_blanks,
-                 num_detects=num_detects,
-                 num_e_detects=num_e_detects,
-                 num_detects_10xRL=num_detects_10xRL,
-                 median_detected_value=median_detected_value,
-                 max_detected_value=max_detected_value
-                 #if(length(BD90.90 != 0))
-                 #{
-                 #BD90.90 = BD90.90
-                 #} else (BD90.90 = NA)
-                )
-
-			})
+  blankStats <- function(x)
+  {
+          num_blanks <- length(x$RESULT_VA)
+          num_detects <- length(x$RESULT_VA[which(x$REMARK_CD == "Sample")])
+          
+          ###Change how the estimated code is displayed or provide better documentation
+          num_e_detects <- length(x$RESULT_VA[which(x$REMARK_CD == "E")])
+          
+          num_detects_10xRL <- length(x$RESULT_VA[which(x$RESULT_VA >= 10*as.numeric(x$RPT_LEV_VA) & x$REMARK_CD == "Sample")])
+          median_detected_value <- median(x$RESULT_VA[which(x$REMARK_CD == "Sample")])
+          max_detected_value <- suppressWarnings(max(x$RESULT_VA[which(x$REMARK_CD == "Sample")],na.rm=TRUE))
+          
+          ##Calculate BD9090 for detections
+          #if(length(x$RESULT_VA[which(x$REMARK_CD == "Sample")]) > 1)
+          #{
+          #sorteddetects <- sort(x$RESULT_VA[which(x$REMARK_CD == "Sample")]) 
+          #BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
+          #} else{BD90.90 <- NA}
+          
+          ##make a date frame out of the summary vectors
+          return(data.frame(num_blanks = num_blanks,
+                            num_detects=num_detects,
+                            num_e_detects=num_e_detects,
+                            num_detects_10xRL=num_detects_10xRL,
+                            median_detected_value=median_detected_value,
+                            max_detected_value=max_detected_value
+                            #if(length(BD90.90 != 0))
+                            #{
+                            #BD90.90 = BD90.90
+                            #} else (BD90.90 = NA)
+                            )
+          )
+  }
+  
+summary <- dplyr::do(group_by(blanks,PARM_CD,RPT_LEV_VA),blankStats(.))
         
-##Join summary to pcode data
+##dplyr::left_join summary to pcode data
 
-blanksummary <- join(blanksummary,summary,by=c("PARM_CD","RPT_LEV_VA"))
+blanksummary <- dplyr::left_join(blanksummary,summary,by=c("PARM_CD","RPT_LEV_VA"))
 } else if (!multiple.levels)
 {
   ###Make blank summary dataframe using pcodes. Omitting RPT_LEVEL_VA so its a unique by pcode
-  blanksummary <- data.frame(PARM_CD = unique(blanks$PARM_CD))
-  blanksummary <- join(blanksummary, blanks[c("PARM_CD","PARM_SEQ_GRP_CD","PARM_DS")],by="PARM_CD")
+  blanksummary <- data.frame(PARM_CD = unique(blanks$PARM_CD),stringsAsFactors=FALSE)
+  blanksummary <- dplyr::left_join(blanksummary, blanks[c("PARM_CD","PARM_SEQ_GRP_CD","PARM_DS")],by="PARM_CD")
   blanksummary <- unique(blanksummary)
   
   ##Add in max and min reporting levels
@@ -124,45 +127,17 @@ blanksummary <- join(blanksummary,summary,by=c("PARM_CD","RPT_LEV_VA"))
   names(minRL) <- c("group","PARM_CD","MIN_RPT_LEV_VA")
   
   
-  blanksummary <- join(blanksummary,maxRL[c("PARM_CD","MAX_RPT_LEV_VA")], by = "PARM_CD")
-  blanksummary <- join(blanksummary,minRL[c("PARM_CD","MIN_RPT_LEV_VA")], by = "PARM_CD")
+  blanksummary <- dplyr::left_join(blanksummary,maxRL[c("PARM_CD","MAX_RPT_LEV_VA")], by = "PARM_CD")
+  blanksummary <- dplyr::left_join(blanksummary,minRL[c("PARM_CD","MIN_RPT_LEV_VA")], by = "PARM_CD")
   
   
-  summary <- ddply(blanks, c("PARM_CD"), function(x) {
-    num_blanks <- length(x$RESULT_VA)
-    num_detects <- length(x$RESULT_VA[which(x$REMARK_CD == "Sample")])
-    num_e_detects <- length(x$RESULT_VA[which(x$REMARK_CD == "E")])
-    num_detects_10xmaxRL <- length(x$RESULT_VA[which(x$RESULT_VA >= 10*as.numeric(max(x$RPT_LEV_VA)) & x$REMARK_CD == "Sample")])
-    median_detected_value <- median(x$RESULT_VA[which(x$REMARK_CD == "Sample")])
-    max_detected_value <- max(x$RESULT_VA[which(x$REMARK_CD == "Sample")],na.rm=TRUE)
-    
-    ##Calculate BD9090 for detections. DISABLED
-   # if(length(x$RESULT_VA[which(x$REMARK_CD == "Sample")]) > 1)
-  #  {
-   #   sorteddetects <- sort(x$RESULT_VA[which(x$REMARK_CD == "Sample")]) 
-  #    BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
-  #  } else{BD90.90 <- NA}
-    
-    ##make a date frame out of the summary vectors
+  summary <- dplyr::do(group_by(blanks, PARM_CD),blankStats(.)) 
 
-    data.frame(num_blanks = num_blanks,
-               num_detects=num_detects,
-               num_e_detects=num_e_detects,
-               num_detects_10xRL=num_detects_10xmaxRL,
-               median_detected_value=median_detected_value,
-               max_detected_value=max_detected_value
-               #if(length(BD90.90 != 0))
-               #{
-              #   BD90.90 = BD90.90
-              # } else (BD90.90 = NA)
-    )
-    
-  })
     
 
   
-  ##Join summary to pcode data
-  blanksummary <- join(blanksummary,summary,by=c("PARM_CD"))
+  ##dplyr::left_join summary to pcode data
+  blanksummary <- dplyr::left_join(blanksummary,summary,by=c("PARM_CD"))
 }	
 
 ###Order blank summary by pcode group
@@ -176,7 +151,7 @@ blanksummary$max_detected_value <- round(blanksummary$max_detected_value,3)
 
 return(blanksummary)
 ###End of blank dataframe length check
-} else{}
+} else{warning("No OAQ samples in dataset")}
 
 
 }

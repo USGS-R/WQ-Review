@@ -45,7 +45,7 @@
 #' @import RODBC
 #' @importFrom reshape2 dcast
 #' @importFrom reshape2 melt
-#' @importFrom plyr join
+#' @importFrom dplyr left_join
 #' @importFrom lubridate yday
 #' @export
 
@@ -229,9 +229,9 @@ readNWISodbc <- function(DSN,
     } else{}
   }
   ###Join comments to results
-  Results <- join(Results,sampleComments,by="RECORD_NO")
-  Results <- join(Results,resultComments,by=c("RECORD_NO","PARM_CD"))
-  Results <- join(Results,resultQualifiers,by=c("RECORD_NO","PARM_CD"))
+  Results <- dplyr::left_join(Results,sampleComments,by="RECORD_NO")
+  Results <- dplyr::left_join(Results,resultComments,by=c("RECORD_NO","PARM_CD"))
+  Results <- dplyr::left_join(Results,resultQualifiers,by=c("RECORD_NO","PARM_CD"))
   
   Results$Val_qual <- paste(Results$RESULT_VA,Results$REMARK_CD, sep = " ")
   Results$Val_qual <- gsub("NA","",Results$Val_qual)
@@ -273,7 +273,7 @@ readNWISodbc <- function(DSN,
   
   #station names and dates
   name_num <- SiteFile[c("SITE_NO","STATION_NM","DEC_LAT_VA","DEC_LONG_VA","HUC_CD")]
-  Sample_meta <- join(Samples, name_num,by="SITE_NO")
+  Sample_meta <- dplyr::left_join(Samples, name_num,by="SITE_NO")
   Sample_meta$RECORD_NO <- paste(Sample_meta$RECORD_NO,env.db,sep="_")
   
   ###Reorder sampel meta columns
@@ -289,7 +289,7 @@ readNWISodbc <- function(DSN,
   #Sample_meta <- Sample_meta[c("SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_START_TZ_CD","SAMPLE_START_LOCAL_TM_FG","SAMPLE_END_DT","MEDIUM_CD","RECORD_NO","LAB_NO","PROJECT_CD","AQFR_CD")]
   
   #join tables so parm names are together
-  Results<- join(Results,parms,by="PARM_CD")
+  Results<- dplyr::left_join(Results,parms,by="PARM_CD")
   
   #Paste database number ot record number to make unique
   Results$RECORD_NO <- paste(Results$RECORD_NO, env.db,sep="_")
@@ -300,7 +300,7 @@ readNWISodbc <- function(DSN,
     if(!("All" %in% dl.parms))
     {
       Results <- subset(Results, PARM_SEQ_GRP_CD %in% dl.parms)
-    } else{ Results<- join(Results,parms,by="PARM_CD")} 
+    } else{ Results<- dplyr::left_join(Results,parms,by="PARM_CD")} 
   } else {Results <- subset(Results, PARM_CD %in% dl.parms)}
   
   if(nrow(Results) == 0) {
@@ -317,17 +317,17 @@ readNWISodbc <- function(DSN,
   #rename pcodes to parm names
   parmNames <- as.data.frame(names(DataTable1))
   names(parmNames) <- "PARM_CD"
-  parmNames <- join(parmNames,unique(Results[c("PARM_CD","PARM_NM")]),by="PARM_CD")
+  parmNames <- dplyr::left_join(parmNames,unique(Results[c("PARM_CD","PARM_NM")]),by="PARM_CD")
   names(DataTable1) <- c("RECORD_NO", na.omit(parmNames$PARM_NM))
   
   #fill in record number meta data (station ID, name, date, time, etc)
-  DataTable1 <- join(DataTable1,Sample_meta, by="RECORD_NO")
+  DataTable1 <- dplyr::left_join(DataTable1,Sample_meta, by="RECORD_NO")
   
   #reorder columns so meta data is at front
   parmcols <- seq(from =2, to =ncol(DataTable1)-ncol(Sample_meta)+1)
   metacols <- seq(from = ncol(DataTable1)-(ncol(Sample_meta)-2), to =ncol(DataTable1))
   DataTable1 <- DataTable1[c(1,metacols[1:7],parmcols,metacols[8:length(metacols)])]
-  PlotTable1 <- join(Results,Sample_meta,by="RECORD_NO")
+  PlotTable1 <- dplyr::left_join(Results,Sample_meta,by="RECORD_NO")
   
   ##################
   ###QA Database####
@@ -438,9 +438,9 @@ readNWISodbc <- function(DSN,
       } else{}
     }
     ###Join comments to results
-    Results <- join(Results,sampleComments,by="RECORD_NO")
-    Results <- join(Results,resultComments,by=c("RECORD_NO","PARM_CD"))
-    Results <- join(Results,resultQualifiers,by=c("RECORD_NO","PARM_CD"))
+    Results <- dplyr::left_join(Results,sampleComments,by="RECORD_NO")
+    Results <- dplyr::left_join(Results,resultComments,by=c("RECORD_NO","PARM_CD"))
+    Results <- dplyr::left_join(Results,resultQualifiers,by=c("RECORD_NO","PARM_CD"))
     
     Results$Val_qual <- paste(Results$RESULT_VA,Results$REMARK_CD, sep = " ")
     Results$Val_qual <- gsub("NA","",Results$Val_qual)
@@ -486,7 +486,7 @@ readNWISodbc <- function(DSN,
     
     #station names and dates
     name_num <- SiteFile[c("SITE_NO","STATION_NM")]
-    Sample_meta <- join(Samples, name_num,by="SITE_NO")
+    Sample_meta <- dplyr::left_join(Samples, name_num,by="SITE_NO")
     Sample_meta$RECORD_NO <- paste(Sample_meta$RECORD_NO,qa.db,sep="_")
     
     Sample_meta <- Sample_meta[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_END_DT","MEDIUM_CD",
@@ -501,7 +501,7 @@ readNWISodbc <- function(DSN,
     
     
     #join tables so parm names are together
-    Results<- join(Results,parms,by="PARM_CD")
+    Results<- dplyr::left_join(Results,parms,by="PARM_CD")
     
     #Paste database number ot record number to make unique
     Results$RECORD_NO <- paste(Results$RECORD_NO, qa.db,sep="_")
@@ -512,7 +512,7 @@ readNWISodbc <- function(DSN,
       if(!("All" %in% dl.parms))
       {
         Results <- subset(Results, PARM_SEQ_GRP_CD %in% dl.parms)
-      } else{Results<- join(Results,parms,by="PARM_CD")} 
+      } else{Results<- dplyr::left_join(Results,parms,by="PARM_CD")} 
     } else {Results <- subset(Results, PARM_CD %in% dl.parms)}
     
     #Make dataframe as record number and pcode. MUST HAVE ALL UNIQUE PCODE NAMES
@@ -525,17 +525,17 @@ readNWISodbc <- function(DSN,
       DataTable2 <- dcast(DataTable2, RECORD_NO ~ PARM_CD,value.var = "Val_qual")
       #rename pcodes to parm names
       parmNames <- data.frame(PARM_CD = names(DataTable2))
-      parmNames <- join(parmNames,unique(Results[c("PARM_CD","PARM_NM")]),by="PARM_CD")
+      parmNames <- dplyr::left_join(parmNames,unique(Results[c("PARM_CD","PARM_NM")]),by="PARM_CD")
       names(DataTable2) <- c("RECORD_NO", na.omit(parmNames$PARM_NM))
       
       #fill in record number meta data (station ID, name, date, time, etc)
-      DataTable2 <- join(DataTable2,Sample_meta, by="RECORD_NO")
+      DataTable2 <- dplyr::left_join(DataTable2,Sample_meta, by="RECORD_NO")
       
       #reorder columns so meta data is at front
       parmcols <- seq(from =2, to =ncol(DataTable2)-ncol(Sample_meta)+1)
       metacols <- seq(from = ncol(DataTable2)-(ncol(Sample_meta)-2), to =ncol(DataTable2))
       DataTable2 <- DataTable2[c(1,metacols[1:7],parmcols,metacols[8:length(metacols)])]
-      PlotTable2 <- join(Results,Sample_meta,by="RECORD_NO")
+      PlotTable2 <- dplyr::left_join(Results,Sample_meta,by="RECORD_NO")
     }else{}
     
     }

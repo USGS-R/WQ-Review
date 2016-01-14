@@ -5,8 +5,8 @@
 #' @examples 
 #' data("exampleData",package="WQReview")
 #' repTablerOut <- repTabler(qw.data=qw.data)
-#' @importFrom plyr join
-#' @importFrom plyr rename
+#' @importFrom dplyr left_join
+#' @importFrom dplyr rename
 #' @export
 
 repTabler <- function(qw.data)
@@ -22,15 +22,15 @@ repTabler <- function(qw.data)
   ###Rename columns to indicate env or rep
   names(envData) <- paste("Env_",names(envData),sep="")
   names(repData) <- paste("Rep_",names(repData),sep="")
-  envData <- rename(envData,c("Env_PARM_CD" = "PARM_CD"))
-  repData <- rename(repData,c("Rep_PARM_CD" = "PARM_CD"))
+  envData <- dplyr::rename(envData,c("Env_PARM_CD" = "PARM_CD"))
+  repData <- dplyr::rename(repData,c("Rep_PARM_CD" = "PARM_CD"))
   
   ###Make a unique ID for each sample by site id, date
   envData$UID <- paste(envData$Env_SITE_NO,as.Date(envData$Env_SAMPLE_START_DT),sep="")
   repData$UID <- paste(repData$Rep_SITE_NO,as.Date(repData$Rep_SAMPLE_START_DT),sep="")
   
   ###Join data frames by UID and pcode
-  repTable <- join(envData,repData,by=c("UID","PARM_CD"))
+  repTable <- dplyr::left_join(envData,repData,by=c("UID","PARM_CD"))
   
   
   ###Calculate difference and RPD

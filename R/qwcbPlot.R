@@ -21,7 +21,7 @@
 #'                        printPlot = TRUE)
 #' @importFrom stringr str_wrap
 #' @import ggplot2
-#' @importFrom plyr join
+#' @importFrom dplyr left_join
 #' @export
 
 qwcbPlot <- function(qw.data,
@@ -33,7 +33,7 @@ qwcbPlot <- function(qw.data,
                     wySymbol = FALSE,
                     printPlot = TRUE){
   
-        ###Run ion balance function if not run already and join to qw.data$PlotTable
+        ###Run ion balance function if not run already and dplyr::left_join to qw.data$PlotTable
         if(is.null(qw.data$PlotTable$perc.diff))
         {
         tryCatch({       
@@ -42,7 +42,7 @@ qwcbPlot <- function(qw.data,
         ###Check that a balance was calculated
         ###Join charge balance table to plot table
                 chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
-                qw.data$PlotTable <- join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")           
+                qw.data$PlotTable <- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")           
         }, warning = function(w) {
         }, error = function(e) {
                 stop("Insufficient data to calculate charge balance. Check your qw.data$PlotTable data")

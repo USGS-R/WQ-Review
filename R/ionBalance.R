@@ -6,7 +6,7 @@
 #' @examples
 #' data("exampleData",package="WQReview")
 #' ionBalanceOut <- ionBalance(qw.data=qw.data)
-#' @importFrom plyr join
+#' @importFrom dplyr left_join
 #' @importFrom dplyr do
 #' @importFrom reshape2 dcast
 #' @export
@@ -16,8 +16,8 @@ ionBalance <- function(qw.data, wide = FALSE)
 {
   #ion.balance.data <- read.csv("Data/ion_bal_mills.csv",header=TRUE,colClasses = "character")
   
-  ###join charge balance info to plot table by parameter code
-  ion.charges <- join(qw.data$PlotTable,ion.balance.data, by = "PARM_CD")
+  ###dplyr::left_join charge balance info to plot table by parameter code
+  ion.charges <- dplyr::left_join(qw.data$PlotTable,ion.balance.data, by = "PARM_CD")
   ##Remove parameters that do not have a charge
   ion.charges <- subset(ion.charges, is.na(ION_BAL_MEQ_FC) == FALSE)
   
@@ -148,7 +148,7 @@ chargebalance.table$element[which(chargebalance.table$ION_BAL_SUBION_CD=="")] <-
 
 ####Dcast the charge balance table and make a balance data table
 BalanceDataTable <- dcast(chargebalance.table, RECORD_NO + sum_cat + sum_an +perc.diff + complete.chem ~ element,value.var = "meqCharge",fun.aggregate=median)
-BalanceDataTable <- join(unique(qw.data$PlotTable[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_END_DT","MEDIUM_CD")]),
+BalanceDataTable <- dplyr::left_join(unique(qw.data$PlotTable[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_END_DT","MEDIUM_CD")]),
                          BalanceDataTable,by="RECORD_NO",type="right")
 ###Flag CB > 10% or 5%
 BalanceDataTable$flags <- ""
