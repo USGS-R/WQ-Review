@@ -270,7 +270,6 @@ readNWISodbc <- function(DSN,
   parms <- parms[c("PARM_CD","PARM_SEQ_GRP_CD","PARM_DS","PARM_NM","PARM_SEQ_NU")]
   
   
-  
   #station names and dates
   name_num <- SiteFile[c("SITE_NO","STATION_NM","DEC_LAT_VA","DEC_LONG_VA","HUC_CD")]
   Sample_meta <- dplyr::left_join(Samples, name_num,by="SITE_NO")
@@ -300,7 +299,7 @@ readNWISodbc <- function(DSN,
     if(!("All" %in% dl.parms))
     {
       Results <- subset(Results, PARM_SEQ_GRP_CD %in% dl.parms)
-    } else{ Results<- dplyr::left_join(Results,parms,by="PARM_CD")} 
+    } else{} 
   } else {Results <- subset(Results, PARM_CD %in% dl.parms)}
   
   if(nrow(Results) == 0) {
@@ -512,7 +511,7 @@ readNWISodbc <- function(DSN,
       if(!("All" %in% dl.parms))
       {
         Results <- subset(Results, PARM_SEQ_GRP_CD %in% dl.parms)
-      } else{Results<- dplyr::left_join(Results,parms,by="PARM_CD")} 
+      } else{} 
     } else {Results <- subset(Results, PARM_CD %in% dl.parms)}
     
     #Make dataframe as record number and pcode. MUST HAVE ALL UNIQUE PCODE NAMES
