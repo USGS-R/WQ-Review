@@ -74,41 +74,43 @@ if(multiple.levels)
   blanksummary <- dplyr::left_join(blanksummary, blanks[c("PARM_CD","PARM_SEQ_GRP_CD","PARM_DS","RPT_LEV_VA")],by="PARM_CD")
   blanksummary <- unique(blanksummary)
   
-  blankStats <- function(x)
-  {
-          num_blanks <- length(x$RESULT_VA)
-          num_detects <- length(x$RESULT_VA[which(x$REMARK_CD == "Sample")])
-          
-          ###Change how the estimated code is displayed or provide better documentation
-          num_e_detects <- length(x$RESULT_VA[which(x$REMARK_CD == "E")])
-          
-          num_detects_10xRL <- length(x$RESULT_VA[which(x$RESULT_VA >= 10*as.numeric(x$RPT_LEV_VA) & x$REMARK_CD == "Sample")])
-          median_detected_value <- median(x$RESULT_VA[which(x$REMARK_CD == "Sample")])
-          max_detected_value <- suppressWarnings(max(x$RESULT_VA[which(x$REMARK_CD == "Sample")],na.rm=TRUE))
-          
-          ##Calculate BD9090 for detections
-          #if(length(x$RESULT_VA[which(x$REMARK_CD == "Sample")]) > 1)
-          #{
-          #sorteddetects <- sort(x$RESULT_VA[which(x$REMARK_CD == "Sample")]) 
-          #BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
-          #} else{BD90.90 <- NA}
-          
-          ##make a date frame out of the summary vectors
-          return(data.frame(num_blanks = num_blanks,
-                            num_detects=num_detects,
-                            num_e_detects=num_e_detects,
-                            num_detects_10xRL=num_detects_10xRL,
-                            median_detected_value=median_detected_value,
-                            max_detected_value=max_detected_value
-                            #if(length(BD90.90 != 0))
-                            #{
-                            #BD90.90 = BD90.90
-                            #} else (BD90.90 = NA)
-                            )
-          )
-  }
   
-summary <- dplyr::do(group_by(blanks,PARM_CD,RPT_LEV_VA),blankStats(.))
+summary <- dplyr::do(group_by(blanks,PARM_CD,RPT_LEV_VA),
+                     {
+                             
+                             num_blanks <- length(.$RESULT_VA)
+                             num_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "Sample")])
+                             
+                             ###Change how the estimated code is displayed or provide better documentation
+                             num_e_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "E")])
+                             
+                             num_detects_10xRL <- length(.$RESULT_VA[which(.$RESULT_VA >= 10*as.numeric(.$RPT_LEV_VA) & .$REMARK_CD == "Sample")])
+                             median_detected_value <- median(.$RESULT_VA[which(.$REMARK_CD == "Sample")])
+                             max_detected_value <- suppressWarnings(max(.$RESULT_VA[which(.$REMARK_CD == "Sample")],na.rm=TRUE))
+                             
+                             ##Calculate BD9090 for detections
+                             #if(length(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) > 1)
+                             #{
+                             #sorteddetects <- sort(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) 
+                             #BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
+                             #} else{BD90.90 <- NA}
+                             
+                             ##make a date frame out of the summary vectors
+                             data.frame(num_blanks = num_blanks,
+                                        num_detects=num_detects,
+                                        num_e_detects=num_e_detects,
+                                        num_detects_10xRL=num_detects_10xRL,
+                                        median_detected_value=median_detected_value,
+                                        max_detected_value=max_detected_value
+                                        #if(length(BD90.90 != 0))
+                                        #{
+                                        #BD90.90 = BD90.90
+                                        #} else (BD90.90 = NA)
+                             )
+                     }
+)
+                             
+
         
 ##dplyr::left_join summary to pcode data
 
@@ -131,7 +133,38 @@ blanksummary <- dplyr::left_join(blanksummary,summary,by=c("PARM_CD","RPT_LEV_VA
   blanksummary <- dplyr::left_join(blanksummary,minRL[c("PARM_CD","MIN_RPT_LEV_VA")], by = "PARM_CD")
   
   
-  summary <- dplyr::do(group_by(blanks, PARM_CD),blankStats(.)) 
+  summary <- dplyr::do(group_by(blanks, PARM_CD),{
+          
+          num_blanks <- length(.$RESULT_VA)
+          num_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "Sample")])
+          
+          ###Change how the estimated code is displayed or provide better documentation
+          num_e_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "E")])
+          
+          num_detects_10xRL <- length(.$RESULT_VA[which(.$RESULT_VA >= 10*as.numeric(.$RPT_LEV_VA) & .$REMARK_CD == "Sample")])
+          median_detected_value <- median(.$RESULT_VA[which(.$REMARK_CD == "Sample")])
+          max_detected_value <- suppressWarnings(max(.$RESULT_VA[which(.$REMARK_CD == "Sample")],na.rm=TRUE))
+          
+          ##Calculate BD9090 for detections
+          #if(length(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) > 1)
+          #{
+          #sorteddetects <- sort(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) 
+          #BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
+          #} else{BD90.90 <- NA}
+          
+          ##make a date frame out of the summary vectors
+          data.frame(num_blanks = num_blanks,
+                     num_detects=num_detects,
+                     num_e_detects=num_e_detects,
+                     num_detects_10xRL=num_detects_10xRL,
+                     median_detected_value=median_detected_value,
+                     max_detected_value=max_detected_value
+                     #if(length(BD90.90 != 0))
+                     #{
+                     #BD90.90 = BD90.90
+                     #} else (BD90.90 = NA)
+          )
+  }) 
 
     
 
