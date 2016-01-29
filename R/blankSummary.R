@@ -2,7 +2,7 @@
 #' 
 #' Generates a summary table of blank analyses for all analytes in a qw.data list from readNWISodbc.
 #' @param qw.data a qw.data list generated from readNWISodbc
-#' @param STAIDS A character vector of station IDs to summarize.
+#' @param STAIDS A character vector of station IDs to summarize or All for all site ids in qw.data.Defaults to "All"
 #' @param begin.date Character string (yyyy-mm-dd) of beggining date to subset blank analyses. Leave blank for all analyses.
 #' @param end.date Character string (yyyy-mm-dd) of ending date to subset blank analyses. Leave blank for all analyses.
 #' @param multiple.levels Logical to analyze multiple reporting levels separetly. Default is TRUE.
@@ -19,10 +19,16 @@
 #' @export
 #' 
 
-blankSummary <- function(qw.data,STAIDS,begin.date = NA,end.date=NA,multiple.levels = FALSE)
+blankSummary <- function(qw.data,STAIDS="All",begin.date = NA,end.date=NA,multiple.levels = FALSE)
 {
 
 ### Various if statements to check for date range subsetting
+        if(STAIDS == "ALL")
+        {
+                STAIDS <- STAIDS
+        } else {
+                        STAIDS <- unique(qw.data$PlotTable$SITE_NO)
+                        }
   
   if(is.na(begin.date) & is.na(end.date))
   {

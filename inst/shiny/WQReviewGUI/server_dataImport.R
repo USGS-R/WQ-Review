@@ -1,5 +1,4 @@
-####This generates some summary plots####
-###It goes outside the observe so that it displays errors
+
 output$importWarning <- renderPrint({
         validate(
                 need(!is.null(input$STAIDS) | !is.null(input$siteFile), "Please enter a site number or a site ID file"),
@@ -332,8 +331,11 @@ observeEvent(input$dataDownload, {
         ###blank table inputs update####
         ################################
         updateSelectInput(session, "siteSel_blankTable",
-                          choices = setNames((siteSelData$SITE_NO),
+                          choices = c("All",
+                                      setNames((siteSelData$SITE_NO),
                                              paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                          )
+                          
         )
         
         ################################

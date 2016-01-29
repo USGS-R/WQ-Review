@@ -218,8 +218,9 @@ output$wholevpartTableOut <- downloadHandler(
 
 ###Render the table
 try({
+
         output$blankTable <- DT::renderDataTable(
-                
+
                 suppressWarnings(blankSummary(qw.data,
                              STAIDS = as.character(input$siteSel_blankTable),
                              begin.date = input$startDate_blankTable, 
