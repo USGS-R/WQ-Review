@@ -13,9 +13,7 @@
 #'              parameterCd = c("00095","00915","00945"), 
 #'              begin.date = "2010-01-01", 
 #'              end.date = "2011-12-31")
-#' @importFrom plyr join
-#' @importFrom plyr ddply
-#' @importFrom plyr summarize
+#' @importFrom dplyr summarize
 #' @export
 #' 
 summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date = NA, end.date = NA) {
@@ -42,19 +40,21 @@ summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date = 
                 stop("No data to summarize. Check parameter codes and data pull criteria.")
         } else{}
  
-  sumStats<- ddply(data,c("SITE_NO","PARM_CD"),summarize,
-                          N = length(na.omit(RESULT_VA)),
-                          min = min(na.omit(RESULT_VA)),
-                          max = max(na.omit(RESULT_VA)),
-                          mean = mean(na.omit(RESULT_VA)),
-                          median = median(na.omit(RESULT_VA)),
-                   quant99 = quantile(na.omit(RESULT_VA),probs=c(0.99)),
-                          quant90 = quantile(na.omit(RESULT_VA),probs=c(0.9)),
-                          quant10 = quantile(na.omit(RESULT_VA),probs=c(0.1)),
-                          quant95 = quantile(na.omit(RESULT_VA),probs=c(0.95)),
-                          quant05 = quantile(na.omit(RESULT_VA),probs=c(0.05)),
-                   quant01 = quantile(na.omit(RESULT_VA),probs=c(0.01))
+  sumStats<- dplyr::do(group_by(data,SITE_NO,PARM_CD),
+                       data.frame(
+                          N = length(na.omit(.$RESULT_VA)),
+                          min = min(na.omit(.$RESULT_VA)),
+                          max = max(na.omit(.$RESULT_VA)),
+                          mean = mean(na.omit(.$RESULT_VA)),
+                          median = median(na.omit(.$RESULT_VA)),
+                   quant99 = quantile(na.omit(.$RESULT_VA),probs=c(0.99)),
+                          quant90 = quantile(na.omit(.$RESULT_VA),probs=c(0.9)),
+                          quant10 = quantile(na.omit(.$RESULT_VA),probs=c(0.1)),
+                          quant95 = quantile(na.omit(.$RESULT_VA),probs=c(0.95)),
+                          quant05 = quantile(na.omit(.$RESULT_VA),probs=c(0.05)),
+                   quant01 = quantile(na.omit(.$RESULT_VA),probs=c(0.01))
                           )
+  )
   return(sumStats)
   
 }
