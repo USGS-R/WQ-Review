@@ -571,8 +571,8 @@ readNWISodbc <- function(DSN,
   ###Check that data was pulled from Database 2
   if(exists("DataTable2"))
   {
-    DataTable <- rbind.fill(DataTable1,DataTable2)
-    PlotTable <- rbind.fill(PlotTable1,PlotTable2)
+    DataTable <- dplyr::bind_rows(DataTable1,DataTable2)
+    PlotTable <- dplyr::bind_rows(PlotTable1,PlotTable2)
   } else{
     DataTable <- DataTable1
     PlotTable <-PlotTable1
