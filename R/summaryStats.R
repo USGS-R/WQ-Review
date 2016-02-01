@@ -13,7 +13,7 @@
 #'              parameterCd = c("00095","00915","00945"), 
 #'              begin.date = "2010-01-01", 
 #'              end.date = "2011-12-31")
-#' @importFrom dplyr summarize
+#' @importFrom dplyr do
 #' @export
 #' 
 summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date = NA, end.date = NA) {

@@ -17,7 +17,6 @@ Depends:
     R (>= 3.0)
 Imports:
     reshape2,
-    plyr,
     RODBC,
     stringr,
     ggplot2,

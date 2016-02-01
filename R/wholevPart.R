@@ -5,8 +5,8 @@
 #' @examples
 #' data("exampleData",package="WQReview")
 #' wholevPartOut <- wholevPart(qw.data=qw.data)
-#' @importFrom plyr join
-#' @importFrom plyr rename
+#' @importFrom dplyr left_join
+#' @importFrom dplyr rename
 #' @export
 
 
@@ -26,21 +26,21 @@ wholevPart <- function(qw.data)
   {
   
   ###bring in index number for pair
-  filteredData <- join(filteredData, filunfTable,by="PARM_CD")
+  filteredData <- dplyr::left_join(filteredData, filunfTable,by="PARM_CD")
   ###Rename to indicate filtered
   names(filteredData) <- paste("Fil_",names(filteredData),sep="")
   ###bring in index number for pair
-  unfilteredData <- join(unfilteredData, filunfTable,by="PARM_CD")
+  unfilteredData <- dplyr::left_join(unfilteredData, filunfTable,by="PARM_CD")
   ###Rename to indicate filtered
   names(unfilteredData) <- paste("Unf_",names(unfilteredData),sep="")
   
   
   ###Join tables by record number and index to pair up filtered unfiltered results
-  filteredData <- rename(filteredData,c("Fil_RECORD_NO" = "RECORD_NO"))
-  filteredData <- rename(filteredData,c("Fil_index" = "index"))
-  unfilteredData <- rename(unfilteredData,c("Unf_RECORD_NO" = "RECORD_NO"))
-  unfilteredData <- rename(unfilteredData,c("Unf_index" = "index"))
-  pairedData <- join(filteredData,unfilteredData, by = c("RECORD_NO","index"))
+  filteredData <- dplyr::rename(filteredData,RECORD_NO = Fil_RECORD_NO)
+  filteredData <- dplyr::rename(filteredData,index = Fil_index)
+  unfilteredData <- dplyr::rename(unfilteredData,RECORD_NO = Unf_RECORD_NO)
+  unfilteredData <- dplyr::rename(unfilteredData,index = Unf_index)
+  pairedData <- dplyr::left_join(filteredData,unfilteredData, by = c("RECORD_NO","index"))
   
   ###Remove extra columns and NAs
   pairedData <- (pairedData[c("RECORD_NO",
