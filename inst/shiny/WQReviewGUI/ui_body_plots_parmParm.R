@@ -19,6 +19,11 @@ tabItem(tabName = "parmParmPlot",
                                                    choices = c("Log10X","Log10Y")),
                                 verbatimTextOutput("parmParm_hoverinfo"),
                                 
+                                h3("Review comments"),
+                                textInput("parmParm_flaggedRecord",label="Record #"),
+                                textInput("parmParm_flaggedComment",label = "Comment"),
+                                actionButton(inputId = "parmParm_addRecord",label="Add record"),
+                                
                                 #verbatimTextOutput("parmParm_hoverinfo"),
                                 ###Sidebar options
                                 width=3

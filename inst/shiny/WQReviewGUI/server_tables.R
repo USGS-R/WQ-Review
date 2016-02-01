@@ -218,6 +218,11 @@ output$wholevpartTableOut <- downloadHandler(
 
 ###Render the table
 try({
+        output$blankTableWarning <- renderPrint({
+                validate(
+                        need(!is.null(input$siteSel_blankTable), "Please enter a site number")
+                )
+        })
 
         output$blankTable <- DT::renderDataTable(
 

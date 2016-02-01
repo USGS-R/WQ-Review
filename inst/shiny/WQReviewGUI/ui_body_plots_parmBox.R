@@ -16,6 +16,7 @@ tabItem(tabName = "parmBoxPlot",
                                 
                                 checkboxInput("axes_parmBox",label="Log10Y",value=FALSE),
                                 checkboxInput("showpoints_parmBox",label="Show sample points",value=FALSE),
+                                
                                 ###Sidebar options
                                 width=3
                         ),

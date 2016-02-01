@@ -21,6 +21,12 @@ tabItem(tabName = "timeSeries",
                         ),
                         verbatimTextOutput("timeseries_hoverinfo"),
                         
+                        h3("Review comments"),
+                        textInput("timeseries_flaggedRecord",label="Record #"),
+                        textInput("timeseries_flaggedComment",label = "Comment"),
+                        actionButton(inputId = "timeseries_addRecord",label="Add record"),
+                        
+                        
                         ###Sidebar options
                         width=3
                 ),

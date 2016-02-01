@@ -14,6 +14,11 @@ tabItem(tabName = "scSumPlot",
                                 selectInput("facetSel_scSum","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
                                 verbatimTextOutput("scSum_hoverinfo"),
                                 
+                                h3("Review comments"),
+                                textInput("scSum_flaggedRecord",label="Record #"),
+                                textInput("scSum_flaggedComment",label = "Comment"),
+                                actionButton(inputId = "scSum_addRecord",label="Add record"),
+                                
                                 ###Sidebar options
                                 width=3
                                 

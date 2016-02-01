@@ -138,7 +138,7 @@ ionBalance <- function(qw.data, wide = FALSE)
 
 if(nrow(ion.charges) > 0)
 {
-chargebalance.table  <- dplyr::do(ion.charges,chargeCalc(.))
+chargebalance.table  <- dplyr::do(dplyr::group_by(ion.charges,RECORD_NO),chargeCalc(.))
 chargebalance.table$perc.diff <- (chargebalance.table$sum_cat-chargebalance.table$sum_an)/(chargebalance.table$sum_cat+chargebalance.table$sum_an)*100
 
 ###Make element column for dcast table

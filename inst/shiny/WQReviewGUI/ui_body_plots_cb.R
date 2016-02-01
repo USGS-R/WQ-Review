@@ -13,7 +13,9 @@ tabItem(tabName = "cbPlot",
                                selectInput("siteSel_cb","Station",choices="",multiple=TRUE),
                                selectInput("facetSel_cb","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
                                verbatimTextOutput("cb_hoverinfo"),
-                               
+                               textInput("cb_flaggedRecord",label="Record #"),
+                               textInput("cb_flaggedComment",label = "Comment"),
+                               actionButton(inputId = "cb_addRecord",label="Add record"),
                                ###Sidebar options
                                width=3
                                
