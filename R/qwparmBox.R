@@ -10,6 +10,7 @@
 #' @param log.scale Plot y axis on a log scale
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
+#' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
@@ -22,6 +23,7 @@
 #'               log.scale = TRUE,
 #'               highlightrecords = NULL,
 #'               wySymbol = FALSE,
+#'               labelDQI = FALSE,
 #'               printPlot = TRUE)
 #' @import ggplot2
 #' @importFrom stringr str_wrap
@@ -36,6 +38,7 @@ qwparmBoxPlot <- function(qw.data,
                      log.scale = FALSE,
                      highlightrecords = NULL,
                      wySymbol = FALSE,
+                     labelDQI = FALSE,
                      printPlot = TRUE){
   
   medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00")
@@ -90,6 +93,11 @@ qwparmBoxPlot <- function(qw.data,
     {
             p2 <- p2 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
                                   aes(x=PARM_NM,y=RESULT_VA),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+    }
+    
+    if(labelDQI == TRUE)
+    {
+            p2 <- p2 + geom_text(aes(color = MEDIUM_CD,shape=REMARK_CD,label=DQI_CD),size=5,vjust="bottom",hjust="right")
     }
     
     if(printPlot)

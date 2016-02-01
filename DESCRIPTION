@@ -33,3 +33,4 @@ VignetteBuilder: knitr
 BuildVignettes: true
 BugReports: https://github.com/USGS-R/WQReview/issues
 URL: https://github.com/USGS-R/WQReview
+RoxygenNote: 5.0.1

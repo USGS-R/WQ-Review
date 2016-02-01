@@ -8,16 +8,18 @@
 #' @param show.smooth Add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
+#' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' qwcbPlot <- function(qw.data = qw.data,
+#' qwcbPlot(qw.data = qw.data,
 #'                        site.selection = "06733000",
 #'                        facet = "multisite",
 #'                        new.threshold = 60*60*24*30,
 #"                        show.smooth = FALSE,
 #'                        highlightrecords = NULL,
 #'                        wySymbol = FALSE,
+#'                        labelDQI = FALSE,
 #'                        printPlot = TRUE)
 #' @importFrom stringr str_wrap
 #' @import ggplot2
@@ -31,6 +33,7 @@ qwcbPlot <- function(qw.data,
                     show.smooth = FALSE,
                     highlightrecords = NULL,
                     wySymbol = FALSE,
+                    labelDQI = FALSE,
                     printPlot = TRUE){
   
         ###Run ion balance function if not run already and dplyr::left_join to qw.data$PlotTable
@@ -117,6 +120,11 @@ qwcbPlot <- function(qw.data,
   {
           p1 <- p1 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
                                 aes(x=SAMPLE_START_DT,y=perc.diff),size=5,alpha = 0.5, color ="#F0E442" ,shape=19)
+  }
+  
+  if(labelDQI == TRUE)
+  {
+          p1 <- p1 + geom_text(aes(label=DQI_CD),size=5,vjust="bottom",hjust="right")
   }
   
   p1 <- p1 + ggtitle(maintitle)

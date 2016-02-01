@@ -9,19 +9,21 @@
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
 #' @param wySymbol Make current water-year highlighted.
+#' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' qwblankPlot <- function(qw.data = qw.data,
+#' qwblankPlot(qw.data = qw.data,
 #'                        site.selection = "06733000",
 #'                        plotparm = "00915",
 #'                        new.threshold = 60*60*24*30,
-#'                        show.q = FALSE,
 #'                        show.smooth = FALSE,
 #'                        highlightrecords = " ",
 #'                        facet = "multisite",
 #'                        wySymbol = FALSE,
-#'                        printPlot = TRUE)
+#'                        labelDQI = FALSE,
+#'                        printPlot = TRUE
+#'                        )
 #' @import ggplot2
 #' @importFrom stringr str_wrap
 #' @export
@@ -34,6 +36,7 @@ qwblankPlot <- function(qw.data,
                        highlightrecords = " ",
                        facet = "multisite",
                        wySymbol = FALSE,
+                       labelDQI = FALSE,
                        printPlot = TRUE){
         
         ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
@@ -101,6 +104,11 @@ qwblankPlot <- function(qw.data,
         
         
         p1 <- p1 + theme_bw() + theme(axis.text.x = element_text(angle = 90)) + ggtitle(maintitle)
+        
+        if(labelDQI == TRUE)
+        {
+                p1 <- p1 + geom_text(aes(label=DQI_CD),size=5,vjust="bottom",hjust="right")
+        }
         
         if((show.smooth)==TRUE){
                 p2 <- p1 + geom_smooth(data=subset(plotdata, MEDIUM_CD %in% (c("OAQ ","OA "))))

@@ -12,6 +12,7 @@
 #' @param log.scaleY Logical. Plot y parameter on a log scale.
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
+#' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
@@ -26,6 +27,7 @@
 #'               log.scaleX = FALSE,
 #'               highlightrecords = NULL,
 #'               wySymbol = FALSE,
+#'               labelDQI = FALSE,
 #'               printPlot = TRUE)
 #' @import ggplot2
 #' @importFrom stringr str_wrap
@@ -44,6 +46,7 @@ qwparmParmPlot <- function(qw.data,
                       log.scaleX = FALSE,
                       highlightrecords = " ",
                       wySymbol = FALSE,
+                      labelDQI=FALSE,
                       printPlot=TRUE){
   
   lm_eqn = function(df){
@@ -75,9 +78,9 @@ qwparmParmPlot <- function(qw.data,
   
   ###Assigned to global environment to make it work with ggplot2, I don't like doing this since it is not a persistant variable
   ###but this is hte fastest fix for now
-  pp.plot.data <- dplyr::left_join(xpp.plot.data[,c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA","RESULT_MD")], 
-                        ypp.plot.data[,c("RECORD_NO","RESULT_VA","RESULT_MD")],by="RECORD_NO")
-  names(pp.plot.data) <- c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA_X","RESULT_MD_X","RESULT_VA_Y","RESULT_MD_Y")
+  pp.plot.data <- dplyr::left_join(xpp.plot.data[,c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA","RESULT_MD","DQI_CD")], 
+                        ypp.plot.data[,c("RECORD_NO","RESULT_VA","RESULT_MD","DQI_CD")],by="RECORD_NO")
+  names(pp.plot.data) <- c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA_X","RESULT_MD_X","DQI_CD_X","RESULT_VA_Y","RESULT_MD_Y","DQI_CD_Y")
   remove(xpp.plot.data)
   remove(ypp.plot.data)
   
@@ -119,6 +122,11 @@ qwparmParmPlot <- function(qw.data,
   {
           p1 <- p1 + geom_point(data=subset(pp.plot.data, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
                                 aes(x=RESULT_VA_X,y=RESULT_VA_Y),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+  }
+  
+  if(labelDQI == TRUE)
+  {
+          p1 <- p1 + geom_text(aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,label=paste("X-",DQI_CD_X,"_","Y-",DQI_CD_Y,sep="")),size=5,vjust="bottom",hjust="right")
   }
   
   p1 <- p1 + ggtitle(maintitle) + theme_bw()

@@ -10,10 +10,11 @@
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
 #' @param wySymbol Make current water-year highlighted.
+#' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' qwtsPlot <- function(qw.data = qw.data,
+#' qwtsPlot(qw.data = qw.data,
 #'                        site.selection = "06733000",
 #'                        plotparm = "00915",
 #'                        new.threshold = 60*60*24*30,
@@ -22,6 +23,7 @@
 #'                        highlightrecords = " ",
 #'                        facet = "multisite",
 #'                        wySymbol = FALSE,
+#'                        labelDQI = FALSE,
 #'                        printPlot = TRUE)
 #' @import ggplot2
 #' @importFrom stringr str_wrap
@@ -36,6 +38,7 @@ qwtsPlot <- function(qw.data,
                      highlightrecords = " ",
                      facet = "multisite",
                      wySymbol = FALSE,
+                     labelDQI = FALSE,
                      printPlot = TRUE){
   ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
   medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00","#D55E00")
@@ -84,6 +87,11 @@ qwtsPlot <- function(qw.data,
     p1 <- p1 + geom_text(data=subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold)),
                          aes(x=SAMPLE_START_DT,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
   }else{}
+  
+  if(labelDQI == TRUE)
+  {
+          p1 <- p1 + geom_text(aes(label=DQI_CD),size=5,vjust="bottom",hjust="right")
+  }
   
   ##highlight this water year's data
   if(wySymbol == TRUE)

@@ -9,6 +9,7 @@
 #' @param show.smooth Logical to add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
+#' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
@@ -20,6 +21,7 @@
 #'                show.smooth = FALSE,
 #'                highlightrecords = " ",
 #'                wySymbol = FALSE,
+#'                labelDQI = FALSE,
 #'                printPlot = TRUE)
 #' @import ggplot2
 #' @importFrom stringr str_wrap
@@ -33,6 +35,7 @@ qwseasonalPlot <- function(qw.data,
                            show.smooth = FALSE,
                            highlightrecords = " ",
                            wySymbol = FALSE,
+                           labelDQI = FALSE,
                            printPlot = TRUE){
   
         ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
@@ -79,6 +82,11 @@ qwseasonalPlot <- function(qw.data,
   {
           p1 <- p1 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
                                 aes(x=DOY,y=RESULT_VA),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+  }
+  
+  if(labelDQI == TRUE)
+  {
+          p1 <- p1 + geom_text(aes(x=DOY,y=RESULT_VA, color=MEDIUM_CD,label=DQI_CD),size=5,vjust="bottom",hjust="right")
   }
   
   #p1 <- p1 + scale_x_discrete("Month", breaks=levels(qw.data$PlotTable$SAMPLE_MONTH), drop=FALSE)
