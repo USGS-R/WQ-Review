@@ -5,7 +5,8 @@
 \title{Function to pull data from NWIS}
 \usage{
 readNWISodbc(DSN, env.db = "01", qa.db = "02", STAIDS, dl.parms = "All",
-  parm.group.check = TRUE, begin.date = NA, end.date = NA)
+  parm.group.check = TRUE, begin.date = NA, end.date = NA,
+  projectCd = NULL)
 }
 \arguments{
 \item{DSN}{A character string containing the DSN for your local server}
@@ -23,6 +24,8 @@ readNWISodbc(DSN, env.db = "01", qa.db = "02", STAIDS, dl.parms = "All",
 \item{begin.date}{Character string containing beginning date of data pull (yyyy-mm-dd)}
 
 \item{end.date}{Character string containing ending date of data pull (yyyy-mm-dd)}
+
+\item{projectCd}{Character vector containing project codes to subset data by.}
 }
 \value{
 Returns a list containing two dataframes: PlotTable and DataTable.
@@ -61,7 +64,8 @@ qw.data <- readNWISodbc(DSN="NWISCO",
                              dl.parms="All",
                              parm.group.check=TRUE,
                              begin.date = "2005-01-01",
-                             end.date = "2015-10-27")
+                             end.date = "2015-10-27",
+                             projectCd = NULL)
                              }
 }
 
