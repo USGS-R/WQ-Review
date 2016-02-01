@@ -48,10 +48,10 @@ observe({
 
 output$parmBox_sumStats <- DT::renderDataTable({
         
-        DT::datatable(ddply(subset(qw.data$PlotTable,SITE_NO %in% as.character(dataSelections$siteSel) & 
+        DT::datatable(dplyr::summarize(dplyr::group_by(subset(qw.data$PlotTable,SITE_NO %in% as.character(dataSelections$siteSel) & 
                                            PARM_CD%in% as.character(dataSelections$parmSel) & 
                                            MEDIUM_CD %in%(c("WG ","WS "))),
-                            c("PARM_CD","PARM_NM"),summarize,
+                                           PARM_CD,PARM_NM),
                             
                             Quant95 = quantile(na.omit(RESULT_VA),0.90),
                             Quant05 = quantile(na.omit(RESULT_VA),0.10),

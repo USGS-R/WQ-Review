@@ -59,7 +59,16 @@ dashboardSidebar(sidebarMenu(
                          menuSubItem(tabName="longDataTable","Long data table"),
                          tabName = "dataTables", icon = icon("table")
                 ),
-                         
+        menuItem("Reviewer notes",
+                 h3("Review comments"),
+                 textInput("sidebar_flaggedRecord",label="Record #"),
+                 textInput("sidebar_flaggedComment",label = "Comment"),
+                 actionButton(inputId = "sidebar_addRecord",label="Add record"),
+                 
+                 menuSubItem(tabName="markedRecordsTab","View table")
+                 
+                 ),
+        
                 
         #menuSubItem(tabName="dataUpload","Data upload tools"),
         #menuSubItem(tabName="srsSummary","SRS Summary tool"),

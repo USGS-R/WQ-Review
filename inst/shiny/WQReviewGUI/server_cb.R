@@ -150,34 +150,36 @@ output$cb_hoverinfo <- renderPrint({
 
 ###This creates a new entry in the marked record table
 observeEvent(input$cb_addRecord, {
-        newEntry <- data.frame(RECORD_NO = input$cb_flaggedRecord,
-                               SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                        input$cb_flaggedRecord)]
-                               ),
-                               STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                              input$cb_flaggedRecord)]
-                               ),
-                               SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                                                     input$cb_flaggedRecord)])
-                               ),
-                               MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                            input$cb_flaggedRecord)]
-                               ),
-                               DQI_CD = NA,
-                               PARM_CD = NA,
-                               PARM_NM = NA,
-                               Where_Flagged = "charge balance",
-                               Comment = input$cb_flaggedComment
-        )
-        markedRecords <<- rbind(markedRecords,newEntry)
-        
-        updateTextInput(session, 
-                        "cb_flaggedRecord",
-                        value = " "
-        )
-        
-        updateTextInput(session, 
-                        "cb_flaggedComment",
-                        value = " "
-        )
+        try({
+                newEntry <- data.frame(RECORD_NO = input$cb_flaggedRecord,
+                                       SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                input$cb_flaggedRecord)]
+                                       ),
+                                       STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$cb_flaggedRecord)]
+                                       ),
+                                       SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                                             input$cb_flaggedRecord)])
+                                       ),
+                                       MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                    input$cb_flaggedRecord)]
+                                       ),
+                                       DQI_CD = NA,
+                                       PARM_CD = NA,
+                                       PARM_NM = NA,
+                                       Where_Flagged = "charge balance",
+                                       Comment = input$cb_flaggedComment
+                )
+                markedRecords <<- rbind(markedRecords,newEntry)
+                
+                updateTextInput(session, 
+                                "cb_flaggedRecord",
+                                value = " "
+                )
+                
+                updateTextInput(session, 
+                                "cb_flaggedComment",
+                                value = " "
+                )
+        })
 })

@@ -40,7 +40,9 @@ dashboardBody(
         #source("ui_body_srsSummary.r",local=TRUE)$value,
         
         source("ui_body_dataUpload.r",local=TRUE)$value,
-        source("ui_body_saveLoad.r",local=TRUE)$value
+        source("ui_body_saveLoad.r",local=TRUE)$value,
+        source("ui_body_markedRecords.r",local=TRUE)$value
+        
         
 )
 )

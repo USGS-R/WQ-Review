@@ -254,3 +254,27 @@ try({
 })
 
 
+############################
+###Marked records table
+############################
+
+###Render the table
+observeEvent(input$refreshMarkedRecords, {
+output$markedRecords <- DT::renderDataTable(
+        markedRecords,
+        server=TRUE,
+        rownames= FALSE,
+        extensions = list(FixedColumns = list(leftColumns = 1)),
+        options = list(
+                scrollX=TRUE,
+                autoWidth=TRUE)
+)
+})
+
+output$markedRecordsOut <- downloadHandler(
+        filename = function() {"markedRecordsOut"},
+        content = function(file) {
+                write.table(markedRecords,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                            file)
+        }
+)

@@ -214,51 +214,53 @@ output$parmParm_hoverinfo <- renderPrint({
 
 ###This creates a new entry in the marked record table
 observeEvent(input$parmParm_addRecord, {
-        newEntry <- data.frame(RECORD_NO = input$parmParm_flaggedRecord,
-                               SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                        input$parmParm_flaggedRecord)]
-                               ),
-                               STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                              input$parmParm_flaggedRecord)]
-                               ),
-                               SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                                                     input$parmParm_flaggedRecord)])
-                               ),
-                               MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                            input$parmParm_flaggedRecord)]
-                               ),
-                               DQI_CD = paste(unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                      input$parmParm_flaggedRecord &
-                                                                                      qw.data$PlotTable$PARM_CD == 
-                                                                                      as.character(input$parmSel_parmParmX))]),
-                                              unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                            input$parmParm_flaggedRecord &
-                                                                                            qw.data$PlotTable$PARM_CD == 
-                                                                                            as.character(input$parmSel_parmParmY))])
-                               ),
-                               PARM_CD = paste(as.character(input$parmSel_parmParmX),
-                                               as.character(input$parmSel_parmParmY)
-                                               ),
-                               PARM_NM = paste(unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
-                                                                                        as.character(input$parmSel_parmParmX))]),
-                                               unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
-                                                                                              as.character(input$parmSel_parmParmY))])
-                                               
-                               ),
-                               Where_Flagged = "parameter-parameter plot",
-                               Comment = input$parmParm_flaggedComment
-        )
-        markedRecords <<- rbind(markedRecords,newEntry)
-        
-        updateTextInput(session, 
-                        "parmParm_flaggedRecord",
-                        value = " "
-        )
-        
-        updateTextInput(session, 
-                        "parmParm_flaggedComment",
-                        value = " "
-        )
-        
-        
+        try({
+                newEntry <- data.frame(RECORD_NO = input$parmParm_flaggedRecord,
+                                       SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                input$parmParm_flaggedRecord)]
+                                       ),
+                                       STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$parmParm_flaggedRecord)]
+                                       ),
+                                       SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                                             input$parmParm_flaggedRecord)])
+                                       ),
+                                       MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                    input$parmParm_flaggedRecord)]
+                                       ),
+                                       DQI_CD = paste(unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                    input$parmParm_flaggedRecord &
+                                                                                                    qw.data$PlotTable$PARM_CD == 
+                                                                                                    as.character(input$parmSel_parmParmX))]),
+                                                      unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                    input$parmParm_flaggedRecord &
+                                                                                                    qw.data$PlotTable$PARM_CD == 
+                                                                                                    as.character(input$parmSel_parmParmY))])
+                                       ),
+                                       PARM_CD = paste(as.character(input$parmSel_parmParmX),
+                                                       as.character(input$parmSel_parmParmY)
+                                       ),
+                                       PARM_NM = paste(unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
+                                                                                                      as.character(input$parmSel_parmParmX))]),
+                                                       unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
+                                                                                                      as.character(input$parmSel_parmParmY))])
+                                                       
+                                       ),
+                                       Where_Flagged = "parameter-parameter plot",
+                                       Comment = input$parmParm_flaggedComment
+                )
+                markedRecords <<- rbind(markedRecords,newEntry)
+                
+                updateTextInput(session, 
+                                "parmParm_flaggedRecord",
+                                value = " "
+                )
+                
+                updateTextInput(session, 
+                                "parmParm_flaggedComment",
+                                value = " "
+                )
+                
+                
+        })
 })
