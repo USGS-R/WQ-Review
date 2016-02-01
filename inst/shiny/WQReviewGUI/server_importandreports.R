@@ -39,6 +39,7 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                 ###Run ion balance function
                 ionBalanceOut <- suppressWarnings(ionBalance(qw.data = qw.data,wide=TRUE))
                 chargebalance.table <- ionBalanceOut$chargebalance.table
+                chargebalance.table$RECORD_NO <- as.character(chargebalance.table$RECORD_NO)
                 reports$BalanceDataTable <<- ionBalanceOut$BalanceDataTable
                 reports$balanceTable <<- ionBalanceOut$chargebalance.table
                 
@@ -48,7 +49,7 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                         
                         ###Join charge balance table to plot table
                         chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
-                        qw.data$PlotTable <<- join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
+                        qw.data$PlotTable <<- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
                         
                         
                 } else {}
@@ -57,6 +58,7 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                 ###Run ion balance function
                 ionBalanceOut <- ionBalance(qw.data = qw.data,wide=TRUE)
                 chargebalance.table <- ionBalanceOut$chargebalance.table
+                chargebalance.table$RECORD_NO <- as.character(chargebalance.table$RECORD_NO)
                 reports$BalanceDataTable <<- ionBalanceOut$BalanceDataTable
                 reports$balanceTable <<- ionBalanceOut$chargebalance.table
                 
@@ -66,7 +68,7 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                         
                         ###Join charge balance table to plot table
                         chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
-                        qw.data$PlotTable <<- join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
+                        qw.data$PlotTable <<- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
                         
                         
                 } else {}

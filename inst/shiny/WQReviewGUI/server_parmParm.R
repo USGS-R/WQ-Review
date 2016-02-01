@@ -89,7 +89,7 @@ observe({
         ypp.plot.data <- 
                 subset(qw.data$PlotTable,SITE_NO %in% dataSelections_parmParm$siteSel & PARM_CD == dataSelections_parmParm$parmSelY)
         #Join x and y data
-        pp.plot.data <<- join(xpp.plot.data[,c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA","RESULT_MD")], 
+        pp.plot.data <<- dplyr::left_join(xpp.plot.data[,c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA","RESULT_MD")], 
                               ypp.plot.data[,c("RECORD_NO","RESULT_VA","RESULT_MD")],by="RECORD_NO")
         names(pp.plot.data) <<- c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA_X","RESULT_MD_X","RESULT_VA_Y","RESULT_MD_Y")
         }
