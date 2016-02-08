@@ -1,3 +1,10 @@
+library(WQReview)
+library(shiny)
+library(shinydashboard)
+library(dplyr)
+library(DT)
+library(reshape2)
+
 qw.data <- NULL
 reports <- NULL
 markedRecords <- data.frame(RECORD_NO = NA,

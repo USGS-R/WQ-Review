@@ -2,7 +2,6 @@
 ###Replace this with the library once package is revised to supply fuctions that work well with Shiny
 #source("functionLoads.R",local=TRUE)$value
 
-library(WQReview)
 
 ui <- 
         #library(shinyBS)

@@ -246,7 +246,7 @@ try({
                                                  begin.date = input$startDate_blankTable, 
                                                  end.date = input$endDate_blankTable,
                                                  multiple = FALSE)
-                                    ,sep="\t", col.names = F, row.names = F,na="", quote = FALSE,
+                                    ,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
                                     file)
                 }
         )

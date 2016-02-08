@@ -28,16 +28,17 @@ pestCheck <- function(qw.data, returnAll = FALSE)
                                        PARM_SEQ_GRP_CD != "INF" &
                                        MEDIUM_CD %in% c("WS ","WG ", "OA "))
         
+
         if(nrow(inReviewData) > 0 & nrow(approvedData) > 0)
         {
                 
         #Get max number of hits in approved data at each site
         detects <- subset(approvedData, REMARK_CD != "<")
-        siteStats <- summarize(group_by(detects,SITE_NO,RECORD_NO),
+        siteStats <- dplyr::summarize(group_by(detects,SITE_NO,RECORD_NO),
                            numHits = length(RESULT_VA)
         )
         
-        siteStats <- summarize(group_by(siteStats,SITE_NO),
+        siteStats <- dplyr::summarize(group_by(siteStats,SITE_NO),
                            maxHits = max(numHits,na.rm=TRUE),
                            minHits = min(numHits,na.rm=TRUE),
                            N = length(numHits)
@@ -45,7 +46,7 @@ pestCheck <- function(qw.data, returnAll = FALSE)
         
         #Get number of hits for each sample
         detects <- subset(inReviewData, REMARK_CD != "<")
-        sampleHits <- summarize(group_by(detects,SITE_NO,RECORD_NO),summarize,
+        sampleHits <- dplyr::summarize(group_by(detects,SITE_NO,RECORD_NO),
                            numHits = length(RESULT_VA)
         )
         

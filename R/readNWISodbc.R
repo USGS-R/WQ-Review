@@ -187,7 +187,7 @@ readNWISodbc <- function(DSN,
                   print("No samples exist in your local NWIS database for the project code specified, check data criteria")
                   stop("No samples exist in your local NWIS database for the project code specified, check data criteria")
           }
-  } else{}
+  } 
   
   #get the QWResult file using the record numbers
   ##SQL is limited to 1000 entries in querry
@@ -673,7 +673,7 @@ readNWISodbc <- function(DSN,
                            "SAMPLE_END_LOCAL_TM_FG","SAMPLE_ID","TM_DATUM_RLBLTY_CD","ANL_STAT_CD",
                            "HYD_COND_CD","SAMP_TYPE_CD","HYD_EVENT_CD",
                            "AQFR_CD","TU_ID","BODY_PART_ID",
-                           "COLL_ENT_CD","SIDNO_PARTY_CD","PARM_DS",
+                           "COLL_ENT_CD","SIDNO_PARTY_CD",
                            "HUC_CD","SAMPLE_MONTH","DOY")]
 
   ###Remove reviewed and rejected results
