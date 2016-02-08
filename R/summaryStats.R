@@ -55,6 +55,6 @@ summaryStats <- function(qw.data, STAIDS=NULL, parameterCd = NULL, begin.date = 
                    quant01 = quantile(na.omit(.$RESULT_VA),probs=c(0.01))
                           )
   )
-  return(sumStats)
+  return(unique(sumStats))
   
 }

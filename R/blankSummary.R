@@ -188,7 +188,7 @@ blanksummary$median_detected_value <- round(blanksummary$median_detected_value,3
 blanksummary$max_detected_value <- round(blanksummary$max_detected_value,3)
 #blanksummary$BD90.90 <- round(blanksummary$BD90.90,3)
 
-return(blanksummary)
+return(unique(blanksummary))
 ###End of blank dataframe length check
 } else{warning("No OAQ samples in dataset")}
 

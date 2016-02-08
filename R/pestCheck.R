@@ -100,7 +100,7 @@ pestCheck <- function(qw.data, returnAll = FALSE)
                 ),]) 
         } else {}
         
-        return(sampleHits)
+        return(unique(sampleHits))
         
 }
         

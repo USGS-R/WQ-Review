@@ -145,7 +145,7 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                 ),]) 
         } else {}
         
-        return(flaggedSamples)
+        return(unique(flaggedSamples))
 }
         
         

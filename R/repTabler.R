@@ -67,7 +67,7 @@ repTabler <- function(qw.data)
   #repTable$Env_SAMPLE_START_DT <- as.character(repTable$Env_SAMPLE_START_DT)
   #repTable$Rep_SAMPLE_START_DT <- as.character(repTable$Rep_SAMPLE_START_DT)
   
-  return(repTable)
+  return(unique(repTable))
   }else{}
 }
 

@@ -94,7 +94,7 @@ wholevPart <- function(qw.data)
     paste(pairedData$flags[which(pairedData$Fil_REMARK_CD == "<" | pairedData$Unf_REMARK_CD == "<")],"calculations effected by remark code",sep="")
   wholevpartTable <- pairedData
   #wholevpartTable$Fil_SAMPLE_START_DT <- as.character(wholevpartTable$Fil_SAMPLE_START_DT)
-  return(wholevpartTable)
+  return(unique(wholevpartTable))
 } else{}
 
 }
