@@ -81,10 +81,16 @@ output$resultFlagTableOut <- downloadHandler(
 ###Render the table
 try({
         output$wideDataTable <- DT::renderDataTable(
-                subset(qw.data$DataTable, SITE_NO %in% as.character(input$siteSel_wideDataTable) &
-                               as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
-                               as.Date(SAMPLE_START_DT) <= input$endDate_wideDataTable
-                ),
+                if(as.character(input$siteSel_wideDataTable == "All"))
+                {
+                subset(qw.data$DataTable,as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
+                               as.Date(SAMPLE_START_DT) <= input$endDate_wideDataTable)
+                } else 
+                {
+                        subset(qw.data$DataTable, SITE_NO %in% as.character(input$siteSel_wideDataTable) &
+                                       as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
+                                       as.Date(SAMPLE_START_DT) <= input$endDate_wideDataTable)
+                },
                 extensions = list(FixedColumns = list(leftColumns = 1)),
                 server=TRUE,
                 rownames= FALSE,

@@ -229,48 +229,60 @@ updateSelectInput(session, "parmSel_blank",
 ###blank table inputs update####
 ################################
 updateSelectInput(session, "siteSel_blankTable",
-                  choices = setNames((siteSelData$SITE_NO),
-                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  choices = c("All",
+                              setNames((siteSelData$SITE_NO),
+                                       paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  )
 )
 
 ################################
 ###balance table inputs update####
 ################################
 updateSelectInput(session, "siteSel_balanceTable",
-                  choices = setNames((siteSelData$SITE_NO),
-                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  choices = c("All",
+                              setNames((siteSelData$SITE_NO),
+                                       paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  )
 )
 
 ################################
 ###long table inputs update####
 ################################
 updateSelectInput(session, "siteSel_longDataTable",
-                  choices = setNames((siteSelData$SITE_NO),
-                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  choices = c("All",
+                              setNames((siteSelData$SITE_NO),
+                                       paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  )
 )
 
 ################################
 ###rep table inputs update####
 ################################
 updateSelectInput(session, "siteSel_repTable",
-                  choices = setNames((siteSelData$SITE_NO),
-                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  choices = c("All",
+                              setNames((siteSelData$SITE_NO),
+                                       paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  )
 )
 
 ################################
 ###wholevpart table inputs update####
 ################################
 updateSelectInput(session, "siteSel_wholevpartTable",
-                  choices = setNames((siteSelData$SITE_NO),
-                                     paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  choices = c("All",
+                              setNames((siteSelData$SITE_NO),
+                                       paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  )
 )
 
 ################################
 ###wide table inputs update####
 ################################
 updateSelectInput(session, "siteSel_wideDataTable",
-                  choices = setNames((siteSelData$SITE_NO),
+                  choices = c("All",
+                              setNames((siteSelData$SITE_NO),
                                      paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                  )
 )
 },warning = function(w) {
         ###Print retrieval info
@@ -452,48 +464,60 @@ updateSelectInput(session, "siteSel_wideDataTable",
         ###blank table inputs update####
         ################################
         updateSelectInput(session, "siteSel_blankTable",
-                          choices = setNames((siteSelData$SITE_NO),
+                          choices = c("All",
+                                      setNames((siteSelData$SITE_NO),
                                              paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                          )
         )
         
         ################################
         ###balance table inputs update####
         ################################
         updateSelectInput(session, "siteSel_balanceTable",
-                          choices = setNames((siteSelData$SITE_NO),
+                          choices = c("All",
+                                      setNames((siteSelData$SITE_NO),
                                              paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                          )
         )
         
         ################################
         ###long table inputs update####
         ################################
         updateSelectInput(session, "siteSel_longDataTable",
-                          choices = setNames((siteSelData$SITE_NO),
+                          choices = c("All",
+                                      setNames((siteSelData$SITE_NO),
                                              paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                          )
         )
         
         ################################
         ###rep table inputs update####
         ################################
         updateSelectInput(session, "siteSel_repTable",
-                          choices = setNames((siteSelData$SITE_NO),
+                          choices = c("All",
+                                      setNames((siteSelData$SITE_NO),
                                              paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                          )
         )
         
         ################################
         ###wholevpart table inputs update####
         ################################
         updateSelectInput(session, "siteSel_wholevpartTable",
-                          choices = setNames((siteSelData$SITE_NO),
+                          choices = c("All",
+                                      setNames((siteSelData$SITE_NO),
                                              paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                          )
         )
         
         ################################
         ###wide table inputs update####
         ################################
         updateSelectInput(session, "siteSel_wideDataTable",
-                          choices = setNames((siteSelData$SITE_NO),
+                          choices = c("All",
+                                      setNames((siteSelData$SITE_NO),
                                              paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                          )
         )
 },error = function(e) {}
 )
