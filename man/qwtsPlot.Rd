@@ -6,8 +6,8 @@
 \usage{
 qwtsPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 * 30,
   show.q = FALSE, show.smooth = FALSE, highlightrecords = " ",
-  facet = "multisite", wySymbol = FALSE, labelDQI = FALSE,
-  printPlot = TRUE)
+  facet = "multisite", scales = "fixed", wySymbol = FALSE,
+  labelDQI = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
@@ -25,6 +25,8 @@ qwtsPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 * 30,
 \item{highlightrecords}{A character vector of record numbers to highlight in plot}
 
 \item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
+
+\item{scales}{Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"}
 
 \item{wySymbol}{Make current water-year highlighted.}
 
@@ -45,6 +47,7 @@ qwtsPlot(qw.data = qw.data,
                        show.smooth = FALSE,
                        highlightrecords = " ",
                        facet = "multisite",
+                       scales="fixed",
                        wySymbol = FALSE,
                        labelDQI = FALSE,
                        printPlot = TRUE)

@@ -5,9 +5,9 @@
 \title{Parameter boxplot}
 \usage{
 qwparmBoxPlot(qw.data, site.selection, plotparm, facet = "multisite",
-  new.threshold = 60 * 60 * 24 * 30, show.points = FALSE,
-  log.scale = FALSE, highlightrecords = NULL, wySymbol = FALSE,
-  labelDQI = FALSE, printPlot = TRUE)
+  scales = "fixed", new.threshold = 60 * 60 * 24 * 30,
+  show.points = FALSE, log.scale = FALSE, highlightrecords = NULL,
+  wySymbol = FALSE, labelDQI = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
@@ -17,6 +17,8 @@ qwparmBoxPlot(qw.data, site.selection, plotparm, facet = "multisite",
 \item{plotparm}{A character vector of pcodes to plot}
 
 \item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
+
+\item{scales}{Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"}
 
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
@@ -41,6 +43,7 @@ qwparmBoxPlot(qw.data = qw.data,
               site.selection = "06733000",
               plotparm = c("00915","00095","00400"),
               facet = "multisite",
+              scales="fixed",
               new.threshold = 60*60*24*30,
               show.points = FALSE,
               log.scale = TRUE,

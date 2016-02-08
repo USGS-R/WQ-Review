@@ -5,7 +5,7 @@
 \title{Seasonal plot}
 \usage{
 qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30, site.selection,
-  plotparm, facet = "multisite", show.smooth = FALSE,
+  plotparm, facet = "multisite", scales = "fixed", show.smooth = FALSE,
   highlightrecords = " ", wySymbol = FALSE, labelDQI = FALSE,
   printPlot = TRUE)
 }
@@ -19,6 +19,8 @@ qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30, site.selection,
 \item{plotparm}{A character vector of parameters to plot}
 
 \item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
+
+\item{scales}{Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"}
 
 \item{show.smooth}{Logical to add a loess smooth to plot}
 
@@ -39,6 +41,7 @@ qwseasonalPlot(qw.data = qw.data,
                site.selection = "06733000",
                plotparm = "00095",
                facet = "multisite",
+               scales="fixed",
                new.threshold = 60*60*24*30,
                show.smooth = FALSE,
                highlightrecords = " ",

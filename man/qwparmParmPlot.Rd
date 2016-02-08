@@ -5,9 +5,9 @@
 \title{Parameter-parameter plot}
 \usage{
 qwparmParmPlot(qw.data, site.selection, xparm, yparm, facet = "multisite",
-  new.threshold = 60 * 60 * 24 * 30, show.lm = FALSE, log.scaleY = FALSE,
-  log.scaleX = FALSE, highlightrecords = " ", wySymbol = FALSE,
-  labelDQI = FALSE, printPlot = TRUE)
+  scales = "fixed", new.threshold = 60 * 60 * 24 * 30, show.lm = FALSE,
+  log.scaleY = FALSE, log.scaleX = FALSE, highlightrecords = " ",
+  wySymbol = FALSE, labelDQI = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
@@ -19,6 +19,8 @@ qwparmParmPlot(qw.data, site.selection, xparm, yparm, facet = "multisite",
 \item{yparm}{Character string of parameter to plot on y axis}
 
 \item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
+
+\item{scales}{Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"}
 
 \item{new.threshold}{The threshold value in seconds from current system time for "new" data.}
 
@@ -46,6 +48,7 @@ qwparmParmPlot(qw.data = qw.data,
               xparm = "00915",
               yparm = "00061",
               facet = "multisite",
+              scales="fixed",
               new.threshold = 60*60*24*30,
               show.lm=FALSE,
               log.scaleY = FALSE,
