@@ -5,6 +5,7 @@
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
 #' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
+#' @param scales Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"
 #' @param show.smooth Add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
@@ -15,6 +16,7 @@
 #' qwcbPlot(qw.data = qw.data,
 #'                        site.selection = "06733000",
 #'                        facet = "multisite",
+#'                        scales="fixed",
 #'                        new.threshold = 60*60*24*30,
 #"                        show.smooth = FALSE,
 #'                        highlightrecords = NULL,
@@ -29,6 +31,7 @@
 qwcbPlot <- function(qw.data,
                     site.selection,
                     facet = "multisite",
+                    scales="fixed",
                     new.threshold = 60*60*24*30,
                     show.smooth = FALSE,
                     highlightrecords = NULL,
@@ -86,7 +89,7 @@ qwcbPlot <- function(qw.data,
   p1 <- p1 + scale_y_continuous(limits=c(-100,100))
   
   if(facet == "Facet"){
-          p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales="free_y")
+          p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales=scales)
   } else {}
   
   #p1 <- p1 + scale_x_datetime(limits=c(as.POSIXct((begin.date)),as.POSIXct((end.date))))

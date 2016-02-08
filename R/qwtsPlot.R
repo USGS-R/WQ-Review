@@ -9,6 +9,7 @@
 #' @param show.smooth Logical to add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
+#' @param scales Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"
 #' @param wySymbol Make current water-year highlighted.
 #' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
@@ -22,6 +23,7 @@
 #'                        show.smooth = FALSE,
 #'                        highlightrecords = " ",
 #'                        facet = "multisite",
+#'                        scales="fixed",
 #'                        wySymbol = FALSE,
 #'                        labelDQI = FALSE,
 #'                        printPlot = TRUE)
@@ -37,6 +39,7 @@ qwtsPlot <- function(qw.data,
                      show.smooth = FALSE,
                      highlightrecords = " ",
                      facet = "multisite",
+                     scales="fixed",
                      wySymbol = FALSE,
                      labelDQI = FALSE,
                      printPlot = TRUE){
@@ -63,7 +66,7 @@ qwtsPlot <- function(qw.data,
   p1 <- p1 + geom_point(size=3)
   if ( facet == "Facet")
   {
-          p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales="free_y")
+          p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales=scales)
   }
   
   p1 <- p1 + ylab(paste(ylabel,"\n")) + xlab("Date")

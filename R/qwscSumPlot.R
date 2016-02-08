@@ -3,6 +3,7 @@
 #' Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance. Requires charge balance = TRUE in NWISPullR
 #' @param qw.data A qw.data object generated from readNWISodbc
 #' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
+#' @param scales Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
@@ -13,6 +14,7 @@
 #' qwscSumPlot(qw.data = qw.data,
 #'               site.selection = "06733000",
 #'               facet = "multisite",
+#'               scales="fixed",
 #'               new.threshold = 60*60*24*30,
 #'               highlightrecords = NULL,
 #'               wySymbol = FALSE,
@@ -25,6 +27,7 @@
 qwscSumPlot <- function(qw.data,
                        site.selection,
                        facet = "multisite",
+                       scales="fixed",
                        new.threshold = 60*60*24*30,
                        highlightrecords = NULL,
                        wySymbol = FALSE,
@@ -91,7 +94,7 @@ qwscSumPlot <- function(qw.data,
     p1 <- p1 + scale_shape_manual("Chemistry status",values = qual.shapes)
   if ( facet == "Facet")
   {
-          p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales="free")
+          p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales=scales)
   } else {}
     ###Line for sum/conductunce ratio acceptable bounds
   #p1 <- p1+geom_ribbon(data = plotdata,

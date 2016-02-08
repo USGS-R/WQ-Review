@@ -7,6 +7,7 @@
 #' @param xparm Character string of parameter to plot on x axis
 #' @param yparm Character string of parameter to plot on y axis
 #' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
+#' @param scales Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"
 #' @param show.lm Add a linear fit to plot
 #' @param log.scaleX Logical. Plot x parameter on a log scale.
 #' @param log.scaleY Logical. Plot y parameter on a log scale.
@@ -21,6 +22,7 @@
 #'               xparm = "00915",
 #'               yparm = "00061",
 #'               facet = "multisite",
+#'               scales="fixed",
 #'               new.threshold = 60*60*24*30,
 #'               show.lm=FALSE,
 #'               log.scaleY = FALSE,
@@ -40,6 +42,7 @@ qwparmParmPlot <- function(qw.data,
                       xparm,
                       yparm,
                       facet = "multisite",
+                      scales="fixed",
                       new.threshold = 60*60*24*30,
                       show.lm = FALSE,
                       log.scaleY = FALSE,
@@ -98,7 +101,7 @@ qwparmParmPlot <- function(qw.data,
   p1 <- p1 + scale_colour_manual("Medium code",values = medium.colors)
   if ( facet == "Facet")
   {
-  p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales="free") 
+  p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales=scales) 
   }else{}
   #p1 <- p1 + stat_ellipse(aes(x=RESULT_VA_X,y=RESULT_VA_Y),level=0.999,type="t")
   if(log.scaleY == TRUE)
