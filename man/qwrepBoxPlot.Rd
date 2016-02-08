@@ -30,7 +30,7 @@ Takes output data object from readNWISodbc and prints a boxplot of replicate RPD
 }
 \examples{
 data("exampleData",package="WQReview")
-qwrepBoxPlot <- function(reports = reports,
+qwrepBoxPlot(reports = reports,
                        site.selection = "06733000",
                        plotparm = "00915",
                        new.threshold = 60*60*24*30,

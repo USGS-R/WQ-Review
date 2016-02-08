@@ -11,7 +11,7 @@
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' qwrepBoxPlot <- function(reports = reports,
+#' qwrepBoxPlot(reports = reports,
 #'                        site.selection = "06733000",
 #'                        plotparm = "00915",
 #'                        new.threshold = 60*60*24*30,
@@ -31,6 +31,11 @@ qwrepBoxPlot <- function(reports,
                     highlightrecords = NULL,
                     new.reps = Sys.time() - 60*60*24*30,
                     printPlot = TRUE){
+        
+        give.n <- function(x){
+                return(c(y = median(x)*1.05, label = length(x))) 
+                # experiment with the multiplier to find the perfect position
+        }
 
   hline <- data.frame(yint=c(-5,5,-10,10),RPD=c("+/- 5%","+/- 5%","+/- 10%","+/- 10%"))
     
@@ -52,6 +57,7 @@ qwrepBoxPlot <- function(reports,
   
   p1 <- ggplot(data=plotdata,aes(x=PARM_NM,y=relPercent_diff, color=historic))
   p1 <- p1 + geom_boxplot()
+  p1 <- p1 + stat_summary(fun.data = give.n, geom = "text", fun.y = median,color="black")
   #p1 <- p1 + scale_colour_manual("Medium code",values = medium.colors)
   #p1 <- p1 + scale_shape_manual("Remark code",values = qual.shapes)
   p1 <- p1 + ylab(paste(ylabel,"\n"))
