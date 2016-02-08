@@ -96,6 +96,9 @@ qwseasonalPlot <- function(qw.data,
   p1 <- p1 + scale_color_manual("Medium code",values = medium.colors)
   p1 <- p1 + scale_shape_manual("Remark code",values = qual.shapes)
   p1 <- p1 + ylab(paste(ylabel,"\n"))
+  p1 <- p1 + scale_x_continuous(breaks = c(1,32,60,91,121,152,182,213,244,274,305,335),
+                                labels=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+  )
   p1 <- p1 + ggtitle(maintitle) + theme_bw()
   
 
