@@ -81,10 +81,19 @@ output$resultFlagTableOut <- downloadHandler(
 ###Render the table
 try({
         output$wideDataTable <- DT::renderDataTable(
-                subset(qw.data$DataTable, SITE_NO %in% as.character(input$siteSel_wideDataTable) &
-                               as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
-                               as.Date(SAMPLE_START_DT) <= input$endDate_wideDataTable
-                ),
+                if(!is.null(input$siteSel_wideDataTable))
+                {
+                        if(as.character(input$siteSel_wideDataTable == "All"))
+                        {
+                                subset(qw.data$DataTable,as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
+                                               as.Date(SAMPLE_START_DT) <= input$endDate_wideDataTable)
+                        } else 
+                        {
+                                subset(qw.data$DataTable, SITE_NO %in% as.character(input$siteSel_wideDataTable) &
+                                               as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
+                                               as.Date(SAMPLE_START_DT) <= input$endDate_wideDataTable)
+                        }
+                },
                 extensions = list(FixedColumns = list(leftColumns = 1)),
                 server=TRUE,
                 rownames= FALSE,
@@ -111,10 +120,21 @@ output$wideDataTableOut <- downloadHandler(
 
 ###Render the table
 output$longDataTable <- DT::renderDataTable(
-        subset(qw.data$PlotTable, SITE_NO %in% as.character(input$siteSel_longDataTable) &
-                       as.Date(SAMPLE_START_DT) >= input$startDate_longDataTable &
-                       as.Date(SAMPLE_START_DT) <= input$endDate_longDataTable
-        ),
+        if(!is.null(input$siteSel_longDataTable))
+        {
+                if(as.character(input$siteSel_longDataTable == "All"))
+                {
+                        subset(qw.data$PlotTable, 
+                               as.Date(SAMPLE_START_DT) >= input$startDate_longDataTable &
+                                       as.Date(SAMPLE_START_DT) <= input$endDate_longDataTable)
+                } else {
+                        subset(qw.data$PlotTable, SITE_NO %in% as.character(input$siteSel_longDataTable) &
+                                       as.Date(SAMPLE_START_DT) >= input$startDate_longDataTable &
+                                       as.Date(SAMPLE_START_DT) <= input$endDate_longDataTable)
+                }
+        },
+                        
+        
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         rownames= FALSE,
@@ -138,10 +158,18 @@ output$longDataTableOut <- downloadHandler(
 
 ###Render the table
 output$balanceTable <- DT::renderDataTable(
-        subset(reports$BalanceDataTable, SITE_NO %in% as.character(input$siteSel_balanceTable) &
-                       as.Date(SAMPLE_START_DT) >= input$startDate_balanceTable &
-                       as.Date(SAMPLE_START_DT) <= input$endDate_balanceTable
-        ),
+        if(!is.null(input$siteSel_balanceTable))
+        {
+                if(as.character(input$siteSel_balanceTable == "All"))
+                {
+                        subset(reports$BalanceDataTable, as.Date(SAMPLE_START_DT) >= input$startDate_balanceTable &
+                                       as.Date(SAMPLE_START_DT) <= input$endDate_balanceTable)
+                } else {
+                        subset(reports$BalanceDataTable, SITE_NO %in% as.character(input$siteSel_balanceTable) &
+                                       as.Date(SAMPLE_START_DT) >= input$startDate_balanceTable &
+                                       as.Date(SAMPLE_START_DT) <= input$endDate_balanceTable)
+                }
+        },
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         rownames= FALSE,
@@ -163,10 +191,19 @@ output$BalanceDataTableOut <- downloadHandler(
 
 ###Render the table
 output$repTable <- DT::renderDataTable(
-        subset(reports$repTable, SITE_NO %in% as.character(input$siteSel_repTable) &
-                       as.Date(Env_SAMPLE_START_DT) >= input$startDate_repTable &
-                       as.Date(Env_SAMPLE_START_DT) <= input$endDate_repTable
-        ),
+        if(!is.null(input$siteSel_repTable))
+        {
+                if(as.character(input$siteSel_repTable == "All"))
+                {
+                        subset(reports$repTable, as.Date(Env_SAMPLE_START_DT) >= input$startDate_repTable &
+                                       as.Date(Env_SAMPLE_START_DT) <= input$endDate_repTable)
+                }else {
+                        subset(reports$repTable, SITE_NO %in% as.character(input$siteSel_repTable) &
+                                       as.Date(Env_SAMPLE_START_DT) >= input$startDate_repTable &
+                                       as.Date(Env_SAMPLE_START_DT) <= input$endDate_repTable)
+                }
+        },
+                        
         server=TRUE,
         rownames= FALSE,
         extensions = list(FixedColumns = list(leftColumns = 1)),
@@ -190,10 +227,19 @@ output$repTableOut <- downloadHandler(
 
 ###Render the table
 output$wholevpartTable <- DT::renderDataTable(
-        subset(reports$wholevpartTable, SITE_NO %in% as.character(input$siteSel_wholevpartTable) &
-                       as.Date(SAMPLE_START_DT) >= input$startDate_wholevpartTable &
-                       as.Date(SAMPLE_START_DT) <= input$endDate_wholevpartTable
-        ),
+        if(!is.null(input$siteSel_wholevpartTable))
+        {
+                if(as.character(input$siteSel_wholevpartTable == "All"))
+                {
+                        subset(reports$wholevpartTable, as.Date(SAMPLE_START_DT) >= input$startDate_wholevpartTable &
+                                       as.Date(SAMPLE_START_DT) <= input$endDate_wholevpartTable)
+                } else {
+                        subset(reports$wholevpartTable, SITE_NO %in% as.character(input$siteSel_wholevpartTable) &
+                                       as.Date(SAMPLE_START_DT) >= input$startDate_wholevpartTable &
+                                       as.Date(SAMPLE_START_DT) <= input$endDate_wholevpartTable)
+                }
+        },
+
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         rownames= FALSE,
@@ -218,13 +264,16 @@ output$wholevpartTableOut <- downloadHandler(
 
 ###Render the table
 try({
+
         output$blankTable <- DT::renderDataTable(
-                
-                suppressWarnings(blankSummary(qw.data,
-                             STAIDS = as.character(input$siteSel_blankTable),
-                             begin.date = input$startDate_blankTable, 
-                             end.date = input$endDate_blankTable,
-                             multiple = FALSE)),
+                if(!is.null(input$siteSel_blankTable))
+                {
+                        suppressWarnings(blankSummary(qw.data,
+                                                      STAIDS = as.character(input$siteSel_blankTable),
+                                                      begin.date = input$startDate_blankTable, 
+                                                      end.date = input$endDate_blankTable,
+                                                      multiple = FALSE))
+                },
                 server=TRUE,
                 rownames= FALSE,
                 extensions = list(FixedColumns = list(leftColumns = 1)),
@@ -240,7 +289,7 @@ try({
                                                  begin.date = input$startDate_blankTable, 
                                                  end.date = input$endDate_blankTable,
                                                  multiple = FALSE)
-                                    ,sep="\t", col.names = F, row.names = F,na="", quote = FALSE,
+                                    ,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
                                     file)
                 }
         )
@@ -248,3 +297,27 @@ try({
 })
 
 
+############################
+###Marked records table
+############################
+
+###Render the table
+observeEvent(input$refreshMarkedRecords, {
+output$markedRecords <- DT::renderDataTable(
+        markedRecords,
+        server=TRUE,
+        rownames= FALSE,
+        extensions = list(FixedColumns = list(leftColumns = 1)),
+        options = list(
+                scrollX=TRUE,
+                autoWidth=TRUE)
+)
+})
+
+output$markedRecordsOut <- downloadHandler(
+        filename = function() {"markedRecordsOut"},
+        content = function(file) {
+                write.table(markedRecords,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                            file)
+        }
+)

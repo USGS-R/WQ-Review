@@ -5,35 +5,41 @@
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
 #' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
+#' @param scales Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"
 #' @param show.smooth Add a loess smooth to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
+#' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' qwcbPlot <- function(qw.data = qw.data,
+#' qwcbPlot(qw.data = qw.data,
 #'                        site.selection = "06733000",
 #'                        facet = "multisite",
+#'                        scales="fixed",
 #'                        new.threshold = 60*60*24*30,
 #"                        show.smooth = FALSE,
 #'                        highlightrecords = NULL,
 #'                        wySymbol = FALSE,
+#'                        labelDQI = FALSE,
 #'                        printPlot = TRUE)
 #' @importFrom stringr str_wrap
 #' @import ggplot2
-#' @importFrom plyr join
+#' @importFrom dplyr left_join
 #' @export
 
 qwcbPlot <- function(qw.data,
                     site.selection,
                     facet = "multisite",
+                    scales="fixed",
                     new.threshold = 60*60*24*30,
                     show.smooth = FALSE,
                     highlightrecords = NULL,
                     wySymbol = FALSE,
+                    labelDQI = FALSE,
                     printPlot = TRUE){
   
-        ###Run ion balance function if not run already and join to qw.data$PlotTable
+        ###Run ion balance function if not run already and dplyr::left_join to qw.data$PlotTable
         if(is.null(qw.data$PlotTable$perc.diff))
         {
         tryCatch({       
@@ -42,7 +48,7 @@ qwcbPlot <- function(qw.data,
         ###Check that a balance was calculated
         ###Join charge balance table to plot table
                 chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
-                qw.data$PlotTable <- join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")           
+                qw.data$PlotTable <- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")           
         }, warning = function(w) {
         }, error = function(e) {
                 stop("Insufficient data to calculate charge balance. Check your qw.data$PlotTable data")
@@ -83,7 +89,7 @@ qwcbPlot <- function(qw.data,
   p1 <- p1 + scale_y_continuous(limits=c(-100,100))
   
   if(facet == "Facet"){
-          p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales="free_y")
+          p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales=scales)
   } else {}
   
   #p1 <- p1 + scale_x_datetime(limits=c(as.POSIXct((begin.date)),as.POSIXct((end.date))))
@@ -117,6 +123,11 @@ qwcbPlot <- function(qw.data,
   {
           p1 <- p1 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
                                 aes(x=SAMPLE_START_DT,y=perc.diff),size=5,alpha = 0.5, color ="#F0E442" ,shape=19)
+  }
+  
+  if(labelDQI == TRUE)
+  {
+          p1 <- p1 + geom_text(aes(label=DQI_CD),size=5,vjust="bottom",hjust="right")
   }
   
   p1 <- p1 + ggtitle(maintitle)

@@ -134,7 +134,7 @@ output$messages <- renderMenu({
 
         messageItem(
                 from="DQI Police",
-                message = paste(overdueCount,"results in DQI of I or S < 90 days."),
+                message = paste(overdueCount,"results in DQI of I, S, or P < 90 days."),
                 icon = icon("exclamation-triangle")
                 ),
         
@@ -142,7 +142,7 @@ output$messages <- renderMenu({
         
                 messageItem(
                         from="DQI Police",
-                        message = paste(wayOverdueCount,"results in DQI of I or S > 90 days!"),
+                        message = paste(wayOverdueCount,"results in DQI of I, S, or P > 90 days!"),
                         icon = icon("exclamation-triangle")
                         )
         

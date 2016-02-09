@@ -1,5 +1,26 @@
+library(WQReview)
+library(shiny)
+library(shinydashboard)
+library(dplyr)
+library(DT)
+library(reshape2)
+
 qw.data <- NULL
 reports <- NULL
+markedRecords <- data.frame(RECORD_NO = NA,
+                            SITE_NO = NA,
+                            STATION_NM = NA,
+                            SAMPLE_START_DT = NA,
+                            MEDIUM_CD = NA,
+                            DQI_CD = NA,
+                            PARM_CD = NA,
+                            PARM_NM = NA,
+                            Where_Flagged = NA,
+                            Comment = NA
+                            )
+
+
+                            
 errors <- ""
 ###Plot global settings
 medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00")

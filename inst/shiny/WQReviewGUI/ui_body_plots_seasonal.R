@@ -13,8 +13,15 @@ tabItem(tabName = "seasonalPlot",
                                 selectInput("siteSel_seasonal","Station",choices="",multiple=TRUE),
                                 selectInput("parmSel_seasonal","Parameter",choices="",multiple=FALSE),
                                 selectInput("facetSel_seasonal","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
+                                checkboxInput("labelDQI_seasonal","Label DQI codes"),
                                 checkboxInput("fit_seasonal",label="Add LOESS",value=FALSE),
                                 verbatimTextOutput("seasonal_hoverinfo"),
+                                
+                                h3("Review comments"),
+                                textInput("seasonal_flaggedRecord",label="Record #"),
+                                textInput("seasonal_flaggedComment",label = "Comment"),
+                                actionButton(inputId = "seasonal_addRecord",label="Add record"),
+                                
                                 ###Sidebar options
                                 width=3
                         ),

@@ -153,3 +153,46 @@ output$blank_hoverinfo <- renderPrint({
         
 })
 
+###This creates a new entry in the marked record table
+observeEvent(input$blank_addRecord, {
+        try({
+                newEntry <- data.frame(RECORD_NO = input$blank_flaggedRecord,
+                                       SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                input$blank_flaggedRecord)]
+                                       ),
+                                       STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$blank_flaggedRecord)]
+                                       ),
+                                       SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                                             input$blank_flaggedRecord)])
+                                       ),
+                                       MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                    input$blank_flaggedRecord)]
+                                       ),
+                                       DQI_CD = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                              input$blank_flaggedRecord &
+                                                                                              qw.data$PlotTable$PARM_CD == 
+                                                                                              as.character(input$parmSel_blank))]
+                                       ),
+                                       PARM_CD = as.character(input$parmSel_blank),
+                                       PARM_NM = unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
+                                                                                                as.character(input$parmSel_blank))]
+                                       ),
+                                       Where_Flagged = "blank timeseries",
+                                       Comment = input$blank_flaggedComment
+                )
+                markedRecords <<- rbind(markedRecords,newEntry)
+                
+                updateTextInput(session, 
+                                "blank_flaggedRecord",
+                                value = " "
+                )
+                
+                updateTextInput(session, 
+                                "blank_flaggedComment",
+                                value = " "
+                )
+                
+                
+        })
+})

@@ -8,9 +8,8 @@
 #' data("exampleData",package="WQReview")
 #' pestCheckOut <- pestCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
-#' @importFrom plyr join
-#' @importFrom plyr ddply
-#' @importFrom plyr summarize
+#' @importFrom dplyr left_join
+#' @importFrom dplyr summarize
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 
@@ -29,16 +28,17 @@ pestCheck <- function(qw.data, returnAll = FALSE)
                                        PARM_SEQ_GRP_CD != "INF" &
                                        MEDIUM_CD %in% c("WS ","WG ", "OA "))
         
+
         if(nrow(inReviewData) > 0 & nrow(approvedData) > 0)
         {
                 
         #Get max number of hits in approved data at each site
         detects <- subset(approvedData, REMARK_CD != "<")
-        siteStats <- ddply(detects,c("SITE_NO","RECORD_NO"),summarize,
+        siteStats <- dplyr::summarize(group_by(detects,SITE_NO,RECORD_NO),
                            numHits = length(RESULT_VA)
         )
         
-        siteStats <- ddply(siteStats,c("SITE_NO"),summarize,
+        siteStats <- dplyr::summarize(group_by(siteStats,SITE_NO),
                            maxHits = max(numHits,na.rm=TRUE),
                            minHits = min(numHits,na.rm=TRUE),
                            N = length(numHits)
@@ -46,12 +46,12 @@ pestCheck <- function(qw.data, returnAll = FALSE)
         
         #Get number of hits for each sample
         detects <- subset(inReviewData, REMARK_CD != "<")
-        sampleHits <- ddply(detects,c("SITE_NO","RECORD_NO"),summarize,
+        sampleHits <- dplyr::summarize(group_by(detects,SITE_NO,RECORD_NO),
                            numHits = length(RESULT_VA)
         )
         
         #Join siteStats to sample hits for comparison
-        sampleHits <- join(sampleHits,siteStats,by="SITE_NO")
+        sampleHits <- dplyr::left_join(sampleHits,siteStats,by="SITE_NO")
         
         #Compare to max and min number of hits and flag
         sampleHits$newMaxHits_30.13 <- NA
@@ -69,7 +69,7 @@ pestCheck <- function(qw.data, returnAll = FALSE)
                                                                                                          sampleHits$N > 4)],
                                                                         "hits"
                                             )
-        sampleHits <- join(unique(pestData[c("RECORD_NO",
+        sampleHits <- dplyr::left_join(unique(pestData[c("RECORD_NO",
                                              "STATION_NM",
                                              "SAMPLE_START_DT",
                                              "SAMPLE_END_DT",
@@ -100,7 +100,7 @@ pestCheck <- function(qw.data, returnAll = FALSE)
                 ),]) 
         } else {}
         
-        return(sampleHits)
+        return(unique(sampleHits))
         
 }
         

@@ -8,6 +8,7 @@ output$qwscSumPlot <- renderPlot({
         qwscSumPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
+                 labelDQI = input$labelDQI_scSum,
                  facet = input$facetSel_scSum,
                  highlightrecords = reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                  printPlot=FALSE)
@@ -20,6 +21,7 @@ output$qwscSumPlot_zoom <- renderPlot({
         qwscSumPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
+                 labelDQI = input$labelDQI_scSum,
                  facet = input$facetSel_scSum,
                  highlightrecords = reports$chemFlagTable$RECORD_NO[which(!is.na(reports$sampleFlagTable$BadCB_30.21))],
                  printPlot = FALSE) + 
@@ -148,4 +150,42 @@ output$scSum_hoverinfo <- renderPrint({
 
         
         
+})
+
+###This creates a new entry in the marked record table
+observeEvent(input$scSum_addRecord, {
+        try({
+                newEntry <- data.frame(RECORD_NO = input$scSum_flaggedRecord,
+                                       SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                input$scSum_flaggedRecord)]
+                                       ),
+                                       STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$scSum_flaggedRecord)]
+                                       ),
+                                       SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                                             input$scSum_flaggedRecord)])
+                                       ),
+                                       MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                    input$scSum_flaggedRecord)]
+                                       ),
+                                       DQI_CD = NA,
+                                       PARM_CD = NA,
+                                       PARM_NM = NA,
+                                       Where_Flagged = "SC vs sum ions",
+                                       Comment = input$scSum_flaggedComment
+                )
+                markedRecords <<- rbind(markedRecords,newEntry)
+                
+                updateTextInput(session, 
+                                "scSum_flaggedRecord",
+                                value = " "
+                )
+                
+                updateTextInput(session, 
+                                "scSum_flaggedComment",
+                                value = " "
+                )
+                
+                
+        })
 })

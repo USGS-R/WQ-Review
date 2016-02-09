@@ -7,7 +7,7 @@
 #' data("exampleData",package="WQReview")
 #' chemCheckOut <- chemCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
-#' @importFrom plyr join
+#' @importFrom dplyr left_join
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 
@@ -31,7 +31,7 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
         fieldSCData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ")
         labSCData <- subset(inReviewData, PARM_CD == "90095" & MEDIUM_CD != "OAQ")
 
-        SCData <- join(fieldSCData[c("RECORD_NO","RESULT_VA")], labSCData[c("RECORD_NO","RESULT_VA","SC_badLabVSField")], by="RECORD_NO")
+        SCData <- dplyr::left_join(fieldSCData[c("RECORD_NO","RESULT_VA")], labSCData[c("RECORD_NO","RESULT_VA","SC_badLabVSField")], by="RECORD_NO")
         rm(fieldSCData)
         rm(labSCData)
         
@@ -114,22 +114,22 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                                                                                                               abs(cbData$perc.diff) > 5)]
                                                                               )
         #Join flagged samples together into one dataframe
-        flaggedSamples <- join(flaggedSamples, 
+        flaggedSamples <- dplyr::left_join(flaggedSamples, 
                                SCData[c("RECORD_NO","SC_badLabVSField")], 
                                by = "RECORD_NO")
         
-        flaggedSamples <- join(flaggedSamples, 
+        flaggedSamples <- dplyr::left_join(flaggedSamples, 
                                pHData[c("RECORD_NO","phTooLow_30.01")], 
                                by = "RECORD_NO")
         
-        flaggedSamples <- join(flaggedSamples, 
+        flaggedSamples <- dplyr::left_join(flaggedSamples, 
                                pHData[c("RECORD_NO","phTooHigh_30.02")], 
                                by = "RECORD_NO")
         
-        flaggedSamples <- join(flaggedSamples, 
+        flaggedSamples <- dplyr::left_join(flaggedSamples, 
                                O2Data[c("RECORD_NO","O2TooHigh_30.03")], 
                                by = "RECORD_NO")
-        flaggedSamples <- join(flaggedSamples, 
+        flaggedSamples <- dplyr::left_join(flaggedSamples, 
                                cbData[c("RECORD_NO","BadCB_30.21")], 
                                by = "RECORD_NO")
         flaggedSamples <- unique(flaggedSamples)
@@ -145,7 +145,7 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                 ),]) 
         } else {}
         
-        return(flaggedSamples)
+        return(unique(flaggedSamples))
 }
         
         

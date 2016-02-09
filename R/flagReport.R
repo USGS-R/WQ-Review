@@ -9,6 +9,8 @@
 #' @param begin.date Character string containing beginning date of data pull (yyyy-mm-dd). Default is 10 years from current date.
 #' @param end.date Character string containing ending date of data pull (yyyy-mm-dd). Default is current date.
 #' @param outputDir Directory to store output files. Must be an absolute path, e.g. "D:/flagReports"
+#' @importFrom dplyr left_join
+#' @importFrom rmarkdown render
 #' @details 
 #' flagReport uses the readNWISodbc function to pull data for sites in networkList. Sites are grouped by the cooresponding network name
 #' in the first column of networkList. Reports for each site are generated and written to subfolders by network name. A top-level index
@@ -103,7 +105,7 @@ flagReport <- function(networkList,
                         
                         ###Join charge balance table to plot table
                         chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
-                        qw.data$PlotTable <- join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
+                        qw.data$PlotTable <- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
                         
                         
                 } else {}
@@ -121,7 +123,7 @@ flagReport <- function(networkList,
                         
                         ###Join charge balance table to plot table
                         chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
-                        qw.data$PlotTable <- join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
+                        qw.data$PlotTable <- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
                         
                         
                 } else {}
@@ -223,20 +225,23 @@ flagReport <- function(networkList,
             
             sites <- subset(stations,network == networks[i])$SITE_NO
             network <- networks[i]
-            
+            try(
             rmarkdown::render(paste(markdownDir,"/networkSummary.rmd",sep=""),params = list(sites = sites, network=network,outputDir = outputDir),
                               output_file="networkSummary.htm",
                               output_dir=paste0(outputDir,"/",networks[i],sep="")
+            )
             )
         
             for(k in 1:length(sites))
             {
             site <- subset(stations,network == networks[i])$SITE_NO[k]
             siteName <- unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$SITE_NO == site)])
+            try(
             rmarkdown::render(paste(markdownDir,"/flagReport.rmd",sep=""),params = list(site = site,siteName=siteName,outputDir = outputDir),
                           output_file=paste(site,".htm",sep=""),
                           output_dir=paste0(outputDir,"/",networks[i],sep="")
                           )
+            )
             
             }
         }

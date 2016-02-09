@@ -10,6 +10,7 @@ tabItem(tabName = "siteSelection",
                         sidebarPanel(
                                 selectizeInput("STAIDS",label="Site number",choices=NULL,multiple=TRUE,options=list(create=TRUE)),
                                 fileInput("siteFile",label="Site number file",accept="csv"),
+                                selectizeInput("projectCd",label="Project code (optional)",choices=NULL,multiple=TRUE,options=list(create=TRUE)),
                                 
                                 selectizeInput("dl.parms",label="Parameter codes",choices=NULL,multiple=TRUE,options=list(create=TRUE)),
                                 selectInput("dl.parms.group","Parameter groups",choices=c("All" = "All",
@@ -33,7 +34,6 @@ tabItem(tabName = "siteSelection",
                                 
                                 dateInput(inputId = "begin.date",label="Start date",max=Sys.Date(),value=Sys.Date()-365*10),
                                 dateInput(inputId = "end.date",label="End date",max=Sys.Date(),value=Sys.Date()),
-                                
                                 textInput("DSN",label="Server name (DSN)",value=""),
                                 textInput("env.db",label="Environment DB Number",value="01"),
                                 textInput("qa.db",label="QA DB Number",value="02"),

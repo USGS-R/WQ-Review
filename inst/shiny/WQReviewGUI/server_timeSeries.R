@@ -12,6 +12,7 @@ output$qwtsPlot <- renderPlot({
                  highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                       reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_TS))]),
                  show.smooth = input$fit_timeseries,
+                 labelDQI = input$labelDQI_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,
                  printPlot=FALSE
@@ -29,6 +30,7 @@ output$qwtsPlot_zoom <- renderPlot({
                  highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                       reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_TS))]),
                  show.smooth = input$fit_timeseries,
+                 labelDQI = input$labelDQI_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,
                  printPlot=FALSE
@@ -161,3 +163,49 @@ output$timeseries_hoverinfo <- renderPrint({
         
         
 })
+
+###This creates a new entry in the marked record table
+observeEvent(input$timeseries_addRecord, {
+        try({
+                newEntry <- data.frame(RECORD_NO = input$timeseries_flaggedRecord,
+                                       SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                input$timeseries_flaggedRecord)]
+                                       ),
+                                       STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$timeseries_flaggedRecord)]
+                                       ),
+                                       SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                                             input$timeseries_flaggedRecord)])
+                                       ),
+                                       MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                    input$timeseries_flaggedRecord)]
+                                       ),
+                                       DQI_CD = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                              input$timeseries_flaggedRecord &
+                                                                                              qw.data$PlotTable$PARM_CD == 
+                                                                                              as.character(input$parmSel_TS))]
+                                       ),
+                                       PARM_CD = as.character(input$parmSel_TS),
+                                       PARM_NM = unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
+                                                                                                as.character(input$parmSel_TS))]
+                                       ),
+                                       Where_Flagged = "timeseries",
+                                       Comment = input$timeseries_flaggedComment
+                )
+                markedRecords <<- rbind(markedRecords,newEntry)
+                
+                updateTextInput(session, 
+                                "timeseries_flaggedRecord",
+                                value = " "
+                )
+                
+                updateTextInput(session, 
+                                "timeseries_flaggedComment",
+                                value = " "
+                )
+                
+        })
+})
+
+        
+        

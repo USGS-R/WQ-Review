@@ -14,12 +14,18 @@ tabItem(tabName = "timeSeries",
                         selectInput("siteSel_TS","Station",choices="",multiple=TRUE),
                         selectInput("parmSel_TS","Parameter",choices="",multiple=FALSE),
                         selectInput("facetSel_TS","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
-                        
+                        checkboxInput("labelDQI_timeseries","Label DQI codes"),
                         checkboxInput("fit_timeseries",label="Add LOESS",value=FALSE),
                         tags$div(title="Plot interactions won't work with hydrograph display",
                                  checkboxInput("showQ",label="Display hydrograph",value=FALSE)
                         ),
                         verbatimTextOutput("timeseries_hoverinfo"),
+                        
+                        h3("Review comments"),
+                        textInput("timeseries_flaggedRecord",label="Record #"),
+                        textInput("timeseries_flaggedComment",label = "Comment"),
+                        actionButton(inputId = "timeseries_addRecord",label="Add record"),
+                        
                         
                         ###Sidebar options
                         width=3

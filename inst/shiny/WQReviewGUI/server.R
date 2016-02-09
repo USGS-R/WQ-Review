@@ -10,7 +10,7 @@ server <- function(input, output, session) {
         #source("server_srsSummary.r",local=TRUE)$value
         
         source("server_dataImport.r",local=TRUE)$value
-        
+        source("server_sidebar.r",local=TRUE)$value
         ###This generates reactive tables
         #############################################################
         ###Different functional elements of the dashboard,        ###

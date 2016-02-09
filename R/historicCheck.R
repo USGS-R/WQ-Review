@@ -8,9 +8,9 @@
 #' data("exampleData",package="WQReview")
 #' historicCheckOut <- historicCheck(qw.data=qw.data,
 #'              returnAll = FALSE)
-#' @importFrom plyr join
-#' @importFrom plyr ddply
-#' @importFrom plyr summarize
+#' @importFrom dplyr group_by
+#' @importFrom dplyr summarize
+#' @importFrom dplyr left_join
 
 #' @export
 #' @return A dataframe containing all samples with applicable flags
@@ -28,15 +28,15 @@ historicCheck <- function(qw.data, returnAll = FALSE)
         if(nrow(inReviewData > 0))
         {
         #Get stats by parm for each site
-        siteStats <- ddply(approvedData,c("SITE_NO","PARM_CD"),summarize,
-                        min = min(RESULT_VA,na.rm=TRUE),
-                        max = max(RESULT_VA,na.rm=TRUE),
-                        quant99 = quantile(RESULT_VA,probs=(0.99),na.rm=TRUE),
-                        quant01 = quantile(RESULT_VA,probs=(0.01),na.rm=TRUE),
-                        N = length(RESULT_VA)
-        )
+        siteStats <- dplyr::summarize(group_by(approvedData,SITE_NO,PARM_CD),
+                                              min = min(RESULT_VA,na.rm=TRUE),
+                                              max = max(RESULT_VA,na.rm=TRUE),
+                                              quant99 = quantile(RESULT_VA,probs=(0.99),na.rm=TRUE),
+                                              quant01 = quantile(RESULT_VA,probs=(0.01),na.rm=TRUE),
+                                              N = length(RESULT_VA)
+                )
         
-        inReviewData <- join(inReviewData,siteStats, by = c("SITE_NO","PARM_CD"))
+        inReviewData <- dplyr::left_join(inReviewData,siteStats, by = c("SITE_NO","PARM_CD"))
         
         ##Check if new max
         inReviewData$newMax_30.11 <- NA
@@ -103,7 +103,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
         ),]) 
         } else {}
         
-        return(flaggedSamples)
+        return(unique(flaggedSamples))
         
         } else{ print("No in-review data for comparison to approved data")}
 }

@@ -12,6 +12,7 @@ output$qwcbPlot <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  show.smooth = FALSE,
                  highlightrecords = reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
+                 labelDQI = input$labelDQI_cb,
                  printPlot = FALSE)
         
  
@@ -27,6 +28,7 @@ output$qwcbPlot_zoom <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  show.smooth = FALSE,
                  highlightrecords = reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
+                 labelDQI = input$labelDQI_cb,
                  printPlot = FALSE) +  
                 ###This resecb the axes to zoomed area, must specify origin because brushedPoincb returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = as.POSIXct(ranges_cb$x,origin="1970-01-01 00:00.00 UTC"), ylim = ranges_cb$y)
@@ -146,4 +148,40 @@ output$cb_hoverinfo <- renderPrint({
         
         
         
+})
+
+###This creates a new entry in the marked record table
+observeEvent(input$cb_addRecord, {
+        try({
+                newEntry <- data.frame(RECORD_NO = input$cb_flaggedRecord,
+                                       SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                input$cb_flaggedRecord)]
+                                       ),
+                                       STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$cb_flaggedRecord)]
+                                       ),
+                                       SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                                             input$cb_flaggedRecord)])
+                                       ),
+                                       MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                    input$cb_flaggedRecord)]
+                                       ),
+                                       DQI_CD = NA,
+                                       PARM_CD = NA,
+                                       PARM_NM = NA,
+                                       Where_Flagged = "charge balance",
+                                       Comment = input$cb_flaggedComment
+                )
+                markedRecords <<- rbind(markedRecords,newEntry)
+                
+                updateTextInput(session, 
+                                "cb_flaggedRecord",
+                                value = " "
+                )
+                
+                updateTextInput(session, 
+                                "cb_flaggedComment",
+                                value = " "
+                )
+        })
 })

@@ -3,6 +3,7 @@
 #' Takes output list from readNWISodbc and prints a boxplot of parameters
 #' @param qw.data A qw.data object generated from readNWISodbc
 #' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
+#' @param scales Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character vector of pcodes to plot
@@ -10,6 +11,7 @@
 #' @param log.scale Plot y axis on a log scale
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
+#' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
@@ -17,11 +19,13 @@
 #'               site.selection = "06733000",
 #'               plotparm = c("00915","00095","00400"),
 #'               facet = "multisite",
+#'               scales="fixed",
 #'               new.threshold = 60*60*24*30,
 #'               show.points = FALSE,
 #'               log.scale = TRUE,
 #'               highlightrecords = NULL,
 #'               wySymbol = FALSE,
+#'               labelDQI = FALSE,
 #'               printPlot = TRUE)
 #' @import ggplot2
 #' @importFrom stringr str_wrap
@@ -31,11 +35,13 @@ qwparmBoxPlot <- function(qw.data,
                      site.selection,
                      plotparm,
                      facet = "multisite",
+                     scales="fixed",
                      new.threshold = 60*60*24*30,
                      show.points = FALSE,
                      log.scale = FALSE,
                      highlightrecords = NULL,
                      wySymbol = FALSE,
+                     labelDQI = FALSE,
                      printPlot = TRUE){
   
   medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00")
@@ -65,7 +71,7 @@ qwparmBoxPlot <- function(qw.data,
   p1 <- p1 + scale_x_discrete("Analyte")
   if ( facet == "Facet")
   {
-  p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales="free") 
+  p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales=scales) 
   } else{}
   if(log.scale == TRUE)
   {
@@ -90,6 +96,11 @@ qwparmBoxPlot <- function(qw.data,
     {
             p2 <- p2 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
                                   aes(x=PARM_NM,y=RESULT_VA),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+    }
+    
+    if(labelDQI == TRUE)
+    {
+            p2 <- p2 + geom_text(aes(color = MEDIUM_CD,shape=REMARK_CD,label=DQI_CD),size=5,vjust="bottom",hjust="right")
     }
     
     if(printPlot)

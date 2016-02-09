@@ -7,7 +7,6 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 ###Load libraries and setup options
 
 require(WQReview)
-require(plyr)
 require(knitr)
 opts_chunk$set(dev = 'png',out.width='1024px',out.height='750px',dpi=60)
 ```

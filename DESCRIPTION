@@ -17,7 +17,6 @@ Depends:
     R (>= 3.0)
 Imports:
     reshape2,
-    plyr,
     RODBC,
     stringr,
     ggplot2,
@@ -26,10 +25,12 @@ Imports:
     lubridate,
     DT,
     gridExtra,
-    rmarkdown
+    rmarkdown,
+    dplyr
 Suggests:
     knitr
 VignetteBuilder: knitr
 BuildVignettes: true
 BugReports: https://github.com/USGS-R/WQReview/issues
 URL: https://github.com/USGS-R/WQReview
+RoxygenNote: 5.0.1

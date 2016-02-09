@@ -7,8 +7,8 @@
 # @param begin.date Character string containing beginning date of data pull (yyyy-mm-dd)
 # @param end.date Character string containing ending date of data pull (yyyy-mm-dd)
 # @import dataRetrieval 
-# @import reshape2 
-# @import plyr
+# @importFrom reshape2 dcast 
+# @import dplyr left_join
 # @import lubridate
 
 publicData <- function(STAIDS,dl.parms = "All",parm.group.check = TRUE,begin.date ="",end.date="")
@@ -49,8 +49,8 @@ offsetLibrary <- setNames(c(5, 4, 6, 5, 7, 6, 8, 7, 9,
 offset <- offsetLibrary[PlotTable$sample_start_time_datum_cd] * 60 * 60
 PlotTable$startDateTime <- PlotTable$startDateTime - offset
 ###Bring in meta data
-PlotTable <- join(PlotTable, unique(availableData[c("site_no","station_nm","dec_lat_va","dec_long_va","huc_cd")]),by= "site_no")
-PlotTable <- join(PlotTable, unique(availableData[c("parm_cd","parameter_nm","parm_grp_cd")]),by= "parm_cd")
+PlotTable <- dplyr::left_join(PlotTable, unique(availableData[c("site_no","station_nm","dec_lat_va","dec_long_va","huc_cd")]),by= "site_no")
+PlotTable <- dplyr::left_join(PlotTable, unique(availableData[c("parm_cd","parameter_nm","parm_grp_cd")]),by= "parm_cd")
 
 ###Rename to same as internal Plot Table
 names(PlotTable) <- c("AGENCY_CD","SITE_NO","SAMPLE_DT",

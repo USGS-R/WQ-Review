@@ -13,7 +13,7 @@ tabItem(tabName = "blankTable",
                         ),
                         mainPanel(
                                 downloadButton('blankTableOut', 'Download tab delimited table'),
-                                
+                                h3(textOutput("blankTableWarning")),
                                 DT::dataTableOutput("blankTable")
                         )
                 )

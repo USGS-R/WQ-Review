@@ -13,6 +13,7 @@ output$qwseasonalPlot <- renderPlot({
                        site.selection = as.character(input$siteSel_seasonal),
                        plotparm = as.character(input$parmSel_seasonal),
                        facet = input$facetSel_seasonal,
+                       labelDQI = input$labelDQI_seasonal,
                        show.smooth = input$fit_seasonal,
                        highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                             reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_seasonal))]),
@@ -28,6 +29,7 @@ output$qwseasonalPlot_zoom <- renderPlot({
                        site.selection = as.character(input$siteSel_seasonal),
                        plotparm = as.character(input$parmSel_seasonal),
                        facet = input$facetSel_seasonal,
+                       labelDQI = input$labelDQI_seasonal,
                        show.smooth = input$fit_seasonal,
                        highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                             reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_seasonal))]),
@@ -164,4 +166,48 @@ output$seasonal_hoverinfo <- renderPrint({
         
         
             
+})
+
+###This creates a new entry in the marked record table
+observeEvent(input$seasonal_addRecord, {
+        try({
+                newEntry <- data.frame(RECORD_NO = input$seasonal_flaggedRecord,
+                                       SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                input$seasonal_flaggedRecord)]
+                                       ),
+                                       STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$seasonal_flaggedRecord)]
+                                       ),
+                                       SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                                             input$seasonal_flaggedRecord)])
+                                       ),
+                                       MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                    input$seasonal_flaggedRecord)]
+                                       ),
+                                       DQI_CD = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                              input$seasonal_flaggedRecord &
+                                                                                              qw.data$PlotTable$PARM_CD == 
+                                                                                              as.character(input$parmSel_seasonal))]
+                                       ),
+                                       PARM_CD = as.character(input$parmSel_seasonal),
+                                       PARM_NM = unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
+                                                                                                as.character(input$parmSel_seasonal))]
+                                       ),
+                                       Where_Flagged = "seasonal plot",
+                                       Comment = input$seasonal_flaggedComment
+                )
+                markedRecords <<- rbind(markedRecords,newEntry)
+                
+                updateTextInput(session, 
+                                "seasonal_flaggedRecord",
+                                value = " "
+                )
+                
+                updateTextInput(session, 
+                                "seasonal_flaggedComment",
+                                value = " "
+                )
+                
+                
+        })
 })
