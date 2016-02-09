@@ -12,6 +12,7 @@ output$qwcbPlot <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  show.smooth = FALSE,
                  highlightrecords = reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
+                 labelDQI = input$labelDQI_cb,
                  printPlot = FALSE)
         
  
@@ -27,6 +28,7 @@ output$qwcbPlot_zoom <- renderPlot({
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  show.smooth = FALSE,
                  highlightrecords = reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
+                 labelDQI = input$labelDQI_cb,
                  printPlot = FALSE) +  
                 ###This resecb the axes to zoomed area, must specify origin because brushedPoincb returns time in seconds from origin, not hte posixCT "yyyy-mm-dd" format
                 coord_cartesian(xlim = as.POSIXct(ranges_cb$x,origin="1970-01-01 00:00.00 UTC"), ylim = ranges_cb$y)

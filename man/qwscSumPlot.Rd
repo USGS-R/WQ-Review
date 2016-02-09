@@ -6,7 +6,7 @@
 \usage{
 qwscSumPlot(qw.data, site.selection, facet = "multisite", scales = "fixed",
   new.threshold = 60 * 60 * 24 * 30, highlightrecords = NULL,
-  wySymbol = FALSE, printPlot = TRUE)
+  wySymbol = FALSE, labelDQI = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}
@@ -23,6 +23,8 @@ qwscSumPlot(qw.data, site.selection, facet = "multisite", scales = "fixed",
 
 \item{wySymbol}{Make current water-year highlighted.}
 
+\item{labelDQI}{Logical. Should points be labeled with DQI code.}
+
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 }
 \description{
@@ -37,6 +39,7 @@ qwscSumPlot(qw.data = qw.data,
               new.threshold = 60*60*24*30,
               highlightrecords = NULL,
               wySymbol = FALSE,
+              labelDQI=FALSE,
               printPlot = TRUE)
 }
 

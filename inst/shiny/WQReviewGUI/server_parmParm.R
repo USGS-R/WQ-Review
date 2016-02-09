@@ -13,6 +13,7 @@ output$qwparmParmPlot <- renderPlot({
                        facet = input$facetSel_parmParm,
                        new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                        show.lm = input$fit_parmParm,
+                       labelDQI = input$labelDQI_parmParm,
                        if("Log10X" %in% input$axes_parmParm)
                        {
                                log.scaleX = TRUE
@@ -42,6 +43,7 @@ output$qwparmParmPlot_zoom <- renderPlot({
                        facet = input$facetSel_parmParm,
                        new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                        show.lm = input$fit_parmParm,
+                       labelDQI = input$labelDQI_parmParm,
                        if("Log10X" %in% input$axes_parmParm)
                        {
                                log.scaleX = TRUE

@@ -14,7 +14,7 @@ tabItem(tabName = "timeSeries",
                         selectInput("siteSel_TS","Station",choices="",multiple=TRUE),
                         selectInput("parmSel_TS","Parameter",choices="",multiple=FALSE),
                         selectInput("facetSel_TS","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
-                        
+                        checkboxInput("labelDQI_timeseries","Label DQI codes"),
                         checkboxInput("fit_timeseries",label="Add LOESS",value=FALSE),
                         tags$div(title="Plot interactions won't work with hydrograph display",
                                  checkboxInput("showQ",label="Display hydrograph",value=FALSE)

@@ -8,6 +8,7 @@
 #' @param site.selection A character vector of site IDs to plot
 #' @param highlightrecords A character vector of record numbers to highlight in plot
 #' @param wySymbol Make current water-year highlighted.
+#' @param labelDQI Logical. Should points be labeled with DQI code.
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
@@ -18,6 +19,7 @@
 #'               new.threshold = 60*60*24*30,
 #'               highlightrecords = NULL,
 #'               wySymbol = FALSE,
+#'               labelDQI=FALSE,
 #'               printPlot = TRUE)
 #' @import ggplot2
 #' @importFrom stringr str_wrap
@@ -31,14 +33,15 @@ qwscSumPlot <- function(qw.data,
                        new.threshold = 60*60*24*30,
                        highlightrecords = NULL,
                        wySymbol = FALSE,
+                       labelDQI=FALSE,
                        printPlot = TRUE
                        ) {
 
   ###Subset to plot data
   plotdata <- subset(qw.data$PlotTable,SITE_NO %in% site.selection & PARM_CD== "00095")
   
-  plotdata <- melt(plotdata[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","sum_cat","sum_an","complete.chem","perc.diff")],
-                   id.vars=c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","RESULT_VA","complete.chem","perc.diff"))
+  plotdata <- melt(plotdata[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","DQI_CD","RESULT_VA","sum_cat","sum_an","complete.chem","perc.diff")],
+                   id.vars=c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","SAMPLE_MD","MEDIUM_CD","DQI_CD","RESULT_VA","complete.chem","perc.diff"))
   ##New data subset for new modified samples. Used for labelling points as "NEW"
   newflagdata <- na.omit(subset(plotdata,SAMPLE_MD >= (Sys.time()-new.threshold)))
   
@@ -87,6 +90,11 @@ qwscSumPlot <- function(qw.data,
       {
               p1 <- p1 + geom_point(data=subset(plotdata, as.character(waterYear(SAMPLE_START_DT)) == as.character(waterYear(Sys.time()))),
                                     aes(x=RESULT_VA,y=value),size=7,alpha = 0.5, color = "#F0E442",shape=19)
+      }
+      
+      if(labelDQI == TRUE)
+      {
+              p1 <- p1 + geom_text(aes(x=RESULT_VA,y=value,shape = complete.chem, color = variable,label=DQI_CD),size=5,vjust="bottom",hjust="right")
       }
       
     p1 <- p1 + ylab(paste(ylabel,"\n")) + xlab("Specific conducatance")

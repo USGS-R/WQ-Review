@@ -13,6 +13,7 @@ tabItem(tabName = "parmParmPlot",
                                 selectInput("parmSel_parmParmX","X-Parameter",choices="",multiple=FALSE),
                                 selectInput("parmSel_parmParmY","Y-Parameter",choices="",multiple=FALSE),
                                 selectInput("facetSel_parmParm","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
+                                checkboxInput("labelDQI_parmParm",label="Label DQI codes",value=FALSE),
                                 
                                 checkboxInput("fit_parmParm",label="Add linear fit",value=FALSE),
                                 checkboxGroupInput("axes_parmParm","Axis options:",

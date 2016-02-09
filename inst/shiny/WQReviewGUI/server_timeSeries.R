@@ -12,6 +12,7 @@ output$qwtsPlot <- renderPlot({
                  highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                       reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_TS))]),
                  show.smooth = input$fit_timeseries,
+                 labelDQI = input$labelDQI_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,
                  printPlot=FALSE
@@ -29,6 +30,7 @@ output$qwtsPlot_zoom <- renderPlot({
                  highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                       reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_TS))]),
                  show.smooth = input$fit_timeseries,
+                 labelDQI = input$labelDQI_timeseries,
                  facet = input$facetSel_TS,
                  show.q = input$showQ,
                  printPlot=FALSE

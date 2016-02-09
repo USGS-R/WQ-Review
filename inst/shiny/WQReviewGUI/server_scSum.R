@@ -8,6 +8,7 @@ output$qwscSumPlot <- renderPlot({
         qwscSumPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
+                 labelDQI = input$labelDQI_scSum,
                  facet = input$facetSel_scSum,
                  highlightrecords = reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                  printPlot=FALSE)
@@ -20,6 +21,7 @@ output$qwscSumPlot_zoom <- renderPlot({
         qwscSumPlot(qw.data = qw.data,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  site.selection = as.character(input$siteSel_scSum),
+                 labelDQI = input$labelDQI_scSum,
                  facet = input$facetSel_scSum,
                  highlightrecords = reports$chemFlagTable$RECORD_NO[which(!is.na(reports$sampleFlagTable$BadCB_30.21))],
                  printPlot = FALSE) + 
