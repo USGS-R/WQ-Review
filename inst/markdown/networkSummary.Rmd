@@ -16,10 +16,18 @@ opts_chunk$set(dev = 'png',out.width='1024px',out.height='750px',dpi=60)
 load(paste(outputDir,"/data.rda",sep=""))
 ###Subset to site network
 qw.data$PlotTable <- subset(qw.data$PlotTable,SITE_NO %in% sites)
+if(!is.null(reports$chemFlagTable))
+{
 reports$chemFlagTable <- subset(reports$chemFlagTable, SITE_NO %in% sites)
-reports$pestFlagTable <- subset(reports$pestFlagTable, SITE_NO %in% sites)   
+} else{}
+if(!is.null(reports$pestFlagTable))
+{
+reports$pestFlagTable <- subset(reports$pestFlagTable, SITE_NO %in% sites)
+} else{}
+if(!is.null(reports$resultFlagTable))
+{
 reports$resultFlagTable <- subset(reports$resultFlagTable, SITE_NO %in% sites)  
-
+} else{}
 ```
 
 #Network Data Summary
