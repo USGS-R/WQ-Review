@@ -5,7 +5,7 @@
 
 tabItem(tabName = "markedRecordsTab",
         fluidPage(
-                headerPanel("Blank summary table"),
+                headerPanel("Reviewer notes"),
                 downloadButton('markedRecordsOut', 'Download tab delimited table'),
                 actionButton(inputId = "refreshMarkedRecords",label="Refresh table"),
                 

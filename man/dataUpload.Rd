@@ -4,9 +4,8 @@
 \alias{dataUpload}
 \title{dataUpload formats files for upload into QWData}
 \usage{
-dataUpload(qwsampletype, DSN = "NWISCO", env.db = "01", qa.db = "02",
-  labfile, pcodefile, qwsamplefile = "", qwresultname = "qwresult",
-  qwsamplename = "qwsample", qwsample.begin.date = NA,
+dataUpload(qwsampletype, labfile, pcodefile, DSN = "NWISCO", env.db = "01",
+  qa.db = "02", qwsamplefile = "", qwsample.begin.date = NA,
   qwsample.end.date = NA, censor = FALSE, agencycode = "USGS",
   labid = NA, projectcode = NA, aquifercode = NA, analysisstatus = NA,
   analysissource = NA, hydrologiccond = "A", hydrologicevent = 9,
@@ -16,21 +15,17 @@ dataUpload(qwsampletype, DSN = "NWISCO", env.db = "01", qa.db = "02",
 \arguments{
 \item{qwsampletype}{Numeric of type of qwsample file. Options 1: Pull qwsample form NWIS, 2:QWSample from file, 3: batch qwsample file}
 
+\item{labfile}{Character string containing path to the labfile, must be .csv format}
+
+\item{pcodefile}{Character string containing path to the pcodefile, must be .csv format}
+
 \item{DSN}{Character string containing local NWIS server name}
 
 \item{env.db}{Environmental database number}
 
 \item{qa.db}{QA database number}
 
-\item{labfile}{Character string containing path to the labfile, must be .csv format}
-
-\item{pcodefile}{Character string containing path to the pcodefile, must be .csv format}
-
 \item{qwsamplefile}{Character string containing path to the qwsample file if using qwsampletype = 2, must be .csv format}
-
-\item{qwresultname}{Character string containing output path for the qwresult file}
-
-\item{qwsamplename}{Character string containing output path for the qwsample file}
 
 \item{qwsample.begin.date}{Character string (yyyy-mm-dd) of beggining date to subset qwsample file to}
 
@@ -70,6 +65,5 @@ dataUpload(qwsampletype, DSN = "NWISCO", env.db = "01", qa.db = "02",
 }
 \description{
 Assists in formatting data for upload into QWData. Use templateExport to generate spreadsheet templates to create labfile and pcode file.
-See vignettes for further instructions on uploading non-NWQL data to NWIS using dataUpload
 }
 
