@@ -25,7 +25,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                        PARM_SEQ_GRP_CD != "INF" &
                                        MEDIUM_CD %in% c("WS ","WG ", "OA "))
         
-        if(nrow(inReviewData > 0))
+        if(nrow(inReviewData) > 0)
         {
         #Get stats by parm for each site
         siteStats <- dplyr::summarize(group_by(approvedData,SITE_NO,PARM_CD),
@@ -105,5 +105,24 @@ historicCheck <- function(qw.data, returnAll = FALSE)
         
         return(unique(flaggedSamples))
         
-        } else{ print("No in-review data for comparison to approved data")}
+        } else{ print("No in-review data for comparison to approved data")
+                return(data.frame(RECORD_NO = NA,
+                                  SITE_NO = NA,
+                                  STATION_NM = NA,
+                                  SAMPLE_START_DT = NA,
+                                  SAMPLE_END_DT = NA,
+                                  MEDIUM_CD = NA,
+                                  PARM_CD = NA,
+                                  PARM_NM = NA,
+                                  PARM_SEQ_GRP_CD = NA,
+                                  min = NA,
+                                  max = NA,
+                                  quant99 = NA,
+                                  quant01 = NA,
+                                  newMax_30.11 = NA,
+                                  newMin_30.12 = NA,
+                                  greaterQuant99_30.15 = NA,
+                                  lessQuant01_30.16 = NA)
+                )
+        }
 }

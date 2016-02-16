@@ -4,6 +4,7 @@ library(shinydashboard)
 library(dplyr)
 library(DT)
 library(reshape2)
+library(ggplot2)
 
 qw.data <- NULL
 reports <- NULL
