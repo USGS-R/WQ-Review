@@ -1,7 +1,7 @@
 #' Boxplot of replicate relative percent difference
 #' 
 #' Takes output data object from readNWISodbc and prints a boxplot of replicate RPD
-#' @param reports A reports object generated from readNWISodbc
+#' @param qw.data A qw.data list generated from readNWISodbc
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character vector of pcodes to plot
@@ -23,7 +23,7 @@
 #' @importFrom stringr str_wrap
 #' @export
 
-qwrepBoxPlot <- function(reports,
+qwrepBoxPlot <- function(qw.data,
                     site.selection,
                     plotparm,
                     new.threshold = 60*60*24*30,
@@ -39,7 +39,7 @@ qwrepBoxPlot <- function(reports,
 
   hline <- data.frame(yint=c(-5,5,-10,10),RPD=c("+/- 5%","+/- 5%","+/- 10%","+/- 10%"))
     
-  plotdata <- subset(reports$repTable,PARM_CD%in%(plotparm) & SITE_NO %in% site.selection)
+  plotdata <- subset(qw.data$reports$repTable,PARM_CD%in%(plotparm) & SITE_NO %in% site.selection)
   plotdata$historic <- "Historic"
   plotdata$historic[which(plotdata$Env_SAMPLE_START_DT >= new.reps)] <- "New"
   

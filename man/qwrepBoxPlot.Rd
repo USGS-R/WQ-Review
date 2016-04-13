@@ -4,12 +4,12 @@
 \alias{qwrepBoxPlot}
 \title{Boxplot of replicate relative percent difference}
 \usage{
-qwrepBoxPlot(reports, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
+qwrepBoxPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 *
   30, show.points = FALSE, highlightrecords = NULL, new.reps = Sys.time()
   - 60 * 60 * 24 * 30, printPlot = TRUE)
 }
 \arguments{
-\item{reports}{A reports object generated from readNWISodbc}
+\item{qw.data}{A qw.data list generated from readNWISodbc}
 
 \item{site.selection}{A character vector of site IDs to plot}
 
