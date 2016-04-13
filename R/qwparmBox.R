@@ -68,6 +68,7 @@ qwparmBoxPlot <- function(qw.data,
   p1 <- p1 + ylab(paste(ylabel,"\n"))
   p1 <- p1 + ggtitle(maintitle)
   p1 <- p1 + theme(axis.text.x = element_text(angle = 90))
+  p1 <- p1 + theme_bw()
   p1 <- p1 + scale_x_discrete("Analyte")
   if ( facet == "Facet")
   {
