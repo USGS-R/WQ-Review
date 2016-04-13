@@ -11,7 +11,7 @@
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' qwrepBoxPlot(reports = reports,
+#' qwrepBoxPlot(qw.data = qw.data,
 #'                        site.selection = "06733000",
 #'                        plotparm = "00915",
 #'                        new.threshold = 60*60*24*30,

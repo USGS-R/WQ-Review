@@ -12,6 +12,7 @@
 #' @return A dataframe containing all samples with applicable flags
 
 chemCheck <- function(qw.data, returnAll = FALSE) {
+        
         #Make data frame of all samples
         inReviewData <- subset(qw.data$PlotTable, DQI_CD %in% c("I","S","P"))
         inReviewData$SC_badLabVSField <- NA
@@ -77,7 +78,13 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
         
         
         #Flag samples with bad charge balance
-        
+        #Check if charge balance was run and throw a warning if not
+        if(is.null(qw.data$PlotTable$complete.chem))
+        {
+                warning("No charge balance data. Try running ionBalance() on qw.data list input first.")
+                cbData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ")
+                cbData$BadCB_30.21 <- NA
+        } else {
         ##Subset to samples with SC data
         cbData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ" & complete.chem == "Complete")
         
@@ -113,6 +120,7 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                                                                                cbData$perc.diff[which(cbData$RESULT_VA > 1000 & 
                                                                                                               abs(cbData$perc.diff) > 5)]
                                                                               )
+        }
         #Join flagged samples together into one dataframe
         flaggedSamples <- dplyr::left_join(flaggedSamples, 
                                SCData[c("RECORD_NO","SC_badLabVSField")], 
