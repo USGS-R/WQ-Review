@@ -23,7 +23,7 @@ blankSummary <- function(qw.data,STAIDS="All",begin.date = NA,end.date=NA,multip
 {
         
         ### Various if statements to check for date range subsetting
-        if("All" %in% STAIDS)
+        if(!("All" %in% STAIDS))
         {
                 STAIDS <- STAIDS
         } else {
