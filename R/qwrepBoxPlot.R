@@ -39,7 +39,7 @@ qwrepBoxPlot <- function(qw.data,
 
   hline <- data.frame(yint=c(-5,5,-10,10),RPD=c("+/- 5%","+/- 5%","+/- 10%","+/- 10%"))
     
-  plotdata <- subset(qw.data$reports$repTable,PARM_CD%in%(plotparm) & SITE_NO %in% site.selection)
+  plotdata <- subset(reports$repTable,PARM_CD%in%(plotparm) & SITE_NO %in% site.selection)
   plotdata$historic <- "Historic"
   plotdata$historic[which(plotdata$Env_SAMPLE_START_DT >= new.reps)] <- "New"
   
