@@ -2,8 +2,9 @@ dashboardBody(
         
         tabItems(
                 
-        source("ui_body_sitePage.r",local=TRUE)$value,
-                
+        source("ui_body_siteSelection.r",local=TRUE)$value,
+        #source("ui_body_nwisDCImport.r",local=TRUE)$value,
+        
         ################################################################
         ###Different functional elements of the body of the dashboard###
         ###plotting, tables, etc. add items here if desired          ###
@@ -35,7 +36,9 @@ dashboardBody(
         source("ui_body_tables_blank.r",local=TRUE)$value,
         source("ui_body_tables_rep.r",local=TRUE)$value,
         source("ui_body_tables_wholevpart.r",local=TRUE)$value,
-        source("ui_body_flagPage.r",local=TRUE)$value,
+        #source("ui_body_flagPage.r",local=TRUE)$value,
+        source("ui_body_tables_chemFlagTable.r",local=TRUE)$value,
+        
         
         #source("ui_body_srsSummary.r",local=TRUE)$value,
         

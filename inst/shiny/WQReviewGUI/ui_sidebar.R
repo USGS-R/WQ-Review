@@ -9,8 +9,18 @@ dashboardSidebar(sidebarMenu(
                        
                 
                        ###Load the controls
-        menuItem(tabName="siteSelection","Data import"),
-        menuItem(tabName="flagPage","Auto-flagged samples"),
+        menuItem("Data import",
+                 menuSubItem(tabName="siteSelection", text = "Import sites and samples"),
+                 menuSubItem(tabName="nwisDCImport", text = "NWIS Datachecks import")
+                 ),
+        
+        menuItem("Chemical sense checks",
+                 menuSubItem(tabName="chemFlagTable","Chemical sense summary"),
+                 menuSubItem(tabName="balanceTable","Charge balance table"),
+                 menuSubItem(tabName="cbPlot",text="Chargebalance plot"),
+                 menuSubItem(tabName="scSumPlot",text="Ions vs conductance plot")
+                 
+                 ),
         
                 menuItem("Plots",
                          
@@ -28,9 +38,7 @@ dashboardSidebar(sidebarMenu(
                          
                          menuSubItem(tabName="matrixPlot",text="Matrix plot"),
                          
-                         menuSubItem(tabName="cbPlot",text="Chargebalance plot"),
                          
-                         menuSubItem(tabName="scSumPlot",text="Ions vs conductance plot"),
                          
                          menuSubItem(tabName="repBoxPlot",text="Replicate boxplot"),
                          

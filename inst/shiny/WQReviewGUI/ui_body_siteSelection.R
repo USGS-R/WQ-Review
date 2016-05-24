@@ -6,7 +6,7 @@
 tabItem(tabName = "siteSelection",
         fluidPage(
                 pageWithSidebar(
-                        headerPanel("Data download criteria"),
+                        headerPanel("User-specified import"),
                         sidebarPanel(
                                 selectizeInput("STAIDS",label="Site number",choices=NULL,multiple=TRUE,options=list(create=TRUE)),
                                 fileInput("siteFile",label="Site number file",accept="csv"),
