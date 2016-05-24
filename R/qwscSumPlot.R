@@ -114,7 +114,7 @@ qwscSumPlot <- function(qw.data,
     #p1 <- p1 + labs(linetype="Acceptable sum(ion)/Sc range")
     
     
-    p1 <- p1 + ggtitle(maintitle) + theme_bw()
+    p1 <- p1 + ggtitle(maintitle) + theme_bw() + theme(panel.grid.minor = element_line())
     
   if(printPlot == TRUE)
   {
