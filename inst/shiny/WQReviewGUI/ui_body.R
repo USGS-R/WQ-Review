@@ -38,6 +38,7 @@ dashboardBody(
         source("ui_body_tables_wholevpart.r",local=TRUE)$value,
         #source("ui_body_flagPage.r",local=TRUE)$value,
         source("ui_body_tables_chemFlagTable.r",local=TRUE)$value,
+        source("ui_body_tables_pestFlagTable.r",local=TRUE)$value,
         
         
         #source("ui_body_srsSummary.r",local=TRUE)$value,

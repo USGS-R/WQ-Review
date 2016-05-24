@@ -14,13 +14,31 @@ dashboardSidebar(sidebarMenu(
                  menuSubItem(tabName="nwisDCImport", text = "NWIS Datachecks import")
                  ),
         
-        menuItem("Chemical sense checks",
-                 menuSubItem(tabName="chemFlagTable","Chemical sense summary"),
-                 menuSubItem(tabName="balanceTable","Charge balance table"),
-                 menuSubItem(tabName="cbPlot",text="Chargebalance plot"),
-                 menuSubItem(tabName="scSumPlot",text="Ions vs conductance plot")
+        menuItem("Chemical sense checks",icon = icon("table"),
+                 menuSubItem(tabName="chemFlagTable","Chemical sense flags",icon = icon("table")),
+                 menuSubItem(tabName="balanceTable","Charge balance table",icon = icon("table")),
+                 menuSubItem(tabName="cbPlot",text="Chargebalance plot",icon = icon("bar-chart")),
+                 menuSubItem(tabName="scSumPlot",text="Ions vs conductance plot",icon = icon("bar-chart"))
                  
                  ),
+        
+        menuItem("Pesticide checks",icon = icon("table"),
+                 menuSubItem(tabName="pestFlagTable","Pesticide flags",icon = icon("table"))
+        ),
+        
+        menuItem("Bias analysis",icon = icon("table"),
+        menuItem("Blank analysis",
+                 menuSubItem(tabName="blankTable","Blank summary",icon = icon("table")),
+                 menuSubItem(tabName="parmBoxPlot",text="Parameter boxplot",icon = icon("bar-chart")),
+                 menuSubItem(tabName="blankPlot",text="Blank timeseries",icon = icon("bar-chart"))
+        ),
+        
+        menuItem("Replicate analysis",
+                 menuSubItem(tabName="repTable","Replicate table",icon = icon("table")),
+                 menuSubItem(tabName="repBoxPlot",text="Replicate boxplot",icon = icon("bar-chart"))
+        )
+        ),
+        
         
                 menuItem("Plots",
                          
@@ -40,9 +58,9 @@ dashboardSidebar(sidebarMenu(
                          
                          
                          
-                         menuSubItem(tabName="repBoxPlot",text="Replicate boxplot"),
                          
-                         menuSubItem(tabName="blankPlot",text="Blank timeseries"),
+                         
+                         
                          
                          #menuSubItem(tabName="mapPlot",text="Spatial plot"),
                          
@@ -56,8 +74,8 @@ dashboardSidebar(sidebarMenu(
                           ###Table types, each one will appear in dashboard
                           
                           menuSubItem(tabName="balanceTable","Charge balance table"),
-                          menuSubItem(tabName="repTable","Replicate table"),
-                          menuSubItem(tabName="blankTable","Blank table"),
+                          
+                          
                           menuSubItem(tabName="wholvevpartTable","Fil vs. Unf table"),
                           ###Other arguments ot top menu item                          
                           tabName = "QAQCTables", icon = icon("table")
