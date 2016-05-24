@@ -103,7 +103,7 @@ qwtsPlot <- function(qw.data,
                                 aes(x=SAMPLE_START_DT,y=RESULT_VA),size=5,alpha = 0.5, color = "#F0E442",shape=19)
   }
   
-  p1 <- p1 + theme(axis.text.x = element_text(angle = 90)) #+ ggtitle(maintitle)
+  p1 <- p1 + theme(axis.text.x = element_text(angle = 90)) + theme(panel.grid.minor = element_line())
   
   ###Add smooth if checked
   if((show.smooth)==TRUE){

@@ -1,7 +1,7 @@
 #' Boxplot of replicate relative percent difference
 #' 
 #' Takes output data object from readNWISodbc and prints a boxplot of replicate RPD
-#' @param reports A reports object generated from readNWISodbc
+#' @param qw.data A qw.data list generated from readNWISodbc
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character vector of pcodes to plot
@@ -11,7 +11,7 @@
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
-#' qwrepBoxPlot(reports = reports,
+#' qwrepBoxPlot(qw.data = qw.data,
 #'                        site.selection = "06733000",
 #'                        plotparm = "00915",
 #'                        new.threshold = 60*60*24*30,
@@ -23,7 +23,7 @@
 #' @importFrom stringr str_wrap
 #' @export
 
-qwrepBoxPlot <- function(reports,
+qwrepBoxPlot <- function(qw.data,
                     site.selection,
                     plotparm,
                     new.threshold = 60*60*24*30,

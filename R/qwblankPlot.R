@@ -106,7 +106,8 @@ qwblankPlot <- function(qw.data,
         }
         
         
-        p1 <- p1 + theme_bw() + theme(axis.text.x = element_text(angle = 90)) + ggtitle(maintitle)
+        p1 <- p1 + theme_bw() + theme(axis.text.x = element_text(angle = 90),
+                                      panel.grid.minor = element_line()) + ggtitle(maintitle)
         
         if(labelDQI == TRUE)
         {

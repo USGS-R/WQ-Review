@@ -132,7 +132,7 @@ qwparmParmPlot <- function(qw.data,
           p1 <- p1 + geom_text(aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,label=paste("X-",DQI_CD_X,"_","Y-",DQI_CD_Y,sep="")),size=5,vjust="bottom",hjust="right")
   }
   
-  p1 <- p1 + ggtitle(maintitle) + theme_bw()
+  p1 <- p1 + ggtitle(maintitle) + theme_bw() + theme(panel.grid.minor = element_line())
   
   
   

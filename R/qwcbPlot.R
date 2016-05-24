@@ -132,7 +132,7 @@ qwcbPlot <- function(qw.data,
   
   p1 <- p1 + ggtitle(maintitle)
   p1 <- p1 + geom_hline(data = hline,aes(yintercept = yint,linetype=Imbalance),show_guide=TRUE) 
-  p1 <- p1 + theme_bw()
+  p1 <- p1 + theme_bw() + theme(panel.grid.minor = element_line())
   
   if((show.smooth)==TRUE){
     p2 <- p1 + geom_smooth(data=subset(plotdata, MEDIUM_CD %in% (c("WS ","WG ")))) + theme_bw()
