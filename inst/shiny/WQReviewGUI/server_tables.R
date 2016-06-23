@@ -133,7 +133,7 @@ output$longDataTable <- DT::renderDataTable(
                                        as.Date(SAMPLE_START_DT) <= input$endDate_longDataTable)
                 }
         },
-                        
+        
         
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
@@ -203,7 +203,7 @@ output$repTable <- DT::renderDataTable(
                                        as.Date(Env_SAMPLE_START_DT) <= input$endDate_repTable)
                 }
         },
-                        
+        
         server=TRUE,
         rownames= FALSE,
         extensions = list(FixedColumns = list(leftColumns = 1)),
@@ -239,7 +239,7 @@ output$wholevpartTable <- DT::renderDataTable(
                                        as.Date(SAMPLE_START_DT) <= input$endDate_wholevpartTable)
                 }
         },
-
+        
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
         rownames= FALSE,
@@ -264,7 +264,7 @@ output$wholevpartTableOut <- downloadHandler(
 
 ###Render the table
 try({
-
+        
         output$blankTable <- DT::renderDataTable(
                 if(!is.null(input$siteSel_blankTable))
                 {
@@ -296,22 +296,21 @@ try({
         
 })
 
-
 ############################
 ###Marked records table
 ############################
 
 ###Render the table
 observeEvent(input$refreshMarkedRecords, {
-output$markedRecords <- DT::renderDataTable(
-        markedRecords,
-        server=TRUE,
-        rownames= FALSE,
-        extensions = list(FixedColumns = list(leftColumns = 1)),
-        options = list(
-                scrollX=TRUE,
-                autoWidth=TRUE)
-)
+        output$markedRecords <- DT::renderDataTable(
+                markedRecords,
+                server=TRUE,
+                rownames= FALSE,
+                extensions = list(FixedColumns = list(leftColumns = 1)),
+                options = list(
+                        scrollX=TRUE,
+                        autoWidth=TRUE)
+        )
 })
 
 output$markedRecordsOut <- downloadHandler(
@@ -321,3 +320,71 @@ output$markedRecordsOut <- downloadHandler(
                             file)
         }
 )
+
+observeEvent(input$flipDQI, {
+        
+        dqiTables <<- flipDQI(STAIDS = unique(markedRecords$SITE_NO),
+                             records = markedRecords$RECORD_NO,
+                             parameters = markedRecords$PARM_CD,
+                             dqiCodes = markedRecords$DQI_CD_New,
+                             DSN = DSN,
+                             env.db = env.db,
+                             qa.db= qa.db)
+        
+        output$qwSample <- DT::renderDataTable(
+                dqiTables$qwsample,
+                server=TRUE,
+                rownames= FALSE,
+                extensions = list(FixedColumns = list(leftColumns = 1)),
+                options = list(
+                        scrollX=TRUE,
+                        autoWidth=TRUE)
+        )
+        output$qwResult <- DT::renderDataTable(
+                dqiTables$qwresult,
+                server=TRUE,
+                rownames= FALSE,
+                extensions = list(FixedColumns = list(leftColumns = 1)),
+                options = list(
+                        scrollX=TRUE,
+                        autoWidth=TRUE)
+        )
+})
+
+output$qwResultOut <- downloadHandler(
+        filename = function() {"qwResultOut"},
+        content = function(file) {
+                write.table(dqiTables$qwresult,
+                            sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                            file = "qwresult")
+        }
+)
+
+output$qwSampleOut <- downloadHandler(
+        filename = function() {"qwSampleOut"},
+        content = function(file) {
+                write.table(dqiTables$qwsample,
+                            sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                            file = "qwresult")
+        }
+)
+###############################
+###Needs review sidebar table
+###############################
+###Can't get this to look nice in sidebar yet, tabled for now
+
+# output$needsReviewTable <- DT::renderDataTable(
+#        formatStyle(
+#                DT::datatable(
+#                        qw.data$PlotTable[qw.data$PlotTable$DQI_CD %in% c("I","S","P"),c("SITE_NO","PARM_CD","DQI_CD","RECORD_NO")],
+#                        #extensions = list(FixedColumns = list(leftColumns = 1)),
+#                        rownames= FALSE,
+#                        options = list(
+#                                searching=FALSE,
+#                                scrollX=TRUE,
+#                                autoWidth=TRUE)
+#                ), columns = 1:4, color="black"),
+#        server=TRUE
+# )
+
+

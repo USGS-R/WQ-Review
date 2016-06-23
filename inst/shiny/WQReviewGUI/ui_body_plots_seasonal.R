@@ -17,10 +17,12 @@ tabItem(tabName = "seasonalPlot",
                                 checkboxInput("fit_seasonal",label="Add LOESS",value=FALSE),
                                 verbatimTextOutput("seasonal_hoverinfo"),
                                 
-                                h3("Review comments"),
-                                textInput("seasonal_flaggedRecord",label="Record #"),
-                                textInput("seasonal_flaggedComment",label = "Comment"),
-                                actionButton(inputId = "seasonal_addRecord",label="Add record"),
+                                #h3("Review comments"),
+                                #textInput("seasonal_flaggedRecord",label="Record #"),
+                                #radioButtons("seasonal_flaggedStatus",choices=c("No selection","Looks good","Not OK"),label="Status"),
+                                #selectInput("seasonal_dqiCode",choices = c(NA,"R","Q","I","S","O","X","U","A","P"),label="DQI Code",multiple=FALSE),
+                                #textInput("seasonal_flaggedComment",label = "Comment"),
+                                #actionButton(inputId = "seasonal_addRecord",label="Add record"),
                                 
                                 ###Sidebar options
                                 width=3

@@ -180,16 +180,18 @@ observeEvent(input$timeseries_addRecord, {
                                        MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
                                                                                                     input$timeseries_flaggedRecord)]
                                        ),
-                                       DQI_CD = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                       PARM_CD = as.character(input$parmSel_TS),
+                                       DQI_CD_Current = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
                                                                                               input$timeseries_flaggedRecord &
                                                                                               qw.data$PlotTable$PARM_CD == 
                                                                                               as.character(input$parmSel_TS))]
                                        ),
-                                       PARM_CD = as.character(input$parmSel_TS),
+                                       DQI_CD_New = input$timeseries_dqiCode,
                                        PARM_NM = unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
                                                                                                 as.character(input$parmSel_TS))]
                                        ),
                                        Where_Flagged = "timeseries",
+                                       Status = input$timeseries_flaggedStatus,
                                        Comment = input$timeseries_flaggedComment
                 )
                 markedRecords <<- rbind(markedRecords,newEntry)

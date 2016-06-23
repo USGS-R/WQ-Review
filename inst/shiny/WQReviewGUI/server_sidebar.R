@@ -14,10 +14,18 @@ observeEvent(input$sidebar_addRecord, {
                                        MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
                                                                                                     input$sidebar_flaggedRecord)]
                                        ),
-                                       DQI_CD = NA,
-                                       PARM_CD = NA,
-                                       PARM_NM = NA,
+                                       PARM_CD = as.character(input$parmSel_sidebar),
+                                       DQI_CD_Current = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$sidebar_flaggedRecord &
+                                                                                                      qw.data$PlotTable$PARM_CD == 
+                                                                                                      as.character(input$parmSel_sidebar))]
+                                       ),
+                                       DQI_CD_New = input$sidebar_dqiCode,
+                                       PARM_NM = unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
+                                                                                                as.character(input$parmSel_sidebar))]
+                                       ),
                                        Where_Flagged = "sidebar",
+                                       Status = input$sidebar_flaggedStatus,
                                        Comment = input$sidebar_flaggedComment
                 )
                 markedRecords <<- rbind(markedRecords,newEntry)
@@ -34,3 +42,5 @@ observeEvent(input$sidebar_addRecord, {
                 
         })
 })
+
+

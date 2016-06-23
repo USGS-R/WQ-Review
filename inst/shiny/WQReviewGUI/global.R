@@ -8,15 +8,18 @@ library(ggplot2)
 
 qw.data <- NULL
 reports <- NULL
+
 markedRecords <- data.frame(RECORD_NO = NA,
                             SITE_NO = NA,
                             STATION_NM = NA,
                             SAMPLE_START_DT = NA,
                             MEDIUM_CD = NA,
-                            DQI_CD = NA,
                             PARM_CD = NA,
+                            DQI_CD_Current = NA,
+                            DQI_CD_New = NA,
                             PARM_NM = NA,
                             Where_Flagged = NA,
+                            Status = NA,
                             Comment = NA
                             )
 

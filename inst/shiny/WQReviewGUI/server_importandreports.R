@@ -3,16 +3,20 @@
 withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
         
         tryCatch({
-        qw.data <<- suppressWarnings(readNWISodbc(DSN=input$DSN,
-                                 env.db = input$env.db,
-                                 qa.db=input$qa.db,
-                                 STAIDS=STAIDS,
-                                 dl.parms=dl.parms,
-                                 parm.group.check=parm.group.check,
-                                 begin.date=as.character(input$begin.date),
-                                 end.date=as.character(input$end.date),
-                                 projectCd = input$projectCd)
-        )
+                DSN <<- input$DSN
+                env.db <<- input$env.db
+                qa.db <<- input$qa.db
+                
+                qw.data <<- suppressWarnings(readNWISodbc(DSN=input$DSN,
+                                                          env.db = input$env.db,
+                                                          qa.db=input$qa.db,
+                                                          STAIDS=STAIDS,
+                                                          dl.parms=dl.parms,
+                                                          parm.group.check=parm.group.check,
+                                                          begin.date=as.character(input$begin.date),
+                                                          end.date=as.character(input$end.date),
+                                                          projectCd = input$projectCd)
+                )
         },warning = function(w){        qw.data <<- suppressWarnings(readNWISodbc(DSN=input$DSN,
                                                                                   env.db = input$env.db,
                                                                                   qa.db=input$qa.db,
@@ -22,8 +26,8 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                                                                                   begin.date=as.character(input$begin.date),
                                                                                   end.date=as.character(input$end.date),
                                                                                   projectCd = input$projectCd
-                                                                                  )
-                                                                     )
+        )
+        )
         },error = function(e){
                 output$errors <- renderPrint(geterrmessage())
                 stop(geterrmessage())
@@ -75,7 +79,7 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                 warning(w,"This caused a warning DO NOT REPORT UNLESS YOU NOTICE A PROBLEM WITH PERFORMANCE")
         }, error = function(e) {
                 output$errors <- renderPrint("Error with charge balance. please report this on the github issues page")
-                        
+                
         })
         
         incProgress(0.5,detail="Generating replicate report")
@@ -84,7 +88,7 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                 
                 ###Run repTabler
                 reports$repTable <<- suppressWarnings(repTabler(qw.data))
-        
+                
         }, warning = function(w) {
                 
                 ###Run repTabler
@@ -138,47 +142,47 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                 reports$sampleFlagTable <<- suppressWarnings(flagSummary(qw.data))
                 ###Need to reset row names
                 rownames(reports$sampleFlagTable) <<- seq(from = 1, to = nrow(reports$sampleFlagTable))
-                },
-                warning = function(w) {
-                        reports$sampleFlagTable <<- suppressWarnings(flagSummary(qw.data))
-                        ###Need to reset row names
-                        rownames(reports$sampleFlagTable) <<- seq(from = 1, to = nrow(reports$sampleFlagTable))
-                        
-                        },
-                error = function(e) {
-                        output$errors <- renderPrint("Error with auto sample flagging, please report this on the github issues page")
-                        })
+        },
+        warning = function(w) {
+                reports$sampleFlagTable <<- suppressWarnings(flagSummary(qw.data))
+                ###Need to reset row names
+                rownames(reports$sampleFlagTable) <<- seq(from = 1, to = nrow(reports$sampleFlagTable))
+                
+        },
+        error = function(e) {
+                output$errors <- renderPrint("Error with auto sample flagging, please report this on the github issues page")
+        })
         
         ###Generate result flags
         tryCatch({
                 reports$resultFlagTable <<- suppressWarnings(historicCheck(qw.data,returnAll=FALSE))
                 ###Need to reset row names
                 rownames(reports$resultFlagTable) <<- seq(from = 1, to = nrow(reports$resultFlagTable))
-                },
-                warning = function(w) {
-                        
-                        reports$resultFlagTable <<- suppressWarnings(historicCheck(qw.data,returnAll=FALSE)) 
-                        ###Need to reset row names
-                        rownames(reports$resultFlagTable) <<- seq(from = 1, to = nrow(reports$resultFlagTable))
-                        },
-                error = function(e) {
-                        output$errors <- renderPrint("Error with auto result flagging, please report this on the github issues page")
-                })
-                                
-                        
+        },
+        warning = function(w) {
+                
+                reports$resultFlagTable <<- suppressWarnings(historicCheck(qw.data,returnAll=FALSE)) 
+                ###Need to reset row names
+                rownames(reports$resultFlagTable) <<- seq(from = 1, to = nrow(reports$resultFlagTable))
+        },
+        error = function(e) {
+                output$errors <- renderPrint("Error with auto result flagging, please report this on the github issues page")
+        })
+        
+        
         #tryCatch({       
         ###Run blnk table summary
         #        reports$blankTable_all <<- suppressWarnings(blankSummary(qw.data, STAIDS = unique(qw.data$PlotTable$SITE_NO), multiple = FALSE))
-                
-                
-                
+        
+        
+        
         #}, warning = function(w) {
-                ###Run blnk table summary
+        ###Run blnk table summary
         #        reports$blankTable_all <<- blankSummary(qw.data, multiple = FALSE)
         #        warning(w,"This caused a warning DO NOT REPORT UNLESS YOU NOTICE A PROBLEM WITH PERFORMANCE")
         #}, error = function(e) {
-                                
+        
         #        output$errors <- renderPrint("Error with blank table summary. Please check your data import criteria and QWToolbox manual and if not user error report this whole message on the github issues page and generate a bug report using the button at the top of QWToolbox")
-                
+        
         #})
 })

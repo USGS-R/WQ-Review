@@ -85,16 +85,6 @@ menuItem("Data Tables",
          menuSubItem(tabName="longDataTable","Long data table"),
          tabName = "dataTables", icon = icon("table")
 ),
-menuItem("Reviewer notes",
-         h3("Review comments"),
-         textInput("sidebar_flaggedRecord",label="Record #"),
-         textInput("sidebar_flaggedComment",label = "Comment"),
-         actionButton(inputId = "sidebar_addRecord",label="Add record"),
-         
-         menuSubItem(tabName="markedRecordsTab","View table")
-         
-),
-
 
 #menuSubItem(tabName="dataUpload","Data upload tools"),
 #menuSubItem(tabName="srsSummary","SRS Summary tool"),
@@ -102,9 +92,20 @@ menuItem(tabName="saveLoadTab","Save/load data"),
 menuItem(tabName="helpTab","Help",
          menuSubItem(href="FAQ.htm",text="FAQ"),
          menuSubItem(href="WQReviewGUI.html",text="User Guide")
-)
+),
+
+h3("Review comments"),
+menuItem(tabName="markedRecordsTab","View table"),
+textInput("sidebar_flaggedRecord",label="Record #"),
+textInput("parmSel_sidebar",label="PCODE"),
+radioButtons("sidebar_flaggedStatus",choices=c("No selection","Looks good","Not OK"),label="Status"),
+selectInput("sidebar_dqiCode",choices = c(NA,"R","Q","I","S","O","X","U","A","P"),label="DQI Code",multiple=FALSE),
+textInput("sidebar_flaggedComment",label = "Comment"),
+actionButton(inputId = "sidebar_addRecord",label="Add record")
 
 
+###Can't get this to look nice in sidebar yet, tabled for now
+#DT::dataTableOutput("needsReviewTable")
 
 )
 )

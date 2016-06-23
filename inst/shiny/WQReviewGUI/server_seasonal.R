@@ -184,16 +184,18 @@ observeEvent(input$seasonal_addRecord, {
                                        MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
                                                                                                     input$seasonal_flaggedRecord)]
                                        ),
-                                       DQI_CD = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                              input$seasonal_flaggedRecord &
-                                                                                              qw.data$PlotTable$PARM_CD == 
-                                                                                              as.character(input$parmSel_seasonal))]
-                                       ),
                                        PARM_CD = as.character(input$parmSel_seasonal),
+                                       DQI_CD_Current = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$seasonal_flaggedRecord &
+                                                                                                      qw.data$PlotTable$PARM_CD == 
+                                                                                                      as.character(input$parmSel_seasonal))]
+                                       ),
+                                       DQI_CD_New = input$seasonal_dqiCode,
                                        PARM_NM = unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
                                                                                                 as.character(input$parmSel_seasonal))]
                                        ),
-                                       Where_Flagged = "seasonal plot",
+                                       Where_Flagged = "seasonal",
+                                       Status = input$seasonal_flaggedStatus,
                                        Comment = input$seasonal_flaggedComment
                 )
                 markedRecords <<- rbind(markedRecords,newEntry)

@@ -20,10 +20,12 @@ tabItem(tabName = "parmParmPlot",
                                                    choices = c("Log10X","Log10Y")),
                                 verbatimTextOutput("parmParm_hoverinfo"),
                                 
-                                h3("Review comments"),
-                                textInput("parmParm_flaggedRecord",label="Record #"),
-                                textInput("parmParm_flaggedComment",label = "Comment"),
-                                actionButton(inputId = "parmParm_addRecord",label="Add record"),
+                                #h3("Review comments"),
+                                #textInput("parmParm_flaggedRecord",label="Record #"),
+                                #radioButtons("parmParm_flaggedStatus",choices=c("No selection","Looks good","Not OK"),label="Status"),
+                                #selectInput("parmParm_dqiCode",choices = c(NA,"R","Q","I","S","O","X","U","A","P"),label="DQI Code",multiple=FALSE),
+                                #textInput("parmParm_flaggedComment",label = "Comment"),
+                                #actionButton(inputId = "parmParm_addRecord",label="Add record"),
                                 
                                 #verbatimTextOutput("parmParm_hoverinfo"),
                                 ###Sidebar options
