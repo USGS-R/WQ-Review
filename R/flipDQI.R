@@ -71,8 +71,8 @@ flipDQI <- function(STAIDS,
         ########
         #Get the data
         qwData <- readNWISodbc(DSN = "NWISCO",
-                               STAIDS = STAIDS,
-                               dl.parms = parameters,
+                               STAIDS = unique(STAIDS),
+                               dl.parms = unique(parameters),
                                parm.group.check=FALSE)$PlotTable
         qwData <- qwData[qwData$RECORD_NO %in% records,]
         
