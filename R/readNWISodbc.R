@@ -10,6 +10,7 @@
 #' @param begin.date Character string containing beginning date of data pull (yyyy-mm-dd)
 #' @param end.date Character string containing ending date of data pull (yyyy-mm-dd)
 #' @param projectCd Character vector containing project codes to subset data by.
+#' @param resultAsText Output results as character instead of numeric. Used for literal output of results from NWIS that are no affected by class coerrcion, such as dropping zeros after decimal point. Default is False. 
 #' @return Returns a list containing two dataframes: PlotTable and DataTable. 
 #' PlotTable contains all data pulled from NWIS along with all assosciated metadata in by-result format. 
 #' DataTable contains all data pulled from NWIS in wide (sample-result) format, an easier format for import into spreadsheet programs.
@@ -58,7 +59,8 @@ readNWISodbc <- function(DSN,
                          parm.group.check = TRUE,
                          begin.date = NA,
                          end.date = NA,
-                         projectCd = NULL)
+                         projectCd = NULL,
+                         resultAsText = FALSE)
 {
         ##Check that the 32 bit version of r is running
         if(Sys.getenv("R_ARCH") != "/i386"){
@@ -589,8 +591,11 @@ readNWISodbc <- function(DSN,
   ###Set factors levels
   #PlotTable$REMARK_CD = factor(PlotTable$REMARK_CD,levels(PlotTable$REMARK_CD)[c(4,1:3)])
   ###Make result a numeric
-  PlotTable$RESULT_VA <- as.numeric(PlotTable$RESULT_VA)
   
+  if(resultAsText == FALSE)
+  {
+  PlotTable$RESULT_VA <- as.numeric(PlotTable$RESULT_VA)
+  }
   
   ##Format date times to local sample collection timezone
   #SAMPLE_START_DT

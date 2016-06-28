@@ -5,7 +5,7 @@
 \title{flipDQI Flip DQI codes for given sites and parameters}
 \usage{
 flipDQI(STAIDS, records, parameters, dqiCodes, DSN = "NWISCO",
-  env.db = "01", qa.db = "02")
+  env.db = "01", qa.db = "02", keepRecordNo = FALSE)
 }
 \arguments{
 \item{STAIDS}{A vector of station IDs}
@@ -21,6 +21,8 @@ flipDQI(STAIDS, records, parameters, dqiCodes, DSN = "NWISCO",
 \item{env.db}{Environmental database number}
 
 \item{qa.db}{QA database number}
+
+\item{keepRecordNo}{Logical. Retain record numbers in qwresult and qwsample. If TRUE, RECORD_NO column in qwresult and qwsample dataframes will need to be removed prior to batch upload to NWIS}
 }
 \description{
 Generates batch files for input into QWData with user-specified DQI codes.

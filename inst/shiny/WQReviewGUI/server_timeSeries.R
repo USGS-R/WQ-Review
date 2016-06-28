@@ -128,7 +128,7 @@ output$timeseries_hoverinfo <- renderPrint({
         cat("Date/time:",format(unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                            coordinfo = input$plot_hover,
                                            xvar=xvar_timeseries,
-                                           yvar=yvar_timeseries)$SAMPLE_START_D,"%Y-%m-%d %H:%M")),
+                                           yvar=yvar_timeseries)$SAMPLE_START_DT,"%Y-%m-%d %H:%M")),
             "\n");
         cat("Chemical flags:",
             names(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
