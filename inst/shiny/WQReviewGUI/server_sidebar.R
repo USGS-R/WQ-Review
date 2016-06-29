@@ -38,7 +38,12 @@ observeEvent(input$sidebar_addRecord, {
                                 "parmSel_sidebar",
                                 value = ""
                 )
-                
+                updateSelectInput(session,
+                                  "sidebar_dqiCode",
+                                  selected=NA)
+                updateRadioButtons(session,
+                                   "sidebar_flaggedStatus",
+                                   selected="No selection")
                 updateTextInput(session, 
                                 "sidebar_flaggedComment",
                                 value = " "
