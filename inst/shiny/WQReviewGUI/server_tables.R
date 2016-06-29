@@ -305,8 +305,21 @@ observeEvent(input$refreshMarkedRecords, {
         output$markedRecords <- DT::renderDataTable(
                 markedRecords,
                 server=TRUE,
-                rownames= FALSE,
-                extensions = list(FixedColumns = list(leftColumns = 1)),
+                #rownames= FALSE,
+                #extensions = list(FixedColumns = list(leftColumns = 1)),
+                options = list(
+                        scrollX=TRUE,
+                        autoWidth=TRUE)
+        )
+})
+
+observeEvent(input$deleteMarkedRecords, {
+        markedRecords <<- markedRecords[-as.numeric(input$markedRecords_rows_selected),]
+        output$markedRecords <- DT::renderDataTable(
+                markedRecords,
+                server=TRUE,
+                #rownames= FALSE,
+                #extensions = list(FixedColumns = list(leftColumns = 1)),
                 options = list(
                         scrollX=TRUE,
                         autoWidth=TRUE)
@@ -323,10 +336,10 @@ output$markedRecordsOut <- downloadHandler(
 
 observeEvent(input$flipDQI, {
         
-        dqiTables <<- flipDQI(STAIDS = unique(markedRecords$SITE_NO),
-                             records = markedRecords$RECORD_NO,
-                             parameters = markedRecords$PARM_CD,
-                             dqiCodes = markedRecords$DQI_CD_New,
+        dqiTables <<- flipDQI(STAIDS = unique(as.character(markedRecords$SITE_NO)),
+                             records = as.character(markedRecords$RECORD_NO),
+                             parameters = as.character(markedRecords$PARM_CD),
+                             dqiCodes = as.character(markedRecords$DQI_CD_New),
                              DSN = DSN,
                              env.db = env.db,
                              qa.db= qa.db)
@@ -356,7 +369,7 @@ output$qwResultOut <- downloadHandler(
         content = function(file) {
                 write.table(dqiTables$qwresult,
                             sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
-                            file = "qwresult")
+                            file = file)
         }
 )
 
@@ -365,7 +378,7 @@ output$qwSampleOut <- downloadHandler(
         content = function(file) {
                 write.table(dqiTables$qwsample,
                             sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
-                            file = "qwresult")
+                            file = file)
         }
 )
 ###############################

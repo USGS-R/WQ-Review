@@ -32,7 +32,11 @@ observeEvent(input$sidebar_addRecord, {
                 
                 updateTextInput(session, 
                                 "sidebar_flaggedRecord",
-                                value = " "
+                                value = ""
+                )
+                updateTextInput(session, 
+                                "parmSel_sidebar",
+                                value = ""
                 )
                 
                 updateTextInput(session, 
