@@ -12,6 +12,7 @@ tabItem(tabName = "longDataTable",
                                 width=3),
                         mainPanel(
                                 downloadButton('longDataTableOut', 'Download tab delimited table'),
+                                actionButton(inputId = "longDataTable_popNotes",label="Add to notes"),
                                 
                                 DT::dataTableOutput("longDataTable")
                         )

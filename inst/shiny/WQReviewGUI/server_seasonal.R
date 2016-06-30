@@ -75,21 +75,48 @@ observe({
 })
 
 
-
 ###This outputs the data tables for clicked and brushed points
-
-output$seasonal_clickinfo <- DT::renderDataTable({
-        # With base graphics, need to tell it what the x and y variables are.
-        DT::datatable(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_seasonal$siteSel & PARM_CD %in% dataSelections_seasonal$parmSel),
+#Make this table reactive so that the values can be used to populate the review notes on click
+seasonal_clickReactive <<- reactive({
+        nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_seasonal$siteSel & PARM_CD %in% dataSelections_seasonal$parmSel),
                                  coordinfo = input$plot_click_seasonal,
                                  xvar=xvar_seasonal,
-                                 yvar=yvar_seasonal),
-                      
-                      options=list(scrollX=TRUE)
-        )
-        # nearPoints() also works with hover and dblclick events
+                                 yvar=yvar_seasonal)
 })
 
+output$seasonal_clickinfo <- DT::renderDataTable(
+        # With base graphics, need to tell it what the x and y variables are.
+        seasonal_clickReactive(),
+        extensions = list(FixedColumns = list(leftColumns = 1)),
+        server=TRUE,
+        #rownames= FALSE,
+        options = list(
+                scrollX=TRUE,
+                autoWidth=TRUE)
+        # nearPoints() also works with hover and dblclick events
+)
+
+observeEvent(input$seasonal_popNotes, {
+        updateTextInput(session, 
+                        "sidebar_flaggedRecord",
+                        value = seasonal_clickReactive()$RECORD_NO[as.numeric(input$seasonal_clickinfo_rows_selected)]
+        )
+        updateTextInput(session, 
+                        "parmSel_sidebar",
+                        value = seasonal_clickReactive()$PARM_CD[as.numeric(input$seasonal_clickinfo_rows_selected)]
+        )
+        updateSelectInput(session,
+                          "sidebar_dqiCode",
+                          selected=NA)
+        updateRadioButtons(session,
+                           "sidebar_flaggedStatus",
+                           selected="No selection")
+        updateTextInput(session, 
+                        "sidebar_flaggedComment",
+                        value = " "
+        )
+})
+###This outputs the data tables for brushed points
 
 output$seasonal_brushinfo <- DT::renderDataTable({
         # With base graphics, need to tell it what the x and y variables are.

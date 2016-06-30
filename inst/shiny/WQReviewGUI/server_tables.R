@@ -56,14 +56,14 @@ output$resultFlagTable <- DT::renderDataTable(
         reports$resultFlagTable,
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
-        rownames= FALSE,
+        #rownames= FALSE,
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
 )
 
 
-
+###Download table
 output$resultFlagTableOut <- downloadHandler(
         filename = function() {"resultFlagTableOut"},
         content = function(file) {
@@ -72,7 +72,28 @@ output$resultFlagTableOut <- downloadHandler(
         }
 )
 
-
+###Add to notes
+observeEvent(input$resultFlagTable_popNotes, {
+        print(input$resultFlagTable_rows_selected)
+        updateTextInput(session, 
+                        "sidebar_flaggedRecord",
+                        value = reports$resultFlagTable$RECORD_NO[as.numeric(input$resultFlagTable_rows_selected)]
+        )
+        updateTextInput(session, 
+                        "parmSel_sidebar",
+                        value = reports$resultFlagTable$PARM_CD[as.numeric(input$resultFlagTable_rows_selected)]
+        )
+        updateSelectInput(session,
+                          "sidebar_dqiCode",
+                          selected=NA)
+        updateRadioButtons(session,
+                           "sidebar_flaggedStatus",
+                           selected="No selection")
+        updateTextInput(session, 
+                        "sidebar_flaggedComment",
+                        value = " "
+        )
+})
 ############################
 ###Wide Data table
 ############################
@@ -117,9 +138,7 @@ output$wideDataTableOut <- downloadHandler(
 ############################
 
 
-
-###Render the table
-output$longDataTable <- DT::renderDataTable(
+longDataTableReactive <<- reactive({
         if(!is.null(input$siteSel_longDataTable))
         {
                 if(as.character(input$siteSel_longDataTable == "All"))
@@ -132,18 +151,20 @@ output$longDataTable <- DT::renderDataTable(
                                        as.Date(SAMPLE_START_DT) >= input$startDate_longDataTable &
                                        as.Date(SAMPLE_START_DT) <= input$endDate_longDataTable)
                 }
-        },
-        
-        
-        extensions = list(FixedColumns = list(leftColumns = 1)),
+        }
+})
+
+###Render the table
+output$longDataTable <- DT::renderDataTable(
+        longDataTableReactive(),extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
-        rownames= FALSE,
+        #rownames= FALSE,
         options = list(
                 scrollX=TRUE,
                 autoWidth=TRUE)
 )
 
-
+##Download the table
 output$longDataTableOut <- downloadHandler(
         filename = function() {"longDataTableOut"},
         content = function(file) {
@@ -151,6 +172,29 @@ output$longDataTableOut <- downloadHandler(
                             file)
         }
 )
+
+###Add to notes
+observeEvent(input$longDataTable_popNotes, {
+        updateTextInput(session, 
+                        "sidebar_flaggedRecord",
+                        value = longDataTableReactive()$RECORD_NO[as.numeric(input$longDataTable_rows_selected)]
+        )
+        updateTextInput(session, 
+                        "parmSel_sidebar",
+                        value = longDataTableReactive()$PARM_CD[as.numeric(input$longDataTable_rows_selected)]
+        )
+        updateSelectInput(session,
+                          "sidebar_dqiCode",
+                          selected=NA)
+        updateRadioButtons(session,
+                           "sidebar_flaggedStatus",
+                           selected="No selection")
+        updateTextInput(session, 
+                        "sidebar_flaggedComment",
+                        value = " "
+        )
+})
+
 ############################
 ###CB table
 ############################
@@ -337,12 +381,12 @@ output$markedRecordsOut <- downloadHandler(
 observeEvent(input$flipDQI, {
         
         dqiTables <<- flipDQI(STAIDS = unique(as.character(markedRecords$SITE_NO)),
-                             records = as.character(markedRecords$RECORD_NO),
-                             parameters = as.character(markedRecords$PARM_CD),
-                             dqiCodes = as.character(markedRecords$DQI_CD_New),
-                             DSN = DSN,
-                             env.db = env.db,
-                             qa.db= qa.db)
+                              records = as.character(markedRecords$RECORD_NO),
+                              parameters = as.character(markedRecords$PARM_CD),
+                              dqiCodes = as.character(markedRecords$DQI_CD_New),
+                              DSN = DSN,
+                              env.db = env.db,
+                              qa.db= qa.db)
         
         output$qwSample <- DT::renderDataTable(
                 dqiTables$qwsample,

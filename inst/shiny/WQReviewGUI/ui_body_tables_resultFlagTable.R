@@ -11,6 +11,8 @@ tabItem(tabName = "resultFlagTable",
                 ),
                 
                 downloadButton('resultFlagTableOut', 'Download tab delimited table'),
+                actionButton(inputId = "resultFlagTable_popNotes",label="Add to notes"),
+                
                 DT::dataTableOutput("resultFlagTable")
                 
                 

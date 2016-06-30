@@ -48,6 +48,7 @@ tabItem(tabName = "seasonalPlot",
                 ###This displays the plot interaction output
                 
                 box(
+                        actionButton(inputId = "seasonal_popNotes",label="Add to notes"),
                         DT::dataTableOutput("seasonal_clickinfo"),
                         DT::dataTableOutput("seasonal_brushinfo"),
                         ###Box options

@@ -55,6 +55,7 @@ tabItem(tabName = "timeSeries",
                 ###This displays the plot interaction output
                 
                 box(
+                        actionButton(inputId = "timeseries_popNotes",label="Add to notes"),
                         DT::dataTableOutput("timeseries_clickinfo"),
                         DT::dataTableOutput("timeseries_brushinfo"),
                         ###Box options
