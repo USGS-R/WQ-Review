@@ -18,7 +18,6 @@ markedRecords <- data.frame(RECORD_NO = character(),
                             DQI_CD_Current = character(),
                             DQI_CD_New = character(),
                             PARM_NM = character(),
-                            Where_Flagged = character(),
                             Status = character(),
                             Comment = character()
                             )

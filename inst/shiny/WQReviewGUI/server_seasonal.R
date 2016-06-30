@@ -89,6 +89,8 @@ output$seasonal_clickinfo <- DT::renderDataTable(
         seasonal_clickReactive(),
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        #selection = 'single',
+        
         #rownames= FALSE,
         options = list(
                 scrollX=TRUE,

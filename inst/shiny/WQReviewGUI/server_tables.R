@@ -56,6 +56,7 @@ output$resultFlagTable <- DT::renderDataTable(
         reports$resultFlagTable,
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        #selection = 'single',
         #rownames= FALSE,
         options = list(
                 scrollX=TRUE,
@@ -158,6 +159,7 @@ longDataTableReactive <<- reactive({
 output$longDataTable <- DT::renderDataTable(
         longDataTableReactive(),extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        #selection = 'single',
         #rownames= FALSE,
         options = list(
                 scrollX=TRUE,

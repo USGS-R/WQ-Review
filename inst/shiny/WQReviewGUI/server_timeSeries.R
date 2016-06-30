@@ -88,6 +88,7 @@ output$timeseries_clickinfo <- DT::renderDataTable(
         timeseries_clickReactive(),
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
+        #selection = 'single',
         #rownames= FALSE,
         options = list(
                 scrollX=TRUE,
