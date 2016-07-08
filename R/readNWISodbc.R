@@ -130,7 +130,10 @@ readNWISodbc <- function(DSN,
   #############################################################################
   Chan1 <- RODBC::odbcConnect(DSN)###Start of ODBC connection
   #############################################################################
-  
+  if(Chan1 == -1L)
+  {
+          stop("ODBC connection failed. Check DSN name and ODBC connection settings")
+  }
   ##################
   ###Env Database###
   ##################
@@ -138,6 +141,10 @@ readNWISodbc <- function(DSN,
   Query <- paste("select * from ", DSN, ".SITEFILE_",env.db," where site_no IN (", STAID.list, ")",sep="")
   SiteFile <- RODBC::sqlQuery(Chan1, Query, as.is=T)
   
+  if("[RODBC]" %in% SiteFile)
+  {
+          stop("Incorrect database number entered for env.db")
+  }
   #Make unique AgencyCd/sitefile key
   SiteFile$agencySTAID <- gsub(" ","",paste0(SiteFile$AGENCY_CD,SiteFile$SITE_NO))
   
@@ -350,6 +357,11 @@ readNWISodbc <- function(DSN,
   # First get the site info--need column SITE_ID
   Query <- paste("select * from ", DSN, ".SITEFILE_",qa.db," where site_no IN (", STAID.list, ")", sep="")
   QASiteFile <- RODBC::sqlQuery(Chan1, Query, as.is=T)
+  
+  if("[RODBC]" %in% QASiteFile)
+  {
+          stop("Incorrect database number entered for qa.db")
+  }
   
   ##Make unique AgencyCd/sitefile key
   QASiteFile$agencySTAID <- gsub(" ","",paste0(SiteFile$AGENCY_CD,SiteFile$SITE_NO))
