@@ -458,4 +458,66 @@ output$qwSampleOut <- downloadHandler(
 #        server=TRUE
 # )
 
+###############################
+###DQI Flip table
+###############################
+dqiTable <<- qw.data$PlotTable[qw.data$PlotTable$DQI_CD %in% c("I","S","P"),
+                               c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","MEDIUM_CD","PARM_CD","PARM_NM","DQI_CD")]
+dqiTable <<- transmute(dqiTable,
+                       #RECORD_NO = RECORD_NO,
+                       SITE_NO = as.factor(SITE_NO),
+                       #STATION_NM = STATION_NM,
+                       SAMPLE_START_DT = SAMPLE_START_DT,
+                       #MEDIUM_CD = as.factor(MEDIUM_CD),
+                       PARM_CD = as.factor(PARM_CD),
+                       PARM_NM = PARM_NM,
+                       DQI_CD = DQI_CD)
+
+# dqiTableReactive <<- reactive({
+#         if(!is.null(input$siteSel_dqiTable))
+#         {
+#                 if(as.character(input$siteSel_dqiTable == "All"))
+#                 {
+#                         subset(dqiTable, 
+#                                as.Date(SAMPLE_START_DT) >= input$startDate_dqiTable &
+#                                        as.Date(SAMPLE_START_DT) <= input$endDate_dqiTable)
+#                 } else {
+#                         subset(dqiTable, SITE_NO %in% as.character(input$siteSel_dqiTable) &
+#                                        as.Date(SAMPLE_START_DT) >= input$startDate_dqiTable &
+#                                        as.Date(SAMPLE_START_DT) <= input$endDate_dqiTable)
+#                 }
+#         }
+# })
+
+output$dqiTable <- DT::renderDataTable(
+        dqiTable,
+        rownames= TRUE,
+        filter="top",
+        server=TRUE
+)
+
+observeEvent(input$dqiTable_popNotes, {
+        updateTextInput(session, 
+                        "sidebar_flaggedRecord",
+                        value = dqiTableReactive()$RECORD_NO[as.numeric(input$dqiTable_rows_selected)]
+        )
+        updateTextInput(session, 
+                        "parmSel_sidebar",
+                        value = dqiTableReactive()$PARM_CD[as.numeric(input$dqiTable_rows_selected)]
+        )
+        updateSelectInput(session,
+                          "sidebar_dqiCode",
+                          selected=NA)
+        updateRadioButtons(session,
+                           "sidebar_flaggedStatus",
+                           selected="No selection")
+        updateTextInput(session, 
+                        "sidebar_flaggedComment",
+                        value = " "
+        )
+        
+        ###Remove entry from unnaproved data table
+        dqiTable <<- dqiTable[!(row.names(dqiTable)%in%input$dqiTable_rows_selected),]
+        
+})
 

@@ -223,7 +223,7 @@ dataUpload <- function(qwsampletype,
 
     qwsample$sample.integer <- seq(1:nrow(qwsample))
     qwsample$UID <- paste(qwsample$site.no,qwsample$start.date,qwsample$medium,sep="")
-    
+    qwsample$UID <- gsub(" ","",qwsample$UID)
 
     
     
@@ -337,6 +337,7 @@ dataUpload <- function(qwsampletype,
   
   ###Populate qwresult
   qwresult$UID<-mergeddata$UID
+  qwresult$UID <- gsub(" ","",qwresult$UID)
   qwresult$pcode<-mergeddata$pcode
   qwresult$result<-mergeddata$result
   
@@ -389,7 +390,7 @@ dataUpload <- function(qwsampletype,
 
   
   ###Remove rows with missing results to avoid annoying watlist errors from NWIS
-  qwresult <- subset(qwresult, result != "")
+  qwresult <- qwresult[qwresult$result != "",]
   
   ###Wire qwresult and qwsample files
   #write.table(qwsample,file=qwsamplename,sep="\t", col.names = F, row.names = F,na="", quote = FALSE)

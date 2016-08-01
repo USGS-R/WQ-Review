@@ -86,6 +86,9 @@ menuItem("Data Tables",
          tabName = "dataTables", icon = icon("table")
 ),
 
+menuItem("Unnaproved data",
+         tabName = "dqiTable", icon = icon("table")
+),
 #menuSubItem(tabName="dataUpload","Data upload tools"),
 #menuSubItem(tabName="srsSummary","SRS Summary tool"),
 menuItem(tabName="saveLoadTab","Save/load data"),
