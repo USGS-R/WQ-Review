@@ -145,8 +145,8 @@ dataUpload <- function(qwsampletype,
                             "",
                             "",
                             Samples$COLL_ENT_CD,
-                            Samples$SAMPLE_START_TZ_CD,
-                            Samples$SAMPLE_START_LOCAL_TM_FG,
+                            Samples$SAMPLE_ID,
+                            Samples$SIDNO_PARTY_CD,
                             stringsAsFactors=FALSE)
     ##################
     ###DATABASE 2#####
@@ -182,8 +182,8 @@ dataUpload <- function(qwsampletype,
                             "",
                             "",
                             Samples$COLL_ENT_CD,
-                            Samples$SAMPLE_START_TZ_CD,
-                            Samples$SAMPLE_START_LOCAL_TM_FG,
+                            Samples$SAMPLE_ID,
+                            Samples$SIDNO_PARTY_CD,
                             stringsAsFactors=FALSE)
     
     qwsample <- rbind(QWSample1,QWSample2)
