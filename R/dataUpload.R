@@ -39,6 +39,9 @@ dataUpload <- function(qwsampletype,
                        DSN = "NWISCO",
                        env.db = "01",
                        qa.db = "02",
+                       writeFiles = FALSE,
+                       qwresultname="",
+                       qwsamplename="",
                        qwsamplefile = "",
                        qwsample.begin.date = NA,
                        qwsample.end.date = NA,
@@ -70,11 +73,7 @@ dataUpload <- function(qwsampletype,
                  colClasses = c("character","character","character","character","character","character"),na.strings = "NA")
   numdatacols <- ncol(data)-6  
   
-  ##Add in spaces for medium codes to match NWIS
-  if(!(is.null(data$medium.code[which(nchar(data$medium.code) == 2)])))
-  {
-  data$medium.code[which(nchar(data$medium.code) == 2)] <- paste(data$medium.code[which(nchar(data$medium.code) == 2)]," ",sep="")
-  }else{}
+
   ##Pad times with leading 0s if truncated by excel
   if(!(is.null(data$Sample.time..hhmm.[which(nchar(data$Sample.time..hhmm.) == 3)])))
   {
@@ -118,6 +117,14 @@ dataUpload <- function(qwsampletype,
     #get the record numbers
     Query <- paste("select * from ", DSN, ".QW_SAMPLE_",env.db," where site_no IN (", STAID.list, ")", sep="")
     Samples <- sqlQuery(Chan1, Query, as.is=T)
+    
+    ##Format times into GMT and correct of daylight savings offset according to location
+    ##Weather or not to apply daylight savings is in the std.time.code column, which is from the SAMPLE_START_LOCAL_TM_FG NWIS parameter
+    ##e.g. in Colorado, SAMPLE_START_LOCAL_TM_FG = Y, timezone = MDT, SAMPLE_START_LOCAL_TM_FG = N, timezone = MST
+    
+    Samples$SAMPLE_START_DT <- convertTime(datetime = Samples$SAMPLE_START_DT,
+                                           timezone = Samples$SAMPLE_START_TZ_CD,
+                                           daylight = Samples$SAMPLE_START_LOCAL_TM_FG)
    
     ###SAMPLE TIMES PULLED THIS WAY ARE NOT THE ACTUAL SAMPLE TIME. THESE MUST BE CONVERTED USING THE SAMPLE_START_TZ_CD OR THEY WILL NOT MATCH ACTUAL SAMPLE TIMES
     ###THERE IS CODE BELOW TO DO THIS
@@ -156,6 +163,13 @@ dataUpload <- function(qwsampletype,
     Query <- paste("select * from ", DSN, ".QW_SAMPLE_",qa.db," where site_no IN (", STAID.list, ")", sep="")
     Samples <- sqlQuery(Chan1, Query, as.is=T)
     
+    ##Format times into GMT and correct of daylight savings offset according to location
+    ##Weather or not to apply daylight savings is in the std.time.code column, which is from the SAMPLE_START_LOCAL_TM_FG NWIS parameter
+    ##e.g. in Colorado, SAMPLE_START_LOCAL_TM_FG = Y, timezone = MDT, SAMPLE_START_LOCAL_TM_FG = N, timezone = MST
+    
+    Samples$SAMPLE_START_DT <- convertTime(datetime = Samples$SAMPLE_START_DT,
+                                       timezone = Samples$SAMPLE_START_TZ_CD,
+                                       daylight = Samples$SAMPLE_START_LOCAL_TM_FG)
     ####Close ODBC Connection
     odbcClose(Chan1)
     ######################
@@ -195,31 +209,14 @@ dataUpload <- function(qwsampletype,
     
 
     
-    ##Format times into GMT and correct of daylight savings offset according to location
-    ##Weather or not to apply daylight savings is in the std.time.code column, which is from the SAMPLE_START_LOCAL_TM_FG NWIS parameter
-    ##e.g. in Colorado, SAMPLE_START_LOCAL_TM_FG = Y, timezone = MDT, SAMPLE_START_LOCAL_TM_FG = N, timezone = MST
-    qwsample$start.date <- as.POSIXct(qwsample$start.date, tz="GMT")
+
     if(!is.na(qwsample.begin.date) && !is.na(qwsample.end.date)) 
     {
       qwsample <- subset(qwsample, start.date >= qwsample.begin.date & start.date <= qwsample.end.date)
     } else{}
-    qwsample$offset <- ifelse (qwsample$std.time.code == "Y", 60*60,0)
-    qwsample$start.date.offset <- qwsample$start.date + qwsample$offset
-    ###Format times from GMT to appropriate time zone
-    ###Using a loop because I could not figure out how to vectorize it, perhaps "mapply" would work, but don't know
-    for ( i in 1:nrow(qwsample))
-    {
-    ###Converts to time zone
-        qwsample$start.date.adj[i] <- format(qwsample$start.date.offset[i],"%Y%m%d%H%M", tz=as.character(qwsample$time.zone[i]))
-    }
+
     
-    qwsample$start.date <- qwsample$start.date.adj 
-    qwsample$start.date.adj <- NULL
-    qwsample$offset <- NULL
-    qwsample$start.date.offset <- NULL
-    qwsample$time.zone <- NULL
-    ###Remove extra empty character space from medium to make it match medium in data file of 2-3 char
-    #qwsample$medium <- (gsub(" ", "", qwsample$medium))
+    qwsample$start.date <- format(qwsample$start.date,"%Y%m%d%H%M")
 
     qwsample$sample.integer <- seq(1:nrow(qwsample))
     qwsample$UID <- paste(qwsample$site.no,qwsample$start.date,qwsample$medium,sep="")
@@ -393,7 +390,10 @@ dataUpload <- function(qwsampletype,
   qwresult <- qwresult[qwresult$result != "",]
   
   ###Wire qwresult and qwsample files
-  #write.table(qwsample,file=qwsamplename,sep="\t", col.names = F, row.names = F,na="", quote = FALSE)
-  #write.table(qwresult,file=qwresultname,sep="\t", col.names = F, row.names = F, na="",quote = FALSE)
+  if(writeFiles == TRUE)
+  {
+  write.table(qwsample,file=qwsamplename,sep="\t", col.names = F, row.names = F,na="", quote = FALSE)
+  write.table(qwresult,file=qwresultname,sep="\t", col.names = F, row.names = F, na="",quote = FALSE)
+  }
   return(list(qwsample=qwsample,qwresult=qwresult))
 }
