@@ -26,6 +26,12 @@ dataUpload(qwsampletype, labfile, pcodefile, DSN = "NWISCO", env.db = "01",
 
 \item{qa.db}{QA database number}
 
+\item{writeFiles}{write out qwresult and qwsample files to text files in working directory}
+
+\item{qwresultname}{Name of qwresult file}
+
+\item{qwsamplename}{Name of qwsample file}
+
 \item{qwsamplefile}{Character string containing path to the qwsample file if using qwsampletype = 2, must be .csv format}
 
 \item{qwsample.begin.date}{Character string (yyyy-mm-dd) of beggining date to subset qwsample file to}

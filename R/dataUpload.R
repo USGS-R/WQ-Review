@@ -8,6 +8,9 @@
 #' @param DSN Character string containing local NWIS server name
 #' @param env.db Environmental database number
 #' @param qa.db QA database number
+#' @param writeFiles write out qwresult and qwsample files to text files in working directory
+#' @param qwresultname Name of qwresult file
+#' @param qwsamplename Name of qwsample file
 #' @param qwsamplefile Character string containing path to the qwsample file if using qwsampletype = 2, must be .csv format
 #' @param qwsample.begin.date Character string (yyyy-mm-dd) of beggining date to subset qwsample file to
 #' @param qwsample.end.date Character string (yyyy-mm-dd) of ending date to subset qwsample file to
