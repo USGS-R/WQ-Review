@@ -418,6 +418,7 @@ observeEvent(input$dataDownload, {
                 ###Until afte rthe data has been imported
                 ###############################################
                 source("server_tablesandplots.r",local=TRUE)$value
+                #source("server_markedRecords.r",local=TRUE)$value
                 
                 parmSelData <- unique(qw.data$PlotTable[c("PARM_CD","PARM_NM")])
                 

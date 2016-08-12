@@ -5,7 +5,8 @@
 \title{dataUpload formats files for upload into QWData}
 \usage{
 dataUpload(qwsampletype, labfile, pcodefile, DSN = "NWISCO", env.db = "01",
-  qa.db = "02", qwsamplefile = "", qwsample.begin.date = NA,
+  qa.db = "02", writeFiles = FALSE, qwresultname = "",
+  qwsamplename = "", qwsamplefile = "", qwsample.begin.date = NA,
   qwsample.end.date = NA, censor = FALSE, agencycode = "USGS",
   labid = NA, projectcode = NA, aquifercode = NA, analysisstatus = NA,
   analysissource = NA, hydrologiccond = "A", hydrologicevent = 9,
@@ -24,6 +25,12 @@ dataUpload(qwsampletype, labfile, pcodefile, DSN = "NWISCO", env.db = "01",
 \item{env.db}{Environmental database number}
 
 \item{qa.db}{QA database number}
+
+\item{writeFiles}{write out qwresult and qwsample files to text files in working directory}
+
+\item{qwresultname}{Name of qwresult file}
+
+\item{qwsamplename}{Name of qwsample file}
 
 \item{qwsamplefile}{Character string containing path to the qwsample file if using qwsampletype = 2, must be .csv format}
 

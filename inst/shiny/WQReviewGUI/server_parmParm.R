@@ -230,25 +230,18 @@ observeEvent(input$parmParm_addRecord, {
                                        MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
                                                                                                     input$parmParm_flaggedRecord)]
                                        ),
-                                       DQI_CD = paste(unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                                    input$parmParm_flaggedRecord &
-                                                                                                    qw.data$PlotTable$PARM_CD == 
-                                                                                                    as.character(input$parmSel_parmParmX))]),
-                                                      unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
-                                                                                                    input$parmParm_flaggedRecord &
-                                                                                                    qw.data$PlotTable$PARM_CD == 
-                                                                                                    as.character(input$parmSel_parmParmY))])
+                                       PARM_CD = as.character(input$parmSel_parmParm),
+                                       DQI_CD_Current = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                                                                                      input$parmParm_flaggedRecord &
+                                                                                                      qw.data$PlotTable$PARM_CD == 
+                                                                                                      as.character(input$parmSel_parmParm))]
                                        ),
-                                       PARM_CD = paste(as.character(input$parmSel_parmParmX),
-                                                       as.character(input$parmSel_parmParmY)
+                                       DQI_CD_New = input$parmParm_dqiCode,
+                                       PARM_NM = unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
+                                                                                                as.character(input$parmSel_parmParm))]
                                        ),
-                                       PARM_NM = paste(unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
-                                                                                                      as.character(input$parmSel_parmParmX))]),
-                                                       unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
-                                                                                                      as.character(input$parmSel_parmParmY))])
-                                                       
-                                       ),
-                                       Where_Flagged = "parameter-parameter plot",
+                                       Where_Flagged = "parmParm",
+                                       Status = input$parmParm_flaggedStatus,
                                        Comment = input$parmParm_flaggedComment
                 )
                 markedRecords <<- rbind(markedRecords,newEntry)

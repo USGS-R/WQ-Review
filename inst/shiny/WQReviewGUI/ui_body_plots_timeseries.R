@@ -21,10 +21,12 @@ tabItem(tabName = "timeSeries",
                         ),
                         verbatimTextOutput("timeseries_hoverinfo"),
                         
-                        h3("Review comments"),
-                        textInput("timeseries_flaggedRecord",label="Record #"),
-                        textInput("timeseries_flaggedComment",label = "Comment"),
-                        actionButton(inputId = "timeseries_addRecord",label="Add record"),
+                        #h3("Review comments"),
+                        #textInput("timeseries_flaggedRecord",label="Record #"),
+                        #radioButtons("timeseries_flaggedStatus",choices=c("No selection","Looks good","Not OK"),label="Status"),
+                        #selectInput("timeseries_dqiCode",choices = c(NA,"R","Q","I","S","O","X","U","A","P"),label="DQI Code",multiple=FALSE),
+                        #textInput("timeseries_flaggedComment",label = "Comment"),
+                        #actionButton(inputId = "timeseries_addRecord",label="Add record"),
                         
                         
                         ###Sidebar options
@@ -53,6 +55,7 @@ tabItem(tabName = "timeSeries",
                 ###This displays the plot interaction output
                 
                 box(
+                        actionButton(inputId = "timeseries_popNotes",label="Add to notes"),
                         DT::dataTableOutput("timeseries_clickinfo"),
                         DT::dataTableOutput("timeseries_brushinfo"),
                         ###Box options

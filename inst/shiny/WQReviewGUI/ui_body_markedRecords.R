@@ -3,13 +3,44 @@
 ###These are contained in individual scripts just for organization sake.
 
 
-tabItem(tabName = "markedRecordsTab",
+ tabItem(tabName = "markedRecordsTab",
+
+
         fluidPage(
-                headerPanel("Reviewer notes"),
-                downloadButton('markedRecordsOut', 'Download tab delimited table'),
-                actionButton(inputId = "refreshMarkedRecords",label="Refresh table"),
-                
-                DT::dataTableOutput("markedRecords")
+                pageWithSidebar(
+
+                        headerPanel("Reviewer notes and DQI Codes"),
+                        sidebarPanel(
+                                ###Controls items
+                                actionButton(inputId = "refreshMarkedRecords",label="View/Refresh Notes"),
+                                actionButton(inputId = "deleteMarkedRecords",label="Delete entry"),
+                                actionButton(inputId = "flipDQI",label="Make DQI Batch files"),
+
+                                ###Sidebar options
+                                width=3
+                        ),
+                        mainPanel(
+                                box(
+                                        downloadButton('markedRecordsOut', 'Download tab delimited table'),
+                                        DT::dataTableOutput("markedRecords"),
+                                        collapsible = TRUE,
+                                        width= 12
+                                        ),
+                                box(
+                                        h2("QWSample"),
+                                        downloadButton('qwSampleOut',"Download qwsample file"),
+                                        DT::dataTableOutput("qwSample"),
+                                        collapsible = TRUE,
+                                        width= 12
+                                ),
+                                box(
+                                        h2("QWResult"),
+                                        downloadButton('qwResultOut',"Download qwresult file"),
+                                        DT::dataTableOutput("qwResult"),
+                                        collapsible = TRUE,
+                                        width= 12
+                                )
+                        )
+                )
         )
 )
-  

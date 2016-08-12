@@ -10,6 +10,7 @@
 #' @param begin.date Character string containing beginning date of data pull (yyyy-mm-dd)
 #' @param end.date Character string containing ending date of data pull (yyyy-mm-dd)
 #' @param projectCd Character vector containing project codes to subset data by.
+#' @param resultAsText Output results as character instead of numeric. Used for literal output of results from NWIS that are no affected by class coerrcion, such as dropping zeros after decimal point. Default is False. 
 #' @return Returns a list containing two dataframes: PlotTable and DataTable. 
 #' PlotTable contains all data pulled from NWIS along with all assosciated metadata in by-result format. 
 #' DataTable contains all data pulled from NWIS in wide (sample-result) format, an easier format for import into spreadsheet programs.
@@ -58,7 +59,8 @@ readNWISodbc <- function(DSN,
                          parm.group.check = TRUE,
                          begin.date = NA,
                          end.date = NA,
-                         projectCd = NULL)
+                         projectCd = NULL,
+                         resultAsText = FALSE)
 {
         ##Check that the 32 bit version of r is running
         if(Sys.getenv("R_ARCH") != "/i386"){
@@ -72,8 +74,8 @@ readNWISodbc <- function(DSN,
                 stop("A valid datasource name must be entered for the ODBC connection")
         }
         if(is.null(STAIDS)){
-                print("A valid datasource name must be entered for the ODBC connection")
-                stop("You must enter atleast one site number to pull data")
+                print("You must enter atleast one site number")
+                stop("You must enter atleast one site number")
         }
         
   RODBC::odbcCloseAll()
@@ -128,7 +130,10 @@ readNWISodbc <- function(DSN,
   #############################################################################
   Chan1 <- RODBC::odbcConnect(DSN)###Start of ODBC connection
   #############################################################################
-  
+  if(Chan1 == -1L)
+  {
+          stop("ODBC connection failed. Check DSN name and ODBC connection settings")
+  }
   ##################
   ###Env Database###
   ##################
@@ -136,6 +141,10 @@ readNWISodbc <- function(DSN,
   Query <- paste("select * from ", DSN, ".SITEFILE_",env.db," where site_no IN (", STAID.list, ")",sep="")
   SiteFile <- RODBC::sqlQuery(Chan1, Query, as.is=T)
   
+  if(length(grep("[RODBC]",SiteFile)) > 0)
+  {
+          stop("Incorrect database number entered for env.db")
+  }
   #Make unique AgencyCd/sitefile key
   SiteFile$agencySTAID <- gsub(" ","",paste0(SiteFile$AGENCY_CD,SiteFile$SITE_NO))
   
@@ -348,6 +357,11 @@ readNWISodbc <- function(DSN,
   # First get the site info--need column SITE_ID
   Query <- paste("select * from ", DSN, ".SITEFILE_",qa.db," where site_no IN (", STAID.list, ")", sep="")
   QASiteFile <- RODBC::sqlQuery(Chan1, Query, as.is=T)
+  
+  if(length(grep("[RODBC]",SiteFile)) > 0)
+  {
+          stop("Incorrect database number entered for qa.db")
+  }
   
   ##Make unique AgencyCd/sitefile key
   QASiteFile$agencySTAID <- gsub(" ","",paste0(SiteFile$AGENCY_CD,SiteFile$SITE_NO))
@@ -589,8 +603,11 @@ readNWISodbc <- function(DSN,
   ###Set factors levels
   #PlotTable$REMARK_CD = factor(PlotTable$REMARK_CD,levels(PlotTable$REMARK_CD)[c(4,1:3)])
   ###Make result a numeric
-  PlotTable$RESULT_VA <- as.numeric(PlotTable$RESULT_VA)
   
+  if(resultAsText == FALSE)
+  {
+  PlotTable$RESULT_VA <- as.numeric(PlotTable$RESULT_VA)
+  }
   
   ##Format date times to local sample collection timezone
   #SAMPLE_START_DT

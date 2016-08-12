@@ -6,7 +6,7 @@
 \usage{
 readNWISodbc(DSN, env.db = "01", qa.db = "02", STAIDS, dl.parms = "All",
   parm.group.check = TRUE, begin.date = NA, end.date = NA,
-  projectCd = NULL)
+  projectCd = NULL, resultAsText = FALSE)
 }
 \arguments{
 \item{DSN}{A character string containing the DSN for your local server}
@@ -26,6 +26,8 @@ readNWISodbc(DSN, env.db = "01", qa.db = "02", STAIDS, dl.parms = "All",
 \item{end.date}{Character string containing ending date of data pull (yyyy-mm-dd)}
 
 \item{projectCd}{Character vector containing project codes to subset data by.}
+
+\item{resultAsText}{Output results as character instead of numeric. Used for literal output of results from NWIS that are no affected by class coerrcion, such as dropping zeros after decimal point. Default is False.}
 }
 \value{
 Returns a list containing two dataframes: PlotTable and DataTable. 
