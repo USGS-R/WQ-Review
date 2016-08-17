@@ -470,8 +470,8 @@ dqiTable <<- transmute(dqiTable,
                        SAMPLE_START_DT = SAMPLE_START_DT,
                        #MEDIUM_CD = as.factor(MEDIUM_CD),
                        PARM_CD = as.factor(PARM_CD),
-                       PARM_NM = PARM_NM,
-                       DQI_CD = DQI_CD)
+                       PARM_NM = as.factor(PARM_NM),
+                       DQI_CD = as.factor(DQI_CD))
 
 # dqiTableReactive <<- reactive({
 #         if(!is.null(input$siteSel_dqiTable))

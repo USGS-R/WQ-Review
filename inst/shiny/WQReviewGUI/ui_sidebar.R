@@ -10,8 +10,8 @@ dashboardSidebar(sidebarMenu(
         
         ###Load the controls
         menuItem("Data import",
-                 menuSubItem(tabName="siteSelection", text = "Import sites and samples"),
-                 menuSubItem(tabName="nwisDCImport", text = "NWIS Datachecks import")
+                 menuSubItem(tabName="siteSelection", text = "Import sites and samples")
+                 #menuSubItem(tabName="nwisDCImport", text = "NWIS Datachecks import")
         ),
         
         menuItem("Chemical sense checks",icon = icon("table"),
@@ -101,7 +101,7 @@ h3("Review comments"),
 menuItem(tabName="markedRecordsTab","View table"),
 textInput("sidebar_flaggedRecord",label="Record #"),
 textInput("parmSel_sidebar",label="PCODE"),
-radioButtons("sidebar_flaggedStatus",choices=c("No selection","Looks good","Not OK"),label="Status"),
+radioButtons("sidebar_flaggedStatus",choices=c("No selection","OK","Not OK, see comment"),label="Status"),
 selectInput("sidebar_dqiCode",choices = c(NA,"R","Q","I","S","O","X","U","A","P"),label="DQI Code",multiple=FALSE),
 textInput("sidebar_flaggedComment",label = "Comment"),
 actionButton(inputId = "sidebar_addRecord",label="Add record")

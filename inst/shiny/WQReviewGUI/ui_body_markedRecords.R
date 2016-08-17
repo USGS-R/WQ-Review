@@ -14,7 +14,7 @@
                                 ###Controls items
                                 actionButton(inputId = "refreshMarkedRecords",label="View/Refresh Notes"),
                                 actionButton(inputId = "deleteMarkedRecords",label="Delete entry"),
-                                actionButton(inputId = "flipDQI",label="Make DQI Batch files"),
+                                #actionButton(inputId = "flipDQI",label="Make DQI Batch files"),
 
                                 ###Sidebar options
                                 width=3
@@ -25,21 +25,21 @@
                                         DT::dataTableOutput("markedRecords"),
                                         collapsible = TRUE,
                                         width= 12
-                                        ),
-                                box(
-                                        h2("QWSample"),
-                                        downloadButton('qwSampleOut',"Download qwsample file"),
-                                        DT::dataTableOutput("qwSample"),
-                                        collapsible = TRUE,
-                                        width= 12
-                                ),
-                                box(
-                                        h2("QWResult"),
-                                        downloadButton('qwResultOut',"Download qwresult file"),
-                                        DT::dataTableOutput("qwResult"),
-                                        collapsible = TRUE,
-                                        width= 12
-                                )
+                                        )
+                                # box(
+                                #         h2("QWSample"),
+                                #         downloadButton('qwSampleOut',"Download qwsample file"),
+                                #         DT::dataTableOutput("qwSample"),
+                                #         collapsible = TRUE,
+                                #         width= 12
+                                # ),
+                                # box(
+                                #         h2("QWResult"),
+                                #         downloadButton('qwResultOut',"Download qwresult file"),
+                                #         DT::dataTableOutput("qwResult"),
+                                #         collapsible = TRUE,
+                                #         width= 12
+                                # )
                         )
                 )
         )
