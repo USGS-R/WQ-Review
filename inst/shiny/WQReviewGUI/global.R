@@ -70,3 +70,5 @@ getEntry <- function(plotTable,flaggedRecord,parmSel)
                        Status = input$seasonal_flaggedStatus,
                        Comment = input$seasonal_flaggedComment)
 }
+
+

@@ -77,7 +77,7 @@ observe({
 ###This outputs the data tables for clicked and brushed points
 #Make this table reactive so that the values can be used to populate the review notes on click
 timeseries_clickReactive <<- reactive({
-        nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+        nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                  coordinfo = input$plot_click_timeseries,
                                  xvar=xvar_timeseries,
                                  yvar=yvar_timeseries)
@@ -121,7 +121,7 @@ observeEvent(input$timeseries_popNotes, {
 ##Brush info does not need ot be reactive because don't use values for anything else
 
 output$timeseries_brushinfo <- DT::renderDataTable({
-        DT::datatable(brushedPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+        DT::datatable(brushedPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                     brush=input$plot_brush_timeseries,
                                     xvar=xvar_timeseries,
                                     yvar=yvar_timeseries),
@@ -138,54 +138,54 @@ output$timeseries_brushinfo <- DT::renderDataTable({
 
 output$timeseries_hoverinfo <- renderPrint({
         
-        cat("Record #:",unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+        cat("Record #:",unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                           coordinfo = input$plot_hover,
                                           xvar=xvar_timeseries,
                                           yvar=yvar_timeseries)$RECORD_NO),
             "\n"
         );
         
-        cat("Site #:",unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+        cat("Site #:",unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                         coordinfo = input$plot_hover,
                                         xvar=xvar_timeseries,
                                         yvar=yvar_timeseries)$SITE_NO),
             "\n");
         
-        cat("Station:",unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+        cat("Station:",unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                          coordinfo = input$plot_hover,
                                          xvar=xvar_timeseries,
                                          yvar=yvar_timeseries)$STATION_NM),
             "\n");
-        cat("Date/time:",format(unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+        cat("Date/time:",format(unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                                   coordinfo = input$plot_hover,
                                                   xvar=xvar_timeseries,
                                                   yvar=yvar_timeseries)$SAMPLE_START_DT,"%Y-%m-%d %H:%M")),
             "\n");
         cat("Chemical flags:",
-            names(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+            names(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                                                               coordinfo = input$plot_hover,
                                                                               xvar=xvar_timeseries,
-                                                                              yvar=yvar_timeseries)$RECORD_NO))[7:11])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+                                                                              yvar=yvar_timeseries)$RECORD_NO))[7:11])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                                                                                                                                                                                 coordinfo = input$plot_hover,
                                                                                                                                                                                                 xvar=xvar_timeseries,
                                                                                                                                                                                                 yvar=yvar_timeseries)$RECORD_NO))[7:11], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         cat("Pesticide flags:",
-            names(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+            names(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                                                               coordinfo = input$plot_hover,
                                                                               xvar=xvar_timeseries,
-                                                                              yvar=yvar_timeseries)$RECORD_NO))[11:12])[which(sapply(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+                                                                              yvar=yvar_timeseries)$RECORD_NO))[11:12])[which(sapply(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                                                                                                                                                                                  coordinfo = input$plot_hover,
                                                                                                                                                                                                  xvar=xvar_timeseries,
                                                                                                                                                                                                  yvar=yvar_timeseries)$RECORD_NO))[11:12], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         cat("Result flags:",
-            names(subset(reports$resultFlagTable,PARM_CD == dataSelections_timeseries$parmSel & RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+            names(subset(reports$resultFlagTable,PARM_CD == dataSelections_timeseries$parmSel & RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                                                                                                                coordinfo = input$plot_hover,
                                                                                                                                xvar=xvar_timeseries,
-                                                                                                                               yvar=yvar_timeseries)$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == dataSelections_timeseries$parmSel & RECORD_NO == unique(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
+                                                                                                                               yvar=yvar_timeseries)$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == dataSelections_timeseries$parmSel & RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_timeseries$siteSel & PARM_CD %in% dataSelections_timeseries$parmSel),
                                                                                                                                                                                                                                                                                                    coordinfo = input$plot_hover,
                                                                                                                                                                                                                                                                                                    xvar=xvar_timeseries,
                                                                                                                                                                                                                                                                                                    yvar=yvar_timeseries)$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
@@ -199,26 +199,26 @@ output$timeseries_hoverinfo <- renderPrint({
 observeEvent(input$timeseries_addRecord, {
         try({
                 newEntry <- data.frame(RECORD_NO = input$timeseries_flaggedRecord,
-                                       SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
+                                       SITE_NO = unique(plotTable$SITE_NO[which(plotTable$RECORD_NO == 
                                                                                                 input$timeseries_flaggedRecord)]
                                        ),
-                                       STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
+                                       STATION_NM = unique(plotTable$STATION_NM[which(plotTable$RECORD_NO == 
                                                                                                       input$timeseries_flaggedRecord)]
                                        ),
-                                       SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
+                                       SAMPLE_START_DT = as.character(unique(plotTable$SAMPLE_START_DT[which(plotTable$RECORD_NO == 
                                                                                                                              input$timeseries_flaggedRecord)])
                                        ),
-                                       MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                       MEDIUM_CD = unique(plotTable$MEDIUM_CD[which(plotTable$RECORD_NO == 
                                                                                                     input$timeseries_flaggedRecord)]
                                        ),
                                        PARM_CD = as.character(input$parmSel_TS),
-                                       DQI_CD_Current = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                       DQI_CD_Current = unique(plotTable$DQI_CD[which(plotTable$RECORD_NO == 
                                                                                                       input$timeseries_flaggedRecord &
-                                                                                                      qw.data$PlotTable$PARM_CD == 
+                                                                                                      plotTable$PARM_CD == 
                                                                                                       as.character(input$parmSel_TS))]
                                        ),
                                        DQI_CD_New = input$timeseries_dqiCode,
-                                       PARM_NM = unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
+                                       PARM_NM = unique(plotTable$PARM_NM[which(plotTable$PARM_CD == 
                                                                                                 as.character(input$parmSel_TS))]
                                        ),
                                        Where_Flagged = "timeseries",

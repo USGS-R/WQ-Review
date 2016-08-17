@@ -5,17 +5,17 @@
 
 
 tryCatch({
-newSampleCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$SAMPLE_CR > Sys.time() - 60*60*24*7
-                                                     &!duplicated(qw.data$PlotTable$RECORD_NO)])
-newResultCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$RESULT_CR > Sys.time() - 60*60*24*7])
-modifiedCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$RESULT_MD > Sys.time() - 60*60*24*7])
-totalSampleCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
-                                                       &!duplicated(qw.data$PlotTable$RECORD_NO)])
-totalResultCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3])
-},warning = function(w) {newSampleCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$SAMPLE_CR > Sys.time() - 60*60*24*7
-                                                                              &!duplicated(qw.data$PlotTable$RECORD_NO)])
-                         newResultCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$RESULT_CR > Sys.time() - 60*60*24*7])
-                         modifiedCount <- length(qw.data$PlotTable$RECORD_NO[qw.data$PlotTable$RESULT_MD > Sys.time() - 60*60*24*7])
+newSampleCount <- length(plotTable$RECORD_NO[plotTable$SAMPLE_CR > Sys.time() - 60*60*24*7
+                                                     &!duplicated(plotTable$RECORD_NO)])
+newResultCount <- length(plotTable$RECORD_NO[plotTable$RESULT_CR > Sys.time() - 60*60*24*7])
+modifiedCount <- length(plotTable$RECORD_NO[plotTable$RESULT_MD > Sys.time() - 60*60*24*7])
+totalSampleCount <- length(plotTable$RECORD_NO[plotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
+                                                       &!duplicated(plotTable$RECORD_NO)])
+totalResultCount <- length(plotTable$RESULT_VA[plotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3])
+},warning = function(w) {newSampleCount <- length(plotTable$RECORD_NO[plotTable$SAMPLE_CR > Sys.time() - 60*60*24*7
+                                                                              &!duplicated(plotTable$RECORD_NO)])
+                         newResultCount <- length(plotTable$RECORD_NO[plotTable$RESULT_CR > Sys.time() - 60*60*24*7])
+                         modifiedCount <- length(plotTable$RECORD_NO[plotTable$RESULT_MD > Sys.time() - 60*60*24*7])
 
 },error = function(e) {
         newSampleCount <- ""
@@ -65,17 +65,17 @@ output$alerts <- renderMenu({
 ######################################################
 
 tryCatch({
-reviewedCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
-                        & (qw.data$PlotTable$DQI_CD %in% c("R","Q","O","X","U","A"))])/totalResultCount*100
+reviewedCount <- length(plotTable$RESULT_VA[plotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
+                        & (plotTable$DQI_CD %in% c("R","Q","O","X","U","A"))])/totalResultCount*100
 
-waitingCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
-                                                    & qw.data$PlotTable$DQI_CD %in% c("I","S","P")])/totalResultCount*100
+waitingCount <- length(plotTable$RESULT_VA[plotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
+                                                    & plotTable$DQI_CD %in% c("I","S","P")])/totalResultCount*100
 }, warning = function(w) {
-        reviewedCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
-                                                            & (qw.data$PlotTable$DQI_CD %in% c("R","Q","O","X","U","A"))])/totalResultCount*100
+        reviewedCount <- length(plotTable$RESULT_VA[plotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
+                                                            & (plotTable$DQI_CD %in% c("R","Q","O","X","U","A"))])/totalResultCount*100
         
-        waitingCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
-                                                           & qw.data$PlotTable$DQI_CD %in% c("I","S","P")])/totalResultCount*100
+        waitingCount <- length(plotTable$RESULT_VA[plotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*365*3
+                                                           & plotTable$DQI_CD %in% c("I","S","P")])/totalResultCount*100
 }, error = function(e) {
         reviewedCount <- ""
         waitingCount <- ""
@@ -112,17 +112,17 @@ overdueCount <- ""
 wayOverdueCount <- ""
 
 tryCatch({
-overdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*30*3
-                                                    & qw.data$PlotTable$DQI_CD %in% c("I","S")])
+overdueCount <- length(plotTable$RESULT_VA[plotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*30*3
+                                                    & plotTable$DQI_CD %in% c("I","S")])
 
-wayOverdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT < Sys.time() - 60*60*24*30*3
-                                                   & qw.data$PlotTable$DQI_CD %in% c("I","S")])
+wayOverdueCount <- length(plotTable$RESULT_VA[plotTable$SAMPLE_START_DT < Sys.time() - 60*60*24*30*3
+                                                   & plotTable$DQI_CD %in% c("I","S")])
 },warning = function(w) {
-        overdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*30*3
-                                                           & qw.data$PlotTable$DQI_CD %in% c("I","S")])
+        overdueCount <- length(plotTable$RESULT_VA[plotTable$SAMPLE_START_DT > Sys.time() - 60*60*24*30*3
+                                                           & plotTable$DQI_CD %in% c("I","S")])
         
-        wayOverdueCount <- length(qw.data$PlotTable$RESULT_VA[qw.data$PlotTable$SAMPLE_START_DT < Sys.time() - 60*60*24*30*3
-                                                              & qw.data$PlotTable$DQI_CD %in% c("I","S")])
+        wayOverdueCount <- length(plotTable$RESULT_VA[plotTable$SAMPLE_START_DT < Sys.time() - 60*60*24*30*3
+                                                              & plotTable$DQI_CD %in% c("I","S")])
 }, error = function(e) {
         
         overdueCount <- 0

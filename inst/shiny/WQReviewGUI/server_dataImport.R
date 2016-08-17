@@ -9,7 +9,7 @@ output$importWarning <- renderPrint({
                 
         )
 
-        #sampleCountHist <- ggplot(data=qw.data$PlotTable[!duplicated(qw.data$PlotTable$RECORD_NO),],aes(x=year(SAMPLE_START_DT)))
+        #sampleCountHist <- ggplot(data=plotTable[!duplicated(plotTable$RECORD_NO),],aes(x=year(SAMPLE_START_DT)))
         #sampleCountHist <- sampleCountHist + geom_histogram(colour = "darkgreen", fill = "white",binwidth=1) + theme_bw()
         #sampleCountHist <- sampleCountHist + ylab("Sample count") + xlab("Calendar year")
         #sampleCountHist
@@ -70,37 +70,37 @@ observeEvent(input$dataDownload, {
                         print("Please see notifications at the top-right of this page for important information regarding your data")
                 })
                 output$samplesRetrieved <- renderText({
-                        print(paste("Samples retrieved:",length(unique(qw.data$PlotTable$RECORD_NO))))
+                        print(paste("Samples retrieved:",length(unique(plotTable$RECORD_NO))))
                 })
                 output$resultsRetrieved <- renderText({
-                        print(paste("Results retrieved:",length(unique(qw.data$PlotTable$RESULT_VA))))
+                        print(paste("Results retrieved:",length(unique(plotTable$RESULT_VA))))
                 })
                 output$sampleModified <- renderText({
                         print("Most recent sample modification")
                 })
                 output$recordModified <- renderText({
-                        print(unique(paste("Record:",qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$SAMPLE_MD == max(qw.data$PlotTable$SAMPLE_MD))])))
+                        print(unique(paste("Record:",plotTable$RECORD_NO[which(plotTable$SAMPLE_MD == max(plotTable$SAMPLE_MD))])))
                 })
                 output$recordModifiedDate <- renderText({
-                        print(unique(paste("Date:",max(qw.data$PlotTable$SAMPLE_MD))))
+                        print(unique(paste("Date:",max(plotTable$SAMPLE_MD))))
                 })
                 output$recordModifiedName <- renderText({
-                        print(unique(paste("Name:",qw.data$PlotTable$SAMPLE_MN[which(qw.data$PlotTable$SAMPLE_MD == max(qw.data$PlotTable$SAMPLE_MD))])))
+                        print(unique(paste("Name:",plotTable$SAMPLE_MN[which(plotTable$SAMPLE_MD == max(plotTable$SAMPLE_MD))])))
                 })
                 output$resultModified <- renderText({
                         print("Most recent result modification")
                 })
                 output$resultRecordModified <- renderText({
-                        print(unique(paste("Record:",qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                        print(unique(paste("Record:",plotTable$RECORD_NO[which(plotTable$RESULT_MD == max(plotTable$RESULT_MD))])))
                 })
                 output$resultModifiedPARM <- renderText({
-                        print(unique(paste("P-Code",qw.data$PlotTable$PARM_CD[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                        print(unique(paste("P-Code",plotTable$PARM_CD[which(plotTable$RESULT_MD == max(plotTable$RESULT_MD))])))
                 })
                 output$resultModifiedDate <- renderText({
-                        print(unique(paste("Date:",max(qw.data$PlotTable$RESULT_MD))))
+                        print(unique(paste("Date:",max(plotTable$RESULT_MD))))
                 })
                 output$resultModifiedName <- renderText({
-                        print(unique(paste("Name:",qw.data$PlotTable$RESULT_MN[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                        print(unique(paste("Name:",plotTable$RESULT_MN[which(plotTable$RESULT_MD == max(plotTable$RESULT_MD))])))
                 })
         } else{output$shinyErrors <- renderPrint("Problem with data import, please check import criteria")}
                 },warning = function(w) {
@@ -140,37 +140,37 @@ observeEvent(input$dataDownload, {
                         print("Please see notifications at the top-right of this page for important information regarding your data")
                 })
                 output$samplesRetrieved <- renderText({
-                        print(paste("Samples retrieved:",length(unique(qw.data$PlotTable$RECORD_NO))))
+                        print(paste("Samples retrieved:",length(unique(plotTable$RECORD_NO))))
                 })
                 output$resultsRetrieved <- renderText({
-                        print(paste("Results retrieved:",length(unique(qw.data$PlotTable$RESULT_VA))))
+                        print(paste("Results retrieved:",length(unique(plotTable$RESULT_VA))))
                 })
                 output$sampleModified <- renderText({
                         print("Most recent sample modification")
                 })
                 output$recordModified <- renderText({
-                        print(unique(paste("Record:",qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$SAMPLE_MD == max(qw.data$PlotTable$SAMPLE_MD))])))
+                        print(unique(paste("Record:",plotTable$RECORD_NO[which(plotTable$SAMPLE_MD == max(plotTable$SAMPLE_MD))])))
                 })
                 output$recordModifiedDate <- renderText({
-                        print(unique(paste("Date:",max(qw.data$PlotTable$SAMPLE_MD))))
+                        print(unique(paste("Date:",max(plotTable$SAMPLE_MD))))
                 })
                 output$recordModifiedName <- renderText({
-                        print(unique(paste("Name:",qw.data$PlotTable$SAMPLE_MN[which(qw.data$PlotTable$SAMPLE_MD == max(qw.data$PlotTable$SAMPLE_MD))])))
+                        print(unique(paste("Name:",plotTable$SAMPLE_MN[which(plotTable$SAMPLE_MD == max(plotTable$SAMPLE_MD))])))
                 })
                 output$resultModified <- renderText({
                         print("Most recent result modification")
                 })
                 output$resultRecordModified <- renderText({
-                        print(unique(paste("Record:",qw.data$PlotTable$RECORD_NO[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                        print(unique(paste("Record:",plotTable$RECORD_NO[which(plotTable$RESULT_MD == max(plotTable$RESULT_MD))])))
                 })
                 output$resultModifiedPARM <- renderText({
-                        print(unique(paste("P-Code",qw.data$PlotTable$PARM_CD[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                        print(unique(paste("P-Code",plotTable$PARM_CD[which(plotTable$RESULT_MD == max(plotTable$RESULT_MD))])))
                 })
                 output$resultModifiedDate <- renderText({
-                        print(unique(paste("Date:",max(qw.data$PlotTable$RESULT_MD))))
+                        print(unique(paste("Date:",max(plotTable$RESULT_MD))))
                 })
                 output$resultModifiedName <- renderText({
-                        print(unique(paste("Name:",qw.data$PlotTable$RESULT_MN[which(qw.data$PlotTable$RESULT_MD == max(qw.data$PlotTable$RESULT_MD))])))
+                        print(unique(paste("Name:",plotTable$RESULT_MN[which(plotTable$RESULT_MD == max(plotTable$RESULT_MD))])))
                 })
                 
                 } else{output$shinyErrors <- renderPrint("Problem with data import, please check import criteria")}

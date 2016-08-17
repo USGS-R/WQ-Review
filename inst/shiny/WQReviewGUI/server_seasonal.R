@@ -64,15 +64,7 @@ output$qwseasonalPlot_zoom <- renderPlot({
 ###This does the plotting interactions###
 #########################################
 
-# ###These are the values to subset the data by for dataTable ouput
-# dataSelections_seasonal <- reactiveValues(siteSel = NULL, parmSel = NULL)
-# 
-# ##################################################
-# ###CHANGE these to the respective sidebar element
-# observe({
-#         dataSelections_seasonal$siteSel <- input$siteSel_seasonal
-#         dataSelections_seasonal$parmSel <- input$parmSel_seasonal
-# })
+
 ##################################################
 ##################################################
 ###CHANGE these to the respective plot variables
@@ -99,7 +91,7 @@ observe({
 
 ###This outputs the data tables for clicked and brushed points
 #Make this table reactive so that the values can be used to populate the review notes on click
-seasonal_clickReactive <<- reactive({
+seasonal_clickReactive <- reactive({
         nearPoints(df=selData_seasonal(),
                                  coordinfo = input$plot_click_seasonal,
                                  xvar=xvar_seasonal,
@@ -107,7 +99,6 @@ seasonal_clickReactive <<- reactive({
 })
 
 output$seasonal_clickinfo <- DT::renderDataTable(
-        # With base graphics, need to tell it what the x and y variables are.
         seasonal_clickReactive(),
         extensions = list(FixedColumns = list(leftColumns = 1)),
         server=TRUE,
@@ -188,7 +179,7 @@ output$seasonal_hoverinfo <- renderPrint({
             "\n");
 
         cat("Result flags:",
-            names(subset(reports$resultFlagTable,PARM_CD == dataSelections_seasonal$parmSel & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == dataSelections_seasonal$parmSel & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$resultFlagTable,PARM_CD == input$parmSel_seasonal & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == input$parmSel_seasonal & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
             "\n");
         })
 

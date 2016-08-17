@@ -49,7 +49,7 @@ observe({
 
 output$parmBox_sumStats <- DT::renderDataTable({
         
-        DT::datatable(dplyr::summarize(dplyr::group_by(subset(qw.data$PlotTable,SITE_NO %in% as.character(dataSelections$siteSel) & 
+        DT::datatable(dplyr::summarize(dplyr::group_by(subset(plotTable,SITE_NO %in% as.character(dataSelections$siteSel) & 
                                            PARM_CD%in% as.character(dataSelections$parmSel) & 
                                            MEDIUM_CD %in%(c("WG ","WS "))),
                                            PARM_CD,PARM_NM),
@@ -94,7 +94,7 @@ observe({
 
 output$parmBox_clickinfo <- DT::renderDataTable({
         # With base graphics, need to tell it what the x and y variables are.
-        DT::datatable(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+        DT::datatable(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
                                  coordinfo = input$plot_click,
                                  xvar=xvar_parmBox,
                                  yvar=yvar_parmBox)[1:4],
@@ -107,7 +107,7 @@ output$parmBox_clickinfo <- DT::renderDataTable({
 
 output$parmBox_brushinfo <- DT::renderDataTable({
         # With base graphics, need to tell it what the x and y variables are.
-        DT::datatable(brushedPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
+        DT::datatable(brushedPoints(df=subset(plotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel),
                                     brush=input$plot_brush,
                                     xvar=xvar_parmBox,
                                     yvar=yvar_parmBox),
@@ -119,7 +119,7 @@ output$parmBox_brushinfo <- DT::renderDataTable({
 
 output$parmBox_hoverinfo <- DT::renderDataTable({
         # With base graphics, need to tell it what the x and y variables are.
-        DT::datatable(nearPoints(qw.data$PlotTable, input$plot_hover)
+        DT::datatable(nearPoints(plotTable, input$plot_hover)
         )
         # nearPoints() also works with hover and dblclick events
 })

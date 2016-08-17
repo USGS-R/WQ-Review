@@ -86,10 +86,10 @@ observe({
         {
         ##Have to get different data table styructure that is the same as used in the plot function
         xpp.plot.data <- 
-                subset(qw.data$PlotTable,SITE_NO %in% dataSelections_parmParm$siteSel & PARM_CD == dataSelections_parmParm$parmSelX)
+                subset(plotTable,SITE_NO %in% dataSelections_parmParm$siteSel & PARM_CD == dataSelections_parmParm$parmSelX)
         
         ypp.plot.data <- 
-                subset(qw.data$PlotTable,SITE_NO %in% dataSelections_parmParm$siteSel & PARM_CD == dataSelections_parmParm$parmSelY)
+                subset(plotTable,SITE_NO %in% dataSelections_parmParm$siteSel & PARM_CD == dataSelections_parmParm$parmSelY)
         #Join x and y data
         pp.plot.data <<- dplyr::left_join(xpp.plot.data[,c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA","RESULT_MD")], 
                               ypp.plot.data[,c("RECORD_NO","RESULT_VA","RESULT_MD")],by="RECORD_NO")
@@ -218,26 +218,26 @@ output$parmParm_hoverinfo <- renderPrint({
 observeEvent(input$parmParm_addRecord, {
         try({
                 newEntry <- data.frame(RECORD_NO = input$parmParm_flaggedRecord,
-                                       SITE_NO = unique(qw.data$PlotTable$SITE_NO[which(qw.data$PlotTable$RECORD_NO == 
+                                       SITE_NO = unique(plotTable$SITE_NO[which(plotTable$RECORD_NO == 
                                                                                                 input$parmParm_flaggedRecord)]
                                        ),
-                                       STATION_NM = unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$RECORD_NO == 
+                                       STATION_NM = unique(plotTable$STATION_NM[which(plotTable$RECORD_NO == 
                                                                                                       input$parmParm_flaggedRecord)]
                                        ),
-                                       SAMPLE_START_DT = as.character(unique(qw.data$PlotTable$SAMPLE_START_DT[which(qw.data$PlotTable$RECORD_NO == 
+                                       SAMPLE_START_DT = as.character(unique(plotTable$SAMPLE_START_DT[which(plotTable$RECORD_NO == 
                                                                                                                              input$parmParm_flaggedRecord)])
                                        ),
-                                       MEDIUM_CD = unique(qw.data$PlotTable$MEDIUM_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                       MEDIUM_CD = unique(plotTable$MEDIUM_CD[which(plotTable$RECORD_NO == 
                                                                                                     input$parmParm_flaggedRecord)]
                                        ),
                                        PARM_CD = as.character(input$parmSel_parmParm),
-                                       DQI_CD_Current = unique(qw.data$PlotTable$DQI_CD[which(qw.data$PlotTable$RECORD_NO == 
+                                       DQI_CD_Current = unique(plotTable$DQI_CD[which(plotTable$RECORD_NO == 
                                                                                                       input$parmParm_flaggedRecord &
-                                                                                                      qw.data$PlotTable$PARM_CD == 
+                                                                                                      plotTable$PARM_CD == 
                                                                                                       as.character(input$parmSel_parmParm))]
                                        ),
                                        DQI_CD_New = input$parmParm_dqiCode,
-                                       PARM_NM = unique(qw.data$PlotTable$PARM_NM[which(qw.data$PlotTable$PARM_CD == 
+                                       PARM_NM = unique(plotTable$PARM_NM[which(plotTable$PARM_CD == 
                                                                                                 as.character(input$parmSel_parmParm))]
                                        ),
                                        Where_Flagged = "parmParm",
