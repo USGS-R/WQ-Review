@@ -15,19 +15,10 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                                                           parm.group.check=parm.group.check,
                                                           begin.date=as.character(input$begin.date),
                                                           end.date=as.character(input$end.date),
-                                                          projectCd = input$projectCd)
-                )
-        },warning = function(w){        qw.data <<- suppressWarnings(readNWISodbc(DSN=input$DSN,
-                                                                                  env.db = input$env.db,
-                                                                                  qa.db=input$qa.db,
-                                                                                  STAIDS=STAIDS,
-                                                                                  dl.parms=dl.parms,
-                                                                                  parm.group.check=parm.group.check,
-                                                                                  begin.date=as.character(input$begin.date),
-                                                                                  end.date=as.character(input$end.date),
-                                                                                  projectCd = input$projectCd
-        )
-        )
+                                                          projectCd = input$projectCd))
+                plotTable <<- qw.data$PlotTable
+                dataTable <<- qw.data$DataTable
+                
         },error = function(e){
                 output$errors <- renderPrint(geterrmessage())
                 stop(geterrmessage())
