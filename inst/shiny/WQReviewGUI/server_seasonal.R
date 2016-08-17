@@ -7,10 +7,16 @@ output$qwseasonalPlot <- renderPlot({
         validate(need(!is.null(input$siteSel_seasonal) & !is.null(input$parmSel_seasonal),
                       "No site or parameter selected"))
         
+        if(input$siteSel_seasonal == "All")
+        {
+                sites <- unique(qw.data$PlotTable$SITE_NO)
+        } else {
+                sites <- as.character(input$siteSel_seasonal)
+        }
         
         qwseasonalPlot(qw.data = qw.data,
                        new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
-                       site.selection = as.character(input$siteSel_seasonal),
+                       site.selection = sites,
                        plotparm = as.character(input$parmSel_seasonal),
                        facet = input$facetSel_seasonal,
                        labelDQI = input$labelDQI_seasonal,
@@ -26,7 +32,7 @@ output$qwseasonalPlot_zoom <- renderPlot({
         validate(need(!is.null(ranges_seasonal$x), "Select area in upper plot to zoom"))
         qwseasonalPlot(qw.data = qw.data,
                        new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
-                       site.selection = as.character(input$siteSel_seasonal),
+                       site.selection = sites,
                        plotparm = as.character(input$parmSel_seasonal),
                        facet = input$facetSel_seasonal,
                        labelDQI = input$labelDQI_seasonal,
