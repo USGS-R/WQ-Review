@@ -1,11 +1,12 @@
 ###This subsets the qw.data dataframe to selected sites and results
 
-selData_seasonal <- reactive({
-        if(input$siteSel_seasonal == "All")
+selData_cb <- reactive({
+        if(input$siteSel_cb == "All")
         {
-                plotTable
+                unique(plotTable[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","MEDIUM_CD","perc.diff","sum_an","sum_cat")])
         } else {
-                plotTable[plotTable$SITE_NO %in% input$siteSel_cb]
+                unique(plotTable[plotTable$SITE_NO %in% input$siteSel_cb,
+                                 c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","MEDIUM_CD","perc.diff","sum_an","sum_cat")])
         }
 })
 
@@ -18,8 +19,15 @@ output$qwcbPlot <- renderPlot({
         validate(need(!is.null(input$siteSel_cb),
                       "No site selected"))
         
+        if(input$siteSel_cb == "All")
+        {
+                sites <- unique(qw.data$PlotTable$SITE_NO)
+        } else {
+                sites <- as.character(input$siteSel_cb)
+        }
+        
         qwcbPlot(qw.data = qw.data,
-                 site.selection = as.character(input$siteSel_cb),
+                 site.selection = sites,
                  facet = input$facetSel_cb,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  show.smooth = FALSE,
@@ -27,13 +35,21 @@ output$qwcbPlot <- renderPlot({
                  labelDQI = input$labelDQI_cb,
                  printPlot = FALSE)
         
- 
+        
 })
 
 output$tableOut <- renderPrint(input$wideDataTable_rows_selected)
 
 output$qwcbPlot_zoom <- renderPlot({
         validate(need(!is.null(ranges_cb$x), "Select area in upper plot to zoom"))
+        
+        if(input$siteSel_cb == "All")
+        {
+                sites <- unique(qw.data$PlotTable$SITE_NO)
+        } else {
+                sites <- as.character(input$siteSel_cb)
+        }
+        
         qwcbPlot(qw.data = qw.data,
                  site.selection = as.character(input$siteSel_cb),
                  facet = input$facetSel_cb,
@@ -50,14 +66,6 @@ output$qwcbPlot_zoom <- renderPlot({
 ###This does the plotting interactions###
 #########################################
 
-###These are the values to subset the data by for dataTable ouput
-dataSelections_cb <- reactiveValues(siteSel = NULL, parmSel = NULL)
-
-##################################################
-###CHANGE these to the respective sidebar element
-observe({
-        dataSelections_cb$siteSel <- input$siteSel_cb
-})
 ##################################################
 ##################################################
 ###CHANGE these to the respective plot variables
@@ -83,8 +91,7 @@ observe({
 ###This outputs the data tables for clicked and brushed points
 
 output$cb_clickinfo <- DT::renderDataTable({
-        DT::datatable(nearPoints(df=unique(subset(plotTable[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","MEDIUM_CD","perc.diff","sum_an","sum_cat")]
-                                               ,SITE_NO %in% dataSelections_cb$siteSel)),
+        DT::datatable(nearPoints(df=selData_cb(),
                                  coordinfo = input$plot_click_cb,
                                  xvar=xvar_cb,
                                  yvar=yvar_cb),
@@ -95,8 +102,7 @@ output$cb_clickinfo <- DT::renderDataTable({
 
 
 output$cb_brushinfo <- DT::renderDataTable({
-        DT::datatable(brushedPoints(df=unique(subset(plotTable[c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","MEDIUM_CD","perc.diff","sum_an","sum_cat")]
-                                                     ,SITE_NO %in% dataSelections_cb$siteSel)),
+        DT::datatable(brushedPoints(df=selData_cb(),
                                     brush=input$plot_brush_cb,
                                     xvar=xvar_cb,
                                     yvar=yvar_cb),
@@ -113,87 +119,29 @@ output$cb_brushinfo <- DT::renderDataTable({
 
 output$cb_hoverinfo <- renderPrint({
         
-        cat("Record #:",unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_cb$siteSel),
-                                          coordinfo = input$plot_hover,
-                                          xvar=xvar_cb,
-                                          yvar=yvar_cb)$RECORD_NO),
+        hoverTable <- nearPoints(df=selData_cb(),
+                                 coordinfo = input$plot_hover,
+                                 xvar=xvar_seasonal,
+                                 yvar=yvar_seasonal)
+        
+        cat("Record #:",unique(hoverTable$RECORD_NO),
             "\n"
         );
         
-        cat("Site #:",unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_cb$siteSel),
-                                        coordinfo = input$plot_hover,
-                                        xvar=xvar_cb,
-                                        yvar=yvar_cb)$SITE_NO),
+        cat("Site #:",unique(hoverTable$SITE_NO),
             "\n");
         
-        cat("Station:",unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_cb$siteSel),
-                                         coordinfo = input$plot_hover,
-                                         xvar=xvar_cb,
-                                         yvar=yvar_cb)$STATION_NM),
+        cat("Station:",unique(hoverTable$STATION_NM),
             "\n");
-        cat("Date/time:",format(unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_cb$siteSel),
-                                           coordinfo = input$plot_hover,
-                                           xvar=xvar_cb,
-                                           yvar=yvar_cb)$SAMPLE_START_DT,"%Y-%m-%d %H:%M")),
+        cat("Date/time:",format(hoverTable$SAMPLE_START_DT,"%Y-%m-%d %H:%M"),
             "\n");
         cat("Chemical flags:",
-            names(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_cb$siteSel),
-                                                                              coordinfo = input$plot_hover,
-                                                                              xvar=xvar_cb,
-                                                                              yvar=yvar_cb)$RECORD_NO))[7:11])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_cb$siteSel),
-                                                                                                                                                                                              coordinfo = input$plot_hover,
-                                                                                                                                                                                              xvar=xvar_cb,
-                                                                                                                                                                                              yvar=yvar_cb)$RECORD_NO))[7:11], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$chemFlagTable,RECORD_NO == unique(hoverTable$RECORD_NO))[7:11])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(hoverTable$RECORD_NO))[7:11], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         cat("Pesticide flags:",
-            names(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_cb$siteSel),
-                                                                              coordinfo = input$plot_hover,
-                                                                              xvar=xvar_cb,
-                                                                              yvar=yvar_cb)$RECORD_NO))[11:12])[which(sapply(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections_cb$siteSel),
-                                                                                                                                                                                               coordinfo = input$plot_hover,
-                                                                                                                                                                                               xvar=xvar_cb,
-                                                                                                                                                                                               yvar=yvar_cb)$RECORD_NO))[11:12], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$pestFlagTable,RECORD_NO == unique(hoverTable$RECORD_NO))[11:12])[which(sapply(subset(reports$pestFlagTable,RECORD_NO == unique(hoverTable$RECORD_NO))[11:12], function(x)all(is.na(x))) == FALSE)],
             "\n");
-        
-
-        
-        
-        
 })
 
-###This creates a new entry in the marked record table
-observeEvent(input$cb_addRecord, {
-        try({
-                newEntry <- data.frame(RECORD_NO = input$cb_flaggedRecord,
-                                       SITE_NO = unique(plotTable$SITE_NO[which(plotTable$RECORD_NO == 
-                                                                                                input$cb_flaggedRecord)]
-                                       ),
-                                       STATION_NM = unique(plotTable$STATION_NM[which(plotTable$RECORD_NO == 
-                                                                                                      input$cb_flaggedRecord)]
-                                       ),
-                                       SAMPLE_START_DT = as.character(unique(plotTable$SAMPLE_START_DT[which(plotTable$RECORD_NO == 
-                                                                                                                             input$cb_flaggedRecord)])
-                                       ),
-                                       MEDIUM_CD = unique(plotTable$MEDIUM_CD[which(plotTable$RECORD_NO == 
-                                                                                                    input$cb_flaggedRecord)]
-                                       ),
-                                       DQI_CD = NA,
-                                       PARM_CD = NA,
-                                       PARM_NM = NA,
-                                       Where_Flagged = "charge balance",
-                                       Comment = input$cb_flaggedComment
-                )
-                markedRecords <<- rbind(markedRecords,newEntry)
-                
-                updateTextInput(session, 
-                                "cb_flaggedRecord",
-                                value = " "
-                )
-                
-                updateTextInput(session, 
-                                "cb_flaggedComment",
-                                value = " "
-                )
-        })
-})
+

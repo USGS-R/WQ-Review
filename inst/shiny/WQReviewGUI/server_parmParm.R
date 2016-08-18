@@ -1,3 +1,29 @@
+###This subsets the qw.data dataframe to selected sites and results
+
+selData_parmparm <- reactive({
+        
+        if(input$siteSel_parmParm == "All")
+        {
+                xpp.plot.data <- plotTable[plotTable$PARM_CD == input$parmSel_parmParmX,]
+                ypp.plot.data <- plotTable[plotTable$PARM_CD == input$parmSel_parmParmY,]
+        } else {
+                xpp.plot.data <- plotTable[plotTable$SITE_NO %in% input$siteSel_parmParm &
+                                                   plotTable$PARM_CD == input$parmSel_parmParmX,]
+                ypp.plot.data <- plotTable[plotTable$SITE_NO %in% input$siteSel_parmParm &
+                                                   plotTable$PARM_CD == input$parmSel_parmParmY,]
+        }
+        pp.plot.data <- dplyr::left_join(xpp.plot.data[,c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA","RESULT_MD")], 
+                                          ypp.plot.data[,c("RECORD_NO","RESULT_VA","RESULT_MD")],by="RECORD_NO")
+        names(pp.plot.data) <- c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA_X","RESULT_MD_X","RESULT_VA_Y","RESULT_MD_Y")
+        
+        return(pp.plot.data)
+})
+        
+        
+        
+
+
+
 #######################################
 ###This does the parameter-parameter plotting###
 #######################################
@@ -6,27 +32,37 @@
 output$qwparmParmPlot <- renderPlot({
         validate(need(!is.null(input$siteSel_parmParm) & !is.null(input$parmSel_parmParmX) & !is.null(input$parmSel_parmParmY),
                       "No site or parameter selected"))
+        
+        if(input$siteSel_parmParm == "All")
+        {
+                sites <- unique(qw.data$PlotTable$SITE_NO)
+        } else {
+                sites <- as.character(input$siteSel_parmParm)
+        }
+        
+        if("Log10X" %in% input$axes_parmParm)
+        {
+                log.scaleX <- TRUE
+        } else(log.scaleX <- FALSE)
+        if("Log10Y" %in% input$axes_parmParm)
+        {
+                log.scaleY <- TRUE 
+        } else(log.scaleY <- FALSE)
+        
         qwparmParmPlot(qw.data = qw.data,
-                       site.selection = as.character(input$siteSel_parmParm),
+                       site.selection = sites,
                        xparm = as.character(input$parmSel_parmParmX),
                        yparm = as.character(input$parmSel_parmParmY),
                        facet = input$facetSel_parmParm,
                        new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                        show.lm = input$fit_parmParm,
                        labelDQI = input$labelDQI_parmParm,
-                       if("Log10X" %in% input$axes_parmParm)
-                       {
-                               log.scaleX = TRUE
-                       } else(log.scaleX = FALSE),
-                       if("Log10Y" %in% input$axes_parmParm)
-                       {
-                              log.scaleY = TRUE 
-                       } else(log.scaleY = FALSE),
+                       log.scaleY = log.scaleY,
+                       log.scaleX = log.scaleX,
                        highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                             reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmX) |
                                                                                             reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmY))]),
                        printPlot = FALSE
-                       
                        
                        
         ) 
@@ -36,22 +72,33 @@ output$qwparmParmPlot <- renderPlot({
 output$qwparmParmPlot_zoom <- renderPlot({
         validate(need(!is.null(ranges_parmParm$x), "Select area in upper plot to zoom"))
         
+        if(input$siteSel_parmParm == "All")
+        {
+                sites <- unique(qw.data$PlotTable$SITE_NO)
+        } else {
+                sites <- as.character(input$siteSel_parmParm)
+        }
+        
+        
+        if("Log10X" %in% input$axes_parmParm)
+        {
+                log.scaleX <- TRUE
+        } else(log.scaleX <- FALSE)
+        if("Log10Y" %in% input$axes_parmParm)
+        {
+                log.scaleY <- TRUE 
+        } else(log.scaleY <- FALSE)
+        
         qwparmParmPlot(qw.data = qw.data,
-                       site.selection = as.character(input$siteSel_parmParm),
+                       site.selection = sites,
                        xparm = as.character(input$parmSel_parmParmX),
                        yparm = as.character(input$parmSel_parmParmY),
                        facet = input$facetSel_parmParm,
                        new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                        show.lm = input$fit_parmParm,
                        labelDQI = input$labelDQI_parmParm,
-                       if("Log10X" %in% input$axes_parmParm)
-                       {
-                               log.scaleX = TRUE
-                       } else(log.scaleX = FALSE),
-                       if("Log10Y" %in% input$axes_parmParm)
-                       {
-                               log.scaleY = TRUE 
-                       } else(log.scaleY = FALSE),
+                       log.scaleY = log.scaleY,
+                       log.scaleX = log.scaleX,
                        highlightrecords = c(reports$chemFlagTable$RECORD_NO[which(!is.na(reports$chemFlagTable$BadCB_30.21))],
                                             reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmX) |
                                                                                             reports$resultFlagTable$PARM_CD == as.character(input$parmSel_parmParmY))]),
@@ -69,34 +116,6 @@ output$qwparmParmPlot_zoom <- renderPlot({
 #########################################
 ###This does the plotting interactions###
 #########################################
-
-###These are the values to subset the data by for dataTable ouput
-dataSelections_parmParm <- reactiveValues(siteSel = NULL, parmSelX = NULL,parmSelY=NULL)
-
-##################################################
-###CHANGE these to the respective sidebar element
-observe({
-        dataSelections_parmParm$siteSel <- input$siteSel_parmParm
-        dataSelections_parmParm$parmSelX <- input$parmSel_parmParmX
-        dataSelections_parmParm$parmSelY <- input$parmSel_parmParmY
-})
-
-observe({
-        if(!is.null(qw.data))
-        {
-        ##Have to get different data table styructure that is the same as used in the plot function
-        xpp.plot.data <- 
-                subset(plotTable,SITE_NO %in% dataSelections_parmParm$siteSel & PARM_CD == dataSelections_parmParm$parmSelX)
-        
-        ypp.plot.data <- 
-                subset(plotTable,SITE_NO %in% dataSelections_parmParm$siteSel & PARM_CD == dataSelections_parmParm$parmSelY)
-        #Join x and y data
-        pp.plot.data <<- dplyr::left_join(xpp.plot.data[,c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA","RESULT_MD")], 
-                              ypp.plot.data[,c("RECORD_NO","RESULT_VA","RESULT_MD")],by="RECORD_NO")
-        names(pp.plot.data) <<- c("RECORD_NO","SITE_NO","STATION_NM","MEDIUM_CD","SAMPLE_START_DT","RESULT_VA_X","RESULT_MD_X","RESULT_VA_Y","RESULT_MD_Y")
-        }
-})
-
 
 ##################################################
 ##################################################
@@ -126,26 +145,29 @@ observe({
 
 output$parmParm_clickinfo <- DT::renderDataTable({
         # With base graphics, need to tell it what the x and y variables are.
-        DT::datatable(nearPoints(df=na.omit(pp.plot.data),
+        DT::datatable(nearPoints(df=na.omit(selData_parmparm()),
                                  coordinfo = input$plot_click_parmParm,
                                  xvar=xvar_parmParm,
                                  yvar=yvar_parmParm),
                       
                       options=list(scrollX=TRUE)
         )
+        
         # nearPoints() also works with hover and dblclick events
 })
 
 
 output$parmParm_brushinfo <- DT::renderDataTable({
+        
         # With base graphics, need to tell it what the x and y variables are.
-        DT::datatable(brushedPoints(df=na.omit(pp.plot.data),
+        DT::datatable(brushedPoints(df=na.omit(selData_parmparm()),
                                     brush=input$plot_brush_parmParm,
                                     xvar=xvar_parmParm,
                                     yvar=yvar_parmParm),
                       
                       options=list(scrollX=TRUE)
         )
+        
         # nearPoints() also works with hover and dblclick events
 })
 
@@ -156,106 +178,36 @@ output$parmParm_brushinfo <- DT::renderDataTable({
 ###It then returns the column names of columns that have flags in them.
 
 output$parmParm_hoverinfo <- renderPrint({
-        
-        cat("Record #:",unique(nearPoints(df=na.omit(pp.plot.data),
-                                                     coordinfo = input$plot_hover,
-                                                     xvar=xvar_parmParm,
-                                                     yvar=yvar_parmParm)$RECORD_NO),
+                hoverTable <- nearPoints(df=selData_parmparm(),
+                                         coordinfo = input$plot_hover,
+                                         xvar=xvar_parmParm,
+                                         yvar=yvar_parmParm)
+                
+        cat("Record #:",unique(hoverTable$RECORD_NO),
             "\n"
         );
         
-        cat("Site #:",unique(nearPoints(df=na.omit(pp.plot.data),
-                                                   coordinfo = input$plot_hover,
-                                                   xvar=xvar_parmParm,
-                                                   yvar=yvar_parmParm)$SITE_NO),
+        cat("Site #:",unique(hoverTable$SITE_NO),
             "\n");
         
-        cat("Station:",unique(nearPoints(df=na.omit(pp.plot.data),
-                                                    coordinfo = input$plot_hover,
-                                                    xvar=xvar_parmParm,
-                                                    yvar=yvar_parmParm)$STATION_NM),
+        cat("Station:",unique(hoverTable$STATION_NM),
             "\n");
-        cat("Date/time:",format(unique(nearPoints(df=na.omit(pp.plot.data),
-                                                  coordinfo = input$plot_hover,
-                                                  xvar=xvar_parmParm,
-                                                  yvar=yvar_parmParm)$SAMPLE_START_DT),"%Y-%m-%d %H:%M"),
+        cat("Date/time:",format(unique(hoverTable$SAMPLE_START_DT),"%Y-%m-%d %H:%M"),
             "\n");
         cat("Chemical flags:",
-            names(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
-                                                                              coordinfo = input$plot_hover,
-                                                                              xvar=xvar_parmParm,
-                                                                              yvar=yvar_parmParm)$RECORD_NO))[7:11])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
-                                                                                                                                                                                              coordinfo = input$plot_hover,
-                                                                                                                                                                                              xvar=xvar_parmParm,
-                                                                                                                                                                                              yvar=yvar_parmParm)$RECORD_NO))[7:11], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$chemFlagTable,RECORD_NO == unique(hoverTable$RECORD_NO))[7:11])[which(sapply(subset(reports$chemFlagTable,RECORD_NO == unique(hoverTable$RECORD_NO))[7:11], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         cat("Pesticide flags:",
-            names(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
-                                                                              coordinfo = input$plot_hover,
-                                                                              xvar=xvar_parmParm,
-                                                                              yvar=yvar_parmParm)$RECORD_NO))[11:12])[which(sapply(subset(reports$pestFlagTable,RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
-                                                                                                                                                                                               coordinfo = input$plot_hover,
-                                                                                                                                                                                               xvar=xvar_parmParm,
-                                                                                                                                                                                               yvar=yvar_parmParm)$RECORD_NO))[11:12], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$pestFlagTable,RECORD_NO == unique(hoverTable$RECORD_NO))[11:12])[which(sapply(subset(reports$pestFlagTable,RECORD_NO == unique(hoverTable$RECORD_NO))[11:12], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         cat("Result flags:",
-            names(subset(reports$resultFlagTable, RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
-                                                                                  coordinfo = input$plot_hover,
-                                                                                  xvar=xvar_parmParm,
-                                                                                  yvar=yvar_parmParm)$RECORD_NO) & (PARM_CD == dataSelections_parmParm$parmSelX | PARM_CD == dataSelections_parmParm$parmSelY))[14:17])[which(sapply(subset(reports$resultFlagTable, RECORD_NO == unique(nearPoints(df=na.omit(pp.plot.data),
-                                                                                                                                                                                                                                                                                                  coordinfo = input$plot_hover,
-                                                                                                                                                                                                                                                                                                  xvar=xvar_parmParm,
-                                                                                                                                                                                                                                                                                                  yvar=yvar_parmParm)$RECORD_NO) & (PARM_CD == dataSelections_parmParm$parmSelX | PARM_CD == dataSelections_parmParm$parmSelY))[14:17], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$resultFlagTable, RECORD_NO == unique(hoverTable$RECORD_NO) & (PARM_CD == dataSelections_parmParm$parmSelX | PARM_CD == dataSelections_parmParm$parmSelY))[14:17])[which(sapply(subset(reports$resultFlagTable, RECORD_NO == unique(hoverTable$RECORD_NO) & (PARM_CD == dataSelections_parmParm$parmSelX | PARM_CD == dataSelections_parmParm$parmSelY))[14:17], function(x)all(is.na(x))) == FALSE)],
             "\n");
-        
         
         
 })
 
-###This creates a new entry in the marked record table
-observeEvent(input$parmParm_addRecord, {
-        try({
-                newEntry <- data.frame(RECORD_NO = input$parmParm_flaggedRecord,
-                                       SITE_NO = unique(plotTable$SITE_NO[which(plotTable$RECORD_NO == 
-                                                                                                input$parmParm_flaggedRecord)]
-                                       ),
-                                       STATION_NM = unique(plotTable$STATION_NM[which(plotTable$RECORD_NO == 
-                                                                                                      input$parmParm_flaggedRecord)]
-                                       ),
-                                       SAMPLE_START_DT = as.character(unique(plotTable$SAMPLE_START_DT[which(plotTable$RECORD_NO == 
-                                                                                                                             input$parmParm_flaggedRecord)])
-                                       ),
-                                       MEDIUM_CD = unique(plotTable$MEDIUM_CD[which(plotTable$RECORD_NO == 
-                                                                                                    input$parmParm_flaggedRecord)]
-                                       ),
-                                       PARM_CD = as.character(input$parmSel_parmParm),
-                                       DQI_CD_Current = unique(plotTable$DQI_CD[which(plotTable$RECORD_NO == 
-                                                                                                      input$parmParm_flaggedRecord &
-                                                                                                      plotTable$PARM_CD == 
-                                                                                                      as.character(input$parmSel_parmParm))]
-                                       ),
-                                       DQI_CD_New = input$parmParm_dqiCode,
-                                       PARM_NM = unique(plotTable$PARM_NM[which(plotTable$PARM_CD == 
-                                                                                                as.character(input$parmSel_parmParm))]
-                                       ),
-                                       Where_Flagged = "parmParm",
-                                       Status = input$parmParm_flaggedStatus,
-                                       Comment = input$parmParm_flaggedComment
-                )
-                markedRecords <<- rbind(markedRecords,newEntry)
-                
-                updateTextInput(session, 
-                                "parmParm_flaggedRecord",
-                                value = " "
-                )
-                
-                updateTextInput(session, 
-                                "parmParm_flaggedComment",
-                                value = " "
-                )
-                
-                
-        })
-})
+
+

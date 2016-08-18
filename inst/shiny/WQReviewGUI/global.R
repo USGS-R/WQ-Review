@@ -40,7 +40,12 @@ names(qual.shapes) <- c("Sample","<",">","E")
 
 
 ###Function for a new entry into the marked records table
-getEntry <- function(plotTable,flaggedRecord,parmSel)
+getEntry <- function(plotTable,
+                     flaggedRecord,
+                     whereFlagged,
+                     flaggedStatus,
+                     flaggedComment,
+                     parmSel = NULL)
 {
                      
                      data.frame(RECORD_NO = flaggedRecord,
@@ -66,9 +71,9 @@ getEntry <- function(plotTable,flaggedRecord,parmSel)
                        PARM_NM = unique(plotTable$PARM_NM[which(plotTable$PARM_CD == 
                                                                                 as.character(parmSel))]
                        ),
-                       Where_Flagged = "seasonal",
-                       Status = input$seasonal_flaggedStatus,
-                       Comment = input$seasonal_flaggedComment)
+                       Where_Flagged = whereFlagged,
+                       Status = flaggedStatus,
+                       Comment = flaggedComment )
 }
 
 
