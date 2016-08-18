@@ -165,10 +165,7 @@ output$seasonal_brushinfo <- DT::renderDataTable({
 ###It then returns the column names of columns that have flags in them.
 
 output$seasonal_hoverinfo <- renderPrint({
-        if(is.null(selData_seasonal()))
-        {
-                return()
-        } else {
+
                 hoverTable <- nearPoints(df=selData_seasonal(),
                                          coordinfo = input$plot_hover,
                                          xvar=xvar_seasonal,
@@ -198,7 +195,7 @@ output$seasonal_hoverinfo <- renderPrint({
                 cat("Result flags:",
                     names(subset(reports$resultFlagTable,PARM_CD == input$parmSel_seasonal & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == input$parmSel_seasonal & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
                     "\n");
-        }
+        
 })
 
 ###This creates a new entry in the marked record table
