@@ -183,7 +183,7 @@ output$timeseries_hoverinfo <- renderPrint({
             "\n");
         
         cat("Result flags:",
-            names(subset(reports$resultFlagTable,PARM_CD == input$parmSel_seasonal & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == dataSelections_timeseries$parmSel & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$resultFlagTable,PARM_CD == input$parmSel_seasonal & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == input$parmSel_TS & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         
