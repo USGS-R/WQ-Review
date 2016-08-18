@@ -130,8 +130,8 @@ output$blank_hoverinfo <- renderPrint({
         
         hoverTable <- nearPoints(df=selData_blank(),
                                  coordinfo = input$plot_hover,
-                                 xvar=xvar_seasonal,
-                                 yvar=yvar_seasonal)
+                                 xvar=xvar_blank,
+                                 yvar=yvar_blank)
         
         cat("Record #:",unique(hoverTable$RECORD_NO),
             "\n"

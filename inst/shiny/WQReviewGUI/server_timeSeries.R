@@ -159,8 +159,8 @@ output$timeseries_hoverinfo <- renderPrint({
         
         hoverTable <- nearPoints(df=selData_TS(),
                                  coordinfo = input$plot_hover,
-                                 xvar=xvar_seasonal,
-                                 yvar=yvar_seasonal)
+                                 xvar=xvar_timeseries,
+                                 yvar=yvar_timeseries)
         
         
         cat("Record #:",unique(hoverTable$RECORD_NO),
@@ -183,7 +183,7 @@ output$timeseries_hoverinfo <- renderPrint({
             "\n");
         
         cat("Result flags:",
-            names(subset(reports$resultFlagTable,PARM_CD == input$parmSel_seasonal & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == input$parmSel_TS & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$resultFlagTable,PARM_CD == input$parmSel_TS & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == input$parmSel_TS & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         

@@ -40,6 +40,7 @@ tabItem(tabName = "blankPlot",
                                 ###This displays the plot interaction output
                                 
                                 box(
+                                        actionButton(inputId = "blank_popNotes",label="Add to notes"),
                                         DT::dataTableOutput("blank_clickinfo"),
                                         DT::dataTableOutput("blank_brushinfo"),
                                         ###Box options

@@ -51,7 +51,7 @@ output$qwcbPlot_zoom <- renderPlot({
         }
         
         qwcbPlot(qw.data = qw.data,
-                 site.selection = as.character(input$siteSel_cb),
+                 site.selection = sites,
                  facet = input$facetSel_cb,
                  new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                  show.smooth = FALSE,
@@ -121,8 +121,8 @@ output$cb_hoverinfo <- renderPrint({
         
         hoverTable <- nearPoints(df=selData_cb(),
                                  coordinfo = input$plot_hover,
-                                 xvar=xvar_seasonal,
-                                 yvar=yvar_seasonal)
+                                 xvar=xvar_cb,
+                                 yvar=yvar_cb)
         
         cat("Record #:",unique(hoverTable$RECORD_NO),
             "\n"
