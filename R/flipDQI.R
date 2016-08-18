@@ -32,7 +32,7 @@
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarize
 #' @import RODBC 
-#' @export
+
 #' 
 flipDQI <- function(STAIDS,
                     records,

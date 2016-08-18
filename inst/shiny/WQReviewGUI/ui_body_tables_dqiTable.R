@@ -11,7 +11,7 @@ tabItem(tabName = "dqiTable",
                 #                 ###sidebar options
                 #                 width=3),
                 #         mainPanel(
-                                actionButton(inputId = "dqiTable_popNotes",label="Add to notes and remove"),
+                                #actionButton(inputId = "dqiTable_popNotes",label="Add to notes and remove"),
                                 DT::dataTableOutput("dqiTable")
                         #)
                 #)

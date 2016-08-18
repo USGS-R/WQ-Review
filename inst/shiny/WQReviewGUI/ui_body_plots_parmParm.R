@@ -8,7 +8,7 @@ tabItem(tabName = "parmParmPlot",
                 pageWithSidebar(
                         headerPanel("Parameter vs. Paramater Plot"),
                         sidebarPanel(
-                                dateInput("newThreshold_parmParm", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
+                                #dateInput("newThreshold_parmParm", "New samples threshold",max=Sys.Date(),value=Sys.Date()-30),
                                 selectInput("siteSel_parmParm","Station",choices="",multiple=TRUE),
                                 selectInput("parmSel_parmParmX","X-Parameter",choices="",multiple=TRUE),
                                 selectInput("parmSel_parmParmY","Y-Parameter",choices="",multiple=TRUE),

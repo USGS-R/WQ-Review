@@ -2,8 +2,8 @@
 ###This does the spatial plotting###
 #######################################
 observeEvent(input$getMap, {
-        siteMap <<- get_map(location = c(lon = as.numeric(median(qw.data$PlotTable$DEC_LONG_VA[!duplicated(qw.data$PlotTable$DEC_LONG_VA)],na.rm=TRUE)), 
-                                     lat = as.numeric(median(qw.data$PlotTable$DEC_LAT_VA[!duplicated(qw.data$PlotTable$DEC_LAT_VA)],na.rm=TRUE))), 
+        siteMap <<- get_map(location = c(lon = as.numeric(median(plotTable$DEC_LONG_VA[!duplicated(plotTable$DEC_LONG_VA)],na.rm=TRUE)), 
+                                     lat = as.numeric(median(plotTable$DEC_LAT_VA[!duplicated(plotTable$DEC_LAT_VA)],na.rm=TRUE))), 
                         zoom = "auto",
                         maptype = "terrain", 
                         scale = "auto")
@@ -65,7 +65,7 @@ observe({
 ###This outputs the data tables for clicked and brushed points
 
 output$map_clickinfo <- DT::renderDataTable({
-        DT::datatable(nearPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel & MEDIUM_CD %in% c("OAQ","OA")),
+        DT::datatable(nearPoints(df=subset(plotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel & MEDIUM_CD %in% c("OAQ","OA")),
                                  coordinfo = input$plot_click,
                                  xvar=xvar_map,
                                  yvar=yvar_map),
@@ -76,7 +76,7 @@ output$map_clickinfo <- DT::renderDataTable({
 
 
 output$map_brushinfo <- DT::renderDataTable({
-        DT::datatable(brushedPoints(df=subset(qw.data$PlotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel & MEDIUM_CD %in% c("OAQ","OA")),
+        DT::datatable(brushedPoints(df=subset(plotTable,SITE_NO %in% dataSelections$siteSel & PARM_CD %in% dataSelections$parmSel & MEDIUM_CD %in% c("OAQ","OA")),
                                     brush=input$plot_brush,
                                     xvar=xvar_map,
                                     yvar=yvar_map),

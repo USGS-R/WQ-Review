@@ -8,7 +8,7 @@ observeEvent(input$sidebar_addRecord, {
                 newEntry$Comment <- rep(input$sidebar_flaggedComment,nrow(newEntry))
                 
                 ###Join to sample meta data
-                newEntry <- dplyr::left_join(newEntry,unique(qw.data$PlotTable[c("RECORD_NO",
+                newEntry <- dplyr::left_join(newEntry,unique(plotTable[c("RECORD_NO",
                                                                                  "PARM_CD",
                                                                                  "PARM_NM",
                                                                                  "SITE_NO",

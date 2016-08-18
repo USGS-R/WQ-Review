@@ -141,7 +141,7 @@ readNWISodbc <- function(DSN,
   Query <- paste("select * from ", DSN, ".SITEFILE_",env.db," where site_no IN (", STAID.list, ")",sep="")
   SiteFile <- RODBC::sqlQuery(Chan1, Query, as.is=T)
   
-  if(length(grep("[RODBC]",SiteFile)) > 0)
+  if(length(grep("table or view does not exist",SiteFile)) > 0)
   {
           stop("Incorrect database number entered for env.db")
   }
@@ -358,7 +358,7 @@ readNWISodbc <- function(DSN,
   Query <- paste("select * from ", DSN, ".SITEFILE_",qa.db," where site_no IN (", STAID.list, ")", sep="")
   QASiteFile <- RODBC::sqlQuery(Chan1, Query, as.is=T)
   
-  if(length(grep("[RODBC]",SiteFile)) > 0)
+  if(length(grep("table or view does not exist",QASiteFile)) > 0)
   {
           stop("Incorrect database number entered for qa.db")
   }
