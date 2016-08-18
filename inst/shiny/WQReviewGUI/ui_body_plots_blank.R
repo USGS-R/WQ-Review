@@ -14,11 +14,6 @@ tabItem(tabName = "blankPlot",
                                 selectInput("parmSel_blank","Parameter",choices="",multiple=FALSE),
                                 selectInput("facetSel_blank","Multi-site options",choices=c("Multisite","Facet"),multiple=FALSE),
                                 verbatimTextOutput("blank_hoverinfo"),
-                                
-                                h3("Review comments"),
-                                textInput("blank_flaggedRecord",label="Record #"),
-                                textInput("blank_flaggedComment",label = "Comment"),
-                                actionButton(inputId = "blank_addRecord",label="Add record"),
                                
                                  ###Sidebar options
                                 width=3
@@ -45,6 +40,7 @@ tabItem(tabName = "blankPlot",
                                 ###This displays the plot interaction output
                                 
                                 box(
+                                        actionButton(inputId = "blank_popNotes",label="Add to notes"),
                                         DT::dataTableOutput("blank_clickinfo"),
                                         DT::dataTableOutput("blank_brushinfo"),
                                         ###Box options

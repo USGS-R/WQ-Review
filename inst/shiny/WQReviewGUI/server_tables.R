@@ -110,11 +110,11 @@ try({
                 {
                         if(as.character(input$siteSel_wideDataTable == "All"))
                         {
-                                subset(qw.data$DataTable,as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
+                                subset(dataTable,as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
                                                as.Date(SAMPLE_START_DT) <= input$endDate_wideDataTable)
                         } else 
                         {
-                                subset(qw.data$DataTable, SITE_NO %in% as.character(input$siteSel_wideDataTable) &
+                                subset(dataTable, SITE_NO %in% as.character(input$siteSel_wideDataTable) &
                                                as.Date(SAMPLE_START_DT) >= input$startDate_wideDataTable &
                                                as.Date(SAMPLE_START_DT) <= input$endDate_wideDataTable)
                         }
@@ -132,7 +132,7 @@ try({
 output$wideDataTableOut <- downloadHandler(
         filename = function() {"wideDataTableOut"},
         content = function(file) {
-                write.table(qw.data$DataTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                write.table(dataTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
                             file)
         }
 )
@@ -148,11 +148,11 @@ longDataTableReactive <<- reactive({
         {
                 if(as.character(input$siteSel_longDataTable == "All"))
                 {
-                        subset(qw.data$PlotTable, 
+                        subset(plotTable, 
                                as.Date(SAMPLE_START_DT) >= input$startDate_longDataTable &
                                        as.Date(SAMPLE_START_DT) <= input$endDate_longDataTable)
                 } else {
-                        subset(qw.data$PlotTable, SITE_NO %in% as.character(input$siteSel_longDataTable) &
+                        subset(plotTable, SITE_NO %in% as.character(input$siteSel_longDataTable) &
                                        as.Date(SAMPLE_START_DT) >= input$startDate_longDataTable &
                                        as.Date(SAMPLE_START_DT) <= input$endDate_longDataTable)
                 }
@@ -176,7 +176,7 @@ output$longDataTable <- DT::renderDataTable(
 output$longDataTableOut <- downloadHandler(
         filename = function() {"longDataTableOut"},
         content = function(file) {
-                write.table(qw.data$PlotTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
+                write.table(plotTable,sep="\t", col.names = T, row.names = F,na="", quote = FALSE,
                             file)
         }
 )
@@ -447,7 +447,7 @@ output$qwSampleOut <- downloadHandler(
 # output$needsReviewTable <- DT::renderDataTable(
 #        formatStyle(
 #                DT::datatable(
-#                        qw.data$PlotTable[qw.data$PlotTable$DQI_CD %in% c("I","S","P"),c("SITE_NO","PARM_CD","DQI_CD","RECORD_NO")],
+#                        plotTable[plotTable$DQI_CD %in% c("I","S","P"),c("SITE_NO","PARM_CD","DQI_CD","RECORD_NO")],
 #                        ##extensions = list(FixedColumns = list(leftColumns = 1)),
 #                        rownames= FALSE,
 #                        options = list(
@@ -461,7 +461,7 @@ output$qwSampleOut <- downloadHandler(
 ###############################
 ###DQI Flip table
 ###############################
-dqiTable <<- qw.data$PlotTable[qw.data$PlotTable$DQI_CD %in% c("I","S","P"),
+dqiTable <<- plotTable[plotTable$DQI_CD %in% c("I","S","P"),
                                c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","MEDIUM_CD","PARM_CD","PARM_NM","DQI_CD")]
 dqiTable <<- transmute(dqiTable,
                        #RECORD_NO = RECORD_NO,
