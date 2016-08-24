@@ -142,10 +142,7 @@ observeEvent(input$seasonal_popNotes, {
 ###This outputs the data tables for brushed points
 
 output$seasonal_brushinfo <- DT::renderDataTable({
-        if(is.null(selData_seasonal()))
-        {
-                return()
-        } else {
+        
         # With base graphics, need to tell it what the x and y variables are.
         DT::datatable(brushedPoints(df=selData_seasonal(),
                                     brush=input$plot_brush_seasonal,
@@ -154,7 +151,7 @@ output$seasonal_brushinfo <- DT::renderDataTable({
                       
                       options=list(scrollX=TRUE)
         )
-        }
+        
         # nearPoints() also works with hover and dblclick events
 })
 

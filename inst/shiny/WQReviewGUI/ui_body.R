@@ -1,5 +1,8 @@
 dashboardBody(
-        
+        tags$style(type="text/css",
+                   ".shiny-output-error { visibility: hidden; }",
+                   ".shiny-output-error:before { visibility: hidden; }"
+        ),
         tabItems(
                 
         source("ui_body_siteSelection.r",local=TRUE)$value,
