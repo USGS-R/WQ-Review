@@ -18,12 +18,14 @@
 historicCheck <- function(qw.data, returnAll = FALSE)
 {
         #subset to in review and approved data, removing information pcodes
-        inReviewData <- subset(qw.data$PlotTable, DQI_CD %in% c("I","S","P") &
-                                       PARM_SEQ_GRP_CD != "INF" &
-                                       MEDIUM_CD %in% c("WS ","WG ", "OA "))
-        approvedData <- subset(qw.data$PlotTable, DQI_CD %in% c("R","O","A") &
-                                       PARM_SEQ_GRP_CD != "INF" &
-                                       MEDIUM_CD %in% c("WS ","WG ", "OA "))
+        inReviewData <- qw.data$PlotTable[is.finite(qw.data$PlotTable$RESULT_VA) &
+                                                  qw.data$PlotTable$DQI_CD %in% c("I","S","P") &
+                                                  qw.data$PlotTable$PARM_SEQ_GRP_CD != "INF" &
+                                                  qw.data$PlotTable$MEDIUM_CD %in% c("WS ","WG ", "OA "),]
+        approvedData <- qw.data$PlotTable[is.finite(qw.data$PlotTable$RESULT_VA) &
+                                                  qw.data$PlotTable$DQI_CD %in% c("R","O","A") &
+                                                  qw.data$PlotTable$PARM_SEQ_GRP_CD != "INF" &
+                                                  qw.data$PlotTable$MEDIUM_CD %in% c("WS ","WG ", "OA "),]
         
         if(nrow(inReviewData) > 0)
         {
@@ -50,7 +52,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                               inReviewData$RESULT_VA > inReviewData$max &
                                                               inReviewData$N > 4]
                         )
-
+                
                 ##Check if new min
                 inReviewData$newMin_30.12 <- NA
                 inReviewData$newMin_30.12[is.finite(inReviewData$min) &
@@ -122,11 +124,12 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                 if(returnAll == FALSE)
                 {
                         #remove NAs from result flags
-                        flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[14]) |
-                                                                              !is.na(flaggedSamples[15]) |
-                                                                              !is.na(flaggedSamples[16]) |
-                                                                              !is.na(flaggedSamples[17])
-                        ),]) 
+                        flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[16]) |
+                                                                              !is.na(flaggedSamples[17]) |
+                                                                              !is.na(flaggedSamples[18]) |
+                                                                              !is.na(flaggedSamples[19]) |
+                                                                                             !is.na(flaggedSamples[20])
+                                                                              ),]) 
                 } else {}
                 
                 return(unique(flaggedSamples))
