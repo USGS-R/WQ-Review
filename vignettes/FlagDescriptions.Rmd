@@ -41,3 +41,5 @@ For each environmental sample, the cation-anion percent difference was be calcul
 2. specific conductance is greater than 100 and less than or equal to 1000 microsiemens/cm, AND percent difference is greater (in absolute value) than +/- 10 percent
 3. specific conductance is greater than 1000 microsiemens/cm, AND percent difference is greater (in absolute value) than +/- 5 percent
 
+#unusualNonDetect
+If more than 95% of the data for a given parameter at a site are detections, then a new non-detect generates a flag.
