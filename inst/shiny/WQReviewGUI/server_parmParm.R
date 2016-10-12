@@ -203,7 +203,7 @@ output$parmParm_hoverinfo <- renderPrint({
             "\n");
         
         cat("Result flags:",
-            names(subset(reports$resultFlagTable, RECORD_NO == unique(hoverTable$RECORD_NO) & (PARM_CD == input$parmSel_parmParmX | PARM_CD == input$parmSel_parmParmY))[14:17])[which(sapply(subset(reports$resultFlagTable, RECORD_NO == unique(hoverTable$RECORD_NO) & (PARM_CD == input$parmSel_parmParmX | PARM_CD == input$parmSel_parmParmY))[14:17], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$resultFlagTable, RECORD_NO == unique(hoverTable$RECORD_NO) & (PARM_CD == input$parmSel_parmParmX | PARM_CD == input$parmSel_parmParmY))[16:20])[which(sapply(subset(reports$resultFlagTable, RECORD_NO == unique(hoverTable$RECORD_NO) & (PARM_CD == input$parmSel_parmParmX | PARM_CD == input$parmSel_parmParmY))[16:20], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         

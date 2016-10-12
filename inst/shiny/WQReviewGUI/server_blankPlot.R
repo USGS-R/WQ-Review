@@ -153,7 +153,7 @@ output$blank_hoverinfo <- renderPrint({
             "\n");
         
         cat("Result flags:",
-            names(subset(reports$resultFlagTable,PARM_CD == input$parmSel_blank & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17])[which(sapply(subset(reports$resultFlagTable,PARM_CD == input$parmSel_blank & RECORD_NO == unique(hoverTable$RECORD_NO))[14:17], function(x)all(is.na(x))) == FALSE)],
+            names(subset(reports$resultFlagTable,PARM_CD == input$parmSel_blank & RECORD_NO == unique(hoverTable$RECORD_NO))[16:20])[which(sapply(subset(reports$resultFlagTable,PARM_CD == input$parmSel_blank & RECORD_NO == unique(hoverTable$RECORD_NO))[16:20], function(x)all(is.na(x))) == FALSE)],
             "\n");
         
         

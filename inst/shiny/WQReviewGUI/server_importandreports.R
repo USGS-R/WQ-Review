@@ -86,7 +86,7 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                 output$errors <- renderPrint("Error with auto sample flagging, please report this on the github issues page")
         })
         
-        ###Generate chem flag summary
+        ###Generate pest flag summary
         tryCatch({
                 reports$pestFlagTable <<- suppressWarnings(pestCheck(qw.data))
         },
