@@ -244,8 +244,8 @@ dataUpload <- function(qwsampletype,
     qwsample$sample.integer <- seq(1:nrow(qwsample))
     qwsample$UID <- paste(qwsample$site.no,qwsample$start.date,qwsample$medium,sep="")
     qwsample$UID <- gsub(" ","",qwsample$UID)
-    #qwsample$sample.id <- NA
-    #qwsample$sidno.party.cd <- NA
+    qwsample$sample.id <- NA
+    qwsample$sidno.party.cd <- NA
 
     
     
