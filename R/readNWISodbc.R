@@ -569,7 +569,7 @@ readNWISodbc <- function(DSN,
       parmNames <- data.frame(PARM_CD = names(DataTable2),stringsAsFactors=FALSE)
       parmNames <- dplyr::left_join(parmNames,unique(Results[c("PARM_CD","PARM_NM")]),by="PARM_CD")
       parmNames$PARM_NM <- make.unique(make.names(parmNames$PARM_NM))
-      names(DataTable2) <- c("RECORD_NO", na.omit(parmNames$PARM_NM))
+      names(DataTable2) <- c("RECORD_NO", parmNames$PARM_NM[2:length(parmNames$PARM_NM)])
       
       #fill in record number meta data (station ID, name, date, time, etc)
       DataTable2 <- dplyr::left_join(DataTable2,Sample_meta, by="RECORD_NO")

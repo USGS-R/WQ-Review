@@ -120,7 +120,7 @@ dataUpload <- function(qwsampletype,
     #get the record numbers
     Query <- paste("select * from ", DSN, ".QW_SAMPLE_",env.db," where site_no IN (", STAID.list, ")", sep="")
     Samples <- sqlQuery(Chan1, Query, as.is=T)
-    
+
     ##Format times into GMT and correct of daylight savings offset according to location
     ##Weather or not to apply daylight savings is in the std.time.code column, which is from the SAMPLE_START_LOCAL_TM_FG NWIS parameter
     ##e.g. in Colorado, SAMPLE_START_LOCAL_TM_FG = Y, timezone = MDT, SAMPLE_START_LOCAL_TM_FG = N, timezone = MST
@@ -165,7 +165,7 @@ dataUpload <- function(qwsampletype,
     #get the record numbers
     Query <- paste("select * from ", DSN, ".QW_SAMPLE_",qa.db," where site_no IN (", STAID.list, ")", sep="")
     Samples <- sqlQuery(Chan1, Query, as.is=T)
-    
+
     ##Format times into GMT and correct of daylight savings offset according to location
     ##Weather or not to apply daylight savings is in the std.time.code column, which is from the SAMPLE_START_LOCAL_TM_FG NWIS parameter
     ##e.g. in Colorado, SAMPLE_START_LOCAL_TM_FG = Y, timezone = MDT, SAMPLE_START_LOCAL_TM_FG = N, timezone = MST
@@ -204,10 +204,30 @@ dataUpload <- function(qwsampletype,
                             stringsAsFactors=FALSE)
     
     qwsample <- rbind(QWSample1,QWSample2)
-    qwsampleheader <- c("sample.integer",  "user.code",  "agency",  "site.no",  "start.date",  "end.date",  "medium",  "labid",
-                        "project.code",  "aquifer.code",	"sample.type",	"analysis.status",	"analysis.source",	"hydrologic.cond",
-                        "hydrologic.event",	"tissue",	"body.part",	"lab.comment.",	"field.comment",	"time.datum",	"datum.reliability",
-                        "collecting.agency.code","time.zone","std.time.code")
+    qwsampleheader <- c("sample.integer",  
+                        "user.code",  
+                        "agency",  
+                        "site.no",  
+                        "start.date",  
+                        "end.date",  
+                        "medium",  
+                        "labid",
+                        "project.code",  
+                        "aquifer.code",	
+                        "sample.type",	
+                        "analysis.status",
+                        "BLANK",
+                        "hydrologic.cond",
+                        "hydrologic.event",
+                        "tissue",
+                        "body.part",
+                        "lab.comment.",
+                        "field.comment",
+                        "time.datum",
+                        "datum.reliability",
+                        "collecting.agency.code",
+                        "sample.id",
+                        "sidno.party.cd")
     colnames(qwsample)<-qwsampleheader
     
 
@@ -224,6 +244,8 @@ dataUpload <- function(qwsampletype,
     qwsample$sample.integer <- seq(1:nrow(qwsample))
     qwsample$UID <- paste(qwsample$site.no,qwsample$start.date,qwsample$medium,sep="")
     qwsample$UID <- gsub(" ","",qwsample$UID)
+    #qwsample$sample.id <- NA
+    #qwsample$sidno.party.cd <- NA
 
     
     
@@ -244,10 +266,30 @@ dataUpload <- function(qwsampletype,
     
     qwsample <- matrix(nrow=nrow(data),ncol=22)
     qwsample <- (as.data.frame(qwsample))
-    names(qwsample) <-  c("sample.integer","user.code","agency","site.no","start.date","end.date","medium",
-                          "labid","project.code","aquifer.code","sample.type","analysis.status",       
-                          "analysis.source","hydrologic.cond","hydrologic.event","tissue","body.part","lab.comment.",          
-                          "field.comment","time.datum","datum.reliability","collecting.agency.code") 
+    names(qwsample) <-  c("sample.integer",  
+                          "user.code",  
+                          "agency",  
+                          "site.no",  
+                          "start.date",  
+                          "end.date",  
+                          "medium",  
+                          "labid",
+                          "project.code",  
+                          "aquifer.code",	
+                          "sample.type",	
+                          "analysis.status",
+                          "BLANK",
+                          "hydrologic.cond",
+                          "hydrologic.event",
+                          "tissue",
+                          "body.part",
+                          "lab.comment.",
+                          "field.comment",
+                          "time.datum",
+                          "datum.reliability",
+                          "collecting.agency.code",
+                          "sample.id",
+                          "sidno.party.cd") 
     qwsample$sample.integer <- seq(1:nrow(qwsample))
     qwsample$user.code <- "*UNSPECIFIED*"
     qwsample$agency <- agencycode
@@ -315,7 +357,8 @@ dataUpload <- function(qwsampletype,
   qwresult <- matrix(nrow=nrow(mergeddata),ncol=20)
   qwresult <- (as.data.frame(qwresult))
   
-  names(qwresult) <- c("UID","pcode",
+  names(qwresult) <- c("UID",
+                       "pcode",
                        "result",
                        "qual.code",
                        "qa.code",
@@ -354,22 +397,22 @@ dataUpload <- function(qwsampletype,
   qwresult$result <- as.numeric(qwresult$result)
 
   ###Populate rest of QWResult
-  qwresult[,5]<-mergeddata$qa.code
-  qwresult[,6]<-mergeddata$method.code
-  qwresult[,7]<-mergeddata$rounding.code
-  qwresult[,8]<-mergeddata$qualifiers
-  qwresult[,9]<-as.numeric(mergeddata$reporting.level)
-  qwresult[,10]<-mergeddata$reporting.level.type
-  qwresult[,11]<-mergeddata$dqi.code
-  qwresult[,12]<-mergeddata$null.value.qualifier
-  qwresult[,13]<-mergeddata$prep.set.no
-  qwresult[,14]<-mergeddata$analytical.set.no
-  qwresult[,15]<-mergeddata$analysis.date
-  qwresult[,16]<-mergeddata$prep.date
-  qwresult[,17]<-mergeddata$lab.comment
-  qwresult[,18]<-mergeddata$field.comment
-  qwresult[,19]<-mergeddata$lab.stdev
-  qwresult[,20]<-mergeddata$analyzing.entity.code
+  qwresult$qa.code<-mergeddata$qa.code
+  qwresult$method.code<-mergeddata$method.code
+  qwresult$rounding.code<-mergeddata$rounding.code
+  qwresult$qualifiers<-mergeddata$qualifiers
+  qwresult$reporting.level<-as.numeric(mergeddata$reporting.level)
+  qwresult$reporting.level.type<-mergeddata$reporting.level.type
+  qwresult$dqi.code<-mergeddata$dqi.code
+  qwresult$null.value.qualifier<-mergeddata$null.value.qualifier
+  qwresult$prep.set.no<-mergeddata$prep.set.no
+  qwresult$analytical.set.no<-mergeddata$analytical.set.no
+  qwresult$analysis.date<-mergeddata$analysis.date
+  qwresult$prep.date<-mergeddata$prep.date
+  qwresult$lab.comment<-mergeddata$lab.comment
+  qwresult$field.comment<-mergeddata$field.comment
+  qwresult$lab.stdev<-mergeddata$lab.stdev
+  qwresult$analyzing.entity.code<-mergeddata$analyzing.entity.code
   
   ###Censor data if applicable and add a < code
   if (censor){
