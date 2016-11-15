@@ -264,7 +264,7 @@ dataUpload <- function(qwsampletype,
     
     ###Manual QWSample generator
     
-    qwsample <- matrix(nrow=nrow(data),ncol=22)
+    qwsample <- matrix(nrow=nrow(data),ncol=24)
     qwsample <- (as.data.frame(qwsample))
     names(qwsample) <-  c("sample.integer",  
                           "user.code",  
@@ -294,7 +294,7 @@ dataUpload <- function(qwsampletype,
     qwsample$user.code <- "*UNSPECIFIED*"
     qwsample$agency <- agencycode
     qwsample$site.no <- data$USGS.SID
-    qwsample$start.date <- paste(data$Sample.start.date..yyyymmdd.,data$Sample.start.time..hhmm.,sep="")
+    qwsample$start.date <- paste(data$Sample.date..yyyymmdd.,data$Sample.time..hhmm.,sep="")
     qwsample$end.date <- paste(data$Sample.end.date..yyyymmdd.,data$Sample.end.time..hhmm.,sep="")
     qwsample$medium <- data$medium.code
     qwsample$labid <- labid
@@ -302,8 +302,8 @@ dataUpload <- function(qwsampletype,
     qwsample$aquifer.code <- aquifercode
     ###Get proper coding for sample type###
     ##Asign temporary UIDs for qwsample and data , THESE ARE NOT TRULY UNIQUE SINCE JUST ID and DATE
-    data$UID <- paste(data$USGS.SID, data$Sample.start.date..yyyymmdd.)
-    qwsample$UID <- paste(data$USGS.SID,data$Sample.start.date..yyyymmdd.)
+    data$UID <- paste(data$USGS.SID, data$Sample.time..hhmm.)
+    qwsample$UID <- paste(data$USGS.SID,data$Sample.time..hhmm.)
     ###Go through data and check for reps
     for (i in 1:nrow(data))
     {
@@ -441,5 +441,7 @@ dataUpload <- function(qwsampletype,
   write.table(qwsample,file=qwsamplename,sep="\t", col.names = F, row.names = F,na="", quote = FALSE)
   write.table(qwresult,file=qwresultname,sep="\t", col.names = F, row.names = F, na="",quote = FALSE)
   }
+  
+  qwresult <- qwresult[!is.na(qwresult$sample.integer),]
   return(list(qwsample=qwsample,qwresult=qwresult))
 }
