@@ -1,7 +1,7 @@
 Package: WQReview
 Type: Package
 Title: Discrete water-quality data review and exploration toolbox
-Version: 1.0.0
+Version: 1.2
 Date: 2015-11-02
 Author: T. Joe Mills <tmills@usgs.gov>
 Maintainer: T. Joe Mills <tmills@usgs.gov>

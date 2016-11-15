@@ -1,4 +1,4 @@
-dashboardHeader(title = "WQ-Review 0.1",
+dashboardHeader(title = "WQ-Review 1.2",
                 dropdownMenuOutput("messages"),
                 dropdownMenuOutput("alerts"),
                 dropdownMenuOutput("progress")
