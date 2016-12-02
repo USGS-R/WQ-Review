@@ -407,8 +407,8 @@ readNWISodbc <- function(DSN,
       Samples <- subset(Samples, SAMPLE_START_DT >= begin.date & SAMPLE_START_DT <= end.date)
       
       if(nrow(Samples) == 0) {
-              print("No samples exist in your local NWIS database for the date range specified, check data criteria")
-              stop("No samples exist in your local NWIS database for the date range specified, check data criteria")
+              print("No QA samples exist in your local NWIS database for the date range specified, check data criteria")
+              warning("No QA samples exist in your local NWIS database for the date range specified, check data criteria")
       }
       
     }else {} 
@@ -418,7 +418,7 @@ readNWISodbc <- function(DSN,
             Samples <- subset(Samples, PROJECT_CD %in% projectCd)
             if(nrow(Samples) == 0) {
                     print("No samples exist in your local NWIS database for the project code specified, check data criteria")
-                    stop("No samples exist in your local NWIS database for the project code specified, check data criteria")
+                    warning("No samples exist in your local NWIS database for the project code specified, check data criteria")
             }
     } else{}
     

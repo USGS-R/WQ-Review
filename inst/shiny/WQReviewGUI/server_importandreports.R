@@ -6,7 +6,7 @@ withProgress(message="Data import",detail="Pulling data from NWIS",value=0,{
                 DSN <<- input$DSN
                 env.db <<- input$env.db
                 qa.db <<- input$qa.db
-                
+
                 qw.data <<- suppressWarnings(readNWISodbc(DSN=input$DSN,
                                                           env.db = input$env.db,
                                                           qa.db=input$qa.db,
