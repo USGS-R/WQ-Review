@@ -1,17 +1,15 @@
-[![Appveyor Build](https://ci.appveyor.com/api/projects/status/ye4ie44dfygg10w6?svg=true)](https://ci.appveyor.com/project/tmills-usgs/wq-review-refactor)
-
 ACHTUNG!
 ----------
 
 This is a development version of the WQReview package. This new implementation allows for changing DQI codes through batchfile creation. DO NOT CHANGE DATA IN YOUR DATABASE USING THIS PROGRAM WITHOUT CAREFUL SCRUTINY. It is strongly recommended that you use the "verify only" option to test data load before makign any real changes.
 
 
-Overview
-----------
 
 Toolbox for discrete water-quality data review and exploration.Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
 
 [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues).
+
+You may also contact the maintainer at tmills@usgs.gov
 
 This package facilitates data review and exploration of discrete water-quality data through rapid and easy-to-use plotting functions and tabular data summaries. Data is imported with user-specified options for single or multiple sites and parameter codes using an ODBC connection to the user's local NWIS server. A graphical user interface allows the user to easily explore their data through a variety of graphical and tabular outputs. 
 
