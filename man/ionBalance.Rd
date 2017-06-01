@@ -18,4 +18,3 @@ Takes output data object from readNWISodbc and calculates a standard ion charge 
 data("exampleData",package="WQReview")
 ionBalanceOut <- ionBalance(qw.data=qw.data)
 }
-

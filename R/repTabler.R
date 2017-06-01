@@ -48,6 +48,7 @@ repTabler <- function(qw.data)
                                        "Env_MEDIUM_CD","Rep_MEDIUM_CD",
                                        "Env_LAB_NO","Rep_LAB_NO",
                                        "PARM_CD","Env_PARM_NM", 
+                                       "Env_DQI_CD","Rep_DQI_CD",
                                        "Env_RESULT_VA","Env_REMARK_CD",
                                        "Rep_RESULT_VA","Rep_REMARK_CD",
                                        "Env_minus_Rep","relPercent_diff",
@@ -57,6 +58,7 @@ repTabler <- function(qw.data)
                                      "Env_MEDIUM_CD","Rep_MEDIUM_CD",
                                      "Env_LAB_NO","Rep_LAB_NO",
                                      "PARM_CD","PARM_NM", 
+                                     "Env_DQI_CD","Rep_DQI_CD",
                                      "Env_RESULT_VA","Env_REMARK_CD",
                                      "Rep_RESULT_VA","Rep_REMARK_CD",
                                      "Env_minus_Rep","relPercent_diff",
@@ -73,6 +75,7 @@ repTabler <- function(qw.data)
                 #repTable$Env_SAMPLE_START_DT <- as.character(repTable$Env_SAMPLE_START_DT)
                 #repTable$Rep_SAMPLE_START_DT <- as.character(repTable$Rep_SAMPLE_START_DT)
                 
+                repTable <- repTable[!is.na(repTable$Rep_RECORD_NO),]
                 return(unique(repTable))
         }else{}
 }

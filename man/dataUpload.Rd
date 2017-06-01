@@ -5,8 +5,8 @@
 \title{dataUpload formats files for upload into QWData}
 \usage{
 dataUpload(qwsampletype, labfile, pcodefile, DSN = "NWISCO", env.db = "01",
-  qa.db = "02", writeFiles = FALSE, qwresultname = "",
-  qwsamplename = "", qwsamplefile = "", qwsample.begin.date = NA,
+  qa.db = "02", writeFiles = FALSE, qwresultname = "qwresult",
+  qwsamplename = "qwsample", qwsamplefile = "", qwsample.begin.date = NA,
   qwsample.end.date = NA, censor = FALSE, agencycode = "USGS",
   labid = NA, projectcode = NA, aquifercode = NA, analysisstatus = NA,
   analysissource = NA, hydrologiccond = "A", hydrologicevent = 9,
@@ -73,4 +73,3 @@ dataUpload(qwsampletype, labfile, pcodefile, DSN = "NWISCO", env.db = "01",
 \description{
 Assists in formatting data for upload into QWData. Use templateExport to generate spreadsheet templates to create labfile and pcode file.
 }
-

@@ -70,4 +70,3 @@ qw.data <- readNWISodbc(DSN="NWISCO",
                              projectCd = NULL)
                              }
 }
-

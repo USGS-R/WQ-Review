@@ -46,7 +46,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                   inReviewData$REMARK_CD != ">" & 
                                                   inReviewData$RESULT_VA > inReviewData$max &
                                                   inReviewData$N > 4] <-
-                        paste0("flag_",
+                        paste0("newMax_",
                                inReviewData$RESULT_VA[is.finite(inReviewData$max) &
                                                               inReviewData$REMARK_CD != ">" &
                                                               inReviewData$RESULT_VA > inReviewData$max &
@@ -59,7 +59,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                   inReviewData$REMARK_CD != "<" & 
                                                   inReviewData$RESULT_VA < inReviewData$min &
                                                   inReviewData$N > 4] <-
-                        paste("flag",
+                        paste("newMin_",
                               inReviewData$RESULT_VA[is.finite(inReviewData$min) &
                                                              inReviewData$REMARK_CD != "<" & 
                                                              inReviewData$RESULT_VA < inReviewData$min &
@@ -72,7 +72,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                           inReviewData$REMARK_CD != ">" & 
                                                           inReviewData$RESULT_VA > inReviewData$quant99 &
                                                           inReviewData$N > 4] <-
-                        paste("flag",
+                        paste(">99perc_",
                               inReviewData$RESULT_VA[is.finite(inReviewData$quant99) &
                                                              inReviewData$REMARK_CD != ">" &
                                                              inReviewData$RESULT_VA > inReviewData$quant99 &
@@ -85,7 +85,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                        inReviewData$REMARK_CD != "<" & 
                                                        inReviewData$RESULT_VA < inReviewData$quant01 &
                                                        inReviewData$N > 4] <-
-                        paste("flag",
+                        paste("<1perc_",
                               inReviewData$RESULT_VA[is.finite(inReviewData$quant01) &
                                                              inReviewData$REMARK_CD != "<" &
                                                              inReviewData$RESULT_VA < inReviewData$quant01 &
@@ -97,7 +97,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                 inReviewData$unusualNonDetect[is.finite(inReviewData$percNonDetects) &
                                                       inReviewData$REMARK_CD == "<" &
                                                       inReviewData$percNonDetects < 5 &
-                                                      inReviewData$N > 4] <- "flag"
+                                                      inReviewData$N > 4] <- "nonDetect_"
                 
                 #Extract site info and flags
                 flaggedSamples <- inReviewData[c("RECORD_NO",
@@ -108,6 +108,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                  "MEDIUM_CD",
                                                  "PARM_CD",
                                                  "PARM_NM",
+                                                 "DQI_CD",
                                                  "RESULT_VA",
                                                  "REMARK_CD",
                                                  "PARM_SEQ_GRP_CD",
@@ -143,6 +144,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                   MEDIUM_CD = NA,
                                   PARM_CD = NA,
                                   PARM_NM = NA,
+                                  DQI_CD = NA,
                                   PARM_SEQ_GRP_CD = NA,
                                   min = NA,
                                   max = NA,

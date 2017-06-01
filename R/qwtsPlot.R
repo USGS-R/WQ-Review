@@ -43,13 +43,13 @@ qwtsPlot <- function(qw.data,
                      wySymbol = FALSE,
                      labelDQI = FALSE,
                      printPlot = TRUE){
-  ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
-  medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00","#D55E00")
-  names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ","OA ")
-  ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
-  qual.shapes <- c(19,0,2,5,4,3,6,7,8,9,11)
-  
-  names(qual.shapes) <- c("Sample","<",">","E","A","M","N","R","S","U","V")
+  # ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
+  # medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00","#D55E00")
+  # names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ","OA ")
+  # ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
+  # qual.shapes <- c(19,0,2,5,4,3,6,7,8,9,11)
+  # 
+  # names(qual.shapes) <- c("Sample","<",">","E","A","M","N","R","S","U","V")
 
     plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
                          PARM_CD == (plotparm))
@@ -88,12 +88,12 @@ qwtsPlot <- function(qw.data,
   if(nrow(subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold))) > 0)
   {
     p1 <- p1 + geom_text(data=subset(plotdata, RESULT_MD >= (Sys.time()-new.threshold)),
-                         aes(x=SAMPLE_START_DT,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
+                         aes(x=SAMPLE_START_DT,y=RESULT_VA,color = MEDIUM_CD,label="New",hjust=1.1),show.legend=F)      
   }else{}
   
   if(labelDQI == TRUE)
   {
-          p1 <- p1 + geom_text(aes(label=DQI_CD),size=5,vjust="bottom",hjust="right")
+          p1 <- p1 + geom_text(aes(label=DQI_CD),size=7,vjust="bottom",hjust="right")
   }
   
   ##highlight this water year's data

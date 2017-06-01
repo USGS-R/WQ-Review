@@ -16,4 +16,3 @@ Generates a table of environmental samples and replicates and calculates relativ
 data("exampleData",package="WQReview")
 repTablerOut <- repTabler(qw.data=qw.data)
 }
-

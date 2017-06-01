@@ -27,4 +27,3 @@ data("exampleData",package="WQReview")
 chemCheckOut <- chemCheck(qw.data=qw.data,
              returnAll = FALSE)
 }
-

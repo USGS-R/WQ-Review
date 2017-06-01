@@ -59,8 +59,8 @@ qwparmParmPlot <- function(qw.data,
   }
   
   ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
-  medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00")
-  names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ")
+  # medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00")
+  # names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ")
   if(length(site.selection) == 1)
   {
     maintitle <- str_wrap(unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$SITE_NO == (site.selection))]), width = 25)
@@ -117,7 +117,7 @@ qwparmParmPlot <- function(qw.data,
   if(nrow(subset(pp.plot.data, RESULT_MD_X >= (Sys.time()-new.threshold) | RESULT_MD_Y >= (Sys.time()-new.threshold))) > 0)
   {
     p1 <- p1 + geom_text(data=subset(pp.plot.data, RESULT_MD_X >= (Sys.time()-new.threshold) | RESULT_MD_Y >= (Sys.time()-new.threshold)),
-                         aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
+                         aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,label="New",hjust=1.1),show.legend=F,size=7)      
   }else{}
   
   ##highlight this water year's data
@@ -129,7 +129,7 @@ qwparmParmPlot <- function(qw.data,
   
   if(labelDQI == TRUE)
   {
-          p1 <- p1 + geom_text(aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,label=paste("X-",DQI_CD_X,"_","Y-",DQI_CD_Y,sep="")),size=5,vjust="bottom",hjust="right")
+          p1 <- p1 + geom_text(aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,label=paste("X-",DQI_CD_X,"_","Y-",DQI_CD_Y,sep="")),show.legend=F,size=7,vjust="bottom",hjust="right")
   }
   
   p1 <- p1 + ggtitle(maintitle) + theme_bw() + theme(panel.grid.minor = element_line())

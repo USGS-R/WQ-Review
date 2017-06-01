@@ -16,4 +16,3 @@ srsSummary(srsValues, srsResults, reportingLevels)
 \description{
 Summarizes standard reference sample (SRS) results and automatically flags bad SRS results.
 }
-

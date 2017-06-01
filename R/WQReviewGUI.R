@@ -4,8 +4,8 @@
 #' WQReviewGUI()
 #' }
 #' @export
-#' @import shinydashboard
 #' @import shiny
+#' @import excel.link
 #' @importFrom DT renderDataTable
 #' @importFrom DT dataTableOutput
 WQReviewGUI <- function() {

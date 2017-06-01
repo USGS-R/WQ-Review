@@ -16,10 +16,26 @@ blankSummary(qw.data, STAIDS = "All", begin.date = NA, end.date = NA,
 
 \item{end.date}{Character string (yyyy-mm-dd) of ending date to subset blank analyses. Leave blank for all analyses.}
 
-\item{multiple.levels}{Logical to analyze multiple reporting levels separetly. Default is TRUE.}
+\item{multiple.levels}{Logical to analyze multiple reporting levels separetly. Default is FALSE.}
+}
+\value{
+A dataframe of summary statistics for blank samples. See details.
 }
 \description{
 Generates a summary table of blank analyses for all analytes in a qw.data list from readNWISodbc.
+}
+\details{
+The dataframe returned contains a summary of blank detections for each constituent with the following statistics:
+\itemize{
+\item num_blanks The number of blank samples collected
+\item num_detects The number of unqualified blank detections
+\item num_E_detects The number of blank detections with an E remark_cd (estimated)
+\item median_detected_value The median value of all detections
+\item max_detected_value The max value of all detections
+\item BD90.90 A statistic used for setting study reporting limits described by Fram and others, 2012. 
+Briefly, the BD90.90 value is the concentration of a blank detection where there is at least a 90-percent confidence
+that the contamination in at least 90 percent of samples is less than this value.
+}
 }
 \examples{
 data("exampleData",package="WQReview")
@@ -29,4 +45,6 @@ blankSummaryOut <- blankSummary(qw.data = qw.data,
              end.date = "2013-01-01",
              multiple.levels = FALSE)
 }
-
+\references{
+Fram, M.S., Olsen, L.D., and Belitz, Kenneth, 2012, Evaluation of volatile organic compound (VOC) blank data and application of study reporting levels to groundwater data collected for the California GAMA Priority Basin Project, May 2004 through September 2010: U.S. Geological Survey Scientific Investigations Report 2012–5139, 94 p
+}

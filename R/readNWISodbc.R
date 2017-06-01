@@ -598,13 +598,8 @@ readNWISodbc <- function(DSN,
   ###Replace NAs with "Sample"
   #PlotTable$REMARK_CD[is.na(PlotTable$REMARK_CD)] <- "Sample"
   PlotTable$REMARK_CD[which(!(PlotTable$REMARK_CD %in% remarkCodes))] <- "Sample"
-  
-  ###Set remark code as factor for plotting
-  #PlotTable$REMARK_CD <- as.factor(PlotTable$REMARK_CD)
-  ###Set factors levels
-  #PlotTable$REMARK_CD = factor(PlotTable$REMARK_CD,levels(PlotTable$REMARK_CD)[c(4,1:3)])
+
   ###Make result a numeric
-  
   if(resultAsText == FALSE)
   {
   PlotTable$RESULT_VA <- as.numeric(PlotTable$RESULT_VA)
@@ -650,6 +645,16 @@ readNWISodbc <- function(DSN,
                                          timezone = DataTable$SAMPLE_START_TZ_CD,
                                          daylight = DataTable$SAMPLE_START_LOCAL_TM_FG)
   
+  #ANL_DT
+  PlotTable$ANL_DT <- convertTime(datetime = PlotTable$ANL_DT,
+                                         timezone = PlotTable$SAMPLE_START_TZ_CD,
+                                         daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
+
+  #PREP_DT
+  PlotTable$PREP_DT <- convertTime(datetime = PlotTable$PREP_DT,
+                                         timezone = PlotTable$SAMPLE_START_TZ_CD,
+                                         daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
+
   ###Get month for seasonal plots and reorder factor levels to match water-year order
   PlotTable$SAMPLE_MONTH <-  factor(format(PlotTable$SAMPLE_START_DT,"%b"),levels=c("Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"))
   ##Convert ddata table start date to character string so displays in gui tables

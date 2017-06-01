@@ -4,8 +4,10 @@
 \alias{flipDQI}
 \title{flipDQI Flip DQI codes for given sites and parameters}
 \usage{
-flipDQI(STAIDS, records, parameters, dqiCodes, DSN = "NWISCO",
-  env.db = "01", qa.db = "02", keepRecordNo = FALSE)
+flipDQI(STAIDS, records, parameters, dqiCodes, comments = NULL,
+  commentType = NULL, DSN = "NWISCO", env.db = "01", qa.db = "02",
+  keepRecordNo = FALSE, writeFiles = FALSE, qwresultname = "qwresult",
+  qwsamplename = "qwsample")
 }
 \arguments{
 \item{STAIDS}{A vector of station IDs}
@@ -16,6 +18,10 @@ flipDQI(STAIDS, records, parameters, dqiCodes, DSN = "NWISCO",
 
 \item{dqiCodes}{A vector of specified DQI codes of the same length as records.See details}
 
+\item{comments}{An optional vector of comments for each result of the same length as records.See details}
+
+\item{commentType}{An optional vector of comment types of the same length as records. Default is "F" for field. See details}
+
 \item{DSN}{A character string containing the DSN for your local server}
 
 \item{env.db}{Environmental database number}
@@ -23,6 +29,12 @@ flipDQI(STAIDS, records, parameters, dqiCodes, DSN = "NWISCO",
 \item{qa.db}{QA database number}
 
 \item{keepRecordNo}{Logical. Retain record numbers in qwresult and qwsample. If TRUE, RECORD_NO column in qwresult and qwsample dataframes will need to be removed prior to batch upload to NWIS}
+
+\item{writeFiles}{write out qwresult and qwsample files to text files in working directory}
+
+\item{qwresultname}{Name of qwresult file}
+
+\item{qwsamplename}{Name of qwsample file}
 }
 \description{
 Generates batch files for input into QWData with user-specified DQI codes.
@@ -48,4 +60,3 @@ qa.db = "02")
 }
 
 }
-

@@ -1,14 +1,16 @@
 library(WQReview)
 library(shiny)
-library(shinydashboard)
 library(dplyr)
 library(DT)
 library(reshape2)
 library(ggplot2)
-
+library(plotly)
+library(excel.link)
+#' @import excel.link
 qw.data <- NULL
 reports <- NULL
-
+options(shiny.reactlog=TRUE) 
+options(shiny.maxRequestSize=30*1024^2)
 markedRecords <- data.frame(RECORD_NO = character(),
                             SITE_NO = character(),
                             STATION_NM = character(),
