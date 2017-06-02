@@ -125,11 +125,11 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                 if(returnAll == FALSE)
                 {
                         #remove NAs from result flags
-                        flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[16]) |
-                                                                              !is.na(flaggedSamples[17]) |
+                        flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[17]) |
                                                                               !is.na(flaggedSamples[18]) |
                                                                               !is.na(flaggedSamples[19]) |
-                                                                                             !is.na(flaggedSamples[20])
+                                                                              !is.na(flaggedSamples[20]) |
+                                                                                             !is.na(flaggedSamples[21])
                                                                               ),]) 
                 } else {}
                 

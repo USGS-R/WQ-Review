@@ -95,39 +95,20 @@ flagReport <- function(networkList,
         tryCatch({
                 ###Run ion balance function
                 ionBalanceOut <- suppressWarnings(ionBalance(qw.data = qw.data,wide=TRUE))
-                chargebalance.table <- ionBalanceOut$chargebalance.table
                 reports$BalanceDataTable <- ionBalanceOut$BalanceDataTable
                 reports$balanceTable <- ionBalanceOut$chargebalance.table
                 
                 ###Check that a balance was calculated
-                if(nrow(chargebalance.table) > 0)
+                if(nrow(reports$BalanceDataTable) > 0)
                 {
                         
                         ###Join charge balance table to plot table
-                        chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
+                        chargebalance.table <- reports$balanceTable[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
                         qw.data$PlotTable <- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
                         
                         
                 } else {}
                 
-        }, warning = function(w) {
-                ###Run ion balance function
-                ionBalanceOut <- ionBalance(qw.data = qw.data,wide=TRUE)
-                chargebalance.table <- ionBalanceOut$chargebalance.table
-                reports$BalanceDataTable <- ionBalanceOut$BalanceDataTable
-                reports$balanceTable <- ionBalanceOut$chargebalance.table
-                
-                ###Check that a balance was calculated
-                if(nrow(chargebalance.table) > 0)
-                {
-                        
-                        ###Join charge balance table to plot table
-                        chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
-                        qw.data$PlotTable <- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")
-                        
-                        
-                } else {}
-                warning(w,"This caused a warning DO NOT REPORT UNLESS YOU NOTICE A PROBLEM WITH PERFORMANCE")
         }, error = function(e) {
                 errors <- print("Error with charge balance. please report this on the github issues page")
                 
@@ -138,11 +119,6 @@ flagReport <- function(networkList,
                 ###Run repTabler
                 reports$repTable <- suppressWarnings(repTabler(qw.data))
                 
-        }, warning = function(w) {
-                
-                ###Run repTabler
-                reports$repTable <- repTabler(qw.data)
-                warning(w,"This caused a warning DO NOT REPORT UNLESS YOU NOTICE A PROBLEM WITH PERFORMANCE")
         }, error = function(e) {
                 errors <- print("Error with replicate table. please report this on the github issues page")
         })
@@ -152,10 +128,6 @@ flagReport <- function(networkList,
                 ###Run wholevPart
                 reports$wholevpartTable <- suppressWarnings(wholevPart(qw.data))
                 
-        }, warning = function(w) {
-                ###Run wholevPart
-                reports$wholevpartTable <- wholevPart(qw.data)
-                warning(w,"This caused a warning DO NOT REPORT UNLESS YOU NOTICE A PROBLEM WITH PERFORMANCE")
         }, error = function(e) {
                 errors <- print("Error with whole vs part table. please report this on the github issues page")
                 
@@ -165,22 +137,14 @@ flagReport <- function(networkList,
         ###Generate chem flag summary
         tryCatch({
                 reports$chemFlagTable <- suppressWarnings(chemCheck(qw.data))
-        },
-        warning = function(w) {
-                reports$chemFlagTable <- suppressWarnings(chemCheck(qw.data))
-        },
-        error = function(e) {
+        }, error = function(e) {
                 errors <- print("Error with auto sample flagging, please report this on the github issues page")
         })
         
         ###Generate chem flag summary
         tryCatch({
                 reports$pestFlagTable <- suppressWarnings(pestCheck(qw.data))
-        },
-        warning = function(w) {
-                reports$pestFlagTable <- suppressWarnings(pestCheck(qw.data))
-        },
-        error = function(e) {
+        }, error = function(e) {
                 errors <- print("Error with auto sample flagging, please report this on the github issues page")
         })
         
@@ -191,14 +155,7 @@ flagReport <- function(networkList,
                 reports$resultFlagTable <- suppressWarnings(historicCheck(qw.data,returnAll=FALSE))
                 ###Need to reset row names
                 rownames(reports$resultFlagTable) <- seq(from = 1, to = nrow(reports$resultFlagTable))
-        },
-        warning = function(w) {
-                
-                reports$resultFlagTable <- suppressWarnings(historicCheck(qw.data,returnAll=FALSE)) 
-                ###Need to reset row names
-                rownames(reports$resultFlagTable) <- seq(from = 1, to = nrow(reports$resultFlagTable))
-        },
-        error = function(e) {
+        }, error = function(e) {
                 print("Error with auto result flagging, please report this on the github issues page")
         })
         
