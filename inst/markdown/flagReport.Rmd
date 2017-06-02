@@ -58,9 +58,58 @@ require(gridExtra)
         siteData <- subset(qw.data$PlotTable,SITE_NO == site &
                                    RESULT_CR > Sys.time() - 60*60*24*365*3)
         allParms <- unique(siteData[c("PARM_CD","PARM_NM","PARM_SEQ_GRP_CD")])
+        
+        ###Run field
+        parms <- subset(allParms, PARM_CD %in% c("00095","00061","00400","00010")
+                        )
+        cat("##Field","\n")
+        for(j in 1:nrow(parms))
+                {
+               try({
+                       if(length(unique(reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == parms$PARM_CD[j])]) > 0 )
+                          ){
+                cat("###*FLAG*",parms$PARM_CD[j],parms$PARM_NM[j],"*FLAG*\n")
+                       } else (cat("###",parms$PARM_CD[j],parms$PARM_NM[j],"\n"))
+                       
+                tsPlot <- qwtsPlot(qw.data = qw.data,
+                   site.selection = site,
+                   plotparm = parms$PARM_CD[j],
+                   highlightrecords = unique(reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == parms$PARM_CD[j])]),
+                   wySymbol = TRUE,
+                   print = FALSE)
+                
+                seasonalPlot <- qwseasonalPlot(qw.data,
+                               site.selection = site,
+                               plotparm = parms$PARM_CD[j],
+                               highlightrecords = unique(reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == parms$PARM_CD[j])]),
+                               wySymbol = TRUE,
+                               print = FALSE)
+                
+                pqPlot <- qwparmParmPlot(qw.data,
+                         site.selection = site,
+                         yparm = parms$PARM_CD[j],
+                         xparm = "00061",
+                         highlightrecords = unique(reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == parms$PARM_CD[j])]),
+                         wySymbol = TRUE,
+                         print = FALSE)
+                
+                pSCPlot <- qwparmParmPlot(qw.data,
+                          site.selection = site,
+                          yparm = parms$PARM_CD[j],
+                          xparm = "00095",
+                          highlightrecords = unique(reports$resultFlagTable$RECORD_NO[which(reports$resultFlagTable$PARM_CD == parms$PARM_CD[j])]),
+                          wySymbol = TRUE,
+                          print = FALSE)
+                
+                grid.arrange(tsPlot,seasonalPlot,pqPlot,pSCPlot,nrow=2,ncol=2)
+                cat("\n\n")
+               })
+        }
 
         ###Run major anions
-        parms <- subset(allParms, PARM_SEQ_GRP_CD %in% c("INN") | PARM_CD %in% c("00095","00061","00400","00010"))
+        parms <- subset(allParms, PARM_SEQ_GRP_CD %in% c("INN") 
+                        #| PARM_CD %in% c("00095","00061","00400","00010")
+                        )
         cat("##Major anions","\n")
         for(j in 1:nrow(parms))
                 {
@@ -109,7 +158,9 @@ require(gridExtra)
 
 
         ###Run major cations
-        parms <- subset(allParms, PARM_SEQ_GRP_CD %in% c("INM") | PARM_CD %in% c("00095","00061","00400","00010"))
+        parms <- subset(allParms, PARM_SEQ_GRP_CD %in% c("INM") 
+                        #| PARM_CD %in% c("00095","00061","00400","00010")
+                        )
         cat("##Major cations","\n")
         for(j in 1:nrow(parms))
                 {
@@ -154,7 +205,9 @@ require(gridExtra)
         }
         
 ###Run nutrients
-        parms <- subset(allParms, PARM_SEQ_GRP_CD %in% c("NUT") | PARM_CD %in% c("00095","00061","00400","00010"))
+        parms <- subset(allParms, PARM_SEQ_GRP_CD %in% c("NUT") 
+                        #| PARM_CD %in% c("00095","00061","00400","00010")
+                        )
         cat("##Nutrients","\n")
         for(j in 1:nrow(parms))
                 {
@@ -199,7 +252,9 @@ require(gridExtra)
         }
 
 ###Run sediment
-        parms <- subset(allParms, PARM_SEQ_GRP_CD %in% c("SED") | PARM_CD %in% c("00095","00061","00400","00010"))
+        parms <- subset(allParms, PARM_SEQ_GRP_CD %in% c("SED") 
+                        #| PARM_CD %in% c("00095","00061","00400","00010")
+                        )
         cat("##Sediment","\n")
         for(j in 1:nrow(parms))
                 {
