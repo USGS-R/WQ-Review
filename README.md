@@ -6,16 +6,15 @@ Toolbox for discrete water-quality data review and exploration.
 ## Package Status
 
 [![status](https://img.shields.io/badge/USGS-Support-yellow.svg)](https://owi.usgs.gov/R/packages.html#support)
-
 This package is considered a 'support' package. For more information, see:
 [https://owi.usgs.gov/R/packages.html#support](https://owi.usgs.gov/R/packages.html#support)
 
+### Build Status
 [![Build status](https://ci.appveyor.com/api/projects/status/o12iv9v16p2udnwd?svg=true)](https://ci.appveyor.com/project/tmills-usgs/wq-review-6hgb9)
 
 ### Reporting Bugs
 Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
 [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues)
-
 You may also contact the maintainer at cpenn@usgs.gov
 
 ## Description
@@ -35,8 +34,7 @@ Please report any issues with the application or R package on the issues page at
 Additionaly, please feel free to post any suggestions or enhancement requests.
 **Your participation will make this a better tool for everyone!**
 
-## Frequently asked questions
-[FAQ](vignettes/faq.Rmd)
+## Frequently Asked Questions [FAQ](vignettes/faq.Rmd)
 
 ## Installation for stand alone application (non-R users)
 
