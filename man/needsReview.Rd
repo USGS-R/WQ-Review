@@ -9,7 +9,7 @@ needsReview(qw.data, flaggedResults = NULL)
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}
 
-\item{flaggedResults}{Optional dataframe of flagged results generated from \code {flagSummary} function}
+\item{flaggedResults}{Optional dataframe of flagged results generated from \code{flagSummary} function}
 }
 \value{
 A dataframe containing all samples with applicable flags

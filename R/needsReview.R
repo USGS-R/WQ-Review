@@ -1,6 +1,6 @@
 #' Function to return sample needing review
 #' @param qw.data A qw.data list generated from readNWISodbc
-#' @param flaggedResults Optional dataframe of flagged results generated from \code {flagSummary} function
+#' @param flaggedResults Optional dataframe of flagged results generated from \code{flagSummary} function
 #' @details Returns list of unapproved results (DQI of I, S, or P) and if the result has been flagged anywhere
 #' @examples 
 #' data("exampleData",package="WQReview")
