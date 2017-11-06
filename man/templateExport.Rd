@@ -12,4 +12,3 @@ exports templates for use with the nwisupload function. Files exported to workin
 \examples{
 templateExport()
 }
-

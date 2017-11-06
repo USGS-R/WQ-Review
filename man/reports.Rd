@@ -17,4 +17,3 @@ This dataset is used for all run examples.
 \author{
 Joe Mills, 2015-11-02
 }
-

@@ -29,4 +29,3 @@ blankSummaryOut <- blankSummary(qw.data = qw.data,
              end.date = "2013-01-01",
              multiple.levels = FALSE)
 }
-

@@ -22,4 +22,3 @@ Takes a date and returns the water year
 \examples{
 waterYear("2015-01-01")
 }
-

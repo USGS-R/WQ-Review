@@ -27,4 +27,3 @@ data("exampleData",package="WQReview")
 pestCheckOut <- pestCheck(qw.data=qw.data,
              returnAll = FALSE)
 }
-

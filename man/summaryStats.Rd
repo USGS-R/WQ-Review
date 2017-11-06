@@ -29,4 +29,3 @@ summaryStatsOut <- summaryStats(qw.data = qw.data,
              begin.date = "2010-01-01", 
              end.date = "2011-12-31")
 }
-

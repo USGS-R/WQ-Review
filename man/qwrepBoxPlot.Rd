@@ -39,4 +39,3 @@ qwrepBoxPlot(qw.data = qw.data,
                        new.reps = Sys.time() - 60*60*24*30,
                        printPlot = TRUE)
 }
-

@@ -73,4 +73,3 @@ dataUpload(qwsampletype, labfile, pcodefile, DSN = "NWISCO", env.db = "01",
 \description{
 Assists in formatting data for upload into QWData. Use templateExport to generate spreadsheet templates to create labfile and pcode file.
 }
-

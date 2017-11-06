@@ -52,4 +52,3 @@ qwparmBoxPlot(qw.data = qw.data,
               labelDQI = FALSE,
               printPlot = TRUE)
 }
-

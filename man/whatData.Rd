@@ -33,4 +33,3 @@ whatDataOut <- whatData(qw.data = qw.data,
         end.date = NULL,
         groups=TRUE)
 }
-

@@ -50,4 +50,3 @@ qwblankPlot(qw.data = qw.data,
                        printPlot = TRUE
                        )
 }
-

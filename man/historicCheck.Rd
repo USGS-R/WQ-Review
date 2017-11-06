@@ -27,4 +27,3 @@ data("exampleData",package="WQReview")
 historicCheckOut <- historicCheck(qw.data=qw.data,
              returnAll = FALSE)
 }
-
