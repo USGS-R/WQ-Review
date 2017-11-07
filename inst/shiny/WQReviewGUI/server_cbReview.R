@@ -9,12 +9,14 @@
 
 ###This creates a reactive data frame to update off the excel charge balance issues data tab
 CBdata <<- eventReactive(input$refresh_cb, {
-  data.frame(RECORD_NO = xl_CB$RECORD_NO,
-             SITE_NO = xl_CB$SITE_NO,
-             STATION_NM = xl_CB$STATION_NM,
-             MEDIUM_CD = xl_CB$MEDIUM_CD,
-             SAMPLE_CM_TX = xl_CB$SAMPLE_CM_TX,
-             FLAGGED = xl_CB$BadCB_30.21)
+        tryCatch({
+                data.frame(RECORD_NO = xl_CB$RECORD_NO,
+                           SITE_NO = xl_CB$SITE_NO,
+                           STATION_NM = xl_CB$STATION_NM,
+                           MEDIUM_CD = xl_CB$MEDIUM_CD,
+                           SAMPLE_CM_TX = xl_CB$SAMPLE_CM_TX,
+                           FLAGGED = xl_CB$BadCB_30.21)  
+        }, error = function(e){})
 }, ignoreNULL = FALSE)
 
 
@@ -41,27 +43,27 @@ CB_sel <- reactive({
 
 ###This watches for changes in the selected rows (i.e. CB_sel) and then updates the selction boxes
 ###for the plots with what is selected in the table, and thus changes the plots as well
-
-observe({
-  
-  updateSelectInput(session, "siteSel_cb",
-                    choices = c("All",
-                                setNames((siteSelData$SITE_NO),
-                                         paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
-                    ),
-                    selected = setNames(CB_sel()$SITE_NO,
-                                        paste((CB_sel()$SITE_NO),(CB_sel()$STATION_NM),sep="-")
-                    )
-  )
-  
-  
-  
-})
+# !!!!!!!!!!!!!!!!!!!!!!! THIS BLOCK IS CRASHING SHINY AFTER DATA IMPORT AND EXCEL ARE GENERATED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# observe({
+# 
+#   updateSelectInput(session, "siteSel_cb",
+#                     choices = c("All",
+#                                 setNames((siteSelData$SITE_NO),
+#                                          paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+#                     ),
+#                     selected = setNames(CB_sel()$SITE_NO,
+#                                         paste((CB_sel()$SITE_NO),(CB_sel()$STATION_NM),sep="-")
+#                     )
+#   )
+# 
+# 
+# 
+# })
 
 output$qwcbPlot <- renderPlotly({
   validate(need(!is.null(input$siteSel_cb),
                 "No site selected"))
-  
+
   if(input$siteSel_cb == "All")
   {
     sites <- unique(qw.data$PlotTable$SITE_NO)
@@ -76,21 +78,21 @@ output$qwcbPlot <- renderPlotly({
              #show.smooth = input$fit_timeseries,
              #labelDQI = input$labelDQI,
              facet = input$facetSel_cb,
-             printPlot=FALSE)) %>% 
+             printPlot=FALSE)) %>%
     config(collaborate=F,cloud=F,showLink=F,displaylogo=F,modeBarButtonsToRemove=c("lasso2d","select2d","autoScale2d","zoom2d","sendDataToCloud"))
 })
 
 output$qwscSumPlot <- renderPlotly({
   validate(need(!is.null(input$siteSel_cb),
                 "No site selected"))
-  
+
   if(input$siteSel_cb == "All")
   {
     sites <- unique(qw.data$PlotTable$SITE_NO)
   } else {
     sites <- as.character(input$siteSel_cb)
   }
-  
+
   ggplotly(qwscSumPlot(qw.data = qw.data,
                        new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
                        site.selection = sites,
