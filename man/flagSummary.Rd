@@ -4,7 +4,7 @@
 \alias{flagSummary}
 \title{Function to summarize samples that are not approved}
 \usage{
-flagSummary(qw.data, returnAll = FALSE)
+flagSummary(qw.data, returnAll = FALSE, returnAllTables = FALSE)
 }
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}
