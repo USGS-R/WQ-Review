@@ -33,7 +33,6 @@ tryCatch({
   ###Run repTabler
   reports$repTable <<- suppressWarnings(repTabler(qw.data))
   
-  
 }, error = function(e) {
   output$errors <- renderPrint("Error with replicate table. please report this on the github issues page")
 })
