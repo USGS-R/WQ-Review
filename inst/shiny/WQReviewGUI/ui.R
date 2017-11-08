@@ -1,7 +1,6 @@
 
 shinyUI(fluidPage(theme="theme.css",title="WQReview 2.0",
-                  tags$head(tags$link(rel = "icon", type = "image/png", href = "favicon-16x16.png")),
-                  navbarPage(img(src="Logo.png", width="80px",height = "40px"),"WQReview 2.0",
+                  navbarPage(title = img(src="Logo.png", width="100px",height = "40px"),
                              navbarMenu("Import/save Data",
                                         tabPanel("Import from internal NWIS server",
                                                  source("ui_dataImport.r",local=TRUE)$value
