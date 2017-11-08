@@ -43,22 +43,22 @@ CB_sel <- reactive({
 
 ###This watches for changes in the selected rows (i.e. CB_sel) and then updates the selction boxes
 ###for the plots with what is selected in the table, and thus changes the plots as well
-# !!!!!!!!!!!!!!!!!!!!!!! THIS BLOCK IS CRASHING SHINY AFTER DATA IMPORT AND EXCEL ARE GENERATED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# observe({
-# 
-#   updateSelectInput(session, "siteSel_cb",
-#                     choices = c("All",
-#                                 setNames((siteSelData$SITE_NO),
-#                                          paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
-#                     ),
-#                     selected = setNames(CB_sel()$SITE_NO,
-#                                         paste((CB_sel()$SITE_NO),(CB_sel()$STATION_NM),sep="-")
-#                     )
-#   )
-# 
-# 
-# 
-# })
+observe({
+        tryCatch({
+                updateSelectInput(session, "siteSel_cb",
+                                  # choices = c("All",
+                                  #             setNames((siteSelData$SITE_NO),
+                                  #                      paste((siteSelData$SITE_NO),(siteSelData$STATION_NM),sep="-"))
+                                  # ),
+                                  selected = setNames(CB_sel()$SITE_NO,
+                                                      paste((CB_sel()$SITE_NO),(CB_sel()$STATION_NM),sep="-")
+                                  )
+                )
+                
+                
+                
+        }, error = function(e){})
+})
 
 output$qwcbPlot <- renderPlotly({
   validate(need(!is.null(input$siteSel_cb),
