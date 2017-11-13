@@ -50,4 +50,3 @@ flagReport(networkList = networkList,
           )
           }
 }
-

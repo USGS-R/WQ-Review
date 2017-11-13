@@ -14,4 +14,3 @@ Function to open the WQReview GUI
 WQReviewGUI()
 }
 }
-

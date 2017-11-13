@@ -16,4 +16,3 @@ Takes output list from readNWISodbc and checks whole vs part concentrations
 data("exampleData",package="WQReview")
 wholevPartOut <- wholevPart(qw.data=qw.data)
 }
-
