@@ -24,7 +24,7 @@ This package facilitates data review and exploration of discrete water-quality d
 
 ## System Requirements
 * This application requires a functioning 32 bit ODBC connection to an NWIS server. Guidance for setting up ODBC access is provided at the bottom of this page.
-* Windows 7 or 8
+* Windows 7,8, or 10
 * **Google Chrome is required and must be set as the system default browser.**
 
 ### Bug reporting and enhancements
@@ -80,9 +80,12 @@ Your database administrator or IT specialist will may need to assist for these s
 
 ### Step 1
 You need to setup a user Data Source Name (User DSN).
+
 On 64bit Windows 7 and 8, run "C:/Windows/SysWOW64/odbcad32.exe".
 
 On 32bit Windows 7 and 8, run "C:/Windows/System32/odbcad32.exe".
+
+On 64bit Windows 10, in an explore window, paste "Control Panel/All Control Panel Items/Administrative Tools" and select "ODBC Data Sources (32-bit)"
 
 In the User DSN tab, if you do not see a connection with the same name as your NWIS server of interest, you must add a new connection. Click "Add" on the right.
 
