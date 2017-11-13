@@ -19,10 +19,10 @@ repTabler <- function(qw.data)
         
         if(nrow(repData) == 0)
         {
-                stop("No samples found with medium code WSQ or WGQ")
+                warning("No samples found with medium code WSQ or WGQ and sample type 7(rep) or 5(dup). Check sample coding in NWIS.")
         } else if(nrow(repData) > 0 && nrow(envData) == 0)
         {
-                stop("There are samples with medium code WSQ or WGQ and sample type = 7 or 5 but no WS or WG samples with sample type = 7 or 5. Check sample coding in NWIS.")
+                warning("There are samples with medium code WSQ or WGQ and sample type 7(rep) or 5(dup), but no WS or WG samples with sample type 7(rep) or 5(dup). Check sample coding in NWIS.")
         } else if(nrow(repData) > 0 & nrow(envData) > 0)
         {
                 ###Rename columns to indicate env or rep
