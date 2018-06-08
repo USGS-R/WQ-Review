@@ -1,10 +1,10 @@
 # #Populate excel sheets
 xl.workbook.add()
 
-xl.sheet.add("Unnaproved data")
-xlc$a1 = reports$unaprovedData
+xl.sheet.add("Unapproved data")
+xlc$a1 = reports$unapprovedData
 
-xl.sheet.add("Reviewed unnaproved data")
+xl.sheet.add("Reviewed unapproved data")
 xlc$a1 = data.frame(RECORD_NO = NA,
                     SITE_NO = NA,
                     STATION_NM = NA,
@@ -51,15 +51,16 @@ xlc$a1 = qw.data$PlotTable
 xl.sheet.add("Data by sample")
 xlc$a1 = qw.data$DataTable
 
-xl.sheet.delete("sheet1")
-xl.sheet.delete("sheet2")
-xl.sheet.delete("sheet3")
-
 xl.sheet.activate("Charge balance issues")
 xl_CB <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
 
-xl.sheet.activate("Reviewed unnaproved data")
+xl.sheet.activate("Reviewed unapproved data")
 xl_DQI <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
 
-xl.sheet.activate("Unnaproved data")
+xl.sheet.activate("Unapproved data")
 xl_UNAP <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
+
+#run these last
+xl.sheet.delete("sheet1")
+xl.sheet.delete("sheet2")
+xl.sheet.delete("sheet3")

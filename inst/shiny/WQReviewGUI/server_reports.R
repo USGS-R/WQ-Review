@@ -135,18 +135,18 @@ tryCatch({
   ###Summarize flags
   # reports$flaggedData <<- suppressWarnings(flagSummary(qw.data))
   
-  # reports$unaprovedData <<- suppressWarnings(needsReview(qw.data,flaggedResults = reports$flaggedData))
-  # reports$unaprovedData <<- dplyr::arrange(reports$unaprovedData,PARM_SEQ_GRP_CD,desc(FLAGGED))
+  # reports$unapprovedData <<- suppressWarnings(needsReview(qw.data,flaggedResults = reports$flaggedData))
+  # reports$unapprovedData <<- dplyr::arrange(reports$unapprovedData,PARM_SEQ_GRP_CD,desc(FLAGGED))
   # 
-  # names(reports$unaprovedData) <<- paste0(names(reports$unaprovedData),"_UNAP") 
-  # reports$unaprovedData$NEW_RESULT_CM_NWIS <<- NA
-  # reports$unaprovedData$RESULT_NOTE_NO_NWIS <<- NA
+  # names(reports$unapprovedData) <<- paste0(names(reports$unapprovedData),"_UNAP") 
+  # reports$unapprovedData$NEW_RESULT_CM_NWIS <<- NA
+  # reports$unapprovedData$RESULT_NOTE_NO_NWIS <<- NA
   
-  # reports$unaprovedData <<- qw.data$PlotTable[qw.data$PlotTable$DQI_CD %in% c("I","S","P"),
+  # reports$unapprovedData <<- qw.data$PlotTable[qw.data$PlotTable$DQI_CD %in% c("I","S","P"),
   #                           c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","MEDIUM_CD","PARM_CD","PARM_NM","PARM_SEQ_GRP_CD","DQI_CD","RESULT_CM_TX")]
   
-  reports$unaprovedData <<- suppressWarnings(historicCheck(qw.data,returnAll=TRUE))
-  reports$unaprovedData <<- reports$unaprovedData[c("RECORD_NO",
+  reports$unapprovedData <<- suppressWarnings(historicCheck(qw.data,returnAll=TRUE))
+  reports$unapprovedData <<- reports$unapprovedData[c("RECORD_NO",
                                                     "SITE_NO",
                                                     "STATION_NM",
                                                     "SAMPLE_START_DT",
@@ -160,22 +160,22 @@ tryCatch({
                                                     "greaterQuant99_30.15",
                                                     "lessQuant01_30.16",
                                                     "unusualNonDetect")]
-  reports$unaprovedData$hasFlags <<- ifelse(!is.na(reports$unaprovedData$newMax_30.11) |
-                                              !is.na(reports$unaprovedData$newMin_30.12) |
-                                              !is.na(reports$unaprovedData$greaterQuant99_30.15) |
-                                              !is.na(reports$unaprovedData$lessQuant01_30.16) |
-                                              !is.na(reports$unaprovedData$unusualNonDetect),
+  reports$unapprovedData$hasFlags <<- ifelse(!is.na(reports$unapprovedData$newMax_30.11) |
+                                              !is.na(reports$unapprovedData$newMin_30.12) |
+                                              !is.na(reports$unapprovedData$greaterQuant99_30.15) |
+                                              !is.na(reports$unapprovedData$lessQuant01_30.16) |
+                                              !is.na(reports$unapprovedData$unusualNonDetect),
                                             TRUE,FALSE)
-  reports$unaprovedData$FLAGS <<- paste(reports$unaprovedData$newMax_30.11,
-                                        reports$unaprovedData$newMin_30.12,
-                                        reports$unaprovedData$greaterQuant99_30.15,
-                                        reports$unaprovedData$lessQuant01_30.16,
-                                        reports$unaprovedData$unusualNonDetect,
+  reports$unapprovedData$FLAGS <<- paste(reports$unapprovedData$newMax_30.11,
+                                        reports$unapprovedData$newMin_30.12,
+                                        reports$unapprovedData$greaterQuant99_30.15,
+                                        reports$unapprovedData$lessQuant01_30.16,
+                                        reports$unapprovedData$unusualNonDetect,
                                         sep=" ")
-  reports$unaprovedData$FLAGS <<- gsub("NA","",reports$unaprovedData$FLAGS)
-  reports$unaprovedData <<- dplyr::arrange(reports$unaprovedData,PARM_SEQ_GRP_CD,desc(hasFlags))
+  reports$unapprovedData$FLAGS <<- gsub("NA","",reports$unapprovedData$FLAGS)
+  reports$unapprovedData <<- dplyr::arrange(reports$unapprovedData,PARM_SEQ_GRP_CD,desc(hasFlags))
   reports$hasFlags <<- NULL
-  reports$unaprovedData <<- reports$unaprovedData[c("RECORD_NO",
+  reports$unapprovedData <<- reports$unapprovedData[c("RECORD_NO",
                                                     "SITE_NO",
                                                     "STATION_NM",
                                                     "SAMPLE_START_DT",
