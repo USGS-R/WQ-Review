@@ -74,8 +74,8 @@ readNWISodbc <- function(DSN,
                 stop("A valid datasource name must be entered for the ODBC connection")
         }
         if(is.null(STAIDS)){
-                print("You must enter atleast one site number")
-                stop("You must enter atleast one site number")
+                print("You must enter at least one site number")
+                stop("You must enter at least one site number")
         }
         
   RODBC::odbcCloseAll()
