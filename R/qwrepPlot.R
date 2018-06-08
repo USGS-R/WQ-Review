@@ -28,20 +28,21 @@ qwrepPlot <- function(qw.data,
     stop("Only one parmater can be supplied")
   }
   give.n <- function(x){
-    return(c(y = median(x)*1.05, label = length(x))) 
+    return(c(y = median(x)*1.10, label = length(x))) 
     # experiment with the multiplier to find the perfect position
   }
   
   hline <- data.frame(yint=c(-5,5,-10,10),RPD=c("+/- 5%","+/- 5%","+/- 10%","+/- 10%"))
   
+  repTable <- repTabler(qw.data)
   if(site.selection == "All")
   {
-    plotData <- subset(reports$repTable,PARM_CD%in%(plotparm))
+    plotData <- subset(repTable,PARM_CD%in%(plotparm))
   } else {
-    plotData <- subset(reports$repTable,PARM_CD%in%(plotparm) & SITE_NO %in% site.selection)
+    plotData <- subset(repTable,PARM_CD%in%(plotparm) & SITE_NO %in% site.selection)
   }
   
-  
+  ### issue is with this chunk, no status is returned, need to subset data similar to qwcbPlot and run repTabler if needed?
   plotData$status <- NA
   plotData$status[plotData$Env_DQI_CD == "R" & plotData$Rep_DQI_CD == "R" ] <- "DQI = R"
   plotData$status[plotData$Env_DQI_CD %in% c("I","S","P") |

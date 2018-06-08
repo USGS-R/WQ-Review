@@ -59,8 +59,9 @@ qwparmParmPlot <- function(qw.data,
   }
   
   ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
-  # medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00")
-  # names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ")
+  medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00")
+  names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ")
+  
   if(length(site.selection) == 1)
   {
     maintitle <- str_wrap(unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$SITE_NO == (site.selection))]), width = 25)
@@ -93,7 +94,7 @@ qwparmParmPlot <- function(qw.data,
   p1 <- p1 + geom_point(aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD),size=3)
   p1 <- p1 + ylab(paste(ylabel,"\n")) + xlab(paste("\n",xlabel))
   #Highlight records
-  if(nrow(subset(pp.plot.data,RECORD_NO %in% highlightrecords)) > 0)
+  if(nrow(subset(pp.plot.data, RECORD_NO %in% highlightrecords)) > 0)
   {
           p1 <- p1 + geom_point(data=subset(pp.plot.data,RECORD_NO %in% highlightrecords),aes(x=RESULT_VA_X,y=RESULT_VA_Y),size=7,alpha=0.5, color = "#D55E00",shape=19)
   } else{}
@@ -118,7 +119,7 @@ qwparmParmPlot <- function(qw.data,
   {
     p1 <- p1 + geom_text(data=subset(pp.plot.data, RESULT_MD_X >= (Sys.time()-new.threshold) | RESULT_MD_Y >= (Sys.time()-new.threshold)),
                          aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,label="New",hjust=1.1),show.legend=F,size=7)      
-  }else{}
+  }
   
   ##highlight this water year's data
   if(wySymbol == TRUE) 

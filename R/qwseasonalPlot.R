@@ -56,7 +56,7 @@ qwseasonalPlot <- function(qw.data,
     maintitle <- str_wrap(unique(plotdata$STATION_NM[which(plotdata$SITE_NO == (site.selection))]), width = 25)
   } else if (length(site.selection) > 1)
   {
-    maintitle <- "Multisite boxplot"
+    maintitle <- "Multisite seasonal plot"
   } else (maintitle <- "No site selected")
   
   ylabel <- str_wrap(unique(qw.data$PlotTable$PARM_DS[which(qw.data$PlotTable$PARM_CD==(plotparm))]), width = 25)

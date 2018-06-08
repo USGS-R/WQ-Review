@@ -43,13 +43,12 @@ qwtsPlot <- function(qw.data,
                      wySymbol = FALSE,
                      labelDQI = FALSE,
                      printPlot = TRUE){
-  # ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
-  # medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00","#D55E00")
-  # names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ","OA ")
-  # ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
-  # qual.shapes <- c(19,0,2,5,4,3,6,7,8,9,11)
-  # 
-  # names(qual.shapes) <- c("Sample","<",">","E","A","M","N","R","S","U","V")
+  ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
+  medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00","#D55E00")
+  names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ","OA ")
+  ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
+  qual.shapes <- c(19,0,2,5,4,3,6,7,8,9,11)
+  names(qual.shapes) <- c("Sample","<",">","E","A","M","N","R","S","U","V")
 
     plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
                          PARM_CD == (plotparm))
@@ -58,10 +57,10 @@ qwtsPlot <- function(qw.data,
   
   if (length(site.selection) == 1)
   {
-    maintitle <- str_wrap(unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$SITE_NO == (site.selection))]), width = 25)
-  } else (maintitle <- "Multisite plot")
+    maintitle <- stringr::str_wrap(unique(qw.data$PlotTable$STATION_NM[which(qw.data$PlotTable$SITE_NO == (site.selection))]), width = 25)
+  } else (maintitle <- "Multisite timeseries plot")
   
-  ylabel <- str_wrap(unique(plotdata$PARM_DS[which(plotdata$PARM_CD==(plotparm))]), width = 25)
+  ylabel <- stringr::str_wrap(unique(plotdata$PARM_DS[which(plotdata$PARM_CD==(plotparm))]), width = 25)
   p1 <- ggplot(data=plotdata,aes(x=SAMPLE_START_DT,y=RESULT_VA,shape = REMARK_CD, color = MEDIUM_CD))
   p1 <- p1 + geom_point(size=3)
   if ( facet == "Facet")

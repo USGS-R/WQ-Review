@@ -1,6 +1,6 @@
 #' Chargebalance timeseries plot
 #' 
-#' Takes output list from readNWISodbc and prints a plot of charge balance vs time. Requires charge balance = TRUE in NWISPullR
+#' Takes output list from readNWISodbc and prints a plot of charge balance vs time.
 #' @param qw.data A qw.data list generated from readNWISodbc
 #' @param new.threshold The threshold value in seconds from current system time for "new" data.
 #' @param site.selection A character vector of site IDs to plot
@@ -49,7 +49,6 @@ qwcbPlot <- function(qw.data,
         ###Join charge balance table to plot table
                 chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
                 qw.data$PlotTable <- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")           
-        }, warning = function(w) {
         }, error = function(e) {
                 stop("Insufficient data to calculate charge balance. Check your qw.data$PlotTable data")
         })
@@ -114,7 +113,7 @@ qwcbPlot <- function(qw.data,
                   
           {
                   p1 <- p1 + geom_text(data=subset(plotdata,RESULT_MD >= (Sys.time()-new.threshold)),
-                                       aes(x=SAMPLE_START_DT,y=perc.diff,color = MEDIUM_CD,label="New",hjust=1.1),show_guide=F)      
+                                       aes(x=SAMPLE_START_DT,y=perc.diff,color = MEDIUM_CD,label="New",hjust=1.1),show.legend=F)      
           }else{}
   } else{}
   
@@ -131,7 +130,7 @@ qwcbPlot <- function(qw.data,
   }
   
   p1 <- p1 + ggtitle(maintitle)
-  p1 <- p1 + geom_hline(data = hline,aes(yintercept = yint,linetype=Imbalance),show_guide=TRUE) 
+  p1 <- p1 + geom_hline(data = hline,aes(yintercept = yint,linetype=Imbalance),show.legend=TRUE) 
   p1 <- p1 + theme_bw() + theme(panel.grid.minor = element_line())
   
   if((show.smooth)==TRUE){

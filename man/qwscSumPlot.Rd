@@ -28,7 +28,7 @@ qwscSumPlot(qw.data, site.selection, facet = "multisite", scales = "fixed",
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 }
 \description{
-Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance. Requires charge balance = TRUE in NWISPullR
+Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance.
 }
 \examples{
 data("exampleData",package="WQReview")

@@ -30,7 +30,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
         if(nrow(inReviewData) > 0)
         {
                 #Get stats by parm for each site
-                siteStats <- dplyr::summarize(group_by(approvedData,SITE_NO,PARM_CD),
+                siteStats <- dplyr::summarize(dplyr::group_by(approvedData,SITE_NO,PARM_CD),
                                               min = min(RESULT_VA[REMARK_CD != "<"],na.rm=TRUE),
                                               max = max(RESULT_VA[REMARK_CD != ">"],na.rm=TRUE),
                                               percNonDetects = length(na.omit(RESULT_VA[REMARK_CD == "<"]))/length(na.omit(RESULT_VA))*100,

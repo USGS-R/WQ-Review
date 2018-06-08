@@ -15,7 +15,7 @@ repTabler <- function(qw.data)
         envData <- subset(qw.data$PlotTable,SAMP_TYPE_CD %in% c(7,5) & MEDIUM_CD %in% c("WS ","WG ")  & PARM_SEQ_GRP_CD != "INF" & DQI_CD != "Q")
         
         ###Subset to rep samples
-        repData <- subset(qw.data$PlotTable,SAMP_TYPE_CD == c(7,5) & MEDIUM_CD %in% c("WSQ","WGQ")  & PARM_SEQ_GRP_CD != "INF" & DQI_CD != "Q")
+        repData <- subset(qw.data$PlotTable,SAMP_TYPE_CD %in% c(7,5) & MEDIUM_CD %in% c("WSQ","WGQ")  & PARM_SEQ_GRP_CD != "INF" & DQI_CD != "Q")
         
         if(nrow(repData) == 0)
         {

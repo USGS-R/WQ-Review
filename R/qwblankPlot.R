@@ -47,19 +47,10 @@ qwblankPlot <- function(qw.data,
                          MEDIUM_CD %in% c("OAQ","OA"))
   }
   
-  plotData$status <- NA
+  #plotData$status <- NA
   plotData$status[plotData$DQI_CD == "R"] <- "DQI = R"
   plotData$status[plotData$DQI_CD %in% c("I","S","P")] <- "DQI = I, S, or P"
   plotData <- plotData[plotData$REMARK_CD != "<",]
-  
-  if(nrow(plotData) == 0)
-  {
-    p1 <- ggplot() + 
-      geom_text(aes(x=1,y=1,label="No detections")) + 
-      theme_bw() +
-      theme(axis.text.x = element_blank(),
-            axis.text.y = element_blank())
-  }
   
   p1 <- ggplot(data=plotData,aes(x=PARM_NM,y=RESULT_VA,color=status,group=status)) +
     geom_boxplot() + geom_point(size=3,position=position_dodge(width=0.75)) +
@@ -73,6 +64,14 @@ qwblankPlot <- function(qw.data,
                           position=position_dodge(width=0.75))
   p1 <- p1 + scale_color_manual("DQI Status",values = dqi.colors)
   
+  if(nrow(plotData) == 0)
+  {
+    p1 <- ggplot() + 
+      geom_text(aes(x=1,y=1,label="No detections")) + ggtitle("Comparison of Blank Detections") +
+      theme_bw() +
+      theme(axis.text.x = element_blank(),
+            axis.text.y = element_blank())
+  }
   
   if(printPlot)
   {
