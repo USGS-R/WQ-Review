@@ -64,7 +64,10 @@ qwtsPlot <- function(qw.data,
         #ylabel <- stringr::str_wrap(unique(plotdata$PARM_DS[which(plotdata$PARM_CD==(plotparm))]), width = 25)
         ylabel <- unique(plotdata$PARM_DS[plotdata$PARM_CD == plotparm])
         
-        p1 <- ggplot(data=plotdata,aes(x=SAMPLE_START_DT,y=RESULT_VA,shape = REMARK_CD, color = MEDIUM_CD))
+        p1 <- ggplot(data=plotdata,aes(x=SAMPLE_START_DT,y=RESULT_VA,shape = REMARK_CD, color = MEDIUM_CD,
+                                       text = paste('SAMPLE_START_DT:',SAMPLE_START_DT,'\n',
+                                                    'REMARK_CD RESULT_VA:',REMARK_CD,RESULT_VA,'\n',
+                                                    'MEDIUM_CD:',MEDIUM_CD,'\n')))
         p1 <- p1 + geom_point(size=3)
         if ( facet == "Facet")
         {

@@ -81,7 +81,11 @@ qwcbPlot <- function(qw.data,
         } else (maintitle <- "No site selected")
         
         ylabel <- "Charge balance Percent difference\n( [sum(cat)-sum(an)]/[tot. charge] * 100 )"
-        p1 <- ggplot(data=plotdata,aes(x=SAMPLE_START_DT,y=perc.diff,shape = complete.chem, color = MEDIUM_CD))
+        p1 <- ggplot(data=plotdata,aes(x=SAMPLE_START_DT,y=perc.diff,shape = complete.chem, color = MEDIUM_CD,
+                                       text = paste('SAMPLE_START_DT:',SAMPLE_START_DT,'\n',
+                                                    'Percent Diff.:',perc.diff,'\n',
+                                                    'Chemistry:',complete.chem,'\n',
+                                                    'MEDIUM_CD:',MEDIUM_CD,'\n')))
         p1 <- p1 + geom_point(size=3)
         p1 <- p1 + ylab(paste(ylabel,"\n")) + xlab("Date")
         p1 <- p1 + scale_colour_manual("Medium code",values = medium.colors)

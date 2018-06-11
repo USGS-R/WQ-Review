@@ -95,7 +95,11 @@ qwparmParmPlot <- function(qw.data,
         pp.plot.data <- na.omit(pp.plot.data)
         ###Make the plot
         p1 <- ggplot(data=pp.plot.data)
-        p1 <- p1 + geom_point(aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD),size=3)
+        p1 <- p1 + geom_point(aes(x=RESULT_VA_X,y=RESULT_VA_Y,color = MEDIUM_CD,
+                                  text = paste('RESULT_VA_X:',RESULT_VA_X,'\n',
+                                               'RESULT_VA_Y:',RESULT_VA_Y,'\n',
+                                               'MEDIUM_CD:',MEDIUM_CD,'\n')),
+                              size=3)
         p1 <- p1 + ylab(paste(ylabel,"\n")) + xlab(paste("\n",xlabel))
         #Highlight records
         if(nrow(subset(pp.plot.data, RECORD_NO %in% highlightrecords)) > 0)

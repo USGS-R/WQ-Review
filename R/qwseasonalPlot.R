@@ -64,7 +64,10 @@ qwseasonalPlot <- function(qw.data,
         ylabel <- unique(plotdata$PARM_DS[plotdata$PARM_CD == plotparm])
         
         p1 <- ggplot(data=plotdata)
-        p1 <- p1 + geom_point(aes(x=DOY,y=RESULT_VA, color=MEDIUM_CD,shape = REMARK_CD),size=3)
+        p1 <- p1 + geom_point(aes(x=DOY,y=RESULT_VA, color=MEDIUM_CD,shape = REMARK_CD,
+                                  text = paste('Day-of-year:',DOY,'\n',
+                                               'REMARK_CD RESULT_VA:',REMARK_CD,RESULT_VA,'\n',
+                                               'MEDIUM_CD:',MEDIUM_CD,'\n')),size=3)
         
         if ( facet == "Facet")
         {

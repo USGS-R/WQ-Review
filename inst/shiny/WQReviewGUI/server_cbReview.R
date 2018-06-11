@@ -78,7 +78,7 @@ output$qwcbPlot <- renderPlotly({
              #show.smooth = input$fit_timeseries,
              #labelDQI = input$labelDQI,
              facet = input$facetSel_cb,
-             printPlot=FALSE)) %>%
+             printPlot=FALSE), tooltip = 'text') %>%
     config(collaborate=F,cloud=F,showLink=F,displaylogo=F,modeBarButtonsToRemove=c("lasso2d","select2d","autoScale2d","zoom2d","sendDataToCloud"))
 })
 
