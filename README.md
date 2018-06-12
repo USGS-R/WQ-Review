@@ -43,9 +43,9 @@ Installation for stand alone application (non-R users)
 
 1. Download the application at
 
-ftp://ftpint.usgs.gov/private/cr/co/lakewood/tmills/wqReviewSetup_2.0beta.exe
+PLACEHOLDER FOR GOOGLE DRIVE LINK
 
-2. Run wqReviewSetup_2.0beta.exe and follow the installation instructions.
+2. Run WQReviewInstall_2.0beta_CP.exe and follow the installation instructions.
 
 **DO NOT INSTALL WQ-REVIEW INTO YOUR PROGRAM FILES DIRECTORY OR THE APPLICATION WILL NOT RUN. INSTALL TO C DRIVE OR YOUR DOCUMENTS FOLDER.**
 
