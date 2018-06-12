@@ -3,9 +3,9 @@ ATTENTION: WQReview 2.0 development version!
 
 This is a development version of the WQReview package. This new implementation allows for changing DQI codes through batchfile creation. DO NOT CHANGE DATA IN YOUR DATABASE USING THIS PROGRAM WITHOUT CAREFUL SCRUTINY. It is strongly recommended that you use the "verify only" option to test data load before makign any real changes.
 
+Please view this [Workflow Video](https://drive.google.com/file/d/1ljb82pTLF_N4jh-n_LGO-_8bymAmvtgf/view?usp=sharing) from original developer T.Joe Mills.
 
-
-Toolbox for discrete water-quality data review and exploration.Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
+Toolbox for discrete water-quality data review and exploration. Users are encouraged to post any bugs or comments for additional functionality on the issues page at:
 
 [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues).
 
