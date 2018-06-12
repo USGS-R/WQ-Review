@@ -1,6 +1,6 @@
 #' Sum ions vs conductance plot
 #' 
-#' Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance. Requires charge balance = TRUE in NWISPullR
+#' Takes output data object from readNWISodbc and prints a plot of sum ions vs. conductance.
 #' @param qw.data A qw.data object generated from readNWISodbc
 #' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
 #' @param scales Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"
@@ -37,6 +37,22 @@ qwscSumPlot <- function(qw.data,
                        printPlot = TRUE
                        ) {
 
+        ###Run ion balance function if not run already and dplyr::left_join to qw.data$PlotTable
+        if(is.null(qw.data$PlotTable$perc.diff))
+        {
+                tryCatch({       
+                        chargebalance.table <- ionBalance(qw.data = qw.data,wide=FALSE)
+                        
+                        ###Check that a balance was calculated
+                        ###Join charge balance table to plot table
+                        chargebalance.table <- chargebalance.table[c("RECORD_NO","sum_cat","sum_an","perc.diff","complete.chem")]
+                        qw.data$PlotTable <- dplyr::left_join(qw.data$PlotTable,chargebalance.table[!duplicated(chargebalance.table$RECORD_NO), ],by="RECORD_NO")           
+                }, error = function(e) {
+                        stop("Insufficient data to calculate ion sums. Check your qw.data$PlotTable data")
+                })
+                
+        } else {}
+        
   ###Subset to plot data
   plotdata <- subset(qw.data$PlotTable,SITE_NO %in% site.selection & PARM_CD== "00095")
   

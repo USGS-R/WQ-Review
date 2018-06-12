@@ -19,6 +19,7 @@
 #'         groups=TRUE)
 #' @importFrom dplyr summarize
 #' @importFrom dplyr left_join
+#' @importFrom plyr ddply
 #' @export
 
 
@@ -170,7 +171,7 @@ whatData <- function(qw.data,searchParms,begin.date = NULL,end.date = NULL,group
   	} else(print("To many or to few parameter groups, please check parameter input"))
   
   } else { 
-          missingData <- ddply(checkTable,"RECORD_NO", summarize,
+          missingData <- plyr::ddply(checkTable,"RECORD_NO", summarize,
                                missingParms = paste(searchParms[which(!(searchParms %in% PARM_CD))],collapse = ","))
   }
     

@@ -1,4 +1,4 @@
-WQReview 2.0 development version
+ATTENTION: WQReview 2.0 development version!
 ----------
 
 This is a development version of the WQReview package. This new implementation allows for changing DQI codes through batchfile creation. DO NOT CHANGE DATA IN YOUR DATABASE USING THIS PROGRAM WITHOUT CAREFUL SCRUTINY. It is strongly recommended that you use the "verify only" option to test data load before makign any real changes.

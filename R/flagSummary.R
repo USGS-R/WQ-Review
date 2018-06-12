@@ -9,6 +9,7 @@
 #' @importFrom dplyr left_join
 #' @importFrom dplyr summarize
 #' @importFrom dplyr transmute
+#' @importFrom dplyr filter
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 
@@ -39,7 +40,7 @@ flagSummary <- function(qw.data,returnAll = FALSE, returnAllTables = FALSE)
         
         flaggedSamples <- unique(flaggedSamples)
         
-        temp <- dplyr::summarize(group_by(flaggedSamples,RECORD_NO,PARM_CD),
+        temp <- dplyr::summarize(dplyr::group_by(flaggedSamples,RECORD_NO,PARM_CD),
                                  chemFlags = length(RECORD_NO[RECORD_NO %in% chemFlagTable$RECORD_NO]),
                                  repFlags = length(PARM_CD[PARM_CD %in% repTable$PARM_CD[repTable$flags=="RPD > 10% and > RPT_LEV"]]),
                                  resultFlag = ifelse(paste0(RECORD_NO,PARM_CD) %in% 
@@ -53,7 +54,7 @@ flagSummary <- function(qw.data,returnAll = FALSE, returnAllTables = FALSE)
         flaggedSamples <- dplyr::left_join(flaggedSamples,temp,by=c("RECORD_NO","PARM_CD"))
         
         if(returnAll == FALSE) {
-                flaggedSamples <- filter(flaggedSamples,chemFlags > 0 |
+                flaggedSamples <- dplyr::filter(flaggedSamples,chemFlags > 0 |
                                                  repFlags > 0 |
                                                  resultFlag == TRUE |
                                                  wholevPartFlag == TRUE)

@@ -1,4 +1,4 @@
-###This contains all the ui elements for the timeseries plot tab.
+###This contains all the ui elements for the data import tab.
 ###It is sourced from the ui-body tab, which is eventually sourced from the ui tab.
 ###These are contained in individual scripts just for organization sake.
 
@@ -43,8 +43,6 @@ fluidPage(
       icon = icon("dashboard")
     ),
     mainPanel(
-      
-      
       h3(textOutput("importWarning")),
       h3(textOutput("samplesRetrieved")),
       h3(textOutput("resultsRetrieved")),

@@ -106,7 +106,7 @@ output$qwtsPlot <- renderPlotly({
              labelDQI = input$labelDQI,
              facet = input$facetSel,
              show.q = input$showQ,
-             printPlot=FALSE) + theme(legend.title = element_blank())) %>% 
+             printPlot=FALSE) + theme(legend.title = element_blank()), tooltip = 'text') %>% 
     config(collaborate=F,cloud=F,showLink=F,displaylogo=F,modeBarButtonsToRemove=c("lasso2d","select2d","autoScale2d","zoom2d","sendDataToCloud"))
 })
 
@@ -131,7 +131,7 @@ output$qwseasonalPlot <- renderPlotly({
                           labelDQI = input$labelDQI,
                           show.smooth = input$fit_seasonal,
                           highlightrecords = UNAP_sel()$RECORD_NO,
-                          print = FALSE) + theme(legend.title = element_blank())) %>% 
+                          print = FALSE) + theme(legend.title = element_blank()), tooltip = 'text') %>% 
     config(collaborate=F,cloud=F,showLink=F,displaylogo=F,modeBarButtonsToRemove=c("lasso2d","select2d","autoScale2d","zoom2d","sendDataToCloud"))
   
 })
@@ -168,7 +168,7 @@ output$qwparmParmPlot1 <- renderPlotly({
                           log.scaleY = log.scaleY1,
                           log.scaleX = log.scaleX1,
                           highlightrecords = UNAP_sel()$RECORD_NO,
-                          printPlot = FALSE) + theme(legend.title = element_blank())) %>% 
+                          printPlot = FALSE) + theme(legend.title = element_blank()), tooltip = 'text') %>% 
     config(collaborate=F,cloud=F,showLink=F,displaylogo=F,modeBarButtonsToRemove=c("lasso2d","select2d","autoScale2d","zoom2d","sendDataToCloud"))
   
   
@@ -207,7 +207,7 @@ output$qwparmParmPlot2 <- renderPlotly({
                           log.scaleY = log.scaleY2,
                           log.scaleX = log.scaleX2,
                           highlightrecords = UNAP_sel()$RECORD_NO,
-                          printPlot = FALSE) + theme(legend.title = element_blank())) %>% 
+                          printPlot = FALSE) + theme(legend.title = element_blank()), tooltip = 'text') %>% 
     config(collaborate=F,cloud=F,showLink=F,displaylogo=F,modeBarButtonsToRemove=c("lasso2d","select2d","autoScale2d","zoom2d","sendDataToCloud"))
   
 })

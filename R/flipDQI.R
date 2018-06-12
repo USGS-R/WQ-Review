@@ -66,12 +66,12 @@ flipDQI <- function(STAIDS,
   
   
   if(is.null(records)){
-    print("You must enter atleast one record number")
-    stop("You must enter atleast one record number")
+    print("You must enter at least one record number")
+    stop("You must enter at least one record number")
   }
   if(is.null(parameters)){
-    print("You must enter atleast one parameter code")
-    stop("You must enter atleast one parameter code")
+    print("You must enter at least one parameter code")
+    stop("You must enter at least one parameter code")
   }
   if(is.null(dqiCodes)){
     print("You must enter atleast one dqi code")

@@ -31,7 +31,7 @@ qwcbPlot(qw.data, site.selection, facet = "multisite", scales = "fixed",
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 }
 \description{
-Takes output list from readNWISodbc and prints a plot of charge balance vs time. Requires charge balance = TRUE in NWISPullR
+Takes output list from readNWISodbc and prints a plot of charge balance vs time.
 }
 \examples{
 data("exampleData",package="WQReview")
