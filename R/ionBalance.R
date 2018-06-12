@@ -54,7 +54,7 @@ ionBalance <- function(qw.data, wide = FALSE)
   ###Subset Alk and NO3 data out for sub ion calculatoin
   alkData <- subset(ion.charges,ION_BAL_CD == "Alk")
   NO2NO3Data <- subset(ion.charges,ION_BAL_CD == "NO2NO3")
-  otherData <- subset(ion.charges,ION_BAL_CD %in% c("Ca","Cl","Fe","H_ion","K","Mg","Mn","Na","SO4")) 
+  otherData <- subset(ion.charges,ION_BAL_CD %in% c("Ca","Cl","F","Fe","H_ion","K","Mg","Mn","Na","SO4")) 
   
   #Retain only first row, i.e. the top preference, of elements which do not have a subion
   otherData <- otherData[!duplicated(otherData$ION_BAL_CD),]
