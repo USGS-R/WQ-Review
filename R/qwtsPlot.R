@@ -43,12 +43,12 @@ qwtsPlot <- function(qw.data,
                      wySymbol = FALSE,
                      labelDQI = FALSE,
                      printPlot = TRUE){
-        ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
-        medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00","#D55E00")
-        names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ","OA ")
-        ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
-        qual.shapes <- c(19,0,2,5,4,3,6,7,8,9,11)
-        names(qual.shapes) <- c("Sample","<",">","E","A","M","N","R","S","U","V")
+        # ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
+        # medium.colors <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#D55E00","#D55E00")
+        # names(medium.colors) <- c("WS ","WG ","WSQ","WGQ","OAQ","OA ")
+        # ## Sets color to medium code name, not factor level, so its consistant between all plots regardles of number of medium codes in data
+        # qual.shapes <- c(19,0,2,5,4,3,6,7,8,9,11)
+        # names(qual.shapes) <- c("Sample","<",">","E","A","M","N","R","S","U","V")
         
         plotdata <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & 
                                    PARM_CD == (plotparm))
@@ -64,11 +64,11 @@ qwtsPlot <- function(qw.data,
         #ylabel <- stringr::str_wrap(unique(plotdata$PARM_DS[which(plotdata$PARM_CD==(plotparm))]), width = 25)
         ylabel <- unique(plotdata$PARM_DS[plotdata$PARM_CD == plotparm])
         
-        p1 <- ggplot(data=plotdata,aes(x=SAMPLE_START_DT,y=RESULT_VA,shape = REMARK_CD, color = MEDIUM_CD,
+        p1 <- ggplot(data=plotdata,)
+        p1 <- p1 + geom_point(aes(x=SAMPLE_START_DT,y=RESULT_VA,shape = REMARK_CD, color = MEDIUM_CD,
                                        text = paste('SAMPLE_START_DT:',SAMPLE_START_DT,'\n',
                                                     'REMARK_CD RESULT_VA:',REMARK_CD,RESULT_VA,'\n',
-                                                    'MEDIUM_CD:',MEDIUM_CD,'\n')))
-        p1 <- p1 + geom_point(size=3)
+                                                    'MEDIUM_CD:',MEDIUM_CD,'\n')), size=3)
         if ( facet == "Facet")
         {
                 p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales=scales)
@@ -98,7 +98,7 @@ qwtsPlot <- function(qw.data,
         
         if(labelDQI == TRUE)
         {
-                p1 <- p1 + geom_text(aes(label=DQI_CD),size=7,vjust="bottom",hjust="right")
+                p1 <- p1 + geom_text(aes(x=SAMPLE_START_DT,y=RESULT_VA,color = MEDIUM_CD,label=DQI_CD),size=7,vjust="bottom",hjust="right")
         }
         
         ##highlight this water year's data
@@ -113,7 +113,8 @@ qwtsPlot <- function(qw.data,
         ###Add smooth if checked
         if((show.smooth)==TRUE){
                 p1 <- p1 + geom_smooth(data = subset(plotdata, REMARK_CD=="Sample" & 
-                                                             MEDIUM_CD %in%(c("WS ","WG "))))
+                                                             MEDIUM_CD %in%(c("WS ","WG "))),
+                                       aes(x=SAMPLE_START_DT,y=RESULT_VA))
         } 
         
         
@@ -136,7 +137,9 @@ qwtsPlot <- function(qw.data,
                 p2 <- p2 + ylab("Value, see individual parameters for units") + xlab("Date")
                 p2 <- p2 + ggtitle(maintitle)
                 if((show.smooth)==TRUE){
-                        p2 <- p2 + geom_smooth(data=subset(Qplotdata,PARM_CD == plotparm & MEDIUM_CD %in%  MEDIUM_CD %in% c("WS ","WG ")))
+                        p2 <- p2 + geom_smooth(data = subset(Qplotdata, REMARK_CD=="Sample" & 
+                                                                     MEDIUM_CD %in%(c("WS ","WG "))),
+                                               aes(x=SAMPLE_START_DT,y=RESULT_VA))
                 }
                 
                 
