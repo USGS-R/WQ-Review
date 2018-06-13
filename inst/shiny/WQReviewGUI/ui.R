@@ -105,7 +105,7 @@ shinyUI(fluidPage(theme="theme.css",title="WQReview 2.0.0_beta",
                              tabPanel(title = "WQReview 2.0.0_beta",
                                       helpText(a("WQReview 2.0.0_beta",
                                                  href="https://github.com/USGS-R/WQ-Review/tree/dev",target="_blank")),
-                                      helpText(a('FAQ', href="FAQ.htm",target="_blank")),
+                                      helpText(a('FAQ', href="faq.html",target="_blank")),
                                       helpText(a('User Guide', href="WQReviewGUI.html",target="_blank")))
                              
 
