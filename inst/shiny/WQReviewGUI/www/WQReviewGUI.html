@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<!-- saved from url=(0100)file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html -->
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<meta charset="utf-8">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-<meta name="generator" content="pandoc">
+<head>
 
-<meta name="author" content="T. Joe Mills">
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
 
-<meta name="date" content="2015-11-06">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="T. Joe Mills and Colin Penn" />
+
+<meta name="date" content="2018-06-13" />
 
 <title>WQReview GUI User Guide</title>
 
@@ -16,171 +20,112 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
-
-
-<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css">
-
-<script type="text/javascript" src="./WQReviewGUI_files/MathJax.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
-.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
-</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
-.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
-.MathJax_MenuItem {padding: 2px 2em; background: transparent}
-.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
-.MathJax_MenuActive .MathJax_MenuArrow {color: white}
-.MathJax_MenuArrow.RTL {left: .5em; right: auto}
-.MathJax_MenuCheck {position: absolute; left: .7em}
-.MathJax_MenuCheck.RTL {right: .7em; left: auto}
-.MathJax_MenuRadioCheck {position: absolute; left: 1em}
-.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
-.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
-.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
-.MathJax_MenuDisabled {color: GrayText}
-.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
-.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
-</style><style type="text/css">.MathJax_Preview .MJXc-math {color: inherit!important}
-</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
-#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
-#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
-#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
-</style><style type="text/css">.MathJax_Preview {color: #888}
-#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
-#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
-.MathJax_Error {color: #CC0000; font-style: italic}
-</style><style type="text/css">.MJXc-script {font-size: .8em}
-.MJXc-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
-.MJXc-bold {font-weight: bold}
-.MJXc-italic {font-style: italic}
-.MJXc-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
-.MJXc-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
-.MJXc-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
-.MJXc-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
-.MJXc-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
-.MJXc-largeop {font-size: 150%}
-.MJXc-largeop.MJXc-int {vertical-align: -.2em}
-.MJXc-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
-.MJXc-display {display: block; text-align: center; margin: 1em 0}
-.MJXc-math span {display: inline-block}
-.MJXc-box {display: block!important; text-align: center}
-.MJXc-box:after {content: " "}
-.MJXc-rule {display: block!important; margin-top: .1em}
-.MJXc-char {display: block!important}
-.MJXc-mo {margin: 0 .15em}
-.MJXc-mfrac {margin: 0 .125em; vertical-align: .25em}
-.MJXc-denom {display: inline-table!important; width: 100%}
-.MJXc-denom > * {display: table-row!important}
-.MJXc-surd {vertical-align: top}
-.MJXc-surd > * {display: block!important}
-.MJXc-script-box > *  {display: table!important; height: 50%}
-.MJXc-script-box > * > * {display: table-cell!important; vertical-align: top}
-.MJXc-script-box > *:last-child > * {vertical-align: bottom}
-.MJXc-script-box > * > * > * {display: block!important}
-.MJXc-mphantom {visibility: hidden}
-.MJXc-munderover {display: inline-table!important}
-.MJXc-over {display: inline-block!important; text-align: center}
-.MJXc-over > * {display: block!important}
-.MJXc-munderover > * {display: table-row!important}
-.MJXc-mtable {vertical-align: .25em; margin: 0 .125em}
-.MJXc-mtable > * {display: inline-table!important; vertical-align: middle}
-.MJXc-mtr {display: table-row!important}
-.MJXc-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
-.MJXc-mtr > .MJXc-mtd:first-child {padding-left: 0}
-.MJXc-mtr:first-child > .MJXc-mtd {padding-top: 0}
-.MJXc-mlabeledtr {display: table-row!important}
-.MJXc-mlabeledtr > .MJXc-mtd:first-child {padding-left: 0}
-.MJXc-mlabeledtr:first-child > .MJXc-mtd {padding-top: 0}
-.MJXc-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
-.MJXc-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
-.MJXc-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
-.MJXc-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
-.MJXc-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
-.MJXc-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
-.MJXc-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
-.MJXc-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
-.MJXc-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
-.MJXc-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
-.MJXc-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
-.MathJax_CHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
-</style></head>
-
-<body><div id="MathJax_Message" style="display: none;"></div>
 
 
 
-<div id="header">
-<h1 class="title">WQReview GUI User Guide</h1>
-<h4 class="author"><em>T. Joe Mills</em></h4>
-<h4 class="date"><em>2015-11-06</em></h4>
-</div>
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">WQReview GUI User Guide</h1>
+<h4 class="author"><em>T. Joe Mills and Colin Penn</em></h4>
+<h4 class="date"><em>2018-06-13</em></h4>
+
 
 <div id="TOC">
 <ul>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#importing-data">Importing Data</a><ul>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#data-import-options">Data import options</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#a-basic-data-import">A basic data import</a></li>
+<li><a href="#importing-data">Importing Data</a><ul>
+<li><a href="#data-import-options">Data import options</a></li>
+<li><a href="#a-basic-data-import">A basic data import</a></li>
 </ul></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#plot-descriptions">Plot descriptions</a><ul>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#symbology">Symbology</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#labelling-conventions">Labelling conventions</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#selecting-data-to-plot">Selecting data to plot</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#global-plot-controls">Global plot controls</a><ul>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#new-data-threshold">New data threshold</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#record-highlights">Record highlights</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#plot-clicking-brushing-and-hovering">Plot clicking, brushing, and hovering</a></li>
+<li><a href="#plot-descriptions">Plot descriptions</a><ul>
+<li><a href="#symbology">Symbology</a></li>
+<li><a href="#labelling-conventions">Labelling conventions</a></li>
+<li><a href="#selecting-data-to-plot">Selecting data to plot</a></li>
+<li><a href="#global-plot-controls">Global plot controls</a><ul>
+<li><a href="#new-data-threshold">New data threshold</a></li>
+<li><a href="#record-highlights">Record highlights</a></li>
+<li><a href="#plot-clicking-brushing-and-hovering">Plot clicking, brushing, and hovering</a></li>
 </ul></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#plot-types">Plot types</a><ul>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#timeseries">Timeseries</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#seasonal-plot">Seasonal plot</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#parameter-box-plot">Parameter box plot</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#parameter-parameter-plot">Parameter-parameter plot</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#matrix-plot">Matrix plot</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#chargebalance-timeseries">Chargebalance timeseries</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#ions-vs-conductance">Ions vs conductance</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#rep-parm-boxplot">Rep-parm boxplot</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#blank-sample-timeseries">Blank sample timeseries</a></li>
+<li><a href="#plot-types">Plot types</a><ul>
+<li><a href="#timeseries">Timeseries</a></li>
+<li><a href="#seasonal-plot">Seasonal plot</a></li>
+<li><a href="#parameter-parameter-plot">Parameter-parameter plot</a></li>
+<li><a href="#charge-balance-timeseries">Charge balance timeseries</a></li>
+<li><a href="#ions-vs-conductance">Ions vs conductance</a></li>
+<li><a href="#rep-parm-boxplot">Rep-parm boxplot</a></li>
+<li><a href="#blank-sample-detections">Blank sample detections</a></li>
 </ul></li>
 </ul></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#tables">Tables</a><ul>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#auto-flagged-samples">Auto-flagged samples</a><ul>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#basic-chemical-flags">Basic chemical flags</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#pesticide-flags">Pesticide flags</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#results-flags">Results flags</a></li>
+<li><a href="#tables">Tables</a><ul>
+<li><a href="#auto-flagged-samples">Auto-flagged samples</a><ul>
+<li><a href="#unapproved-data">Unapproved data</a></li>
+<li><a href="#reviewed-unapproved-data">Reviewed unapproved data</a></li>
+<li><a href="#chemical-sense">Chemical sense</a></li>
+<li><a href="#charge-balance-issues">Charge balance issues</a></li>
+<li><a href="#whole-vs-part">Whole vs Part</a></li>
+<li><a href="#pesticide-flags">Pesticide flags</a></li>
+<li><a href="#replicate-table">Replicate table</a></li>
+<li><a href="#blank-table">Blank table</a></li>
+<li><a href="#all-charge-balance">All charge balance</a></li>
+<li><a href="#data-by-result">Data by result</a></li>
+<li><a href="#data-by-sample">Data by sample</a></li>
 </ul></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#data-and-qaqc-tables">Data and QAQC tables</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#flag-descriptions">Flag descriptions</a><ul>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#sc_badlabvsfield">SC_badLabVSField</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#section">30.01.</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#ph-higher-than-expected">30.02. pH higher than expected</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#dissolved-oxygen-higher-than-expected">30.03. Dissolved Oxygen higher than expected</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#greater-than-max-value-in-old-data">30.11. Greater than max value in old data</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#less-than-min-value-in-old-data">30.12. Less than min value in old data</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#schedule-2437-pesticide-hits-greater-than-max-hits-in-old-data">30.13. Schedule 2437 Pesticide hits greater than max hits in old data</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#less-than-minimum-pesticide-hits-in-old-data">30.14 Less than minimum pesticide hits in old data</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#greater-than-99p-in-old-data">30.15. Greater than 99p in old data</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#less-than-1p-in-old-data">30.16. Less than 1p in old data</a></li>
-<li><a href="file:///C:/Users/JoeMills-PC/AppData/Local/Temp/Rtmps9jPmL/preview-1014752943b1.dir/WQReviewGUI.html#questionable-cation-anion-balance">30.21. Questionable cation-anion balance</a></li>
+<li><a href="#qwsample-and-qwresult">qwsample and qwresult</a></li>
+<li><a href="#data-and-qaqc-tables">Data and QAQC tables</a></li>
+<li><a href="#flag-descriptions">Flag descriptions</a><ul>
+<li><a href="#sc_badlabvsfield">SC_badLabVSField</a></li>
+<li><a href="#section">30.01.</a></li>
+<li><a href="#ph-higher-than-expected">30.02. pH higher than expected</a></li>
+<li><a href="#dissolved-oxygen-higher-than-expected">30.03. Dissolved Oxygen higher than expected</a></li>
+<li><a href="#greater-than-max-value-in-old-data">30.11. Greater than max value in old data</a></li>
+<li><a href="#less-than-min-value-in-old-data">30.12. Less than min value in old data</a></li>
+<li><a href="#schedule-2437-pesticide-hits-greater-than-max-hits-in-old-data">30.13. Schedule 2437 Pesticide hits greater than max hits in old data</a></li>
+<li><a href="#less-than-minimum-pesticide-hits-in-old-data">30.14 Less than minimum pesticide hits in old data</a></li>
+<li><a href="#greater-than-99p-in-old-data">30.15. Greater than 99p in old data</a></li>
+<li><a href="#less-than-1p-in-old-data">30.16. Less than 1p in old data</a></li>
+<li><a href="#questionable-cation-anion-balance">30.21. Questionable cation-anion balance</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -192,18 +137,18 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ol style="list-style-type: decimal">
 <li>Load the WQReview package by typing the following into your R script or command window:</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(WQReview)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(WQReview)</code></pre></div>
 <ol style="list-style-type: decimal">
 <li>To open the GUI run the WQReviewGUI() function.</li>
 </ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">WQReviewGUI</span>()</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">WQReviewGUI</span>()</code></pre></div>
 <p>The GUI window will open in your system’s default internet browser. <strong>It is recommended that the GUI be run in Google Chrome.</strong> If the GUI opens in internet explorer, you need to change your system’s default browser to Google Chrome by opening Google Chrome and going to settings -&gt; default browser (bottom of page).</p>
 <div id="data-import-options" class="section level2">
 <h2>Data import options</h2>
 <p>The data import tab has 10 main inputs. A description of the input is given when the input is hovered over with the mouse cursor.</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Site number</strong>: This input takes a manually entered site number(s). Type the site number in and click “add”. You may add as many site numbers as you would like. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry.</p></li>
-<li><p><strong>Site number file</strong>: This input takes a file of site IDs. The file must be a single column text file of site numbers.Make sure leading zero’s have not been removed if using excel to generate the file.</p></li>
+<li><p><strong>Site number file</strong>: This input takes a file of site IDs. The file must be a single column text file of site numbers. Make sure leading zero’s have not been removed if using excel to generate the file.</p></li>
 <li><p><strong>Parameter codes</strong>: This input takes a manually entered parameter codes (pcodes). This behaves the same as the site number input.</p></li>
 <li><p><strong>Parameter groups</strong>: This input is used to select NWIS parameter groups to retrieve, rather than explicitly selecting individual pcodes.</p></li>
 <li><p><strong>pCode file</strong>: This input takes a file of pcodes. The file must be a single column text file of pcodes. Make sure leading zero’s have not been removed if using excel to generate the file.</p></li>
@@ -223,10 +168,11 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><p>Select “All” parameter groups from the Parameter groups select box to pull data for all parameters or select a specific group of parameters. **Beware, if pulling selected groups of parameters (e.g. “cations”) chargebalance may not be able to be calculated.</p></li>
 <li>Leave the date range input unchanged to pull the last 10 years of data or enter a date range in the date range input to pull a subset of the data.</li>
 <li>Click the “Get data” button to import the data.</li>
-<li>A dialogue box and status bar describing the import process will appear in the upper right corner of the GUI.</li>
-<li><p>Once data has been retrieved, text will be displayed listing the results of the data import.</p></li>
+<li>A dialogue box and status bar describing the import process will appear in the bottom right corner of the GUI.</li>
+<li>A Microsoft Excel workbook window will pop-up and populate with tabs of reports.</li>
+<li><p>Once data has been retrieved, text will be displayed listing the results of the data import. This can take a few seconds after the Excel workbook populates to show up.</p></li>
 </ol>
-<p>If you encounter issues with the data import, send an email to <a href="mailto:tmills@usgs.gov">tmills@usgs.gov</a> and/or post an issue on the WQReview GitHub page at <a href="https://github.com/USGS-R/WQ-Review/issues">WQ-Review Issues</a></p>
+<p>If you encounter issues with the data import, send an email to <a href="mailto:cpenn@usgs.gov">cpenn@usgs.gov</a> and/or post an issue on the WQReview GitHub page at <a href="https://github.com/USGS-R/WQ-Review/issues">WQ-Review Issues</a></p>
 <p>We can now begin to work with the data.</p>
 </div>
 </div>
@@ -265,26 +211,22 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2>Global plot controls</h2>
 <div id="new-data-threshold" class="section level3">
 <h3>New data threshold</h3>
-<p>Point data in all plots can be labeled as “New” data based off of when that data was last modified using the “New data threshold” slider. Any data modified after the date indicated on the slider will be labeled as “New”. This helps identify data that has not been reviewed from historic data when the data are not displayed as a timeseries. Note that the “New data threshold” is set off of when the data were last <strong>modified</strong> for result-level plots (e.g.&nbsp;timeseries, seasonal, etc.) not when they were created. Sample-level plots (e.g.&nbsp;charge balance) are labeled new according to the sample collection date.</p>
+<p>Point data in all plots can be labeled as “New” data based off of when that data was last modified using the “New data threshold” slider. Any data modified after the date indicated on the slider will be labeled as “New”. This helps identify data that has not been reviewed from historic data when the data are not displayed as a timeseries. Note that the “New data threshold” is set off of when the data were last <strong>modified</strong> for result-level plots (e.g. timeseries, seasonal, etc.) not when they were created. Sample-level plots (e.g. charge balance) are labeled new according to the sample collection date.</p>
 </div>
 <div id="record-highlights" class="section level3">
 <h3>Record highlights</h3>
-<p>Samples or results will be hilighted with a red halo if that sample or result has been flagged for one or more of the data checks listed in the data check table.</p>
+<p>Samples or results will be highlighted with a red halo if that sample or result has been selected in the data table.</p>
 </div>
 <div id="plot-clicking-brushing-and-hovering" class="section level3">
 <h3>Plot clicking, brushing, and hovering</h3>
-<p>Most plots are interactive in that the user can click on a point, or zoom into specific areas of the plot. Boxplots are not interactive.</p>
-<div id="clicking" class="section level4">
-<h4>Clicking</h4>
-<p>Clicking on a datapoint will populate a table with all data pertaining to that point. This table will persist until another point is clicked.</p>
-</div>
+<p>Most plots are interactive in that the user can hover on a point to see information, or zoom into specific areas of the plot. Boxplots are not interactive.</p>
 <div id="brushing" class="section level4">
 <h4>Brushing</h4>
-<p>The user may also select and area of the plot by holding down a mouse click and drawing a rectangle around hte area of interest. A new plot will appear below, zoomed into the area of interest. Additionaly, a table will be displayed below with all data pertaining to the points within the zoomed area. Points in the zoomed plot can also be click to get information.</p>
+<p>In interactive plots, the user may also select an area of the plot by holding down a mouse click and drawing a rectangle around the area of interest. A new plot will appear below, zoomed into the area of interest.</p>
 </div>
 <div id="hovering" class="section level4">
 <h4>Hovering</h4>
-<p>Hovering the mouse over any given data point will display basic information about the data point on the left sidebar of the plot frame.</p>
+<p>Hovering the mouse over any given data point will display basic information about the data point.</p>
 </div>
 </div>
 </div>
@@ -293,7 +235,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>This section will describe the details of each different plot type and how to control them in the WQReview GUI.</p>
 <div id="timeseries" class="section level3">
 <h3>Timeseries</h3>
-<p>This tab generates of plot of a selected parameter through time.</p>
+<p>This generates a plot of a selected parameter through time.</p>
 <div id="uses" class="section level4">
 <h4>Uses</h4>
 <ul>
@@ -305,7 +247,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h4>Data selection options</h4>
 <ul>
 <li>Select one or multiple sites</li>
-<li>Select only one parameter</li>
+<li>Select only one parameter from the dropdown list or in linked unapproved data table in Chrome.</li>
 </ul>
 </div>
 <div id="plot-controls" class="section level4">
@@ -314,12 +256,13 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
 <li>Add LOESS: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth</li>
 <li>Display hydrograph: displays the instantaneous hydrograph if data are available under parameter code “00061”</li>
+<li>Label DQI: Superimposes the sample DQI_CD over the point</li>
 </ul>
 </div>
 </div>
 <div id="seasonal-plot" class="section level3">
 <h3>Seasonal plot</h3>
-<p>This pane generates a seasonal timeseries of parameter value by day of year (DOY) to examine seasonality in parameter values.</p>
+<p>This generates a seasonal timeseries of parameter value by day of year (DOY) to examine seasonality in parameter values.</p>
 <div id="uses-1" class="section level4">
 <h4>Uses</h4>
 <ul>
@@ -339,53 +282,28 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ul>
 <li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
 <li>Add LOESS: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth</li>
-</ul>
-</div>
-</div>
-<div id="parameter-box-plot" class="section level3">
-<h3>Parameter box plot</h3>
-<p>This pane generates a box plot of one or more parameters for one or more sites. <strong>Note that this is not an appropriate censored boxplot. Censored results are given the censored value for quantile calculations.</strong></p>
-<div id="uses-2" class="section level4">
-<h4>Uses</h4>
-<ul>
-<li>Comparing parameter values at a site(s).</li>
-<li>Identifying outliers in a parameter.</li>
-</ul>
-</div>
-<div id="data-selection-options-2" class="section level4">
-<h4>Data selection options</h4>
-<ul>
-<li>Select one or multiple sites</li>
-<li>Select one or multiple parameters</li>
-</ul>
-</div>
-<div id="plot-controls-2" class="section level4">
-<h4>Plot controls</h4>
-<ul>
-<li>Log 10 scale: This plots parameter values on a log10 scale.</li>
-<li>Show sample points: This displays individual sample points.</li>
-<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+<li>Label DQI: Superimposes the sample DQI_CD over the point</li>
 </ul>
 </div>
 </div>
 <div id="parameter-parameter-plot" class="section level3">
 <h3>Parameter-parameter plot</h3>
-<p>This pane generates an x-y plot of a selected parameter vs another selected parameter.</p>
-<div id="uses-3" class="section level4">
+<p>This generates an x-y plot of a selected parameter vs another selected parameter. The two side-by-side plots default to the selected parameter vs. discharge and vs. Specific Conductance.</p>
+<div id="uses-2" class="section level4">
 <h4>Uses</h4>
 <ul>
 <li>Identifying relationships between parameters.</li>
 <li>Identifying outliers in related parameters.</li>
 </ul>
 </div>
-<div id="data-selection-options-3" class="section level4">
+<div id="data-selection-options-2" class="section level4">
 <h4>Data selection options</h4>
 <ul>
 <li>Select one or multiple sites</li>
 <li>Select only one parameter per axis</li>
 </ul>
 </div>
-<div id="plot-controls-3" class="section level4">
+<div id="plot-controls-2" class="section level4">
 <h4>Plot controls</h4>
 <ul>
 <li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
@@ -394,42 +312,75 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul>
 </div>
 </div>
-<div id="matrix-plot" class="section level3">
-<h3>Matrix plot</h3>
-<p>This pane generates a plot matrix of one or more parameters for one or more sites. Essentially, this is a parameter-parameter plot for multiple parameters. The lower triangular quadrant of panels are parameter-parameter plots, the diagonal contains a histogram of values and the labelled pcodes, and the upper triangular quadrant of panels contains the correlation coefficients.</p>
-<div id="uses-4" class="section level4">
-<h4>Uses</h4>
-<ul>
-<li>Data exploration.</li>
-<li>Site characterization.</li>
-</ul>
-</div>
-<div id="data-selection-options-4" class="section level4">
-<h4>Data selection options</h4>
-<ul>
-<li>Select one or multiple sites</li>
-<li>Select one or multiple parameters</li>
-</ul>
-</div>
-<div id="plot-controls-4" class="section level4">
-<h4>Plot controls</h4>
-<p>*None</p>
-</div>
-</div>
-<div id="chargebalance-timeseries" class="section level3">
-<h3>Chargebalance timeseries</h3>
+<div id="charge-balance-timeseries" class="section level3">
+<h3>Charge balance timeseries</h3>
 <p>This pane generates a timeseries plot of charge balance percent difference. The plot is annotated with a horizontal dashed line indicating the range of +- 5% and a solid line indicating the range of +- 10%. Symbol type indicates if enough major elements were analyzed to constitute a roughly complete balance. For example, a sample missing calcium would be given a symbol of “Incomplete” because it is a major constituent in the charge balance, but a sample missing fluoride would still be given a “Complete” symbol because it is only a minor constituent of the charge balance.</p>
-<div id="uses-5" class="section level4">
+<div id="uses-3" class="section level4">
 <h4>Uses</h4>
 <ul>
 <li>Obtaining a quick visual snapshot of charge imbalance at a site.</li>
 <li>Identifying charge imbalance issues with current data and comparing to historic chargebalance behavior.</li>
 </ul>
 </div>
+<div id="data-selection-options-3" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+</ul>
+</div>
+<div id="plot-controls-3" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+</ul>
+</div>
+</div>
+<div id="ions-vs-conductance" class="section level3">
+<h3>Ions vs conductance</h3>
+<p>This generates a x-y plot of sum of cations or anions vs conductance. The ratio of the sum of cations or anions vs specific conductance generally falls within a range of 0.92 - 1.24 for natural waters. The shaded region on the plot indicates this typical range. These are the values used in QWData for alert limits, see QWData documentation and references therein for further explanation.</p>
+<p>At many sites, there will be a roughly linear relationship between the sum of cations or anions vs. conductance. If a point falls above or below the general trend line, this is an indication that the particular group of ions is either to low or too high.</p>
+<div id="uses-4" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Identifying samples that fall outside of the typical range of rations of ions/specific conductance.</li>
+<li>Identifying which group of ions, cations or anions, are responsible for charge imbalance issues.</li>
+</ul>
+</div>
+<div id="data-selection-options-4" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+</ul>
+</div>
+<div id="plot-controls-4" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+</ul>
+</div>
+</div>
+<div id="rep-parm-boxplot" class="section level3">
+<h3>Rep-parm boxplot</h3>
+<p>This pane generates a plot of replicate relative percent difference for all replicates analyzed at a given site, organized by DQI code. <strong>READ THE FOLLOWING ON REPLICATE PAIRING</strong></p>
+<p>Replicate pairs are identified as follows:</p>
+<ol style="list-style-type: decimal">
+<li>An environmental sample is a sample with medium code of WS or WG and a sample type of 7.</li>
+<li>A replicate sample is a sample with a medium code of WSQ or WGQ and a sample type of 7.</li>
+<li>An environmental-replicate pair is defined as a replicate sample collected at the same site as an environmental sample on the same day.</li>
+</ol>
+<p><strong>NOTE THAT CENSORED RESULTS ARE GIVEN THE CENSORED VALUE FOR CALCULATIONS. DO NOT INTERPRET REPLICATE ANALYSES BASED ENTIRELY OFF OF THE RELATIVE PERCENT DIFFERENCE PLOT. SEE REPLICATE TABLE AS WELL.</strong></p>
+<div id="uses-5" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Assessing general replicate agreement at a site for multiple parameters.</li>
+<li>Comparing current replicate analyses to historic agreement.</li>
+</ul>
+</div>
 <div id="data-selection-options-5" class="section level4">
 <h4>Data selection options</h4>
 <ul>
 <li>Select one or multiple sites</li>
+<li>Select one parameter</li>
 </ul>
 </div>
 <div id="plot-controls-5" class="section level4">
@@ -439,80 +390,23 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul>
 </div>
 </div>
-<div id="ions-vs-conductance" class="section level3">
-<h3>Ions vs conductance</h3>
-<p>This pane generates a x-y plot of sum of cations or anions vs conductance. The ratio of the sum of cations or anions vs specific conductance generally falls within a range of 0.92 - 1.24 for natural waters. The shaded region on the plot indicates this typical range. These are the values used in QWData for alert limits, see QWData documentation and references therein for further explanation.</p>
-<p>At many sites, there will be a roughly linear relationship between the sum of cations or anions vs.&nbsp;conductance. If a point falls above or below the general trend line, this is an indication that the particular group of ions is either to low or too high.</p>
+<div id="blank-sample-detections" class="section level3">
+<h3>Blank sample detections</h3>
+<p>This pane generates a box plot of parameter values for blanks above reporting level, organized by DQI code.</p>
 <div id="uses-6" class="section level4">
 <h4>Uses</h4>
 <ul>
-<li>Identifying samples that fall outside of the typical range of rations of ions/specific conductance.</li>
-<li>Identifying which group of ions, cations or anions, are responsible for charge imbalance issues.</li>
+<li>Identifying systematic detections in blank samples of unapproved data compared to approved detections.</li>
 </ul>
 </div>
 <div id="data-selection-options-6" class="section level4">
 <h4>Data selection options</h4>
 <ul>
 <li>Select one or multiple sites</li>
+<li>Select one parameter</li>
 </ul>
 </div>
 <div id="plot-controls-6" class="section level4">
-<h4>Plot controls</h4>
-<ul>
-<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
-</ul>
-</div>
-</div>
-<div id="rep-parm-boxplot" class="section level3">
-<h3>Rep-parm boxplot</h3>
-<p>This pane generates a plot of replicate relative percent difference for all replicates analyzed at a given site. <strong>READ THE FOLLOWING ON REPLICATE PAIRING</strong></p>
-<p>Replicate pairs are identified as follows:</p>
-<ol style="list-style-type: decimal">
-<li>An environmental sample is a sample with medium code of WS or WG and a sample type of 7.</li>
-<li>A replicate sample is a sample with a medium code of WSQ or WGQ and a sample type of 7.</li>
-<li>An environmental-replicate pair is defined as a replicate sample collected at the same site as an environmental sample on the same day.</li>
-</ol>
-<p><strong>NOTE THAT CENSORED RESULTS ARE GIVEN THE CENSORED VALUE FOR CALCULATIONS. DO NOT INTERPRET REPLICATE ANALYSES BASED ENTIRELY OFF OF THE RELATIVE PERCENT DIFFERENCE PLOT. SEE REPLICATE TABLE AS WELL.</strong></p>
-<p>Boxplots can be grouped by time frame to compare current replicate agreement to historic using the “New replicate threshold” data input at the top of the page. This functions exactly the same as the “New data threshold” described in the Global Controls section of this vignette.</p>
-<div id="uses-7" class="section level4">
-<h4>Uses</h4>
-<ul>
-<li>Assessing general replicate agreement at a site for multiple parameters.</li>
-<li>Comparing current replicate analyses to historic agreement.</li>
-</ul>
-</div>
-<div id="data-selection-options-7" class="section level4">
-<h4>Data selection options</h4>
-<ul>
-<li>Select one or multiple sites</li>
-<li>Select one or multiple parameters</li>
-</ul>
-</div>
-<div id="plot-controls-7" class="section level4">
-<h4>Plot controls</h4>
-<ul>
-<li>New replicate threshold: Sets the date break for historic vs new replicate analyses.</li>
-<li>Show sample points: This displays individual sample points.</li>
-</ul>
-</div>
-</div>
-<div id="blank-sample-timeseries" class="section level3">
-<h3>Blank sample timeseries</h3>
-<p>This pane generates a plot of parameter values for blank samples over time.</p>
-<div id="uses-8" class="section level4">
-<h4>Uses</h4>
-<ul>
-<li>Identifying systematic detections in blank samples at a given time, for example during a change in field or laboratory method or reporting level.</li>
-</ul>
-</div>
-<div id="data-selection-options-8" class="section level4">
-<h4>Data selection options</h4>
-<ul>
-<li>Select one or multiple sites</li>
-<li>Select only one parameter</li>
-</ul>
-</div>
-<div id="plot-controls-8" class="section level4">
 <h4>Plot controls</h4>
 <ul>
 <li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
@@ -523,22 +417,58 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <div id="tables" class="section level1">
 <h1>Tables</h1>
-<p>This section will describe the various tables generated by the WQReview GUI. The WQ-Review GUI produces 2 general classes of tables: Auto-flag results, and data/QAQC tables. All tables can be downloaded as tab-delimited text files by clicking on the download button above each table. All tables are sortable by clicking on the header, and the number of entries per table page is adjusted using hte “show entries” dropdown. Additionally, all tables can be filtered using the search bar. Typing a value into the searchbar will search the table columns for that value and subset the table to only those rows containing the search value. For example, typing “WSQ” into the search bar will filter the table to only replicate samples.</p>
+<p>This section will describe the various tables generated by the WQReview GUI and output to an Excel Workbook tab.</p>
 <div id="auto-flagged-samples" class="section level2">
 <h2>Auto-flagged samples</h2>
-<p>During data import, samples or results are auto-flagged following criteria developed by NAWQA for all water-quality data, and are defined at the end of this manual. For any flags comparing a current sample to historic data, the current sample is compared to all REVIEWED AND ACCEPTED data rather than prior samples in time. This is because data that have not been reviewed and accepted could themselves be problematic.</p>
-<div id="basic-chemical-flags" class="section level3">
-<h3>Basic chemical flags</h3>
-<p>This table contains basic chemical checks similar to those provided by the QWDATA unix software. The first 6 columns contain sample-level information and the remaining columns contain flags wit hthe column name coorresponding to the particular data check. If a sample fails a given data check, a flag is applied to the respective column for that sample.</p>
+<p>During data import, samples or results are auto-flagged following criteria developed by NAWQA for all water-quality data, and are defined at the end of this manual. For any flags comparing an unapproved sample to historic data, the current sample is compared only to all REVIEWED AND ACCEPTED data in the pull time windowdata rather than all prior samples in time. This is because data that have not been reviewed and accepted could themselves be problematic.</p>
+<div id="unapproved-data" class="section level3">
+<h3>Unapproved data</h3>
+<p>This tab contains all samples in the data pull with a DQI code I,P,or S, and any flags based on comparisons to approved data (see NWIS 30.xx flags below). This tab is dynamically linked to the Chrome browser GUI Result-level review tab. Samples in the Excel tab can be sorted or deleted and the resulting format will appear in the lower lefthand table in Chrome when the “Refresh from excel” button is clicked. Filtering on columns in Excel is not recommended as it is not dynamically linked and can cause errors if rows are deleted while in a filtered state.</p>
+</div>
+<div id="reviewed-unapproved-data" class="section level3">
+<h3>Reviewed unapproved data</h3>
+<p>This tab starts with column headers and empty rows. As records are reviewed in the “Unapproved data” tab, they can be copied and pasted into this tab, with columns for the new reviewed DQI code and comments. Any records in the tab will be used to create qwsample and qwresult tabs in Excel when the “Generate batch files” button is clicked in Chrome.</p>
+</div>
+<div id="chemical-sense" class="section level3">
+<h3>Chemical sense</h3>
+<p>This table contains basic chemical checks similar to those provided by the QWDATA unix software. The first 7 columns contain sample-level information and the remaining columns contain flags with the column name coorresponding to the particular data check. If a sample fails a given data check, a flag is applied to the respective column for that sample. See NWIS 30.xx flag descriptions below for more information.</p>
+</div>
+<div id="charge-balance-issues" class="section level3">
+<h3>Charge balance issues</h3>
+<p>This tab contains flags related to charge balance check 30.21 described below. It is also dynamically linked to the table found under the “Troubleshoot charge balance” tab in Chrome.</p>
+</div>
+<div id="whole-vs-part" class="section level3">
+<h3>Whole vs Part</h3>
+<p>This tab compares samples with filtered and unfiltered constituents and flags samples based on the filtered and unfiltered result values.</p>
 </div>
 <div id="pesticide-flags" class="section level3">
 <h3>Pesticide flags</h3>
 <p>This table contains flags for evaluating number of pesticide hits in schedule 2437. If there are too many or too few hits in the current sample compared to historic data, the sample gets flagged.</p>
 </div>
-<div id="results-flags" class="section level3">
-<h3>Results flags</h3>
-<p>This table contains flags for results that are either suspisously high or low compared to historic data.</p>
+<div id="replicate-table" class="section level3">
+<h3>Replicate table</h3>
+<p>This table contains all replicate pairs based on the criteria as the Rep-parm boxplot described above. It flags samples based on Relative Percent Difference.</p>
 </div>
+<div id="blank-table" class="section level3">
+<h3>Blank table</h3>
+<p>This table summerizes all blank samples in the pulled data, organized by parameter.</p>
+</div>
+<div id="all-charge-balance" class="section level3">
+<h3>All charge balance</h3>
+<p>This table is a “wide” format of all sample charge balance data, including cation and anion sums, individual consitutent values, and general flags for samples with charge imbalance.</p>
+</div>
+<div id="data-by-result" class="section level3">
+<h3>Data by result</h3>
+<p>This table contains all data pulled from NWIS in the “long” format, ie. by record number, parameter code, and result value.</p>
+</div>
+<div id="data-by-sample" class="section level3">
+<h3>Data by sample</h3>
+<p>This table contains all data pulled from NWIS in the “wide” format, ie. by record number date/time and all associated parameter result values.</p>
+</div>
+</div>
+<div id="qwsample-and-qwresult" class="section level2">
+<h2>qwsample and qwresult</h2>
+<p>These tabs will be present when the “Generate batch files” button is pressed in Chrome. See “Reviewed unapproved data” above. The tabs can copied and saved into text files for modifying DQI codes and comments with QWDATA.</p>
 </div>
 <div id="data-and-qaqc-tables" class="section level2">
 <h2>Data and QAQC tables</h2>
@@ -600,11 +530,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 
-
-
-</body></html>
+</body>
+</html>

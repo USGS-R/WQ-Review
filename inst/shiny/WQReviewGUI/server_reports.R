@@ -146,6 +146,7 @@ tryCatch({
   #                           c("RECORD_NO","SITE_NO","STATION_NM","SAMPLE_START_DT","MEDIUM_CD","PARM_CD","PARM_NM","PARM_SEQ_GRP_CD","DQI_CD","RESULT_CM_TX")]
   
   reports$unapprovedData <<- suppressWarnings(historicCheck(qw.data,returnAll=TRUE))
+  reports$unapprovedData <<- reports$unapprovedData[reports$unapprovedData$DQI_CD %in% c("I","S","P"),]
   reports$unapprovedData <<- reports$unapprovedData[c("RECORD_NO",
                                                     "SITE_NO",
                                                     "STATION_NM",
