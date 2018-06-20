@@ -36,14 +36,14 @@ Additionaly, please feel free to post any suggestions or enhancement requests.
 Frequently asked questions
 ----------
 
-[FAQ](vignettes/faq.html)
+[FAQ](vignettes/faq.Rmd)
 
 Installation for stand alone application (non-R users)
 ----------
 
-1. Download the application at
+1. Download the install executable from Google Drive:
 
-PLACEHOLDER FOR GOOGLE DRIVE LINK
+[WQReviewInstall_2.0beta_CP](https://drive.google.com/open?id=16ak-KuKoFsXiGXXfEqEAse48R0FJLx9T)
 
 2. Run WQReviewInstall_2.0beta_CP.exe and follow the installation instructions.
 
