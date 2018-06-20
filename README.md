@@ -36,7 +36,7 @@ Additionaly, please feel free to post any suggestions or enhancement requests.
 Frequently asked questions
 ----------
 
-[FAQ](vignettes/faq.Rmd)
+[FAQ](vignettes/faq.html)
 
 Installation for stand alone application (non-R users)
 ----------
