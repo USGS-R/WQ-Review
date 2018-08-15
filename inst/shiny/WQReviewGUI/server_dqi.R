@@ -23,21 +23,34 @@ observeEvent(input$flipDQI,{
                          qa.db = pullCriteria$qa.db)
   
   tryCatch({
-  xl.sheet.add("QWSample")
-  xlc$a1 = batchFiles$qwsample
+          xl.sheet.activate("Reviewed unapproved data")
+          xl.sheet.delete("QWSample")
+          xl.sheet.delete("QWResult")
+  },error = function(e){})
+  tryCatch({
+          xl.sheet.add("QWSample")
+          xlc$a1 = batchFiles$qwsample
+          
+          xl.sheet.add("QWResult")
+          xlc$a1 = batchFiles$qwresult         
+  },error = function(e){})
   
-  xl.sheet.add("QWResult")
-  xlc$a1 = batchFiles$qwresult
-  },error = function(e) {
-    xl.sheet.delete("QWSample")
-    xl.sheet.delete("QWResult")
-    
-    xl.sheet.add("QWSample")
-    xlc$a1 = batchFiles$qwsample
-    
-    xl.sheet.add("QWResult")
-    xlc$a1 = batchFiles$qwresult
-  })
+  # tryCatch({
+  # xl.sheet.add("QWSample")
+  # xlc$a1 = batchFiles$qwsample
+  # 
+  # xl.sheet.add("QWResult")
+  # xlc$a1 = batchFiles$qwresult
+  # },error = function(e) {
+  #   xl.sheet.delete("QWSample")
+  #   xl.sheet.delete("QWResult")
+  #   
+  #   xl.sheet.add("QWSample")
+  #   xlc$a1 = batchFiles$qwsample
+  #   
+  #   xl.sheet.add("QWResult")
+  #   xlc$a1 = batchFiles$qwresult
+  # })
   
 })
                            
