@@ -15,10 +15,10 @@ xlc$a1 = data.frame(RECORD_NO = NA,
                     DQI_CD_CURRENT = NA,
                     PARM_SEQ_GRP_CD = NA,
                     FLAGGED = NA,
-                    DQI_CD_REV = NA,
-                    RESULT_CM_NWIS_REV = NA,
-                    RESULT_CM_TYPE_NWIS_REV = NA,
-                    RESULT_NOTE_NO_NWIS = NA
+                    DQI_CD_REVIEWED = NA,
+                    RESULT_CM_NWIS_REVIEWED = NA,
+                    RESULT_CM_TYPE_NWIS_REVIEWED = NA,
+                    RESULT_NOTES_WQREVIEW = NA
 )
 
 # xl.sheet.add("Summary of flags")
