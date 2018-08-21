@@ -96,7 +96,7 @@ shinyUI(fluidPage(theme="theme.css",title="WQReview 2.0_beta",
                              tabPanel("Generate batch DQI flip files",
                                       pageWithSidebar(headerPanel("Batch files"),
                                                       sidebarPanel(
-                                                        hr("Generates batch files for upload to QWData from the data in the 'Reviewed unapproved tab' in the Excel workbook"),
+                                                        hr("Generates batch files for upload to QWData from the data in the 'Ready for DQI change' tab in the Excel workbook"),
                                                         actionButton("flipDQI",label="Generate batch files")
                                                       ),
                                                       mainPanel()

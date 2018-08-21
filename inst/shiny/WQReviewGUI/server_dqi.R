@@ -23,7 +23,7 @@ observeEvent(input$flipDQI,{
                          qa.db = pullCriteria$qa.db)
   
   tryCatch({
-          xl.sheet.activate("Reviewed unapproved data")
+          xl.sheet.activate("Ready for DQI change")
           xl.sheet.delete("QWSample")
           xl.sheet.delete("QWResult")
   },error = function(e){})
