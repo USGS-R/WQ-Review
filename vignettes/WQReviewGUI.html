@@ -12,7 +12,7 @@
 
 <meta name="author" content="T. Joe Mills and Colin Penn" />
 
-<meta name="date" content="2018-06-13" />
+<meta name="date" content="2018-08-21" />
 
 <title>WQReview GUI User Guide</title>
 
@@ -70,11 +70,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">WQReview GUI User Guide</h1>
 <h4 class="author"><em>T. Joe Mills and Colin Penn</em></h4>
-<h4 class="date"><em>2018-06-13</em></h4>
+<h4 class="date"><em>2018-08-21</em></h4>
 
 
 <div id="TOC">
 <ul>
+<li><a href="#suggested-wqreview-and-qwdata-workflow-for-flipping-dqi-codes">Suggested WQReview and QWDATA workflow for flipping DQI codes</a><ul>
+<li><a href="#wqreview">WQReview</a></li>
+<li><a href="#qwdata">QWDATA</a></li>
+</ul></li>
 <li><a href="#importing-data">Importing Data</a><ul>
 <li><a href="#data-import-options">Data import options</a></li>
 <li><a href="#a-basic-data-import">A basic data import</a></li>
@@ -100,8 +104,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#tables">Tables</a><ul>
 <li><a href="#auto-flagged-samples">Auto-flagged samples</a><ul>
-<li><a href="#unapproved-data">Unapproved data</a></li>
-<li><a href="#reviewed-unapproved-data">Reviewed unapproved data</a></li>
+<li><a href="#dqi-needs-review">DQI needs review</a></li>
+<li><a href="#ready-for-dqi-change">Ready for DQI change</a></li>
 <li><a href="#chemical-sense">Chemical sense</a></li>
 <li><a href="#charge-balance-issues">Charge balance issues</a></li>
 <li><a href="#whole-vs-part">Whole vs Part</a></li>
@@ -131,6 +135,60 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 
+<div id="suggested-wqreview-and-qwdata-workflow-for-flipping-dqi-codes" class="section level1">
+<h1>Suggested WQReview and QWDATA workflow for flipping DQI codes</h1>
+<div id="wqreview" class="section level2">
+<h2>WQReview</h2>
+<ol style="list-style-type: decimal">
+<li>Use WQReview to pull data of interest.</li>
+<li>Review the Excel workbook tables and WQReview plots as part of your result review.</li>
+<li>Copy results that have been reviewed from the Excel “DQI needs review” tab to the “Ready for DQI change”.</li>
+<li>Based on your review, add the new DQI code (R, Q, etc.) to the “DQI_CD_REVIEWED” column.</li>
+<li>Add any review comments to be added to NWIS in the “RESULT_CM_NWIS_REVIEWED” column.</li>
+<li>Put the comment type (F for field or L for Lab) in the “RESULT_CM_TYPE_REVIEWED” column.</li>
+<li>Add any additional comments to the “RESULT_NOTES_WQREVIEW” column. These will not appeded into NWIS, they will only be saved when the Excel workbook is saved.</li>
+<li>Under the WQReview “Generate batch DQI flip files” header, hit the “Generate batch files” button. A qwsample and qwresult tab will be generated in the Excel workbook.</li>
+<li>Using Windows Explorer, create or navigate to a project folder in your mapped home directory on NWIS. Save the Excel workbook here.</li>
+<li>Copy everything but the column titles from the qwsample and qwresult Excel workbook tabs and paste them into seperate files using a text editor (Notepad, Notepad++, Wordpad) and save them in the project folder as qwsample and qwresult files.</li>
+</ol>
+</div>
+<div id="qwdata" class="section level2">
+<h2>QWDATA</h2>
+<ol style="list-style-type: decimal">
+<li>Using a Unix window (ReflectionX, PuTTY) navigate to your project folder in your home directory on NWIS. Launch QWDATA from this location.</li>
+<li>In the QWDATA menu, select option 8 - Batch Processing</li>
+<li>In the Batch Processing menu, select option 4 - Enter batch-file data with user-specified behavior</li>
+<li>Modify the following:</li>
+</ol>
+<ul>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Transactions allowed: 4. Verification Only, no transaction stored</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Results protected by DQI: No</li>
+</ol></li>
+<li>any other options if desired</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Hit Enter to continue. A watlist will be created in your project folder and your qwsample and qwresult files will have a datetime stamp .YYYYMMDD.HHMMSS appended to them.</li>
+<li>Review the watlist to be sure that the desired changes could take place and no unexpected changes will occur. Append “verification” to the watlist file name.</li>
+<li>Remove the datetime stamp from the qwsample and qwresult files.</li>
+<li>Re-run the Batch Processing with the following:</li>
+</ol>
+<ul>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Transactions allowed: 1. Only updated to samples (QWCARDSIN)</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Results protected by DQI: No</li>
+</ol></li>
+<li>any other options if desired</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Hit Enter to continue. Another watlist will be created with the changes you have made to results in NWIS.</li>
+</ol>
+</div>
+</div>
 <div id="importing-data" class="section level1">
 <h1>Importing Data</h1>
 <p>This will describe the process for importing data into the WQReview Graphical User Interface (GUI). We will start by importing data for a single site using predefined NWIS parameter groups. ##Load the WQReview package and open the WQReview GUI</p>
@@ -421,12 +479,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="auto-flagged-samples" class="section level2">
 <h2>Auto-flagged samples</h2>
 <p>During data import, samples or results are auto-flagged following criteria developed by NAWQA for all water-quality data, and are defined at the end of this manual. For any flags comparing an unapproved sample to historic data, the current sample is compared only to all REVIEWED AND ACCEPTED data in the pull time windowdata rather than all prior samples in time. This is because data that have not been reviewed and accepted could themselves be problematic.</p>
-<div id="unapproved-data" class="section level3">
-<h3>Unapproved data</h3>
-<p>This tab contains all samples in the data pull with a DQI code I,P,or S, and any flags based on comparisons to approved data (see NWIS 30.xx flags below). This tab is dynamically linked to the Chrome browser GUI Result-level review tab. Samples in the Excel tab can be sorted or deleted and the resulting format will appear in the lower lefthand table in Chrome when the “Refresh from excel” button is clicked. Filtering on columns in Excel is not recommended as it is not dynamically linked and can cause errors if rows are deleted while in a filtered state.</p>
+<div id="dqi-needs-review" class="section level3">
+<h3>DQI needs review</h3>
+<p>This tab contains all samples in the data pull with a DQI code S, I, or P, and any flags based on comparisons to approved data (see NWIS 30.xx flags below). This tab is dynamically linked to the Chrome browser GUI Result-level review tab. Samples in the Excel tab can be sorted or deleted and the resulting format will appear in the lower lefthand table in Chrome when the “Refresh from excel” button is clicked. Filtering on columns in Excel is not recommended as it is not dynamically linked and can cause errors if rows are deleted while in a filtered state.</p>
 </div>
-<div id="reviewed-unapproved-data" class="section level3">
-<h3>Reviewed unapproved data</h3>
+<div id="ready-for-dqi-change" class="section level3">
+<h3>Ready for DQI change</h3>
 <p>This tab starts with column headers and empty rows. As records are reviewed in the “Unapproved data” tab, they can be copied and pasted into this tab, with columns for the new reviewed DQI code and comments. Any records in the tab will be used to create qwsample and qwresult tabs in Excel when the “Generate batch files” button is clicked in Chrome.</p>
 </div>
 <div id="chemical-sense" class="section level3">
@@ -468,7 +526,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="qwsample-and-qwresult" class="section level2">
 <h2>qwsample and qwresult</h2>
-<p>These tabs will be present when the “Generate batch files” button is pressed in Chrome. See “Reviewed unapproved data” above. The tabs can copied and saved into text files for modifying DQI codes and comments with QWDATA.</p>
+<p>These tabs will be present when the “Generate batch files” button is pressed in Chrome. See “Ready for DQI change” above. The tabs can copied and saved into text files for modifying DQI codes and comments with QWDATA. To regenerate the tabs if more results have been added to the “Ready for DQI change” tab, delete the current qwsample and qwresult tabs and hit the “Generate batch files” button again.</p>
 </div>
 <div id="data-and-qaqc-tables" class="section level2">
 <h2>Data and QAQC tables</h2>

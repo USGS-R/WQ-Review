@@ -45,10 +45,10 @@ observeEvent(input$loadData, {
       xl.sheet.activate("Charge balance issues")
       xl_CB <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
       
-      xl.sheet.activate("Reviewed unnaproved data")
+      xl.sheet.activate("Ready for DQI change")
       xl_DQI <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
       
-      xl.sheet.activate("Unnaproved data")
+      xl.sheet.activate("DQI needs review")
       xl_UNAP <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
       
     },error = function(e){}

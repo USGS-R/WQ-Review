@@ -1,5 +1,5 @@
 
-shinyUI(fluidPage(theme="theme.css",title="WQReview 2.0.0_beta",
+shinyUI(fluidPage(theme="theme.css",title="WQReview 2.0_beta",
                   navbarPage(title = img(src="Logo.png", width="100px",height = "40px"),
                              navbarMenu("Import/save Data",
                                         tabPanel("Import from internal NWIS server",
@@ -96,17 +96,18 @@ shinyUI(fluidPage(theme="theme.css",title="WQReview 2.0.0_beta",
                              tabPanel("Generate batch DQI flip files",
                                       pageWithSidebar(headerPanel("Batch files"),
                                                       sidebarPanel(
-                                                        hr("Generates batch files for upload to QWData from the data in the 'Reviewed unapproved tab' in the Excel workbook"),
+                                                        hr("Generates batch files for upload to QWData from the data in the 'Ready for DQI change' tab in the Excel workbook"),
                                                         actionButton("flipDQI",label="Generate batch files")
                                                       ),
                                                       mainPanel()
                                       )
                              ),
-                             tabPanel(title = "WQReview 2.0.0_beta",
-                                      helpText(a("WQReview 2.0.0_beta",
-                                                 href="https://github.com/USGS-R/WQ-Review/tree/dev",target="_blank")),
+                             tabPanel(title = "WQReview 2.0_beta User Guide | FAQ | Additional Info",
+                                      helpText(a('User Guide', href="WQReviewGUI.html",target="_blank")),
                                       helpText(a('FAQ', href="faq.html",target="_blank")),
-                                      helpText(a('User Guide', href="WQReviewGUI.html",target="_blank")))
+                                      helpText(a("Additional Info: WQReview 2.0_beta GitHub",
+                                                 href="https://github.com/USGS-R/WQ-Review/tree/dev",target="_blank")))
+                                      
                              
 
                   )

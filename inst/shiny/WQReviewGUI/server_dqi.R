@@ -3,9 +3,9 @@ observeEvent(input$flipDQI,{
   STAIDS <- unique(xl_DQI$SITE_NO)
   records <- xl_DQI$RECORD_NO
   parms <- xl_DQI$PARM_CD
-  dqis <- xl_DQI$DQI_CD_REV
-  comments <- xl_DQI$RESULT_CM_NWIS_REV
-  commentType <- xl_DQI$RESULT_CM_TYPE_NWIS_REV
+  dqis <- xl_DQI$DQI_CD_REVIEWED
+  comments <- xl_DQI$RESULT_CM_NWIS_REVIEWED
+  commentType <- xl_DQI$RESULT_CM_TYPE_NWIS_REVIEWED
   
   comments[is.na(comments)] <- ""
   commentType[is.na(commentType)] <- ""
@@ -23,21 +23,34 @@ observeEvent(input$flipDQI,{
                          qa.db = pullCriteria$qa.db)
   
   tryCatch({
-  xl.sheet.add("QWSample")
-  xlc$a1 = batchFiles$qwsample
+          xl.sheet.activate("Ready for DQI change")
+          xl.sheet.delete("QWSample")
+          xl.sheet.delete("QWResult")
+  },error = function(e){})
+  tryCatch({
+          xl.sheet.add("QWSample")
+          xlc$a1 = batchFiles$qwsample
+          
+          xl.sheet.add("QWResult")
+          xlc$a1 = batchFiles$qwresult         
+  },error = function(e){})
   
-  xl.sheet.add("QWResult")
-  xlc$a1 = batchFiles$qwresult
-  },error = function(e) {
-    xl.sheet.delete("QWSample")
-    xl.sheet.delete("QWResult")
-    
-    xl.sheet.add("QWSample")
-    xlc$a1 = batchFiles$qwsample
-    
-    xl.sheet.add("QWResult")
-    xlc$a1 = batchFiles$qwresult
-  })
+  # tryCatch({
+  # xl.sheet.add("QWSample")
+  # xlc$a1 = batchFiles$qwsample
+  # 
+  # xl.sheet.add("QWResult")
+  # xlc$a1 = batchFiles$qwresult
+  # },error = function(e) {
+  #   xl.sheet.delete("QWSample")
+  #   xl.sheet.delete("QWResult")
+  #   
+  #   xl.sheet.add("QWSample")
+  #   xlc$a1 = batchFiles$qwsample
+  #   
+  #   xl.sheet.add("QWResult")
+  #   xlc$a1 = batchFiles$qwresult
+  # })
   
 })
                            

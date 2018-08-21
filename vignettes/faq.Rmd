@@ -12,6 +12,10 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+##Q: A new Excel workbook does not populate as part of the data import.
+###A:
+Some users have reported issues with Microsoft Excel not generating the workbook populated and linked to WQReview. The issues are not consistent among users and many have reported no problems. If there are any open, unsaved Excel workbooks, try saving them and exiting out/restarting WQReview. If there is an open Excel workbook that has the "Enable Content" warning banner at the top, click the banner before running WQReview. Try closing all other instances of Excel before launching and running WQReview.
+
 ##Q:I click "Get Data" in the import screen and nothing happens except I get the messages "Problem with data import, please check import criteria" and "first argument is not an open RODBC channel".
 ###A: 
 This error indicates that your ODBC connection is not setup correctly. Follow the steps in the installation instructions for setting up the ODBC connection. Make sure that the "DSN" entry box contains the name of your NWIS ODBC connection EXACTLY as named in the ODBC administrator User DSN section. 

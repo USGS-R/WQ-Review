@@ -43,7 +43,7 @@ UNAP_sel <- reactive({
   tryCatch({
     unique(UNAPdata()[input$UNAPtable_rows_selected,c("RECORD_NO","SITE_NO","STATION_NM","PARM_CD","PARM_NM","PARM_GRP","FLAGGED")])
   },error=function(e) {
-    newErr <- simpleWarning("Empty rows need to be deleted from Unnaproved data tab before refresh")
+    newErr <- simpleWarning("Empty rows need to be deleted from 'DQI needs review' data tab before refresh")
     return(message(newErr))  
   })
 })
@@ -73,7 +73,7 @@ observe({
                       
     )
   },error=function(e) {
-    newErr <- simpleWarning("Empty rows need to be deleted from Unnaproved data tab before refresh")
+    newErr <- simpleWarning("Empty rows need to be deleted from 'DQI needs review' data tab before refresh")
     return(message(newErr))  
   })
   

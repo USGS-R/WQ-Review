@@ -1,10 +1,10 @@
 # #Populate excel sheets
 xl.workbook.add()
 
-xl.sheet.add("Unapproved data")
+xl.sheet.add("DQI needs review")
 xlc$a1 = reports$unapprovedData
 
-xl.sheet.add("Reviewed unapproved data")
+xl.sheet.add("Ready for DQI change")
 xlc$a1 = data.frame(RECORD_NO = NA,
                     SITE_NO = NA,
                     STATION_NM = NA,
@@ -15,10 +15,10 @@ xlc$a1 = data.frame(RECORD_NO = NA,
                     DQI_CD_CURRENT = NA,
                     PARM_SEQ_GRP_CD = NA,
                     FLAGGED = NA,
-                    DQI_CD_REV = NA,
-                    RESULT_CM_NWIS_REV = NA,
-                    RESULT_CM_TYPE_NWIS_REV = NA,
-                    RESULT_NOTE_NO_NWIS = NA
+                    DQI_CD_REVIEWED = NA,
+                    RESULT_CM_NWIS_REVIEWED = NA,
+                    RESULT_CM_TYPE_NWIS_REVIEWED = NA,
+                    RESULT_NOTES_WQREVIEW = NA
 )
 
 # xl.sheet.add("Summary of flags")
@@ -54,10 +54,10 @@ xlc$a1 = qw.data$DataTable
 xl.sheet.activate("Charge balance issues")
 xl_CB <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
 
-xl.sheet.activate("Reviewed unapproved data")
+xl.sheet.activate("Ready for DQI change")
 xl_DQI <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
 
-xl.sheet.activate("Unapproved data")
+xl.sheet.activate("DQI needs review")
 xl_UNAP <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
 
 #run these last

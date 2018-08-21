@@ -224,7 +224,7 @@ flipDQI <- function(STAIDS,
                          "LAB_STD_DEV_VA",
                          "ANL_ENT_CD")]
   
-  #Get rid of invalid remakr codes
+  #Get rid of invalid remark codes
   qwResult$REMARK_CD[qwResult$REMARK_CD == "Sample"] <- NA
   
   ###########
@@ -248,17 +248,17 @@ flipDQI <- function(STAIDS,
                                 qwData$BODY_PART_ID,
                                 "",
                                 "",
-                                "",
-                                "",
-                                qwData$COLL_ENT_CD,
                                 qwData$SAMPLE_START_TZ_CD,
-                                qwData$SAMPLE_START_LOCAL_TM_FG,
+                                qwData$TM_DATUM_RLBLTY_CD,
+                                qwData$COLL_ENT_CD,
+                                qwData$SAMPLE_ID,
+                                qwData$SIDNO_PARTY_CD,
                                 stringsAsFactors=FALSE))
   
-  qwsampleheader <- c("sample.integer",  "user.code",  "agency",  "site.no",  "start.date",  "end.date",  "medium",  "labid",
-                      "project.code",  "aquifer.code",	"sample.type",	"analysis.status",	"analysis.source",	"hydrologic.cond",
-                      "hydrologic.event",	"tissue",	"body.part",	"lab.comment.",	"field.comment",	"time.datum",	"datum.reliability",
-                      "collecting.agency.code","time.zone","std.time.code")
+  qwsampleheader <- c("sample.integer",  "user.code",  "agency",  "site.no",  "start.date",  "end.date",  "medium",  "lab.id",
+                      "project.code",  "aquifer.code",	"sample.type",	"analysis.status", "BLANKcol", "hydrologic.cond",
+                      "hydrologic.event", "tissue.id",	"body.part",	"lab.comment.",	"field.comment", "time.datum",	"time.datum.reliability",
+                      "collecting.agency.code","sample.id", "SIDNO.party.cd")
   
   colnames(qwSample)<-qwsampleheader
   
@@ -268,7 +268,7 @@ flipDQI <- function(STAIDS,
   qwSample$RECORD_NO <- qwSample$sample.integer
   qwSample$sample.integer <- seq(1:nrow(qwSample))
   
-  ###Format tiem to character
+  ###Format time to character
   qwSample$start.date <- format(qwSample$start.date,format="%Y%m%d%H%M")
   ###Merge in sample integer and drop UID and recordno columns
   qwResult <- dplyr::left_join(qwSample[c("RECORD_NO","sample.integer")],qwResult,by="RECORD_NO")
