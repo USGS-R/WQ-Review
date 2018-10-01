@@ -66,6 +66,7 @@ qwseasonalPlot <- function(qw.data,
         p1 <- ggplot(data=plotdata)
         p1 <- p1 + geom_point(aes(x=DOY,y=RESULT_VA, color=MEDIUM_CD,shape = REMARK_CD,
                                   text = paste('Day-of-year:',DOY,'\n',
+                                               'SAMPLE_START_DT:',SAMPLE_START_DT,'\n',
                                                'REMARK_CD RESULT_VA:',REMARK_CD,RESULT_VA,'\n',
                                                'MEDIUM_CD:',MEDIUM_CD,'\n')),size=3)
         
