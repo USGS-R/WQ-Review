@@ -12,7 +12,7 @@
 
 <meta name="author" content="T. Joe Mills and Colin Penn" />
 
-<meta name="date" content="2018-08-21" />
+<meta name="date" content="2018-10-01" />
 
 <title>WQReview GUI User Guide</title>
 
@@ -70,14 +70,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">WQReview GUI User Guide</h1>
 <h4 class="author"><em>T. Joe Mills and Colin Penn</em></h4>
-<h4 class="date"><em>2018-08-21</em></h4>
+<h4 class="date"><em>2018-10-01</em></h4>
 
 
 <div id="TOC">
 <ul>
 <li><a href="#suggested-wqreview-and-qwdata-workflow-for-flipping-dqi-codes">Suggested WQReview and QWDATA workflow for flipping DQI codes</a><ul>
 <li><a href="#wqreview">WQReview</a></li>
-<li><a href="#qwdata">QWDATA</a></li>
+<li><a href="#qwdata---consult-with-your-wq-specialist-and-data-base-administrator-about-your-wsc-practices-for-batch-file-changes-in-qwdata.">QWDATA - Consult with your WQ Specialist and Data Base Administrator about your WSC practices for batch file changes in QWDATA.</a></li>
 </ul></li>
 <li><a href="#importing-data">Importing Data</a><ul>
 <li><a href="#data-import-options">Data import options</a></li>
@@ -149,11 +149,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Add any additional comments to the “RESULT_NOTES_WQREVIEW” column. These will not appeded into NWIS, they will only be saved when the Excel workbook is saved.</li>
 <li>Under the WQReview “Generate batch DQI flip files” header, hit the “Generate batch files” button. A qwsample and qwresult tab will be generated in the Excel workbook.</li>
 <li>Using Windows Explorer, create or navigate to a project folder in your mapped home directory on NWIS. Save the Excel workbook here.</li>
-<li>Copy everything but the column titles from the qwsample and qwresult Excel workbook tabs and paste them into seperate files using a text editor (Notepad, Notepad++, Wordpad) and save them in the project folder as qwsample and qwresult files.</li>
+<li>Copy everything but the column titles from the qwsample and qwresult Excel workbook tabs and paste them into seperate files using a text editor (Notepad, Notepad++, Wordpad) and save them in the project folder as qwsample and qwresult files. Some WQ Specialists prefer the qwsample and qwresult file to have a username and date/time stamp appended to the file name. E.g. qwsample_tmills_20181001</li>
 </ol>
 </div>
-<div id="qwdata" class="section level2">
-<h2>QWDATA</h2>
+<div id="qwdata---consult-with-your-wq-specialist-and-data-base-administrator-about-your-wsc-practices-for-batch-file-changes-in-qwdata." class="section level2">
+<h2>QWDATA - Consult with your WQ Specialist and Data Base Administrator about your WSC practices for batch file changes in QWDATA.</h2>
 <ol style="list-style-type: decimal">
 <li>Using a Unix window (ReflectionX, PuTTY) navigate to your project folder in your home directory on NWIS. Launch QWDATA from this location.</li>
 <li>In the QWDATA menu, select option 8 - Batch Processing</li>
@@ -269,7 +269,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Global plot controls</h2>
 <div id="new-data-threshold" class="section level3">
 <h3>New data threshold</h3>
-<p>Point data in all plots can be labeled as “New” data based off of when that data was last modified using the “New data threshold” slider. Any data modified after the date indicated on the slider will be labeled as “New”. This helps identify data that has not been reviewed from historic data when the data are not displayed as a timeseries. Note that the “New data threshold” is set off of when the data were last <strong>modified</strong> for result-level plots (e.g. timeseries, seasonal, etc.) not when they were created. Sample-level plots (e.g. charge balance) are labeled new according to the sample collection date.</p>
+<p>Point data in all plots can be labeled as “New” data based off of when that data was last modified using the “New data threshold” date input. Any data modified after the date indicated in the text box will be labeled as “New”. This helps identify data that has not been reviewed from historic data when the data are not displayed as a timeseries. Note that the “New data threshold” is determined from when data were last <strong>modified</strong> for result-level plots (e.g. timeseries, seasonal, etc.) not when they were created. Sample-level plots (e.g. charge balance) are labeled new according to the sample collection date.</p>
 </div>
 <div id="record-highlights" class="section level3">
 <h3>Record highlights</h3>
@@ -305,7 +305,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4>Data selection options</h4>
 <ul>
 <li>Select one or multiple sites</li>
-<li>Select only one parameter from the dropdown list or in linked unapproved data table in Chrome.</li>
+<li>Select only one parameter from the dropdown list or in linked data table in Chrome.</li>
 </ul>
 </div>
 <div id="plot-controls" class="section level4">
