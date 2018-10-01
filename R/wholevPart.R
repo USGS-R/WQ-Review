@@ -91,7 +91,7 @@ wholevPart <- function(qw.data)
   )] <- "Filtered > unfiltered and > 10% diff."
   
   pairedData$flags[which(pairedData$Fil_REMARK_CD == "<" | pairedData$Unf_REMARK_CD == "<")] <-
-    paste(pairedData$flags[which(pairedData$Fil_REMARK_CD == "<" | pairedData$Unf_REMARK_CD == "<")],"calculations effected by remark code",sep="")
+    paste(pairedData$flags[which(pairedData$Fil_REMARK_CD == "<" | pairedData$Unf_REMARK_CD == "<")],"calculations affected by remark code",sep="")
   wholevpartTable <- pairedData
   #wholevpartTable$Fil_SAMPLE_START_DT <- as.character(wholevpartTable$Fil_SAMPLE_START_DT)
   return(unique(wholevpartTable))
