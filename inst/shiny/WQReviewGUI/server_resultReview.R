@@ -87,8 +87,8 @@ observe({
 ###Timeseries
 
 output$qwtsPlot <- renderPlotly({
-  validate(need(!is.null(input$siteSel) & !is.null(input$parmSel),
-                "No site or parameter selected"))
+        validate(need(!is.null(input$siteSel),"No site(s) selected"),
+                 need(!is.null(input$parmSel),"No parameter selected"))
   
   if(input$siteSel == "All")
   {
@@ -227,6 +227,7 @@ output$qwboxplot <- renderPlot({
         }
         qwparmBoxPlot(qw.data = qw.data,
                     plotparm = as.character(input$parmSel),
+                    facet = input$facetSel,
                     site.selection = sites,
                     printPlot=FALSE) 
 })

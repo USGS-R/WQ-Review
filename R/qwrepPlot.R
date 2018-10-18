@@ -4,6 +4,8 @@
 #' @param qw.data A qw.data list generated from readNWISodbc
 #' @param site.selection A character vector of site IDs to plot
 #' @param plotparm A character vector of pcodes to plot
+#' @param facet Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots
+#' @param scales Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"
 #' @param printPlot Logical. Prints plot to graphics device if TRUE
 #' @examples 
 #' data("exampleData",package="WQReview")
@@ -16,9 +18,11 @@
 #' @export
 
 qwrepPlot <- function(qw.data,
-                         plotparm,
-                         site.selection = "All",
-                         printPlot = TRUE){
+                      plotparm,
+                      site.selection = "All",
+                      facet = "multisite",
+                      scales="fixed",
+                      printPlot = TRUE){
   
   dqi.colors <- c("#000000", "#E69F00")
   names(dqi.colors) <- c("DQI = R","DQI = I, S, or P")
@@ -60,7 +64,10 @@ qwrepPlot <- function(qw.data,
                           position=position_dodge(width=0.75))
   p1 <- p1 + geom_hline(data = hline,aes(yintercept = yint,linetype=RPD),show.legend=TRUE) 
   p1 <- p1 + scale_color_manual("DQI Status",values = dqi.colors)
-  
+  if ( facet == "Facet")
+  {
+          p1 <- p1 + facet_wrap(~ STATION_NM, nrow = 1, scales=scales) 
+  } else{}
   
   
   if(printPlot)
