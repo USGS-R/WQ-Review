@@ -26,7 +26,7 @@ The GUI window will open in your system's default internet browser. **It is requ
 library(WQReview)
 ```
 
-1. To open the GUI run the WQReviewGUI() function
+2. To open the GUI run the WQReviewGUI() function
 
 ```R
 WQReviewGUI()
@@ -54,23 +54,23 @@ There are three options available to choose data to import.  You need to use onl
 
 There are three options to select parameter codes associated with data you will import. You only need one of these options:
 
-1. **Parameter codes**: This input takes manually entered parameter codes (pcodes). This input box behaves the same as the site number input box.
+4. **Parameter codes**: This input takes manually entered parameter codes (pcodes). This input box behaves the same as the site number input box.
 
-1. **Parameter groups**: This input is used to select NWIS parameter groups to retrieve, rather than explicitly selecting individual pcodes.
+5. **Parameter groups**: This input is used to select NWIS parameter groups to retrieve, rather than explicitly selecting individual pcodes.
 
-1. **pCode file**: This input takes a file of pcodes. The file must be a single column text file of pcodes. Make sure leading zero's have not been removed if using excel to generate the file.
+6. **pCode file**: This input takes a file of pcodes. The file must be a single column text file of pcodes. Make sure leading zero's have not been removed if using excel to generate the file.
 
 The remaining options are all mandatory and will bracket the dates used to restrict your data import, the server data is imported from, and the local databases that will be queried for the data import.  
 
-1. **Start date**: The start date for the data import. Samples collected after this date will be retrieved. The default value is 10 years before the current date.
+7. **Start date**: The start date for the data import. Samples collected after this date will be retrieved. The default value is 10 years before the current date.
 
-1. **End date**: The end date for the data import. Samples collected before this date will be retrieved. The default is the current date.
+8. **End date**: The end date for the data import. Samples collected before this date will be retrieved. The default is the current date.
 
-1. **Server name (DSN)**: The name of your NWIS server data source name (DSN) that was established during ODBC setup.
+9. **Server name (DSN)**: The name of your NWIS server data source name (DSN) that was established during ODBC setup.
 
-1. **Environmental DB number**: The number coresponding to the environmental database. Default is "01"
+10. **Environmental DB number**: The number coresponding to the environmental database. Default is "01"
 
-1. **QA DB Number**: The number coresponding to the QA sample database. Default is "02"
+11. **QA DB Number**: The number coresponding to the QA sample database. Default is "02"
 
 ##A basic data import, example for a single site
 We will start with a basic data import for a single site by parameter groups.
@@ -125,9 +125,9 @@ Currently supported medium codes include:
 Currently supported remark codes include:
 
 1. No remark code (listed as "Sample" in legend)
-1. <
-1. >
-1. E
+1. "<"
+1. ">"
+1. "E"
 
 ##Labelling conventions
 All axes pertaining to a particular pcode will be labelled with that pcode's NWIS parameter name, which includes the units of measurement. The main title of the plot will either by labelled with the NWIS station name if only one station is plotted, or "multi-site plot" if multiple stations are displayed.
@@ -147,6 +147,7 @@ In the “Result-level review” tab, samples or results will be highlighted wit
 Most plots are interactive in that the user can hover on a point to see information or zoom into specific areas of the plot. Boxplots are not interactive.
 
 The tool bar at the top of this section appears on hovering in the area at the upper right-hand corner of all interactive graphics.  The tools function as follows:
+
 1. Camera: Allows you to download a plot as a .png file.
 1. Directional arrows: Allows you to pan grab and move (pan) the graphic.
 1. Plus symbol: Zooms in by fixed amount. Note that you can also select an area of the plot to zoom into by holding down a mouse click and drawing a rectangle around the area of interest when the cursor on the graphic is a simple plus shape.
@@ -171,12 +172,14 @@ This section will describe the details of each plot in teh Result-level review t
 
 This page generates timeseries plots at the top, seasonal plots below timeseries plots, parameter-parameter plots below seasonal plots, and parameter boxplot at the bottom. The tool bar described in the “toolbar for interactive graphics/plots” is accessed by hovering in the upper right portion of each plot and clicking on an option. 
 Data options and plot controls for all three sets of plots on this page include:
+
 * Select one or multiple sites
 * Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
 * Label DQI: Superimposes the sample DQI_CD over the point
 
 ###Timeseries plot
-Generates a plot of a selected parameter through time. 
+Generates a plot of a selected parameter through time.
+
 ####Uses
 * Identifying general trends at a site through time.
 * Identifying temporal outliers.
@@ -268,11 +271,25 @@ At many sites, there will be a roughly linear relationship between the sum of ca
 
 * Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
 
+#Blanks and Rep comparison tab
+This tab generates a boxplot of blank detections and a boxplot of replicate relative percent difference.
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! stopped here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+###Comparison of blank detections boxplot
+This pane generates a box plot of parameter values for blanks above reporting level, organized by DQI code.
 
+####Uses
+* Identifying systematic detections in blank samples of unapproved data compared to approved detections.
 
-###Rep-parm boxplot
+####Data selection options
+
+* Select one or multiple sites
+* Select one parameter
+
+####Plot controls
+
+* Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
+
+###Repliacte agreement boxplot
 This pane generates a plot of replicate relative percent difference for all replicates analyzed at a given site, organized by DQI code. **READ THE FOLLOWING ON REPLICATE PAIRING**
 
 Replicate pairs are identified as follows:
@@ -296,53 +313,47 @@ Replicate pairs are identified as follows:
 
 * Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
 
-###Blank sample detections
-This pane generates a box plot of parameter values for blanks above reporting level, organized by DQI code. 
-
-####Uses
-* Identifying systematic detections in blank samples of unapproved data compared to approved detections.
-
-####Data selection options
-
-* Select one or multiple sites
-* Select one parameter
-
-####Plot controls
-
-* Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).
 
 #Tables
-This section will describe the various tables generated by the WQReview GUI and output to an Excel Workbook tab. 
+This section describe the various tables generated and output to an Excel Workbook by the WQReview GUI.
 
 ##Auto-flagged samples
-During data import, samples or results are auto-flagged following criteria developed by NAWQA for all water-quality data, and are defined at the end of this manual. For any flags comparing an unapproved sample to historic data, the current sample is compared only to all REVIEWED AND ACCEPTED data in the pull time windowdata rather than all prior samples in time. This is because data that have not been reviewed and accepted could themselves be problematic.
+During data import, samples or results populate a Microsoft excel workbook where they are auto-flagged following criteria developed by NAWQA for all water-quality data that are defined in each tab description or at the end of this section. For any flags comparing a sample that needs review to historic data, the current sample is compared only to all REVIEWED AND ACCEPTED data in the time frame used to import data into WQReview, rather than compared to all prior samples. This is because other data that have not been reviewed and accepted could themselves be problematic and should not be included in the comparison with other samples or results that need review. Flags are displayed in the following tabs:
+* DQI needs review
+* Chemical sense
+* Charge balance issues
+* Whole vs Par
+* Pesticide flags
+* Replicate table
+* Blank table
+* All charge balance
 
 ###DQI needs review
-This tab contains all samples in the data pull with a DQI code S, I, or P, and any flags based on comparisons to approved data (see NWIS 30.xx flags below). This tab is dynamically linked to the Chrome browser GUI Result-level review tab. Samples in the Excel tab can be sorted or deleted and the resulting format will appear in the lower lefthand table in Chrome when the "Refresh from excel" button is clicked. Filtering on columns in Excel is not recommended as it is not dynamically linked and can cause errors if rows are deleted while in a filtered state.
+This tab contains all samples in the data pull with a DQI code S, I, or P, and any flags based on comparisons to approved data (see NWIS Flags descriptions at the end of this section). This tab is dynamically linked to the Chrome browser GUI Result-level review tab. Samples in the Excel tab can be sorted or deleted and the resulting format will appear in the lower lefthand table in Chrome when the "Refresh from excel" button is clicked. Filtering on columns in Excel is not recommended as it is not dynamically linked and can cause errors if rows are deleted while in a filtered state.
 
 ###Ready for DQI change
-This tab starts with column headers and empty rows. As records are reviewed in the "Unapproved data" tab, they can be copied and pasted into this tab, with columns for the new reviewed DQI code and comments. Any records in the tab will be used to create qwsample and qwresult tabs in Excel when the "Generate batch files" button is clicked in Chrome.
+This tab starts with column headers and empty rows. As records are reviewed in the "Unapproved data" tab, they can be copied and pasted into this tab, with columns for the new reviewed DQI code and comments. Any records in the tab will be used to create qwsample and qwresult tabs in Excel when the "Generate batch files" button is clicked in the WQReview GUI in Chrome.
 
 ###Chemical sense
-This table contains basic chemical checks similar to those provided by the QWDATA unix software. The first 7 columns contain sample-level information and the remaining columns contain flags with the column name coorresponding to the particular data check. If a sample fails a given data check, a flag is applied to the respective column for that sample. See NWIS 30.xx flag descriptions below for more information.
+This table contains basic chemical checks similar to those provided by the QWDATA unix software. The first 7 columns contain sample-level information and the remaining columns contain flags with the column name coorresponding to the particular data check. If a sample fails a given data check, a flag is applied to the respective column for that sample. See NWIS Flags descriptions at the end of this section.
 
 ###Charge balance issues
-This tab contains flags related to charge balance check 30.21 described below. It is also dynamically linked to the table found under the "Troubleshoot charge balance" tab in Chrome.
+This tab contains flags related to charge balance check 30.21 described in the NWIS Flags descriptions at the end of this section. It is also dynamically linked to the table found under the "Troubleshoot charge balance" tab in the WQRevie GUI inChrome.
 
 ###Whole vs Part
-This tab compares samples with filtered and unfiltered constituents and flags samples based on the filtered and unfiltered result values.
+This tab compares filtered and unfiltered constituents and flags results based on comparison of filtered and unfiltered result values.
 
 ###Pesticide flags
-This table contains flags for evaluating number of pesticide hits in schedule 2437. If there are too many or too few hits in the current sample compared to historic data, the sample gets flagged.
+This table contains flags for evaluating the number of pesticide hits in schedule 2437. If there are too many or too few hits in the current sample compared to historic data, the sample will be flagged.
 
 ###Replicate table
-This table contains all replicate pairs based on the criteria as the Rep-parm boxplot described above. It flags samples based on Relative Percent Difference.
+This table contains all replicate pairs based on the same replicate coding criteria as the Replicate agreement boxplot described in the previous section. Samples are flagged based on whether Relative Percent Difference between the replicates exceeds 10% and whether comparison of replicates is affected by one or both values having a remark code.
 
 ###Blank table
-This table summerizes all blank samples in the pulled data, organized by parameter.
+This table summarizes all blank samples in the pulled data, organized by parameter. The BD90.90 column calculates the BD90.90 value of the blank which is a value calculated when there are repeated hits on a blank.  It is the blank sample concentration corresponding to the 90th percentile of the blank hit values at least the 90 percent confidence level.  In other words, there is at least a 90 percent chance that at least 90 percent of all environmental samples will have contamination less than the BD90.90 value for a particular analyte.  This calculation is based on USGS SIR 2012-5139 (https://pubs.usgs.gov/sir/2012/5139/) and can be useful in situations where there is unexplained, or recurring contamination of the blank samples. 
 
 ###All charge balance
-This table is a "wide" format of all sample charge balance data, including cation and anion sums, individual consitutent values, and general flags for samples with charge imbalance.
+This table is a "wide" format of all sample charge balance data, including cation and anion sums, individual constituent values, and general flags for samples with charge imbalance.
 
 ###Data by result
 This table contains all data pulled from NWIS in the "long" format, ie. by record number, parameter code, and result value.
@@ -350,15 +361,11 @@ This table contains all data pulled from NWIS in the "long" format, ie. by recor
 ###Data by sample
 This table contains all data pulled from NWIS in the "wide" format, ie. by record number date/time and all associated parameter result values.
 
-##qwsample and qwresult
-These tabs will be present when the "Generate batch files" button is pressed in Chrome. See "Ready for DQI change" above. The tabs can copied and saved into text files for modifying DQI codes and comments with QWDATA. To regenerate the tabs if more results have been added to the "Ready for DQI change" tab, delete the current qwsample and qwresult tabs and hit the "Generate batch files" button again.
+###qwsample and qwresult
+These tabs will be present when the "Generate batch files" button is pressed in the WQReview GUI in Chrome. See "Ready for DQI change" above. The tabs can copied and saved into text files for modifying DQI codes and comments using QWDATA. To regenerate the tabs if more results have been added to the "Ready for DQI change" tab, delete the current qwsample and qwresult tabs and hit the "Generate batch files" button again.
 
 
-
-##Data and QAQC tables
-These tables are controlled similarly to the auto-flagged tables except that they can be generated according to site and date selection criteria. These tables include standard data tables, a wide (sample-result) and a long (by result) format table. 4 QAQC tables are also presented, including a chargebalance table, a table of replicate agreement, a summary table of blank detections, and a table comparing filtered ot unfiltered values. The last column of each of these QAQC tables contains a column with flags if a particular sample violates some standard QAQC measure. For example, a sample with a charge imbalance > 10% would get a flag in the final column of hte chargebalance table. **The blank summary table is calculated on the fly given the input criteria** For example, leaving the default date range (last 3 years) in the blank table input and selecting a site would summarize the blank detections for that 3 year period for that site.
-
-##Flag descriptions
+##NWIS Flag descriptions
 ###SC_badLabVSField
 The difference between Lab SC (90095) and field SC (00095) is greater than 10%
 
@@ -395,6 +402,7 @@ For each environmental sample, the cation-anion percent difference was be calcul
 2. specific conductance is greater than 100 and less than or equal to 1000 microsiemens/cm, AND percent difference is greater (in absolute value) than +/- 10 percent
 3. specific conductance is greater than 1000 microsiemens/cm, AND percent difference is greater (in absolute value) than +/- 5 percent
 
+
 #Suggested WQReview and QWDATA workflow for flipping DQI codes
 ##WQReview
 1. Use WQReview to pull data of interest.
@@ -403,24 +411,10 @@ For each environmental sample, the cation-anion percent difference was be calcul
 1. Based on your review, add the new DQI code (R, Q, etc.) to the "DQI_CD_REVIEWED" column.
 1. Add any review comments to be added to NWIS in the "RESULT_CM_NWIS_REVIEWED" column.
 1. Put the comment type (F for field or L for Lab) in the "RESULT_CM_TYPE_REVIEWED" column.
-1. Add any additional comments to the "RESULT_NOTES_WQREVIEW" column. These will not appeded into NWIS, they will only be saved when the Excel workbook is saved.
+1. Add any additional comments to the "RESULT_NOTES_WQREVIEW" column. These will not be uploaded to NWIS, they will only be saved when the Excel workbook is saved.
 1. Under the WQReview "Generate batch DQI flip files" header, hit the "Generate batch files" button. A qwsample and qwresult tab will be generated in the Excel workbook.
 1. Using Windows Explorer, create or navigate to a project folder in your mapped home directory on NWIS. Save the Excel workbook here.
-1. Copy everything but the column titles from the qwsample and qwresult Excel workbook tabs and paste them into seperate files using a text editor (Notepad, Notepad++, Wordpad) and save them in the project folder as qwsample and qwresult files. Some WQ Specialists prefer the qwsample and qwresult file to have a username and date/time stamp appended to the file name. E.g. qwsample_tmills_20181001
+1. Copy everything but the column titles from the qwsample and qwresult Excel workbook tabs and paste them into seperate files using a text editor (Notepad, Notepad++, Wordpad) and save them in the project folder as qwsample and qwresult files. Some Water Quality Specialists prefer the qwsample and qwresult file to have a username and date/time stamp appended to the file name. E.g. qwsample_tmills_20181001
 
-##QWDATA - Consult with your WQ Specialist and Data Base Administrator about your WSC practices for batch file changes in QWDATA.
-1. Using a Unix window (ReflectionX, PuTTY) navigate to your project folder in your home directory on NWIS. Launch QWDATA from this location.
-1. In the QWDATA menu, select option 8 - Batch Processing
-1. In the Batch Processing menu, select option 4 - Enter batch-file data with user-specified behavior
-1. Modify the following:
-* 2. Transactions allowed: 4. Verification Only, no transaction stored
-* 3. Results protected by DQI: No
-* any other options if desired
-1. Hit Enter to continue. A watlist will be created in your project folder and your qwsample and qwresult files will have a datetime stamp .YYYYMMDD.HHMMSS appended to them.
-1. Review the watlist to be sure that the desired changes could take place and no unexpected changes will occur. Append "verification" to the watlist file name.
-1. Remove the datetime stamp from the qwsample and qwresult files.
-1. Re-run the Batch Processing with the following:
-* 2. Transactions allowed: 1. Only updated to samples (QWCARDSIN)
-* 3. Results protected by DQI: No
-* any other options if desired
-1. Hit Enter to continue. Another watlist will be created with the changes you have made to results in NWIS.
+##QWDATA - Consult with your Water Quality Specialist, Local Data Manager, and/or Data Base Administrator about your WSC practices for batch file changes in QWDATA.
+
