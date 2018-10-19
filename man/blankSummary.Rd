@@ -46,5 +46,5 @@ blankSummaryOut <- blankSummary(qw.data = qw.data,
              multiple.levels = FALSE)
 }
 \references{
-Fram, M.S., Olsen, L.D., and Belitz, Kenneth, 2012, Evaluation of volatile organic compound (VOC) blank data and application of study reporting levels to groundwater data collected for the California GAMA Priority Basin Project, May 2004 through September 2010: U.S. Geological Survey Scientific Investigations Report 2012–5139, 94 p
+Fram, M.S., Olsen, L.D., and Belitz, Kenneth, 2012, Evaluation of volatile organic compound (VOC) blank data and application of study reporting levels to groundwater data collected for the California GAMA Priority Basin Project, May 2004 through September 2010: U.S. Geological Survey Scientific Investigations Report 2012_5139, 94 p
 }
