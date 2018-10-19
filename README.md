@@ -38,14 +38,14 @@ Additionaly, please feel free to post any suggestions or enhancement requests.
 
 **Your participation will make this a better tool for everyone!**
 
-----------
 WQReview GUI User Guide
+----------
 [WQReviewGUI User Guide](vignettes/WQReviewGUI.md)
 
 Frequently asked questions
 ----------
 
-[FAQ](vignettes/faq.md)
+[FAQ](vignettes/faq2.md)
 
 Installation for stand alone application (non-R users)
 ----------
