@@ -30,7 +30,7 @@ an indexed notebook of flagged samples, tables, and plots for all sites entered.
 \details{
 flagReport uses the readNWISodbc function to pull data for sites in networkList. Sites are grouped by the cooresponding network name
 in the first column of networkList. Reports for each site are generated and written to subfolders by network name. A top-level index
-is then generated to navigate between networks. Reports consist of automated data checks defined in  http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html and plots.
+is then generated to navigate between networks. Reports consist of automated data checks defined in  https://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html and plots.
 Panels containing a timeseries, seasonal, parameter vs discharge and parameter vs SC plot are generated and indexed.
 This function can be used to auto-generate network QAQC reports overnight using R in batch mode with a script and Windows task scheduler.
 }

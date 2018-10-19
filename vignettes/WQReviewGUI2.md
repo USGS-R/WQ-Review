@@ -1,7 +1,7 @@
 Introduction
 ============
 
-This manual describes use of the WQReview 2.0 version. The WQReview R-package allows import of water-quality data from the U.S. Geological Surveyâ€™s National Water Information System utilizing ODBC connections. It allows review of those data using a series of interactive graphical interfaces through a graphical user interface (GUI) and tabular output of data. Finally, it allows selection of specific water-quality results for updating of data quality indicator (DQI) codes using QWDATA after data review.
+This manual describes use of the WQReview 2.0 version. The WQReview R-package allows import of water-quality data from the U.S. Geological Survey’s National Water Information System utilizing ODBC connections. It allows review of those data using a series of interactive graphical interfaces through a graphical user interface (GUI) and tabular output of data. Finally, it allows selection of specific water-quality results for updating of data quality indicator (DQI) codes using QWDATA after data review.
 
 Importing Data Using WQReview
 =============================
