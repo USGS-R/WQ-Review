@@ -5,7 +5,7 @@
 #' @param STAIDS A character vector of station IDs to summarize or All for all site ids in qw.data.Defaults to "All"
 #' @param begin.date Character string (yyyy-mm-dd) of beggining date to subset blank analyses. Leave blank for all analyses.
 #' @param end.date Character string (yyyy-mm-dd) of ending date to subset blank analyses. Leave blank for all analyses.
-#' @param multiple.levels Logical to analyze multiple reporting levels separetly. Default is TRUE.
+#' @param multiple.levels Logical to analyze multiple reporting levels separetly. Default is FALSE.
 #' @examples 
 #' data("exampleData",package="WQReview")
 #' blankSummaryOut <- blankSummary(qw.data = qw.data,
@@ -16,6 +16,19 @@
 #' @importFrom dplyr left_join
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarize
+#' @return A dataframe of summary statistics for blank samples. See details.
+#' @details The dataframe returned contains a summary of blank detections for each constituent with the following statistics:
+#' \itemize{
+#' \item num_blanks The number of blank samples collected
+#' \item num_detects The number of unqualified blank detections
+#' \item num_E_detects The number of blank detections with an E remark_cd (estimated)
+#' \item median_detected_value The median value of all detections
+#' \item max_detected_value The max value of all detections
+#' \item BD90.90 A statistic used for setting study reporting limits described by Fram and others, 2012. 
+#' Briefly, the BD90.90 value is the concentration of a blank detection where there is at least a 90-percent confidence
+#' that the contamination in at least 90 percent of samples is less than this value.
+#' }
+#' @references Fram, M.S., Olsen, L.D., and Belitz, Kenneth, 2012, Evaluation of volatile organic compound (VOC) blank data and application of study reporting levels to groundwater data collected for the California GAMA Priority Basin Project, May 2004 through September 2010: U.S. Geological Survey Scientific Investigations Report 2012–5139, 94 p
 #' @export
 #' 
 
@@ -92,31 +105,27 @@ blankSummary <- function(qw.data,STAIDS="All",begin.date = NA,end.date=NA,multip
                                                      num_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "Sample")])
                                                      
                                                      ###Change how the estimated code is displayed or provide better documentation
-                                                     num_e_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "E")])
+                                                     num_E_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "E")])
                                                      
                                                      num_detects_10xRL <- length(.$RESULT_VA[which(.$RESULT_VA >= 10*as.numeric(.$RPT_LEV_VA) & .$REMARK_CD == "Sample")])
                                                      median_detected_value <- median(.$RESULT_VA[which(.$REMARK_CD == "Sample")])
                                                      max_detected_value <- suppressWarnings(max(.$RESULT_VA[which(.$REMARK_CD == "Sample")],na.rm=TRUE))
                                                      
                                                      ##Calculate BD9090 for detections
-                                                     #if(length(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) > 1)
-                                                     #{
-                                                     #sorteddetects <- sort(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) 
-                                                     #BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
-                                                     #} else{BD90.90 <- NA}
+                                                     if(length(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) > 1)
+                                                     {
+                                                     sorteddetects <- sort(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) 
+                                                     BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
+                                                     } else{BD90.90 <- NA}
                                                      
                                                      ##make a date frame out of the summary vectors
                                                      data.frame(num_blanks = num_blanks,
                                                                 num_detects=num_detects,
-                                                                num_e_detects=num_e_detects,
+                                                                num_E_detects=num_E_detects,
                                                                 num_detects_10xRL=num_detects_10xRL,
                                                                 median_detected_value=median_detected_value,
-                                                                max_detected_value=max_detected_value
-                                                                #if(length(BD90.90 != 0))
-                                                                #{
-                                                                #BD90.90 = BD90.90
-                                                                #} else (BD90.90 = NA)
-                                                     )
+                                                                max_detected_value=max_detected_value,
+                                                                BD90.90 = BD90.90)
                                              }
                         )
                         
@@ -149,31 +158,28 @@ blankSummary <- function(qw.data,STAIDS="All",begin.date = NA,end.date=NA,multip
                                 num_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "Sample")])
                                 
                                 ###Change how the estimated code is displayed or provide better documentation
-                                num_e_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "E")])
+                                num_E_detects <- length(.$RESULT_VA[which(.$REMARK_CD == "E")])
                                 
                                 num_detects_10xRL <- length(.$RESULT_VA[which(.$RESULT_VA >= 10*as.numeric(.$RPT_LEV_VA) & .$REMARK_CD == "Sample")])
                                 median_detected_value <- median(.$RESULT_VA[which(.$REMARK_CD == "Sample")])
                                 max_detected_value <- suppressWarnings(max(.$RESULT_VA[which(.$REMARK_CD == "Sample")],na.rm=TRUE))
                                 
                                 ##Calculate BD9090 for detections
-                                #if(length(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) > 1)
-                                #{
-                                #sorteddetects <- sort(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) 
-                                #BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
-                                #} else{BD90.90 <- NA}
+                                if(length(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) > 1)
+                                {
+                                sorteddetects <- sort(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) 
+                                BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
+                                } else{BD90.90 <- NA}
                                 
                                 ##make a date frame out of the summary vectors
                                 data.frame(num_blanks = num_blanks,
                                            num_detects=num_detects,
-                                           num_e_detects=num_e_detects,
+                                           num_E_detects=num_E_detects,
                                            num_detects_10xRL=num_detects_10xRL,
                                            median_detected_value=median_detected_value,
-                                           max_detected_value=max_detected_value
-                                           #if(length(BD90.90 != 0))
-                                           #{
-                                           #BD90.90 = BD90.90
-                                           #} else (BD90.90 = NA)
-                                )
+                                           max_detected_value=max_detected_value,
+                                           BD90.90 = BD90.90)
+                                
                         }) 
                         
                         
@@ -190,7 +196,9 @@ blankSummary <- function(qw.data,STAIDS="All",begin.date = NA,end.date=NA,multip
                 
                 blanksummary$median_detected_value <- round(blanksummary$median_detected_value,3)
                 blanksummary$max_detected_value <- round(blanksummary$max_detected_value,3)
-                #blanksummary$BD90.90 <- round(blanksummary$BD90.90,3)
+                blanksummary$max_detected_value[blanksummary$max_detected_value %in% c(Inf,-Inf)] <- NA
+                blanksummary$BD90.90 <- round(blanksummary$BD90.90,3)
+                
                 
                 return(unique(blanksummary))
                 ###End of blank dataframe length check

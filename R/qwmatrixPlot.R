@@ -44,7 +44,7 @@ panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor, ...)
 }
 
 data <- subset(qw.data$PlotTable,SITE_NO %in% (site.selection) & PARM_CD%in%(plotparm))
-plotdata <- na.omit(dcast(data,RECORD_NO ~ PARM_CD, max,value.var = "RESULT_VA" ))
+plotdata <- na.omit(reshape2::dcast(data,RECORD_NO ~ PARM_CD, max,value.var = "RESULT_VA" ))
 
 if (length(site.selection) == 1)
 {

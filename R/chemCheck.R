@@ -15,6 +15,21 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
         
         #Make data frame of all samples
         inReviewData <- subset(qw.data$PlotTable, DQI_CD %in% c("I","S","P"))
+        
+        #run ionBalance on inReview data is not present
+        if(is.null(inReviewData$complete.chem)){
+                ionbal <- ionBalance(qw.data)
+                inReviewData <- dplyr::left_join(inReviewData, ionbal[,c("RECORD_NO","PARM_CD","meqCharge","sum_cat","sum_an","complete.chem",
+                                                                  "perc.diff","element")], by = c("RECORD_NO","PARM_CD"))
+        }
+        
+        #Check if empty rows and put in a NA row, super hacky but fixes the issue
+        if(nrow(inReviewData) == 0){
+          tempDF <- as.data.frame(t(rep(NA,ncol(inReviewData))))
+          names(tempDF) <- names(inReviewData)
+          inReviewData <- dplyr::bind_rows(inReviewData,tempDF)
+        }
+        
         inReviewData$SC_badLabVSField <- NA
         inReviewData$phTooLow_30.01 <- NA
         inReviewData$phTooHigh_30.02 <- NA
@@ -26,7 +41,8 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
                                               "STATION_NM",
                                               "SAMPLE_START_DT",
                                               "SAMPLE_END_DT",
-                                              "MEDIUM_CD")])
+                                              "MEDIUM_CD",
+                                              "SAMPLE_CM_TX")])
         #Flag samples with bad field vs lab SC
         ##Subset data to field and lab SC results
         fieldSCData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ")
@@ -79,7 +95,7 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
         
         #Flag samples with bad charge balance
         #Check if charge balance was run and throw a warning if not
-        if(is.null(qw.data$PlotTable$complete.chem))
+        if(is.null(inReviewData$complete.chem))
         {
                 warning("No charge balance data. Try running ionBalance() on qw.data list input first.")
                 cbData <- subset(inReviewData, PARM_CD == "00095" & MEDIUM_CD != "OAQ")
@@ -145,11 +161,11 @@ chemCheck <- function(qw.data, returnAll = FALSE) {
         if(returnAll == FALSE)
         {
                 #remove NAs from result flags
-                flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[7]) |
-                                                                      !is.na(flaggedSamples[8]) |
+                flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[8]) |
                                                                       !is.na(flaggedSamples[9]) |
                                                                       !is.na(flaggedSamples[10]) |
-                                                                                     !is.na(flaggedSamples[11])
+                                                                      !is.na(flaggedSamples[11]) |
+                                                                                     !is.na(flaggedSamples[12])
                 ),]) 
         } else {}
         

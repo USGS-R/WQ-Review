@@ -9,7 +9,7 @@ historicCheck(qw.data, returnAll = FALSE)
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}
 
-\item{returnAll}{logical, return dataframe containing all results or only return flagged samples. Defualt is FALSE}
+\item{returnAll}{logical, return dataframe containing all results or only return flagged samples. Default is FALSE}
 }
 \value{
 A dataframe containing all samples with applicable flags

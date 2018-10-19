@@ -1,6 +1,6 @@
 #' Function to flag samples if values are out of range of historic data
 #' @param qw.data A qw.data list generated from readNWISodbc
-#' @param returnAll logical, return dataframe containing all results or only return flagged samples. Defualt is FALSE
+#' @param returnAll logical, return dataframe containing all results or only return flagged samples. Default is FALSE
 #' @details Compares each sample with DQI code of "I","S", or "P" to ranges of all prior approved data ("R","O","A"),
 #' and flags samples that are suspisciously high or low. 
 #' Definitions of checks can be found at http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
@@ -30,7 +30,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
         if(nrow(inReviewData) > 0)
         {
                 #Get stats by parm for each site
-                siteStats <- dplyr::summarize(group_by(approvedData,SITE_NO,PARM_CD),
+                siteStats <- dplyr::summarize(dplyr::group_by(approvedData,SITE_NO,PARM_CD,MEDIUM_CD),
                                               min = min(RESULT_VA[REMARK_CD != "<"],na.rm=TRUE),
                                               max = max(RESULT_VA[REMARK_CD != ">"],na.rm=TRUE),
                                               percNonDetects = length(na.omit(RESULT_VA[REMARK_CD == "<"]))/length(na.omit(RESULT_VA))*100,
@@ -38,7 +38,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                               quant01 = quantile(RESULT_VA[REMARK_CD != "<"],probs=(0.01),na.rm=TRUE),
                                               N = length(RESULT_VA)
                 )
-                inReviewData <- dplyr::left_join(inReviewData,siteStats, by = c("SITE_NO","PARM_CD"))
+                inReviewData <- dplyr::left_join(inReviewData,siteStats, by = c("SITE_NO","PARM_CD","MEDIUM_CD"))
                 
                 ##Check if new max
                 inReviewData$newMax_30.11 <- NA
@@ -46,7 +46,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                   inReviewData$REMARK_CD != ">" & 
                                                   inReviewData$RESULT_VA > inReviewData$max &
                                                   inReviewData$N > 4] <-
-                        paste0("flag_",
+                        paste0("newMax_",
                                inReviewData$RESULT_VA[is.finite(inReviewData$max) &
                                                               inReviewData$REMARK_CD != ">" &
                                                               inReviewData$RESULT_VA > inReviewData$max &
@@ -59,7 +59,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                   inReviewData$REMARK_CD != "<" & 
                                                   inReviewData$RESULT_VA < inReviewData$min &
                                                   inReviewData$N > 4] <-
-                        paste("flag",
+                        paste("newMin_",
                               inReviewData$RESULT_VA[is.finite(inReviewData$min) &
                                                              inReviewData$REMARK_CD != "<" & 
                                                              inReviewData$RESULT_VA < inReviewData$min &
@@ -72,7 +72,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                           inReviewData$REMARK_CD != ">" & 
                                                           inReviewData$RESULT_VA > inReviewData$quant99 &
                                                           inReviewData$N > 4] <-
-                        paste("flag",
+                        paste(">99perc_",
                               inReviewData$RESULT_VA[is.finite(inReviewData$quant99) &
                                                              inReviewData$REMARK_CD != ">" &
                                                              inReviewData$RESULT_VA > inReviewData$quant99 &
@@ -85,7 +85,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                                        inReviewData$REMARK_CD != "<" & 
                                                        inReviewData$RESULT_VA < inReviewData$quant01 &
                                                        inReviewData$N > 4] <-
-                        paste("flag",
+                        paste("<1perc_",
                               inReviewData$RESULT_VA[is.finite(inReviewData$quant01) &
                                                              inReviewData$REMARK_CD != "<" &
                                                              inReviewData$RESULT_VA < inReviewData$quant01 &
@@ -97,38 +97,62 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                 inReviewData$unusualNonDetect[is.finite(inReviewData$percNonDetects) &
                                                       inReviewData$REMARK_CD == "<" &
                                                       inReviewData$percNonDetects < 5 &
-                                                      inReviewData$N > 4] <- "flag"
+                                                      inReviewData$N > 4] <- "nonDetect_"
                 
                 #Extract site info and flags
-                flaggedSamples <- inReviewData[c("RECORD_NO",
-                                                 "SITE_NO",
-                                                 "STATION_NM",
-                                                 "SAMPLE_START_DT",
-                                                 "SAMPLE_END_DT",
-                                                 "MEDIUM_CD",
-                                                 "PARM_CD",
-                                                 "PARM_NM",
-                                                 "RESULT_VA",
-                                                 "REMARK_CD",
-                                                 "PARM_SEQ_GRP_CD",
-                                                 "min",
-                                                 "max",
-                                                 "quant99",
-                                                 "quant01",
-                                                 "newMax_30.11",
-                                                 "newMin_30.12",
-                                                 "greaterQuant99_30.15",
-                                                 "lessQuant01_30.16",
-                                                 "unusualNonDetect"
-                )]
+                flaggedSamples <- qw.data$PlotTable[c("RECORD_NO",
+                                                      "SITE_NO",
+                                                      "STATION_NM",
+                                                      "SAMPLE_START_DT",
+                                                      "SAMPLE_END_DT",
+                                                      "MEDIUM_CD",
+                                                      "PARM_CD",
+                                                      "PARM_NM",
+                                                      "DQI_CD",
+                                                      "RESULT_VA",
+                                                      "REMARK_CD",
+                                                      "PARM_SEQ_GRP_CD")]
+                flaggedSamples <- dplyr::left_join(flaggedSamples, inReviewData[c("RECORD_NO",
+                                                                                  "SITE_NO",
+                                                                                  "STATION_NM",
+                                                                                  "SAMPLE_START_DT",
+                                                                                  "SAMPLE_END_DT",
+                                                                                  "MEDIUM_CD",
+                                                                                  "PARM_CD",
+                                                                                  "PARM_NM",
+                                                                                  "DQI_CD",
+                                                                                  "RESULT_VA",
+                                                                                  "REMARK_CD",
+                                                                                  "PARM_SEQ_GRP_CD",
+                                                                                  "min",
+                                                                                  "max",
+                                                                                  "quant99",
+                                                                                  "quant01",
+                                                                                  "newMax_30.11",
+                                                                                  "newMin_30.12",
+                                                                                  "greaterQuant99_30.15",
+                                                                                  "lessQuant01_30.16",
+                                                                                  "unusualNonDetect")],
+                                                   by = c("RECORD_NO",
+                                                          "SITE_NO",
+                                                          "STATION_NM",
+                                                          "SAMPLE_START_DT",
+                                                          "SAMPLE_END_DT",
+                                                          "MEDIUM_CD",
+                                                          "PARM_CD",
+                                                          "PARM_NM",
+                                                          "DQI_CD",
+                                                          "RESULT_VA",
+                                                          "REMARK_CD",
+                                                          "PARM_SEQ_GRP_CD"))
                 if(returnAll == FALSE)
                 {
                         #remove NAs from result flags
-                        flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[16]) |
-                                                                              !is.na(flaggedSamples[17]) |
+                        flaggedSamples <- unique(flaggedSamples[which(!is.na(flaggedSamples[17]) |
                                                                               !is.na(flaggedSamples[18]) |
                                                                               !is.na(flaggedSamples[19]) |
-                                                                                             !is.na(flaggedSamples[20])
+                                                                              !is.na(flaggedSamples[20]) |
+                                                                                             !is.na(flaggedSamples[21])
                                                                               ),]) 
                 } else {}
                 
@@ -143,6 +167,7 @@ historicCheck <- function(qw.data, returnAll = FALSE)
                                   MEDIUM_CD = NA,
                                   PARM_CD = NA,
                                   PARM_NM = NA,
+                                  DQI_CD = NA,
                                   PARM_SEQ_GRP_CD = NA,
                                   min = NA,
                                   max = NA,

@@ -4,107 +4,135 @@
 ####################################
 ###Save data after import
 ####################################
-output$saveData <- downloadHandler(
-        filename = function() {"saveData"},
-        content = function(file) {
-                save.image(file)
-        }
+output$saveRData <- downloadHandler(
+  filename = function() {paste0("WQRevOUT_",Sys.time(),".rda")},
+  content = function(file) {
+    save(list=c("pullCriteria","medium.colors","errors","qual.shapes","qw.data","reports"),file=file)
+  }
 )
+
 
 #####################
 ###Load saved data
 #####################
 
-output$loadWarning <- renderPrint({
-        validate(
-                need(!is.null(input$loadDataFile), "Please select a file to load")
-
-        )
-        
-        #sampleCountHist <- ggplot(data=plotTable[!duplicated(plotTable$RECORD_NO),],aes(x=year(SAMPLE_START_DT)))
-        #sampleCountHist <- sampleCountHist + geom_histogram(colour = "darkgreen", fill = "white",binwidth=1) + theme_bw()
-        #sampleCountHist <- sampleCountHist + ylab("Sample count") + xlab("Calendar year")
-        #sampleCountHist
+output$loadWarning <- renderText({
+  validate(
+    need(!is.null(input$loadRDataFile), "Please select an R data file to load"),
+    need(!is.null(input$loadXLDataFile), "Please select the cooresponding XL workbook to load")
+    
+    
+  )
+  
 })
 
 
 observeEvent(input$loadData, {
+  
+  loadRDataFile <- input$loadRDataFile
+  loadXLDataFile <- input$loadXLDataFile
+  
+  
+  if(!is.null(loadRDataFile) &
+     !is.null(loadXLDataFile))
+  {
+    tryCatch({
+      load(loadRDataFile$datapath,envir = .GlobalEnv)
 
-        loadDataFile <- input$loadDataFile
-        
-        
-        if(!is.null(loadDataFile))
-        {
-                tryCatch({
-                load(loadDataFile$datapath)
-                        qw.data <<- qw.data
-                        reports <<- reports
-                source("server_header.r",local=TRUE)$value
-                },warning = function(w) {
-                        load(loadDataFile$datapath)
-                        qw.data <<- qw.data
-                        reports <<- reports
-                        source("server_header.r",local=TRUE)$value
-                },error = function(e){}
-                )
-        } else{}
-        
-tryCatch({
-###Print retrieval info
-output$headerReminder <- renderText({
-        print("Please see notifications at the top-right of this page for important information regarding your data")
-})
-output$samplesRetrieved <- renderText({
-        print(paste("Samples retrieved:",length(unique(plotTable$RECORD_NO))))
-})
-output$resultsRetrieved <- renderText({
-        print(paste("Results retrieved:",length(unique(plotTable$RESULT_VA))))
-})
-output$sampleModified <- renderText({
-        print("Most recent sample modification")
-})
-output$recordModified <- renderText({
-        print(unique(paste("Record:",plotTable$RECORD_NO[which(plotTable$SAMPLE_MD == max(plotTable$SAMPLE_MD))])))
-})
-output$recordModifiedDate <- renderText({
-        print(unique(paste("Date:",max(plotTable$SAMPLE_MD))))
-})
-output$recordModifiedName <- renderText({
-        print(unique(paste("Name:",plotTable$SAMPLE_MN[which(plotTable$SAMPLE_MD == max(plotTable$SAMPLE_MD))])))
-})
-output$resultModified <- renderText({
-        print("Most recent result modification")
-})
-output$resultRecordModified <- renderText({
-        print(unique(paste("Record:",plotTable$RECORD_NO[which(plotTable$RESULT_MD == max(plotTable$RESULT_MD))])))
-})
-output$resultModifiedPARM <- renderText({
-        print(unique(paste("P-Code",plotTable$PARM_CD[which(plotTable$RESULT_MD == max(plotTable$RESULT_MD))])))
-})
-output$resultModifiedDate <- renderText({
-        print(unique(paste("Date:",max(plotTable$RESULT_MD))))
-})
-output$resultModifiedName <- renderText({
-        print(unique(paste("Name:",plotTable$RESULT_MN[which(plotTable$RESULT_MD == max(plotTable$RESULT_MD))])))
+      
+      excel.link::xl.workbook.open(loadXLDataFile$datapath)
+      ###Link excel tables
+      xl.sheet.activate("Charge balance issues")
+      xl_CB <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
+      
+      xl.sheet.activate("Ready for DQI change")
+      xl_DQI <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
+      
+      xl.sheet.activate("DQI needs review")
+      xl_UNAP <<- xl.connect.table("a1",row.names = FALSE, col.names = TRUE)
+      
+    },error = function(e){}
+    )
+  } else{}
+  
+  tryCatch({
+    source("server_reports.r",local=TRUE)$value
+    }, error = function(e) {} )
+  
+  
+  ##################################################
+  
+  ###Check for succesful data import
+  if(!is.null(qw.data))
+  {
+    
+    ###############################################
+    ###Load all plotting elements of server, 
+    ###they can't run until afte rthe data has been imported
+    ###############################################
+    
+    tryCatch({
+      
+      ###Result-level review tab
+      source("server_resultReview.R",local=TRUE)$value
+      
+      ###Charge balance review
+      source("server_cbReview.r",local=TRUE)$value
+      
+      ###Blanks and reps
+      source("server_blankRep.R",local=TRUE)$value
+      
+      
+      # 
+      # 
+      # source("server_repBox.r",local=TRUE)$value
+      # 
+      # source("server_blankPlot.r",local=TRUE)$value
+      # 
+      # #source("server_map.r",local=TRUE)$value
+      # 
+      # ###Tables###
+      # source("server_tables.r",local=TRUE)$value
+      
+      ###############################
+      ###update all inputs with site IDs and parm codes from data pull
+      ###############################
+      source("server_updateInputs.r",local=TRUE)$value
+      
+      ###print complete
+      output$loadMess <- renderText("Data load complete")
+      
+    },error=function(e){})
+    
+    ###Clear error messages on successful data import
+    output$errors <- renderPrint("")
+    output$shinyErrors <- renderPrint("")
+    
+    ###Validate against database for changes
+    qw.data.current <<- suppressWarnings(readNWISodbc(DSN=pullCriteria$DSN,
+                                              env.db = pullCriteria$env.db,
+                                              qa.db=pullCriteria$qa.db,
+                                              STAIDS=pullCriteria$STAIDS,
+                                              dl.parms=pullCriteria$dl.parms,
+                                              parm.group.check=pullCriteria$parm.group.check,
+                                              begin.date=as.character(pullCriteria$begin.date),
+                                              end.date=as.character(pullCriteria$end.date),
+                                              projectCd = pullCriteria$projectCd))
+    qw.data.current$PlotTable <<- qw.data.current$PlotTable[order(qw.data.current$PlotTable$PARM_SEQ_GRP_CD),]
+    
+    if(isTRUE(all.equal(qw.data.current$PlotTable,qw.data$PlotTable[1:76],check.attributes = FALSE)))
+    {
+      output$uptodate <- renderText("Data is current with NWIS database")
+    } else {
+      output$uptodate <- renderText("Data have been modified in NWIS since being saved")
+    }
+
+    
+  } else{output$shinyErrors <- renderPrint("Problem with data import, please check import criteria")}
+  
 })
 
-###############################################
-###Load all plotting elements of server, they can't run 
-###Until afte rthe data has been imported
-###############################################
-source("server_tablesandplots.r",local=TRUE)$value
 
 
-###############################################
-###Update side bar elements with appropriate inputs based on data import
-###############################################
-parmSelData <- unique(plotTable[c("PARM_CD","PARM_NM")])
-siteSelData <- unique(plotTable[c("SITE_NO","STATION_NM")])
-
-source("server_updateInputs.r",local=TRUE)$value
-
-},error = function(e) {}
-)
 
 
-})

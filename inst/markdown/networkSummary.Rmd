@@ -59,10 +59,12 @@ require(DT)
 ###Render the table
 datatable(
         reports$chemFlagTable,
-        extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = 'Buttons',
         options = list(
                 scrollX=TRUE,
-                autoWidth=TRUE)
+                autoWidth=TRUE,
+                dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print'))
 )
 #kable(reports$chemFalgTable)
 ```
@@ -78,10 +80,12 @@ require(DT)
 ###Render the table
 datatable(
         reports$pestFlagTable,
-        extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = 'Buttons',
         options = list(
                 scrollX=TRUE,
-                autoWidth=TRUE)
+                autoWidth=TRUE,
+                dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print'))
 )
 ```
 
@@ -98,10 +102,12 @@ require(DT)
 
 datatable(
         reports$resultFlagTable,
-        extensions = list(FixedColumns = list(leftColumns = 5)),
+        extensions = 'Buttons',
         options = list(
                 scrollX=TRUE,
-                autoWidth=TRUE)
+                autoWidth=TRUE,
+                dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print'))
 )
 
 #kable(reports$resultFlagTable)

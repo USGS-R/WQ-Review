@@ -19,7 +19,7 @@ readNWISodbc(DSN, env.db = "01", qa.db = "02", STAIDS, dl.parms = "All",
 
 \item{dl.parms}{A character vector of pcodes to pull data, e.g. c("00300","00915") or NWIS parameter groups specified in details section.}
 
-\item{parm.group.check}{A logical of weather or not to use NWIS parameter groups. If TRUE, must use NWIS parameter group names in dl.parms}
+\item{parm.group.check}{A logical of whether or not to use NWIS parameter groups. If TRUE, must use NWIS parameter group names in dl.parms}
 
 \item{begin.date}{Character string containing beginning date of data pull (yyyy-mm-dd)}
 

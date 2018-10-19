@@ -15,14 +15,14 @@ repTabler <- function(qw.data)
         envData <- subset(qw.data$PlotTable,SAMP_TYPE_CD %in% c(7,5) & MEDIUM_CD %in% c("WS ","WG ")  & PARM_SEQ_GRP_CD != "INF" & DQI_CD != "Q")
         
         ###Subset to rep samples
-        repData <- subset(qw.data$PlotTable,SAMP_TYPE_CD == c(7,5) & MEDIUM_CD %in% c("WSQ","WGQ")  & PARM_SEQ_GRP_CD != "INF" & DQI_CD != "Q")
+        repData <- subset(qw.data$PlotTable,SAMP_TYPE_CD %in% c(7,5) & MEDIUM_CD %in% c("WSQ","WGQ")  & PARM_SEQ_GRP_CD != "INF" & DQI_CD != "Q")
         
         if(nrow(repData) == 0)
         {
-                stop("No samples found with medium code WSQ or WGQ")
+                warning("No samples found with medium code WSQ or WGQ and sample type 7(rep) or 5(dup). Check sample coding in NWIS.")
         } else if(nrow(repData) > 0 && nrow(envData) == 0)
         {
-                stop("There are samples with medium code WSQ or WGQ and sample type = 7 or 5 but no WS or WG samples with sample type = 7 or 5. Check sample coding in NWIS.")
+                warning("There are samples with medium code WSQ or WGQ and sample type 7(rep) or 5(dup), but no WS or WG samples with sample type 7(rep) or 5(dup). Check sample coding in NWIS.")
         } else if(nrow(repData) > 0 & nrow(envData) > 0)
         {
                 ###Rename columns to indicate env or rep
@@ -48,6 +48,7 @@ repTabler <- function(qw.data)
                                        "Env_MEDIUM_CD","Rep_MEDIUM_CD",
                                        "Env_LAB_NO","Rep_LAB_NO",
                                        "PARM_CD","Env_PARM_NM", 
+                                       "Env_DQI_CD","Rep_DQI_CD",
                                        "Env_RESULT_VA","Env_REMARK_CD",
                                        "Rep_RESULT_VA","Rep_REMARK_CD",
                                        "Env_minus_Rep","relPercent_diff",
@@ -57,6 +58,7 @@ repTabler <- function(qw.data)
                                      "Env_MEDIUM_CD","Rep_MEDIUM_CD",
                                      "Env_LAB_NO","Rep_LAB_NO",
                                      "PARM_CD","PARM_NM", 
+                                     "Env_DQI_CD","Rep_DQI_CD",
                                      "Env_RESULT_VA","Env_REMARK_CD",
                                      "Rep_RESULT_VA","Rep_REMARK_CD",
                                      "Env_minus_Rep","relPercent_diff",
@@ -68,11 +70,12 @@ repTabler <- function(qw.data)
                 ###Flag pairs with RPD > 10% and the difference is > than the largest LRL
                 repTable$flags[which(abs(repTable$relPercent_diff) > 10 & abs(repTable$Env_minus_Rep) > as.numeric(pmax(repTable$Env_RPT_LEV_VA,repTable$Rep_RPT_LEV_VA)))] <- "RPD > 10% and > RPT_LEV"
                 ###Add flag to caution user about < and E values in calculation
-                repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")] <- paste(repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")],"Calculations effected by remark code")
+                repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")] <- paste(repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")],"Calculations affected by remark code")
                 ###Format times as character
                 #repTable$Env_SAMPLE_START_DT <- as.character(repTable$Env_SAMPLE_START_DT)
                 #repTable$Rep_SAMPLE_START_DT <- as.character(repTable$Rep_SAMPLE_START_DT)
                 
+                repTable <- repTable[!is.na(repTable$Rep_RECORD_NO),]
                 return(unique(repTable))
         }else{}
 }
