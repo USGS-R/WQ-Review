@@ -12,9 +12,9 @@
 
 <meta name="author" content="T. Joe Mills and Colin Penn" />
 
-<meta name="date" content="2018-08-21" />
+<meta name="date" content="2018-10-18" />
 
-<title>WQReview GUI User Guide</title>
+<title>WQReview GUI User Manual</title>
 
 
 
@@ -68,39 +68,45 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<h1 class="title toc-ignore">WQReview GUI User Guide</h1>
+<h1 class="title toc-ignore">WQReview GUI User Manual</h1>
 <h4 class="author"><em>T. Joe Mills and Colin Penn</em></h4>
-<h4 class="date"><em>2018-08-21</em></h4>
+<h4 class="date"><em>2018-10-18</em></h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#suggested-wqreview-and-qwdata-workflow-for-flipping-dqi-codes">Suggested WQReview and QWDATA workflow for flipping DQI codes</a><ul>
-<li><a href="#wqreview">WQReview</a></li>
-<li><a href="#qwdata">QWDATA</a></li>
-</ul></li>
-<li><a href="#importing-data">Importing Data</a><ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#importing-data-using-wqreview">Importing Data Using WQReview</a><ul>
+<li><a href="#load-the-wqreview-package-and-open-the-wqreview-gui-from-r-or-rstudio">Load the WQReview package and open the WQReview GUI from R or RStudio</a></li>
+<li><a href="#load-wqreview-from-the-desktop-or-start-menu-standalone-executable">Load WQReview from the desktop or start menu standalone executable</a></li>
 <li><a href="#data-import-options">Data import options</a></li>
-<li><a href="#a-basic-data-import">A basic data import</a></li>
+<li><a href="#a-basic-data-import-example-for-a-single-site">A basic data import, example for a single site</a></li>
 </ul></li>
-<li><a href="#plot-descriptions">Plot descriptions</a><ul>
+<li><a href="#creating-plots-in-wqreview">Creating Plots in WQReview</a><ul>
 <li><a href="#symbology">Symbology</a></li>
 <li><a href="#labelling-conventions">Labelling conventions</a></li>
 <li><a href="#selecting-data-to-plot">Selecting data to plot</a></li>
 <li><a href="#global-plot-controls">Global plot controls</a><ul>
-<li><a href="#new-data-threshold">New data threshold</a></li>
+<li><a href="#new-samples-threshold">New samples threshold</a></li>
 <li><a href="#record-highlights">Record highlights</a></li>
-<li><a href="#plot-clicking-brushing-and-hovering">Plot clicking, brushing, and hovering</a></li>
+<li><a href="#toolbar-for-interactive-graphicsplots">Toolbar for interactive graphics/plots</a></li>
 </ul></li>
-<li><a href="#plot-types">Plot types</a><ul>
-<li><a href="#timeseries">Timeseries</a></li>
+</ul></li>
+<li><a href="#result-level-review-tab">Result-level review tab</a><ul>
+<li><a href="#generate-plots">Generate plots</a><ul>
+<li><a href="#timeseries-plot">Timeseries plot</a></li>
 <li><a href="#seasonal-plot">Seasonal plot</a></li>
 <li><a href="#parameter-parameter-plot">Parameter-parameter plot</a></li>
+<li><a href="#parameter-boxplot">Parameter boxplot</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#troubleshoot-charge-balance-tab">Troubleshoot charge balance tab</a><ul>
 <li><a href="#charge-balance-timeseries">Charge balance timeseries</a></li>
 <li><a href="#ions-vs-conductance">Ions vs conductance</a></li>
-<li><a href="#rep-parm-boxplot">Rep-parm boxplot</a></li>
-<li><a href="#blank-sample-detections">Blank sample detections</a></li>
 </ul></li>
+<li><a href="#blanks-and-rep-comparison-tab">Blanks and Rep comparison tab</a><ul>
+<li><a href="#comparison-of-blank-detections-boxplot">Comparison of blank detections boxplot</a></li>
+<li><a href="#repliacte-agreement-boxplot">Repliacte agreement boxplot</a></li>
 </ul></li>
 <li><a href="#tables">Tables</a><ul>
 <li><a href="#auto-flagged-samples">Auto-flagged samples</a><ul>
@@ -115,10 +121,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#all-charge-balance">All charge balance</a></li>
 <li><a href="#data-by-result">Data by result</a></li>
 <li><a href="#data-by-sample">Data by sample</a></li>
-</ul></li>
 <li><a href="#qwsample-and-qwresult">qwsample and qwresult</a></li>
-<li><a href="#data-and-qaqc-tables">Data and QAQC tables</a></li>
-<li><a href="#flag-descriptions">Flag descriptions</a><ul>
+</ul></li>
+<li><a href="#nwis-flag-descriptions">NWIS Flag descriptions</a><ul>
 <li><a href="#sc_badlabvsfield">SC_badLabVSField</a></li>
 <li><a href="#section">30.01.</a></li>
 <li><a href="#ph-higher-than-expected">30.02. pH higher than expected</a></li>
@@ -132,111 +137,87 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#questionable-cation-anion-balance">30.21. Questionable cation-anion balance</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#suggested-wqreview-and-qwdata-workflow-for-flipping-dqi-codes">Suggested WQReview and QWDATA workflow for flipping DQI codes</a><ul>
+<li><a href="#wqreview">WQReview</a></li>
+<li><a href="#qwdata---consult-with-your-water-quality-specialist-local-data-manager-andor-data-base-administrator-about-your-wsc-practices-for-batch-file-changes-in-qwdata.">QWDATA - Consult with your Water Quality Specialist, Local Data Manager, and/or Data Base Administrator about your WSC practices for batch file changes in QWDATA.</a></li>
+</ul></li>
 </ul>
 </div>
 
-<div id="suggested-wqreview-and-qwdata-workflow-for-flipping-dqi-codes" class="section level1">
-<h1>Suggested WQReview and QWDATA workflow for flipping DQI codes</h1>
-<div id="wqreview" class="section level2">
-<h2>WQReview</h2>
-<ol style="list-style-type: decimal">
-<li>Use WQReview to pull data of interest.</li>
-<li>Review the Excel workbook tables and WQReview plots as part of your result review.</li>
-<li>Copy results that have been reviewed from the Excel “DQI needs review” tab to the “Ready for DQI change”.</li>
-<li>Based on your review, add the new DQI code (R, Q, etc.) to the “DQI_CD_REVIEWED” column.</li>
-<li>Add any review comments to be added to NWIS in the “RESULT_CM_NWIS_REVIEWED” column.</li>
-<li>Put the comment type (F for field or L for Lab) in the “RESULT_CM_TYPE_REVIEWED” column.</li>
-<li>Add any additional comments to the “RESULT_NOTES_WQREVIEW” column. These will not appeded into NWIS, they will only be saved when the Excel workbook is saved.</li>
-<li>Under the WQReview “Generate batch DQI flip files” header, hit the “Generate batch files” button. A qwsample and qwresult tab will be generated in the Excel workbook.</li>
-<li>Using Windows Explorer, create or navigate to a project folder in your mapped home directory on NWIS. Save the Excel workbook here.</li>
-<li>Copy everything but the column titles from the qwsample and qwresult Excel workbook tabs and paste them into seperate files using a text editor (Notepad, Notepad++, Wordpad) and save them in the project folder as qwsample and qwresult files.</li>
-</ol>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This manual describes use of the WQReview 2.0 version. The WQReview R-package allows import of water-quality data from the U.S. Geological Survey’s National Water Information System utilizing ODBC connections. It allows review of those data using a series of interactive graphical interfaces through a graphical user interface (GUI) and tabular output of data. Finally, it allows selection of specific water-quality results for updating of data quality indicator (DQI) codes using QWDATA after data review.</p>
 </div>
-<div id="qwdata" class="section level2">
-<h2>QWDATA</h2>
-<ol style="list-style-type: decimal">
-<li>Using a Unix window (ReflectionX, PuTTY) navigate to your project folder in your home directory on NWIS. Launch QWDATA from this location.</li>
-<li>In the QWDATA menu, select option 8 - Batch Processing</li>
-<li>In the Batch Processing menu, select option 4 - Enter batch-file data with user-specified behavior</li>
-<li>Modify the following:</li>
-</ol>
-<ul>
-<li><ol start="2" style="list-style-type: decimal">
-<li>Transactions allowed: 4. Verification Only, no transaction stored</li>
-</ol></li>
-<li><ol start="3" style="list-style-type: decimal">
-<li>Results protected by DQI: No</li>
-</ol></li>
-<li>any other options if desired</li>
-</ul>
-<ol style="list-style-type: decimal">
-<li>Hit Enter to continue. A watlist will be created in your project folder and your qwsample and qwresult files will have a datetime stamp .YYYYMMDD.HHMMSS appended to them.</li>
-<li>Review the watlist to be sure that the desired changes could take place and no unexpected changes will occur. Append “verification” to the watlist file name.</li>
-<li>Remove the datetime stamp from the qwsample and qwresult files.</li>
-<li>Re-run the Batch Processing with the following:</li>
-</ol>
-<ul>
-<li><ol start="2" style="list-style-type: decimal">
-<li>Transactions allowed: 1. Only updated to samples (QWCARDSIN)</li>
-</ol></li>
-<li><ol start="3" style="list-style-type: decimal">
-<li>Results protected by DQI: No</li>
-</ol></li>
-<li>any other options if desired</li>
-</ul>
-<ol style="list-style-type: decimal">
-<li>Hit Enter to continue. Another watlist will be created with the changes you have made to results in NWIS.</li>
-</ol>
-</div>
-</div>
-<div id="importing-data" class="section level1">
-<h1>Importing Data</h1>
-<p>This will describe the process for importing data into the WQReview Graphical User Interface (GUI). We will start by importing data for a single site using predefined NWIS parameter groups. ##Load the WQReview package and open the WQReview GUI</p>
+<div id="importing-data-using-wqreview" class="section level1">
+<h1>Importing Data Using WQReview</h1>
+<p>This section describes the process to import data into the WQReview Graphical User Interface (GUI).</p>
+<p>The GUI window will open in your system’s default internet browser. <strong>It is required that the GUI be run in Google Chrome.</strong> If the GUI opens in internet explorer, you need to change your system’s default browser to Google Chrome by opening Google Chrome and going to settings -&gt; default browser.</p>
+<div id="load-the-wqreview-package-and-open-the-wqreview-gui-from-r-or-rstudio" class="section level2">
+<h2>Load the WQReview package and open the WQReview GUI from R or RStudio</h2>
 <ol style="list-style-type: decimal">
 <li>Load the WQReview package by typing the following into your R script or command window:</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(WQReview)</code></pre></div>
-<ol style="list-style-type: decimal">
-<li>To open the GUI run the WQReviewGUI() function.</li>
+<ol start="2" style="list-style-type: decimal">
+<li>To open the GUI run the WQReviewGUI() function</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">WQReviewGUI</span>()</code></pre></div>
-<p>The GUI window will open in your system’s default internet browser. <strong>It is recommended that the GUI be run in Google Chrome.</strong> If the GUI opens in internet explorer, you need to change your system’s default browser to Google Chrome by opening Google Chrome and going to settings -&gt; default browser (bottom of page).</p>
-<div id="data-import-options" class="section level2">
-<h2>Data import options</h2>
-<p>The data import tab has 10 main inputs. A description of the input is given when the input is hovered over with the mouse cursor.</p>
+</div>
+<div id="load-wqreview-from-the-desktop-or-start-menu-standalone-executable" class="section level2">
+<h2>Load WQReview from the desktop or start menu standalone executable</h2>
 <ol style="list-style-type: decimal">
-<li><p><strong>Site number</strong>: This input takes a manually entered site number(s). Type the site number in and click “add”. You may add as many site numbers as you would like. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry.</p></li>
-<li><p><strong>Site number file</strong>: This input takes a file of site IDs. The file must be a single column text file of site numbers. Make sure leading zero’s have not been removed if using excel to generate the file.</p></li>
-<li><p><strong>Parameter codes</strong>: This input takes a manually entered parameter codes (pcodes). This behaves the same as the site number input.</p></li>
-<li><p><strong>Parameter groups</strong>: This input is used to select NWIS parameter groups to retrieve, rather than explicitly selecting individual pcodes.</p></li>
-<li><p><strong>pCode file</strong>: This input takes a file of pcodes. The file must be a single column text file of pcodes. Make sure leading zero’s have not been removed if using excel to generate the file.</p></li>
-<li><p><strong>Start date</strong>: The start date for the data pull. Samples collected after this date will be retrieved. The default value is 10 years before the current date.</p></li>
-<li><p><strong>End date</strong>: The end date for the data pull. Samples collected before this date will be retrieved. The default is the current date.</p></li>
-<li><p><strong>Server name (DSN)</strong>: The name of your nwis server data source name (DSN) that was established during ODBC setup.</p></li>
-<li><p><strong>Environmental DB number</strong>: The number cooresponding to the environmental database. Default is “01”</p></li>
-<li><p><strong>QA DB Number</strong>: The number cooresponding to the QA sample database. Default is “02”</p></li>
+<li>This requires the WQReview 2.0 executable setup installer program has previously been run on the local computer</li>
+<li>Navigate to the start menu WQReview 2.0 folder or desktop icon</li>
+<li>Click (start menu) or double-click (desktop icon) the WQReview 2.0 icon</li>
+<li>A command window will appear, <strong>Do not close this window, it will disappear when the WQReview browser tab is closed</strong></li>
+<li>The WQReview GUI will launch in an internet browser tab</li>
 </ol>
 </div>
-<div id="a-basic-data-import" class="section level2">
-<h2>A basic data import</h2>
+<div id="data-import-options" class="section level2">
+<h2>Data import options</h2>
+<p>Data import is accessed by choosing the “Import from internal NWIS server” option under the “Import/Save Data” tab at the top of the WQReview GUI. The “Import from internal NWIS server” option has 11 main inputs.</p>
+<p>There are three options available to choose data to import. You need to use only one of these options to import data:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Site number</strong>: This input accepts (a) manually entered site number(s). Type the site number in the box and click “Add” or hit keyboard Enter key. You may add as many site numbers as you would like by typing or copying them into the Site number box. Do not separate with commas; hitting the Enter key after each site number entry separates the site numbers. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry</p></li>
+<li><p><strong>Site number file</strong>: This input accepts a file of site numbers. The file must be a single column text file of site numbers. Make sure leading zero’s have not been removed if using excel to generate the file.</p></li>
+<li><p><strong>Project codes</strong>: This input accepts a 9-digit project code (the last nine digits of USGS project numbers) and will select all data associated with this project code.</p></li>
+</ol>
+<p>There are three options to select parameter codes associated with data you will import. You only need one of these options:</p>
+<ol start="4" style="list-style-type: decimal">
+<li><p><strong>Parameter codes</strong>: This input takes manually entered parameter codes (pcodes). This input box behaves the same as the site number input box.</p></li>
+<li><p><strong>Parameter groups</strong>: This input is used to select NWIS parameter groups to retrieve, rather than explicitly selecting individual pcodes.</p></li>
+<li><p><strong>pCode file</strong>: This input takes a file of pcodes. The file must be a single column text file of pcodes. Make sure leading zero’s have not been removed if using excel to generate the file.</p></li>
+</ol>
+<p>The remaining options are all mandatory and will bracket the dates used to restrict your data import, the server data is imported from, and the local databases that will be queried for the data import.</p>
+<ol start="7" style="list-style-type: decimal">
+<li><p><strong>Start date</strong>: The start date for the data import. Samples collected after this date will be retrieved. The default value is 10 years before the current date.</p></li>
+<li><p><strong>End date</strong>: The end date for the data import. Samples collected before this date will be retrieved. The default is the current date.</p></li>
+<li><p><strong>Server name (DSN)</strong>: The name of your NWIS server data source name (DSN) that was established during ODBC setup.</p></li>
+<li><p><strong>Environmental DB number</strong>: The number coresponding to the environmental database. Default is “01”</p></li>
+<li><p><strong>QA DB Number</strong>: The number coresponding to the QA sample database. Default is “02”</p></li>
+</ol>
+</div>
+<div id="a-basic-data-import-example-for-a-single-site" class="section level2">
+<h2>A basic data import, example for a single site</h2>
 <p>We will start with a basic data import for a single site by parameter groups.</p>
 <ol style="list-style-type: decimal">
 <li>Double check that your server name and database numbers are correct for your data.</li>
-<li>Type a site ID into the site number input box and click “add”.</li>
-<li><p>Select “All” parameter groups from the Parameter groups select box to pull data for all parameters or select a specific group of parameters. **Beware, if pulling selected groups of parameters (e.g. “cations”) chargebalance may not be able to be calculated.</p></li>
+<li>Type a site numer into the site number input box and hit Enter key.</li>
+<li>Select “All” parameter groups from the Parameter groups select box to pull data for all parameters or select a specific group of parameters. **Beware, if pulling selected groups of parameters (e.g. “cations”) chargebalance may not be calculated.</li>
 <li>Leave the date range input unchanged to pull the last 10 years of data or enter a date range in the date range input to pull a subset of the data.</li>
-<li>Click the “Get data” button to import the data.</li>
+<li>Click the “Get data” button at the bottom left to import the data.</li>
 <li>A dialogue box and status bar describing the import process will appear in the bottom right corner of the GUI.</li>
 <li>A Microsoft Excel workbook window will pop-up and populate with tabs of reports.</li>
-<li><p>Once data has been retrieved, text will be displayed listing the results of the data import. This can take a few seconds after the Excel workbook populates to show up.</p></li>
+<li>Once data have been retrieved, text will be displayed listing the results of the data import. This process can take a few seconds after the Excel workbook populates to show up.</li>
 </ol>
 <p>If you encounter issues with the data import, send an email to <a href="mailto:cpenn@usgs.gov">cpenn@usgs.gov</a> and/or post an issue on the WQReview GitHub page at <a href="https://github.com/USGS-R/WQ-Review/issues">WQ-Review Issues</a></p>
 <p>We can now begin to work with the data.</p>
 </div>
 </div>
-<div id="plot-descriptions" class="section level1">
-<h1>Plot descriptions</h1>
-<p>This section will describe the plot types available in the WQReview GUI and the various ways to manipulate them.</p>
+<div id="creating-plots-in-wqreview" class="section level1">
+<h1>Creating Plots in WQReview</h1>
+<p>This section will describe the plot types available and their functionality in the WQReview GUI and the various ways to manipulate them.</p>
+<p>There are three tabs in WQReview where plots are generated and viewed: Result-level review; Troubleshoot charge balance; and Blanks and Rep comparison. Within these three tabs, there are some common features including symbology, labeling conventions, selecting data to plot, and global plot controls described in sections of those names. Within each tab, there are some unique features described in sections titled for each tab.</p>
 <div id="symbology" class="section level2">
 <h2>Symbology</h2>
 <p>The symbology in all plots is sensitive to the medium code and remark code. Data colors are mapped to the medium code and point data symbols are mapped to the remark code.</p>
@@ -252,48 +233,71 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Currently supported remark codes include:</p>
 <ol style="list-style-type: decimal">
 <li>No remark code (listed as “Sample” in legend)</li>
-<li>&lt;</li>
-<li>‘&gt;’</li>
-<li>E</li>
+<li>“&lt;”</li>
+<li>“&gt;”</li>
+<li>“E”</li>
 </ol>
 </div>
 <div id="labelling-conventions" class="section level2">
 <h2>Labelling conventions</h2>
-<p>All axis pertaining to a particular pcode will be labelled with that pcode’s NWIS parameter name, which includes the units of measurement. The main title of the plot will either by labelled with the NWIS station name if only one station is plotted, or “multi-site plot” if multiple stations are displayed.</p>
+<p>All axes pertaining to a particular pcode will be labelled with that pcode’s NWIS parameter name, which includes the units of measurement. The main title of the plot will either by labelled with the NWIS station name if only one station is plotted, or “multi-site plot” if multiple stations are displayed.</p>
 </div>
 <div id="selecting-data-to-plot" class="section level2">
 <h2>Selecting data to plot</h2>
-<p>Generally, plots are controlled by selecting a site and then a data type from an input box or pick list. In most cases the plot will be displayed or refreshed automatically. <strong>PLOTS WILL NOT BE DISPLAYED IF A SITE AND DATA TYPE ARE NOT SELECTED EVEN IF ONLY ONE SITE OR DATA TYPE IS PRESENT</strong>. Additionally, a plot will not be displayed if there are no data to plot, for example if a particular parameter was not measured at a selected site but is selected for plotting. Multiple sites of multiple parameters can be plotted on certain plot types.</p>
+<p>Generally, plots are generated by selecting a station or stations from the “stations” box and then a data type from the “Parameter” box (in the Result-level review tab only), and then choosing multisite or facet from the “Multi-site option box”. In most cases the plot will be displayed or refreshed automatically. <strong>PLOTS WILL NOT BE DISPLAYED IF A SITE AND DATA TYPE ARE NOT SELECTED EVEN IF ONLY ONE SITE OR DATA TYPE WAS IMPORTED.</strong> Additionally, a plot will not be displayed if there are no data to plot, for example if a particular parameter was not measured at a selected site but is selected for plotting. Plots showing multiple parameters for multiple sites can be generated for certain plot types using the “Multi-site options” box.</p>
 </div>
 <div id="global-plot-controls" class="section level2">
 <h2>Global plot controls</h2>
-<div id="new-data-threshold" class="section level3">
-<h3>New data threshold</h3>
-<p>Point data in all plots can be labeled as “New” data based off of when that data was last modified using the “New data threshold” slider. Any data modified after the date indicated on the slider will be labeled as “New”. This helps identify data that has not been reviewed from historic data when the data are not displayed as a timeseries. Note that the “New data threshold” is set off of when the data were last <strong>modified</strong> for result-level plots (e.g. timeseries, seasonal, etc.) not when they were created. Sample-level plots (e.g. charge balance) are labeled new according to the sample collection date.</p>
+<div id="new-samples-threshold" class="section level3">
+<h3>New samples threshold</h3>
+<p>Point data in some plots can be labeled as “New” data based on when those data were last modified using the “New samples threshold” date input in the “Result-level review” tab. Any data modified after the date indicated in this box will be labeled as “New” in relevant plots, but not all plots. This process helps identify data that has not been reviewed from historic data when the data are displayed on plots other than timeseries plots. The “New samples threshold” chosen on the ”Result-level review” tab also applies to the “Troubleshoot charge balance” and “Blanks and Rep comparison” tabs, even if a different “Station” is chosen on those tabs. Note that the “New samples threshold” is determined from when data were last <strong>modified</strong> for result-level plots (e.g. timeseries, seasonal, etc.) not when they were created. Sample-level plots ( in “Troubleshoot charge balance” and “Blanks and Rep comparison” are labeled new according to the sample collection date.</p>
 </div>
 <div id="record-highlights" class="section level3">
 <h3>Record highlights</h3>
-<p>Samples or results will be highlighted with a red halo if that sample or result has been selected in the data table.</p>
+<p>In the “Result-level review” tab, samples or results will be highlighted with a red halo if that sample or result has been selected in the data table located below the “Refresh from excel” button.</p>
 </div>
-<div id="plot-clicking-brushing-and-hovering" class="section level3">
-<h3>Plot clicking, brushing, and hovering</h3>
-<p>Most plots are interactive in that the user can hover on a point to see information, or zoom into specific areas of the plot. Boxplots are not interactive.</p>
-<div id="brushing" class="section level4">
-<h4>Brushing</h4>
-<p>In interactive plots, the user may also select an area of the plot by holding down a mouse click and drawing a rectangle around the area of interest. A new plot will appear below, zoomed into the area of interest.</p>
+<div id="toolbar-for-interactive-graphicsplots" class="section level3">
+<h3>Toolbar for interactive graphics/plots</h3>
+<p>Most plots are interactive in that the user can hover on a point to see information or zoom into specific areas of the plot. Boxplots are not interactive.</p>
+<p>The tool bar at the top of this section appears on hovering in the area at the upper right-hand corner of all interactive graphics. The tools function as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Camera: Allows you to download a plot as a .png file.</li>
+<li>Directional arrows: Allows you to pan grab and move (pan) the graphic.</li>
+<li>Plus symbol: Zooms in by fixed amount. Note that you can also select an area of the plot to zoom into by holding down a mouse click and drawing a rectangle around the area of interest when the cursor on the graphic is a simple plus shape.</li>
+<li>Minus symbol: Zooms out by fixed amount.<br />
+</li>
+<li>House: Resets the axes after zooming to default extent initially shown.</li>
+<li>Right-angle points (Toggle Spike Lines): Inactive tool for WQReview graphics</li>
+<li>Large tab (Show data on hover): Shows info and value of pcode for that sample and graph on hovering near the point.</li>
+<li>Top and bottom tabs (Compare data on hover): shows value for sample you are near, and associated QA sample, if relevant.</li>
+</ol>
 </div>
-<div id="hovering" class="section level4">
-<h4>Hovering</h4>
-<p>Hovering the mouse over any given data point will display basic information about the data point.</p>
 </div>
 </div>
-</div>
-<div id="plot-types" class="section level2">
-<h2>Plot types</h2>
-<p>This section will describe the details of each different plot type and how to control them in the WQReview GUI.</p>
-<div id="timeseries" class="section level3">
-<h3>Timeseries</h3>
-<p>This generates a plot of a selected parameter through time.</p>
+<div id="result-level-review-tab" class="section level1">
+<h1>Result-level review tab</h1>
+<p>This section will describe the details of each plot in teh Result-level review tab how to control them in the WQReview GUI.</p>
+<div id="generate-plots" class="section level2">
+<h2>Generate plots</h2>
+<ol style="list-style-type: decimal">
+<li>In the Station box, choose a station or stations from the sites you imported by clicking sequentially on the sites you want to view. Backspace to remove an entry.</li>
+<li>Choose a parameter from the drop down list in the Parameter box. You can start to type in constituent name or pcode and the list will narrow to one or a few choices. Click on the choice of interest. Backspace to clear the entry and start over.<br />
+</li>
+<li>Multi-site options: Multisite will plot all data from all sites on one graph. Facet will separate data onto different graphs, one per site.<br />
+</li>
+<li>New samples threshold: Add a date here and samples modified or collected after this date will be labeled on plots as “new”, subject to the details described in the “Global Plot Controls, New samples threshold” section.<br />
+</li>
+<li>Choose a parameter to plot in the “Parameter” box. Input pcode, words from the pcode, or choose from drop down list as described in “Creating plots in WQReview, selecting data to plot section.</li>
+</ol>
+<p>This page generates timeseries plots at the top, seasonal plots below timeseries plots, parameter-parameter plots below seasonal plots, and parameter boxplot at the bottom. The tool bar described in the “toolbar for interactive graphics/plots” is accessed by hovering in the upper right portion of each plot and clicking on an option. Data options and plot controls for all three sets of plots on this page include:</p>
+<ul>
+<li>Select one or multiple sites</li>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+<li>Label DQI: Superimposes the sample DQI_CD over the point</li>
+</ul>
+<div id="timeseries-plot" class="section level3">
+<h3>Timeseries plot</h3>
+<p>Generates a plot of a selected parameter through time.</p>
 <div id="uses" class="section level4">
 <h4>Uses</h4>
 <ul>
@@ -304,23 +308,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="data-selection-options" class="section level4">
 <h4>Data selection options</h4>
 <ul>
-<li>Select one or multiple sites</li>
-<li>Select only one parameter from the dropdown list or in linked unapproved data table in Chrome.</li>
+<li>Select only one parameter from the dropdown list or in the left-side data table linked from Excel.</li>
 </ul>
 </div>
 <div id="plot-controls" class="section level4">
 <h4>Plot controls</h4>
 <ul>
-<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
 <li>Add LOESS: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth</li>
 <li>Display hydrograph: displays the instantaneous hydrograph if data are available under parameter code “00061”</li>
-<li>Label DQI: Superimposes the sample DQI_CD over the point</li>
 </ul>
 </div>
 </div>
 <div id="seasonal-plot" class="section level3">
 <h3>Seasonal plot</h3>
-<p>This generates a seasonal timeseries of parameter value by day of year (DOY) to examine seasonality in parameter values.</p>
+<p>Generates a seasonal timeseries of parameter value by day of year (DOY) to examine seasonality in parameter values.</p>
 <div id="uses-1" class="section level4">
 <h4>Uses</h4>
 <ul>
@@ -331,22 +332,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="data-selection-options-1" class="section level4">
 <h4>Data selection options</h4>
 <ul>
-<li>Select one or multiple sites</li>
-<li>Select only one parameter</li>
+<li>Select only one parameter from the dropdown list or in the left-side data table linked from Excel.</li>
 </ul>
 </div>
 <div id="plot-controls-1" class="section level4">
 <h4>Plot controls</h4>
 <ul>
-<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
 <li>Add LOESS: Adds a locally weighted scatterplot smooth and shaded 95% confidence interval around the smooth</li>
-<li>Label DQI: Superimposes the sample DQI_CD over the point</li>
 </ul>
 </div>
 </div>
 <div id="parameter-parameter-plot" class="section level3">
 <h3>Parameter-parameter plot</h3>
-<p>This generates an x-y plot of a selected parameter vs another selected parameter. The two side-by-side plots default to the selected parameter vs. discharge and vs. Specific Conductance.</p>
+<p>Generates an x-y plot of a selected parameter vs another selected parameter. The two side-by-side plots default to the selected parameter vs. discharge and vs. Specific Conductance.</p>
 <div id="uses-2" class="section level4">
 <h4>Uses</h4>
 <ul>
@@ -357,57 +355,60 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="data-selection-options-2" class="section level4">
 <h4>Data selection options</h4>
 <ul>
-<li>Select one or multiple sites</li>
-<li>Select only one parameter per axis</li>
+<li>Select only one parameter from the dropdown list or in the left-side data table linked from Excel, for the Y-axis parameter</li>
+<li>Select only one parameter from the X-Parameter box</li>
 </ul>
 </div>
 <div id="plot-controls-2" class="section level4">
 <h4>Plot controls</h4>
 <ul>
-<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
 <li>Add linear fit: Add a linear regression line to the x-y data.</li>
 <li>Log 10 scale: This plots parameter values on a log10 scale.</li>
 </ul>
 </div>
 </div>
-<div id="charge-balance-timeseries" class="section level3">
-<h3>Charge balance timeseries</h3>
-<p>This pane generates a timeseries plot of charge balance percent difference. The plot is annotated with a horizontal dashed line indicating the range of +- 5% and a solid line indicating the range of +- 10%. Symbol type indicates if enough major elements were analyzed to constitute a roughly complete balance. For example, a sample missing calcium would be given a symbol of “Incomplete” because it is a major constituent in the charge balance, but a sample missing fluoride would still be given a “Complete” symbol because it is only a minor constituent of the charge balance.</p>
+<div id="parameter-boxplot" class="section level3">
+<h3>Parameter boxplot</h3>
+<p>Generates a boxplot of the selected parameter</p>
 <div id="uses-3" class="section level4">
 <h4>Uses</h4>
 <ul>
-<li>Obtaining a quick visual snapshot of charge imbalance at a site.</li>
-<li>Identifying charge imbalance issues with current data and comparing to historic chargebalance behavior.</li>
+<li>Identifying outliers</li>
 </ul>
 </div>
 <div id="data-selection-options-3" class="section level4">
 <h4>Data selection options</h4>
 <ul>
-<li>Select one or multiple sites</li>
+<li>Select only one parameter from the dropdown list or in the left-side data table linked from Excel</li>
 </ul>
 </div>
 <div id="plot-controls-3" class="section level4">
 <h4>Plot controls</h4>
 <ul>
-<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+<li>None</li>
+<li>Plot is not interactive</li>
 </ul>
 </div>
 </div>
-<div id="ions-vs-conductance" class="section level3">
-<h3>Ions vs conductance</h3>
-<p>This generates a x-y plot of sum of cations or anions vs conductance. The ratio of the sum of cations or anions vs specific conductance generally falls within a range of 0.92 - 1.24 for natural waters. The shaded region on the plot indicates this typical range. These are the values used in QWData for alert limits, see QWData documentation and references therein for further explanation.</p>
-<p>At many sites, there will be a roughly linear relationship between the sum of cations or anions vs. conductance. If a point falls above or below the general trend line, this is an indication that the particular group of ions is either to low or too high.</p>
+</div>
+</div>
+<div id="troubleshoot-charge-balance-tab" class="section level1">
+<h1>Troubleshoot charge balance tab</h1>
+<p>This tab generates a timeseries plot of charge balance and an x-y plot of sum of cations or anions vs conductance.</p>
+<div id="charge-balance-timeseries" class="section level3">
+<h3>Charge balance timeseries</h3>
+<p>The top plot is a timeseries plot of charge balance percent difference. The plot is annotated with a horizontal dashed line indicating the range of +- 5% and a solid line indicating the range of +- 10%. Symbol type indicates if enough major elements were analyzed to constitute a roughly complete balance. For example, a sample missing calcium would be given a symbol of “Incomplete” because it is a major constituent in the charge balance, but a sample missing fluoride would still be given a “Complete” symbol because it is only a minor constituent of the charge balance.</p>
 <div id="uses-4" class="section level4">
 <h4>Uses</h4>
 <ul>
-<li>Identifying samples that fall outside of the typical range of rations of ions/specific conductance.</li>
-<li>Identifying which group of ions, cations or anions, are responsible for charge imbalance issues.</li>
+<li>Obtaining a quick visual snapshot of charge imbalance at a site.</li>
+<li>Identifying charge imbalance issues with current data and comparing to historic charge balance behavior.</li>
 </ul>
 </div>
 <div id="data-selection-options-4" class="section level4">
 <h4>Data selection options</h4>
 <ul>
-<li>Select one or multiple sites</li>
+<li>Select one or multiple sites. If one site is chosen, title of the plot is the name of the site. If multiple sites are chosen, title of plot is “multisite charge balance plot. If multisite facet option is chosen, title of each plot is the name of the sites.</li>
 </ul>
 </div>
 <div id="plot-controls-4" class="section level4">
@@ -417,28 +418,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 </div>
-<div id="rep-parm-boxplot" class="section level3">
-<h3>Rep-parm boxplot</h3>
-<p>This pane generates a plot of replicate relative percent difference for all replicates analyzed at a given site, organized by DQI code. <strong>READ THE FOLLOWING ON REPLICATE PAIRING</strong></p>
-<p>Replicate pairs are identified as follows:</p>
-<ol style="list-style-type: decimal">
-<li>An environmental sample is a sample with medium code of WS or WG and a sample type of 7.</li>
-<li>A replicate sample is a sample with a medium code of WSQ or WGQ and a sample type of 7.</li>
-<li>An environmental-replicate pair is defined as a replicate sample collected at the same site as an environmental sample on the same day.</li>
-</ol>
-<p><strong>NOTE THAT CENSORED RESULTS ARE GIVEN THE CENSORED VALUE FOR CALCULATIONS. DO NOT INTERPRET REPLICATE ANALYSES BASED ENTIRELY OFF OF THE RELATIVE PERCENT DIFFERENCE PLOT. SEE REPLICATE TABLE AS WELL.</strong></p>
+<div id="ions-vs-conductance" class="section level3">
+<h3>Ions vs conductance</h3>
+<p>This plot is an x-y plot of sum of cations or anions (in meq/L) vs conductance. The ratio of the sum of cations or anions vs specific conductance generally falls within a range of 0.92 - 1.24 for natural waters. These are the values used in QWData for alert limits, see QWData documentation and references therein for further explanation.</p>
+<p>At many sites, there will be a roughly linear relationship between the sum of cations or anions vs. conductance. If a point falls above or below the general trend, it may be an indication that the particular group of ions is either too low or too high.</p>
 <div id="uses-5" class="section level4">
 <h4>Uses</h4>
 <ul>
-<li>Assessing general replicate agreement at a site for multiple parameters.</li>
-<li>Comparing current replicate analyses to historic agreement.</li>
+<li>Identifying samples that fall outside of the typical range of ratios of ions/specific conductance.</li>
+<li>Identifying which group of ions, cations or anions, are responsible for charge imbalance issues.</li>
 </ul>
 </div>
 <div id="data-selection-options-5" class="section level4">
 <h4>Data selection options</h4>
 <ul>
 <li>Select one or multiple sites</li>
-<li>Select one parameter</li>
 </ul>
 </div>
 <div id="plot-controls-5" class="section level4">
@@ -448,8 +442,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 </div>
-<div id="blank-sample-detections" class="section level3">
-<h3>Blank sample detections</h3>
+</div>
+<div id="blanks-and-rep-comparison-tab" class="section level1">
+<h1>Blanks and Rep comparison tab</h1>
+<p>This tab generates a boxplot of blank detections and a boxplot of replicate relative percent difference.</p>
+<div id="comparison-of-blank-detections-boxplot" class="section level3">
+<h3>Comparison of blank detections boxplot</h3>
 <p>This pane generates a box plot of parameter values for blanks above reporting level, organized by DQI code.</p>
 <div id="uses-6" class="section level4">
 <h4>Uses</h4>
@@ -471,49 +469,79 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 </div>
+<div id="repliacte-agreement-boxplot" class="section level3">
+<h3>Repliacte agreement boxplot</h3>
+<p>This pane generates a plot of replicate relative percent difference for all replicates analyzed at a given site, organized by DQI code. <strong>READ THE FOLLOWING ON REPLICATE PAIRING</strong></p>
+<p>Replicate pairs are identified as follows:</p>
+<ol style="list-style-type: decimal">
+<li>An environmental sample is a sample with medium code of WS or WG and a sample type of 7.</li>
+<li>A replicate sample is a sample with a medium code of WSQ or WGQ and a sample type of 7.</li>
+<li>An environmental-replicate pair is defined as a replicate sample collected at the same site as an environmental sample on the same day.</li>
+</ol>
+<p><strong>NOTE THAT CENSORED RESULTS ARE GIVEN THE CENSORED VALUE FOR CALCULATIONS. DO NOT INTERPRET REPLICATE ANALYSES BASED ENTIRELY OFF OF THE RELATIVE PERCENT DIFFERENCE PLOT. SEE REPLICATE TABLE AS WELL.</strong></p>
+<div id="uses-7" class="section level4">
+<h4>Uses</h4>
+<ul>
+<li>Assessing general replicate agreement at a site for multiple parameters.</li>
+<li>Comparing current replicate analyses to historic agreement.</li>
+</ul>
+</div>
+<div id="data-selection-options-7" class="section level4">
+<h4>Data selection options</h4>
+<ul>
+<li>Select one or multiple sites</li>
+<li>Select one parameter</li>
+</ul>
+</div>
+<div id="plot-controls-7" class="section level4">
+<h4>Plot controls</h4>
+<ul>
+<li>Multi-site options: Plot all sites on one plot (multisite) or plot sites on individual side-by-side plots (facet).</li>
+</ul>
+</div>
 </div>
 </div>
 <div id="tables" class="section level1">
 <h1>Tables</h1>
-<p>This section will describe the various tables generated by the WQReview GUI and output to an Excel Workbook tab.</p>
+<p>This section describe the various tables generated and output to an Excel Workbook by the WQReview GUI.</p>
 <div id="auto-flagged-samples" class="section level2">
 <h2>Auto-flagged samples</h2>
-<p>During data import, samples or results are auto-flagged following criteria developed by NAWQA for all water-quality data, and are defined at the end of this manual. For any flags comparing an unapproved sample to historic data, the current sample is compared only to all REVIEWED AND ACCEPTED data in the pull time windowdata rather than all prior samples in time. This is because data that have not been reviewed and accepted could themselves be problematic.</p>
+<p>During data import, samples or results populate a Microsoft excel workbook where they are auto-flagged following criteria developed by NAWQA for all water-quality data that are defined in each tab description or at the end of this section. For any flags comparing a sample that needs review to historic data, the current sample is compared only to all REVIEWED AND ACCEPTED data in the time frame used to import data into WQReview, rather than compared to all prior samples. This is because other data that have not been reviewed and accepted could themselves be problematic and should not be included in the comparison with other samples or results that need review. Flags are displayed in the following tabs: * DQI needs review * Chemical sense * Charge balance issues * Whole vs Par * Pesticide flags * Replicate table * Blank table * All charge balance</p>
 <div id="dqi-needs-review" class="section level3">
 <h3>DQI needs review</h3>
-<p>This tab contains all samples in the data pull with a DQI code S, I, or P, and any flags based on comparisons to approved data (see NWIS 30.xx flags below). This tab is dynamically linked to the Chrome browser GUI Result-level review tab. Samples in the Excel tab can be sorted or deleted and the resulting format will appear in the lower lefthand table in Chrome when the “Refresh from excel” button is clicked. Filtering on columns in Excel is not recommended as it is not dynamically linked and can cause errors if rows are deleted while in a filtered state.</p>
+<p>This tab contains all samples in the data pull with a DQI code S, I, or P, and any flags based on comparisons to approved data (see NWIS Flags descriptions at the end of this section). This tab is dynamically linked to the Chrome browser GUI Result-level review tab. Samples in the Excel tab can be sorted or deleted and the resulting format will appear in the lower lefthand table in Chrome when the “Refresh from excel” button is clicked. Filtering on columns in Excel is not recommended as it is not dynamically linked and can cause errors if rows are deleted while in a filtered state.</p>
 </div>
 <div id="ready-for-dqi-change" class="section level3">
 <h3>Ready for DQI change</h3>
-<p>This tab starts with column headers and empty rows. As records are reviewed in the “Unapproved data” tab, they can be copied and pasted into this tab, with columns for the new reviewed DQI code and comments. Any records in the tab will be used to create qwsample and qwresult tabs in Excel when the “Generate batch files” button is clicked in Chrome.</p>
+<p>This tab starts with column headers and empty rows. As records are reviewed in the “Unapproved data” tab, they can be copied and pasted into this tab, with columns for the new reviewed DQI code and comments. Any records in the tab will be used to create qwsample and qwresult tabs in Excel when the “Generate batch files” button is clicked in the WQReview GUI in Chrome.</p>
 </div>
 <div id="chemical-sense" class="section level3">
 <h3>Chemical sense</h3>
-<p>This table contains basic chemical checks similar to those provided by the QWDATA unix software. The first 7 columns contain sample-level information and the remaining columns contain flags with the column name coorresponding to the particular data check. If a sample fails a given data check, a flag is applied to the respective column for that sample. See NWIS 30.xx flag descriptions below for more information.</p>
+<p>This table contains basic chemical checks similar to those provided by the QWDATA unix software. The first 7 columns contain sample-level information and the remaining columns contain flags with the column name coorresponding to the particular data check. If a sample fails a given data check, a flag is applied to the respective column for that sample. See NWIS Flags descriptions at the end of this section.</p>
 </div>
 <div id="charge-balance-issues" class="section level3">
 <h3>Charge balance issues</h3>
-<p>This tab contains flags related to charge balance check 30.21 described below. It is also dynamically linked to the table found under the “Troubleshoot charge balance” tab in Chrome.</p>
+<p>This tab contains flags related to charge balance check 30.21 described in the NWIS Flags descriptions at the end of this section. It is also dynamically linked to the table found under the “Troubleshoot charge balance” tab in the WQRevie GUI inChrome.</p>
 </div>
 <div id="whole-vs-part" class="section level3">
 <h3>Whole vs Part</h3>
-<p>This tab compares samples with filtered and unfiltered constituents and flags samples based on the filtered and unfiltered result values.</p>
+<p>This tab compares filtered and unfiltered constituents and flags results based on comparison of filtered and unfiltered result values.</p>
 </div>
 <div id="pesticide-flags" class="section level3">
 <h3>Pesticide flags</h3>
-<p>This table contains flags for evaluating number of pesticide hits in schedule 2437. If there are too many or too few hits in the current sample compared to historic data, the sample gets flagged.</p>
+<p>This table contains flags for evaluating the number of pesticide hits in schedule 2437. If there are too many or too few hits in the current sample compared to historic data, the sample will be flagged.</p>
 </div>
 <div id="replicate-table" class="section level3">
 <h3>Replicate table</h3>
-<p>This table contains all replicate pairs based on the criteria as the Rep-parm boxplot described above. It flags samples based on Relative Percent Difference.</p>
+<p>This table contains all replicate pairs based on the same replicate coding criteria as the Replicate agreement boxplot described in the previous section. Samples are flagged based on whether Relative Percent Difference between the replicates exceeds 10% and whether comparison of replicates is affected by one or both values having a remark code.</p>
 </div>
 <div id="blank-table" class="section level3">
 <h3>Blank table</h3>
-<p>This table summerizes all blank samples in the pulled data, organized by parameter.</p>
+<p>This table summarizes all blank samples in the pulled data, organized by parameter. The BD90.90 column calculates the BD90.90 value of the blank which is a value calculated when there are repeated hits on a blank. It is the blank sample concentration corresponding to the 90th percentile of the blank hit values at least the 90 percent confidence level. In other words, there is at least a 90 percent chance that at least 90 percent of all environmental samples will have contamination less than the BD90.90 value for a particular analyte. This calculation is based on USGS SIR 2012-5139 (<a href="https://pubs.usgs.gov/sir/2012/5139/" class="uri">https://pubs.usgs.gov/sir/2012/5139/</a>) and can be useful in situations where there is unexplained, or recurring contamination of the blank samples.</p>
 </div>
 <div id="all-charge-balance" class="section level3">
 <h3>All charge balance</h3>
-<p>This table is a “wide” format of all sample charge balance data, including cation and anion sums, individual consitutent values, and general flags for samples with charge imbalance.</p>
+<p>This table is a “wide” format of all sample charge balance data, including cation and anion sums, individual constituent values, and general flags for samples with charge imbalance.</p>
 </div>
 <div id="data-by-result" class="section level3">
 <h3>Data by result</h3>
@@ -523,17 +551,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>Data by sample</h3>
 <p>This table contains all data pulled from NWIS in the “wide” format, ie. by record number date/time and all associated parameter result values.</p>
 </div>
+<div id="qwsample-and-qwresult" class="section level3">
+<h3>qwsample and qwresult</h3>
+<p>These tabs will be present when the “Generate batch files” button is pressed in the WQReview GUI in Chrome. See “Ready for DQI change” above. The tabs can copied and saved into text files for modifying DQI codes and comments using QWDATA. To regenerate the tabs if more results have been added to the “Ready for DQI change” tab, delete the current qwsample and qwresult tabs and hit the “Generate batch files” button again.</p>
 </div>
-<div id="qwsample-and-qwresult" class="section level2">
-<h2>qwsample and qwresult</h2>
-<p>These tabs will be present when the “Generate batch files” button is pressed in Chrome. See “Ready for DQI change” above. The tabs can copied and saved into text files for modifying DQI codes and comments with QWDATA. To regenerate the tabs if more results have been added to the “Ready for DQI change” tab, delete the current qwsample and qwresult tabs and hit the “Generate batch files” button again.</p>
 </div>
-<div id="data-and-qaqc-tables" class="section level2">
-<h2>Data and QAQC tables</h2>
-<p>These tables are controlled similarly to the auto-flagged tables except that they can be generated according to site and date selection criteria. These tables include standard data tables, a wide (sample-result) and a long (by result) format table. 4 QAQC tables are also presented, including a chargebalance table, a table of replicate agreement, a summary table of blank detections, and a table comparing filtered ot unfiltered values. The last column of each of these QAQC tables contains a column with flags if a particular sample violates some standard QAQC measure. For example, a sample with a charge imbalance &gt; 10% would get a flag in the final column of hte chargebalance table. <strong>The blank summary table is calculated on the fly given the input criteria</strong> For example, leaving the default date range (last 3 years) in the blank table input and selecting a site would summarize the blank detections for that 3 year period for that site.</p>
-</div>
-<div id="flag-descriptions" class="section level2">
-<h2>Flag descriptions</h2>
+<div id="nwis-flag-descriptions" class="section level2">
+<h2>NWIS Flag descriptions</h2>
 <div id="sc_badlabvsfield" class="section level3">
 <h3>SC_badLabVSField</h3>
 <p>The difference between Lab SC (90095) and field SC (00095) is greater than 10%</p>
@@ -578,6 +602,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>30.21. Questionable cation-anion balance</h3>
 <p>For each environmental sample, the cation-anion percent difference was be calculated (using the same formula, but a slightly simpler procedure, than what NWIS-QWDATA uses) and compared to the value for specific conductance (P00095). The cation-anion ballance is flagged for 30.21 if any of the following conditions is true 1. specific conductance is less than or equal to 100 microsiemens/cm, AND percent difference is greater (in absolute value) than +/- 15 percent 2. specific conductance is greater than 100 and less than or equal to 1000 microsiemens/cm, AND percent difference is greater (in absolute value) than +/- 10 percent 3. specific conductance is greater than 1000 microsiemens/cm, AND percent difference is greater (in absolute value) than +/- 5 percent</p>
 </div>
+</div>
+</div>
+<div id="suggested-wqreview-and-qwdata-workflow-for-flipping-dqi-codes" class="section level1">
+<h1>Suggested WQReview and QWDATA workflow for flipping DQI codes</h1>
+<div id="wqreview" class="section level2">
+<h2>WQReview</h2>
+<ol style="list-style-type: decimal">
+<li>Use WQReview to pull data of interest.</li>
+<li>Review the Excel workbook tables and WQReview plots as part of your result review.</li>
+<li>Copy results that have been reviewed from the Excel “DQI needs review” tab to the “Ready for DQI change”.</li>
+<li>Based on your review, add the new DQI code (R, Q, etc.) to the “DQI_CD_REVIEWED” column.</li>
+<li>Add any review comments to be added to NWIS in the “RESULT_CM_NWIS_REVIEWED” column.</li>
+<li>Put the comment type (F for field or L for Lab) in the “RESULT_CM_TYPE_REVIEWED” column.</li>
+<li>Add any additional comments to the “RESULT_NOTES_WQREVIEW” column. These will not be uploaded to NWIS, they will only be saved when the Excel workbook is saved.</li>
+<li>Under the WQReview “Generate batch DQI flip files” header, hit the “Generate batch files” button. A qwsample and qwresult tab will be generated in the Excel workbook.</li>
+<li>Using Windows Explorer, create or navigate to a project folder in your mapped home directory on NWIS. Save the Excel workbook here.</li>
+<li>Copy everything but the column titles from the qwsample and qwresult Excel workbook tabs and paste them into seperate files using a text editor (Notepad, Notepad++, Wordpad) and save them in the project folder as qwsample and qwresult files. Some Water Quality Specialists prefer the qwsample and qwresult file to have a username and date/time stamp appended to the file name. E.g. qwsample_tmills_20181001</li>
+</ol>
+</div>
+<div id="qwdata---consult-with-your-water-quality-specialist-local-data-manager-andor-data-base-administrator-about-your-wsc-practices-for-batch-file-changes-in-qwdata." class="section level2">
+<h2>QWDATA - Consult with your Water Quality Specialist, Local Data Manager, and/or Data Base Administrator about your WSC practices for batch file changes in QWDATA.</h2>
 </div>
 </div>
 

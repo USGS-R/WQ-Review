@@ -55,7 +55,9 @@ shinyUI(fluidPage(theme="theme.css",title="WQReview 2.0_beta",
                                                                  ),
                                                                  plotlyOutput("qwparmParmPlot2")
                                                           )
-                                                        )
+                                                        ),
+                                                        
+                                                        plotOutput("qwboxplot",height="800px")
                                                       )
                                                       
                                       )

@@ -1,7 +1,12 @@
-ATTENTION: WQReview 2.0 development version!
+WQReview
 ----------
 
-This is a development version of the WQReview package. This new implementation allows for changing DQI codes through batchfile creation. DO NOT CHANGE DATA IN YOUR DATABASE USING THIS PROGRAM WITHOUT CAREFUL SCRUTINY. It is strongly recommended that you use the "verify only" option to test data load before making any real changes.
+This is version 2.0 of the WQReview package. This new implementation has several bug fixes, and updated features including:
+* Ability to auto-generate batch files for changing DQI codes through QWDATA.
+* Modified GUI to group useful parameter plots into a single webpage.
+* Auto-generated Microsoft Excel workbook with data tables for review.
+* Bug fixes based on user-identified issues.
+DO NOT CHANGE DATA IN YOUR DATABASE USING THIS PROGRAM WITHOUT CAREFUL SCRUTINY. It is strongly recommended that you use the "verify only" option to test data load before making any real changes.
 
 Please view this [Workflow Video](https://drive.google.com/file/d/1ljb82pTLF_N4jh-n_LGO-_8bymAmvtgf/view?usp=sharing) from original developer T.Joe Mills.
 
@@ -33,19 +38,23 @@ Additionaly, please feel free to post any suggestions or enhancement requests.
 
 **Your participation will make this a better tool for everyone!**
 
+WQReview GUI User Guide
+----------
+[WQReviewGUI User Guide](vignettes/WQReviewGUI2.md)
+
 Frequently asked questions
 ----------
 
-[FAQ](vignettes/faq.Rmd)
+[FAQ](vignettes/faq2.md)
 
 Installation for stand alone application (non-R users)
 ----------
 
-1. Download the install executable from Google Drive:
+1. Download the install executable from FTP:
 
-[WQReviewInstall_2.0beta_CP](https://drive.google.com/open?id=1pR8AKZKhut2NitMZuxZRRY30mNs4QSRN)
+[WQReviewInstall_2.0](ftp://ftpint.usgs.gov/private/cr/co/lakewood/WQReview_EXE/)
 
-2. Run WQReviewInstall_2.0beta_CP.exe and follow the installation instructions.
+2. Run WQReviewInstall_2.0.exe and follow the installation instructions.
 
 **DO NOT INSTALL WQ-REVIEW INTO YOUR PROGRAM FILES DIRECTORY OR THE APPLICATION WILL NOT RUN. INSTALL TO C DRIVE OR YOUR DOCUMENTS FOLDER.**
 
@@ -96,4 +105,4 @@ http://nwis.usgs.gov/IT/INSTRUCT/HOWTO/DB_oracle_odbc.html
 The ODBC connection must be setup for Oracle and in 32-bit mode
 
 ## Disclaimer
-"This software has been approved for release by the U.S. Geological Survey (USGS). Although the software has been subjected to rigorous review, the USGS reserves the right to update the software as needed pursuant to further analysis and review. No warranty, expressed or implied, is made by the USGS or the U.S. Government as to the functionality of the software and related material nor shall the fact of release constitute any such warranty. Furthermore, the software is released on condition that neither the USGS nor the U.S. Government shall be held liable for any damages resulting from its authorized or unauthorized use."
+[Disclaimer](DISCLAIMER.md)

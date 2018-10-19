@@ -3,13 +3,9 @@ title: "Frequently asked questions"
 author: "T. Joe Mills and Colin Penn"
 date: "`r Sys.Date()`"
 output:
-  html_vignette:
-    toc: true
-
-vignette: >
-  %\VignetteIndexEntry{User FAQ}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  md_document:
+    variant: markdown_github
+  
 ---
 
 ##Q: A new Excel workbook does not populate as part of the data import.

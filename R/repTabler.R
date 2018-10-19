@@ -70,7 +70,7 @@ repTabler <- function(qw.data)
                 ###Flag pairs with RPD > 10% and the difference is > than the largest LRL
                 repTable$flags[which(abs(repTable$relPercent_diff) > 10 & abs(repTable$Env_minus_Rep) > as.numeric(pmax(repTable$Env_RPT_LEV_VA,repTable$Rep_RPT_LEV_VA)))] <- "RPD > 10% and > RPT_LEV"
                 ###Add flag to caution user about < and E values in calculation
-                repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")] <- paste(repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")],"Calculations effected by remark code")
+                repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")] <- paste(repTable$flags[which(repTable$Env_REMARK_CD != "Sample" | repTable$Rep_REMARK_CD != "Sample")],"Calculations affected by remark code")
                 ###Format times as character
                 #repTable$Env_SAMPLE_START_DT <- as.character(repTable$Env_SAMPLE_START_DT)
                 #repTable$Rep_SAMPLE_START_DT <- as.character(repTable$Rep_SAMPLE_START_DT)

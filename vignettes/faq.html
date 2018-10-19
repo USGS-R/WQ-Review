@@ -10,9 +10,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="T. Joe Mills" />
+<meta name="author" content="T. Joe Mills and Colin Penn" />
 
-<meta name="date" content="2018-08-21" />
+<meta name="date" content="2018-10-19" />
 
 <title>Frequently asked questions</title>
 
@@ -31,104 +31,64 @@
 
 
 <h1 class="title toc-ignore">Frequently asked questions</h1>
-<h4 class="author"><em>T. Joe Mills</em></h4>
-<h4 class="date"><em>2018-08-21</em></h4>
+<h4 class="author"><em>T. Joe Mills and Colin Penn</em></h4>
+<h4 class="date"><em>2018-10-19</em></h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#q-a-new-excel-workbook-does-not-populate-as-part-of-the-data-import.">Q: A new Excel workbook does not populate as part of the data import.</a><ul>
-<li><a href="#a">A:</a></li>
-</ul></li>
-<li><a href="#qi-click-get-data-in-the-import-screen-and-nothing-happens-except-i-get-the-messages-problem-with-data-import-please-check-import-criteria-and-first-argument-is-not-an-open-rodbc-channel.">Q:I click “Get Data” in the import screen and nothing happens except I get the messages “Problem with data import, please check import criteria” and “first argument is not an open RODBC channel”.</a><ul>
-<li><a href="#a-1">A:</a></li>
-</ul></li>
-<li><a href="#q-how-do-i-remove-an-entry-from-an-input-box-like-deleting-a-site-or-parameter-selection">Q: How do I remove an entry from an input box, like deleting a site or parameter selection?</a><ul>
-<li><a href="#a-2">A:</a></li>
-</ul></li>
-<li><a href="#q-nothing-appears-in-my-blank-replicate-or-whole-vs-part-tables-and-i-get-an-error-message.">Q: Nothing appears in my Blank, Replicate, or Whole vs Part tables and I get an error message.</a><ul>
-<li><a href="#a-3">A:</a></li>
-</ul></li>
-<li><a href="#q-i-try-to-read-in-a-qwdata-site-file-to-pull-data-and-it-does-not-work.">Q: I try to read in a QWDATA site file to pull data and it does not work.</a><ul>
-<li><a href="#a-4">A:</a></li>
-</ul></li>
-<li><a href="#q-i-have-tons-or-parameters-at-my-site-is-there-an-easier-way-to-select-a-parameter-than-scrolling-through-hundreds-of-parameters">Q: I have tons or parameters at my site, is there an easier way to select a parameter than scrolling through hundreds of parameters?</a><ul>
-<li><a href="#a-5">A:</a></li>
-</ul></li>
-<li><a href="#q-can-i-save-or-print-plots-i-generate-in-the-gui">Q: Can I save or print plots I generate in the GUI?</a><ul>
-<li><a href="#a-6">A:</a></li>
-</ul></li>
-<li><a href="#q-can-i-plot-multiple-sites-on-the-same-plot">Q: Can I plot multiple sites on the same plot?</a><ul>
-<li><a href="#a-7">A:</a></li>
-</ul></li>
-<li><a href="#q-why-are-some-symbols-highlighted-in-orange">Q: Why are some symbols highlighted in orange?</a><ul>
-<li><a href="#a-8">A:</a></li>
-</ul></li>
+<li><a href="#q-a-new-excel-workbook-does-not-populate-as-part-of-the-data-import.">Q: A new Excel workbook does not populate as part of the data import.</a></li>
+<li><a href="#q-after-importing-data-and-populating-the-excel-workbook-theres-no-stations-or-parameters-available-in-the-result-level-review-tab.">Q: After importing data and populating the Excel workbook, there’s no stations or parameters available in the Result-level review tab.</a></li>
+<li><a href="#qi-click-get-data-in-the-import-screen-and-nothing-happens-except-i-get-the-messages-problem-with-data-import-please-check-import-criteria-and-first-argument-is-not-an-open-rodbc-channel.">Q:I click “Get Data” in the import screen and nothing happens except I get the messages “Problem with data import, please check import criteria” and “first argument is not an open RODBC channel”.</a></li>
+<li><a href="#q-how-do-i-remove-an-entry-from-an-input-box-like-deleting-a-site-or-parameter-selection">Q: How do I remove an entry from an input box, like deleting a site or parameter selection?</a></li>
+<li><a href="#q-nothing-appears-in-my-blank-replicate-or-whole-vs-part-tables-and-i-get-an-error-message.">Q: Nothing appears in my Blank, Replicate, or Whole vs Part tables and I get an error message.</a></li>
+<li><a href="#q-i-try-to-read-in-a-qwdata-site-file-to-pull-data-and-it-does-not-work.">Q: I try to read in a QWDATA site file to pull data and it does not work.</a></li>
+<li><a href="#q-i-have-tons-or-parameters-at-my-site-is-there-an-easier-way-to-select-a-parameter-than-scrolling-through-hundreds-of-parameters">Q: I have tons or parameters at my site, is there an easier way to select a parameter than scrolling through hundreds of parameters?</a></li>
+<li><a href="#q-can-i-save-or-print-plots-i-generate-in-the-gui">Q: Can I save or print plots I generate in the GUI?</a></li>
+<li><a href="#q-can-i-plot-multiple-sites-on-the-same-plot">Q: Can I plot multiple sites on the same plot?</a></li>
+<li><a href="#q-why-are-some-symbols-highlighted-in-orange">Q: Why are some symbols highlighted in orange?</a></li>
 </ul>
 </div>
 
 <div id="q-a-new-excel-workbook-does-not-populate-as-part-of-the-data-import." class="section level2">
 <h2>Q: A new Excel workbook does not populate as part of the data import.</h2>
-<div id="a" class="section level3">
-<h3>A:</h3>
-<p>Some users have reported issues with Microsoft Excel not generating the workbook populated and linked to WQReview. The issues are not consistent among users and many have reported no problems. If there are any open, unsaved Excel workbooks, try saving them and exiting out/restarting WQReview. If there is an open Excel workbook that has the “Enable Content” warning banner at the top, click the banner before running WQReview. Try closing all other instances of Excel before launching and running WQReview.</p>
+<p><strong>A:</strong> Some users have reported issues with Microsoft Excel not generating the workbook populated and linked to WQReview. The issues are not consistent among users and many have reported no problems. If there are any open, unsaved Excel workbooks, try saving them and exiting out/restarting WQReview. If there is an open Excel workbook that has the “Enable Content” warning banner at the top, click the banner before running WQReview. Try closing all other instances of Excel before launching and running WQReview.</p>
 </div>
+<div id="q-after-importing-data-and-populating-the-excel-workbook-theres-no-stations-or-parameters-available-in-the-result-level-review-tab." class="section level2">
+<h2>Q: After importing data and populating the Excel workbook, there’s no stations or parameters available in the Result-level review tab.</h2>
+<p><strong>A:</strong> Return back to the Import/save Data -&gt; Import from internal NWIS server tab. Even if the progress bar in the bottom right has finished, wait for a summary of the data import to populate on the tab (Number of samples retrieved, number of results retrieved, etc.). Longer date ranges and sites with many parameters can take minute to sync after populating Excel. After the summary has loaded, return to the Result-level review tab and the stations and parameters should now be populated.</p>
 </div>
 <div id="qi-click-get-data-in-the-import-screen-and-nothing-happens-except-i-get-the-messages-problem-with-data-import-please-check-import-criteria-and-first-argument-is-not-an-open-rodbc-channel." class="section level2">
 <h2>Q:I click “Get Data” in the import screen and nothing happens except I get the messages “Problem with data import, please check import criteria” and “first argument is not an open RODBC channel”.</h2>
-<div id="a-1" class="section level3">
-<h3>A:</h3>
-<p>This error indicates that your ODBC connection is not setup correctly. Follow the steps in the installation instructions for setting up the ODBC connection. Make sure that the “DSN” entry box contains the name of your NWIS ODBC connection EXACTLY as named in the ODBC administrator User DSN section.</p>
-</div>
+<p><strong>A</strong> This error indicates that your ODBC connection is not setup correctly. Follow the steps in the installation instructions for setting up the ODBC connection. Make sure that the “DSN” entry box contains the name of your NWIS ODBC connection EXACTLY as named in the ODBC administrator User DSN section.</p>
 </div>
 <div id="q-how-do-i-remove-an-entry-from-an-input-box-like-deleting-a-site-or-parameter-selection" class="section level2">
 <h2>Q: How do I remove an entry from an input box, like deleting a site or parameter selection?</h2>
-<div id="a-2" class="section level3">
-<h3>A:</h3>
-<p>Simply click the specific entry you want to delete and hit “backspace” or “delete” to remove it. Alternatively, click the cursor in the input box as if adding a new entry, but hold down backspace to delete entries.</p>
-</div>
+<p><strong>A</strong> Simply click the specific entry you want to delete and hit “backspace” or “delete” to remove it. Alternatively, click the cursor in the input box as if adding a new entry, but hold down backspace to delete entries.</p>
 </div>
 <div id="q-nothing-appears-in-my-blank-replicate-or-whole-vs-part-tables-and-i-get-an-error-message." class="section level2">
 <h2>Q: Nothing appears in my Blank, Replicate, or Whole vs Part tables and I get an error message.</h2>
-<div id="a-3" class="section level3">
-<h3>A:</h3>
-<p>There are no data available at your site(s) for these tables. In the case of replicates, this could be due to miscoded environmental-replicate sample pairs. Make sure both the environmental and replicate sample of the pair are coded with Sample Type = 7</p>
-</div>
+<p><strong>A</strong> There are no data available at your site(s) for these tables. In the case of replicates, this could be due to miscoded environmental-replicate sample pairs. Make sure both the environmental and replicate sample of the pair are coded with Sample Type = 7</p>
 </div>
 <div id="q-i-try-to-read-in-a-qwdata-site-file-to-pull-data-and-it-does-not-work." class="section level2">
 <h2>Q: I try to read in a QWDATA site file to pull data and it does not work.</h2>
-<div id="a-4" class="section level3">
-<h3>A:</h3>
-<p>QWDATA site files will not work because the agency code is placed infront of the site number. The sitefile must be 1 column of site numbers only.</p>
-</div>
+<p><strong>A</strong> QWDATA site files will not work because the agency code is placed infront of the site number. The sitefile must be 1 column of site numbers only.</p>
 </div>
 <div id="q-i-have-tons-or-parameters-at-my-site-is-there-an-easier-way-to-select-a-parameter-than-scrolling-through-hundreds-of-parameters" class="section level2">
 <h2>Q: I have tons or parameters at my site, is there an easier way to select a parameter than scrolling through hundreds of parameters?</h2>
-<div id="a-5" class="section level3">
-<h3>A:</h3>
-<p>Yes. Click in the input box for parameter code and type part of the parameter code number or the analyte name and the box will automatically filter to your search.</p>
-</div>
+<p><strong>A</strong> Yes. Click in the input box for parameter code and type part of the parameter code number or the analyte name and the box will automatically filter to your search.</p>
 </div>
 <div id="q-can-i-save-or-print-plots-i-generate-in-the-gui" class="section level2">
 <h2>Q: Can I save or print plots I generate in the GUI?</h2>
-<div id="a-6" class="section level3">
-<h3>A:</h3>
-<p>Yes. For interactive plots, hovering over the plot will bring up a menu in the plot’s upper left corner. Use the “Download plot as a png” option. For non-interactive plots right-click on the plot and select “save image as”.</p>
-</div>
+<p><strong>A</strong> Yes. For interactive plots, hovering over the plot will bring up a menu in the plot’s upper left corner. Use the “Download plot as a png” option. For non-interactive plots right-click on the plot and select “save image as”.</p>
 </div>
 <div id="q-can-i-plot-multiple-sites-on-the-same-plot" class="section level2">
 <h2>Q: Can I plot multiple sites on the same plot?</h2>
-<div id="a-7" class="section level3">
-<h3>A:</h3>
-<p>In most cases, yes. Select multiple sites in the station number input. By default all sites will be plotted on the same plot, with no symbology to differentiate the sites. If you would like to have separate plots, select “Facet” from the Multisite drop down menu.</p>
-</div>
+<p><strong>A</strong> In most cases, yes. Select multiple sites in the station number input. By default all sites will be plotted on the same plot, with no symbology to differentiate the sites. If you would like to have separate plots, select “Facet” from the Multisite drop down menu.</p>
 </div>
 <div id="q-why-are-some-symbols-highlighted-in-orange" class="section level2">
 <h2>Q: Why are some symbols highlighted in orange?</h2>
-<div id="a-8" class="section level3">
-<h3>A:</h3>
-<p>Samples or results that have been selected from the tables in Chrome will show up as highlighted in the corresponding plots.</p>
-</div>
+<p><strong>A</strong> Samples or results that have been selected from the tables in Chrome will show up as highlighted in the corresponding plots.</p>
 </div>
 
 

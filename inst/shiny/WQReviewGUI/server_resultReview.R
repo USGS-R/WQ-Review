@@ -24,7 +24,7 @@ UNAPdata <<- eventReactive(input$refresh, {
 }, ignoreNULL = FALSE)
 
 
-###Render the unnaproved data tab in shiny
+###Render the unapproved data tab in shiny
 output$UNAPtable <- DT::renderDataTable(UNAPdata(),
                                         ##extensions = list(FixedColumns = list(leftColumns = 1)),
                                         server=TRUE,
@@ -87,8 +87,8 @@ observe({
 ###Timeseries
 
 output$qwtsPlot <- renderPlotly({
-  validate(need(!is.null(input$siteSel) & !is.null(input$parmSel),
-                "No site or parameter selected"))
+        validate(need(!is.null(input$siteSel),"No site(s) selected"),
+                 need(!is.null(input$parmSel),"No parameter selected"))
   
   if(input$siteSel == "All")
   {
@@ -202,7 +202,7 @@ output$qwparmParmPlot2 <- renderPlotly({
                           yparm = as.character(input$parmSel),
                           facet = input$facetSel,
                           new.threshold = Sys.time()-as.POSIXct(input$newThreshold),
-                          show.lm = input$fit_parmParm1,
+                          show.lm = input$fit_parmParm2,
                           labelDQI = input$labelDQI,
                           log.scaleY = log.scaleY2,
                           log.scaleX = log.scaleX2,
@@ -211,3 +211,24 @@ output$qwparmParmPlot2 <- renderPlotly({
     config(collaborate=F,cloud=F,showLink=F,displaylogo=F,modeBarButtonsToRemove=c("lasso2d","select2d","autoScale2d","zoom2d","sendDataToCloud"))
   
 })
+
+###Parameter boxplot
+output$qwboxplot <- renderPlot({
+        validate(
+                need(!is.null(input$siteSel) &
+                             !is.null(input$parmSel),
+                     "No site selected"))
+        
+        if(input$siteSel == "All")
+        {
+                sites <- unique(qw.data$PlotTable$SITE_NO)
+        } else {
+                sites <- as.character(input$siteSel)
+        }
+        qwparmBoxPlot(qw.data = qw.data,
+                    plotparm = as.character(input$parmSel),
+                    facet = input$facetSel,
+                    site.selection = sites,
+                    printPlot=FALSE) 
+})
+

@@ -4,7 +4,8 @@
 \alias{qwrepPlot}
 \title{Boxplot of replicate relative percent difference}
 \usage{
-qwrepPlot(qw.data, plotparm, site.selection = "All", printPlot = TRUE)
+qwrepPlot(qw.data, plotparm, site.selection = "All", facet = "multisite",
+  scales = "fixed", printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}
@@ -12,6 +13,10 @@ qwrepPlot(qw.data, plotparm, site.selection = "All", printPlot = TRUE)
 \item{plotparm}{A character vector of pcodes to plot}
 
 \item{site.selection}{A character vector of site IDs to plot}
+
+\item{facet}{Character string of either "multisite" for plotting all sites on one plot or "Facet" for plotting sites on individual plots}
+
+\item{scales}{Character string to define y axis on faceted plots. Options are "free","fixed","free_x", or "free_y"}
 
 \item{printPlot}{Logical. Prints plot to graphics device if TRUE}
 }
