@@ -40,7 +40,7 @@ Additionaly, please feel free to post any suggestions or enhancement requests.
 
 WQReview GUI User Guide
 ----------
-[WQReviewGUI User Guide](vignettes/WQReviewGUI.md)
+[WQReviewGUI User Guide](vignettes/WQReviewGUI2.md)
 
 Frequently asked questions
 ----------
