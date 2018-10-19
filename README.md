@@ -97,11 +97,11 @@ If you do not have the driver installed
 
 Install the Oracle client by following the instructions here:
 
-http://nwis.usgs.gov/IT/ORACLE/Oracle.client.installation.htm
+https://nwis.usgs.gov/IT/ORACLE/Oracle.client.installation.htm
 
 Then follow the instructions to setup the system DSN
 
-http://nwis.usgs.gov/IT/INSTRUCT/HOWTO/DB_oracle_odbc.html
+https://nwis.usgs.gov/IT/INSTRUCT/HOWTO/DB_oracle_odbc.html
 
 The ODBC connection must be setup for Oracle and in 32-bit mode
 

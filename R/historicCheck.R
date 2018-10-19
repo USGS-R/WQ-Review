@@ -3,7 +3,7 @@
 #' @param returnAll logical, return dataframe containing all results or only return flagged samples. Default is FALSE
 #' @details Compares each sample with DQI code of "I","S", or "P" to ranges of all prior approved data ("R","O","A"),
 #' and flags samples that are suspisciously high or low. 
-#' Definitions of checks can be found at http://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
+#' Definitions of checks can be found at https://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
 #' @examples 
 #' data("exampleData",package="WQReview")
 #' historicCheckOut <- historicCheck(qw.data=qw.data,

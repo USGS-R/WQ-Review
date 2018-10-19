@@ -93,10 +93,6 @@ output:
     toc: true
     toc_depth: 4
             
-vignette: >
-  %\VignetteIndexEntry{WQReview GUI- working with interactive plots}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
 ---
 
 
