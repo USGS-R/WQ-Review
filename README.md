@@ -3,9 +3,10 @@ WQReview
 
 This is version 2.0 of the WQReview package. This new implementation has several bug fixes, and updated features including:
 * Ability to auto-generate batch files for changing DQI codes through QWDATA.
-* Modified GUI to group useful parameter plots into a single webpage.
-* Auto-generated Microsoft Excel workbook with data tables for review.
+* Modified Shiny GUI to group useful parameter plots into a single webpage.
+* Auto-generated Microsoft Excel workbook with data tables for review, generated from Shiny GUI.
 * Bug fixes based on user-identified issues.
+
 DO NOT CHANGE DATA IN YOUR DATABASE USING THIS PROGRAM WITHOUT CAREFUL SCRUTINY. It is strongly recommended that you use the "verify only" option to test data load before making any real changes.
 
 Please view this [Workflow Video](https://drive.google.com/file/d/1ljb82pTLF_N4jh-n_LGO-_8bymAmvtgf/view?usp=sharing) from original developer T.Joe Mills.
