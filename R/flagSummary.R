@@ -13,7 +13,7 @@
 #' @export
 #' @return A dataframe containing all samples with applicable flags
 
-flagSummary <- function(qw.data,returnAll = FALSE, returnAllTables = FALSE)
+flagSummary <- function(qw.data,returnAll = FALSE)
 {
 
         repTable <- try(suppressWarnings(repTabler(qw.data)))

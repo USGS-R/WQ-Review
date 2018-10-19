@@ -26,6 +26,7 @@ Imports:
     gridExtra,
     rmarkdown,
     dplyr,
+    plyr,
     plotly,
     excel.link
 Suggests:
