@@ -53,7 +53,7 @@ Installation for stand alone application (non-R users)
 
 1. Download the install executable from FTP:
 
-[WQReviewInstall_2.0](ftp://ftpint.usgs.gov/private/cr/co/lakewood/WQReview_EXE/)
+ftp://ftpint.usgs.gov/private/cr/co/lakewood/WQReview_EXE/
 
 2. Run WQReviewInstall_2.0.exe and follow the installation instructions.
 
