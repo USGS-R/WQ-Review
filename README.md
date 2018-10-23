@@ -67,7 +67,7 @@ ftp://ftpint.usgs.gov/private/cr/co/lakewood/WQReview_EXE/
 Guidance for setting up ODBC connection to NWIS
 ----------
 
-Your database administrator or IT specialist will may need to assist for these steps.
+Your database administrator or IT specialist may need to assist with these steps.
 
 ## Step 1
 You need to setup a user Data Source Name (User DSN).
