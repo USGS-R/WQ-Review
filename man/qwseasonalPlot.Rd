@@ -4,10 +4,10 @@
 \alias{qwseasonalPlot}
 \title{Seasonal plot}
 \usage{
-qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30, site.selection,
-  plotparm, facet = "multisite", scales = "fixed", show.smooth = FALSE,
-  highlightrecords = " ", wySymbol = FALSE, labelDQI = FALSE,
-  printPlot = TRUE)
+qwseasonalPlot(qw.data, new.threshold = 60 * 60 * 24 * 30,
+  site.selection, plotparm, facet = "multisite", scales = "fixed",
+  show.smooth = FALSE, highlightrecords = " ", wySymbol = FALSE,
+  labelDQI = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}

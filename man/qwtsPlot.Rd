@@ -4,8 +4,8 @@
 \alias{qwtsPlot}
 \title{Parameter timeseries plot}
 \usage{
-qwtsPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24 * 30,
-  show.q = FALSE, show.smooth = FALSE, highlightrecords = " ",
+qwtsPlot(qw.data, site.selection, plotparm, new.threshold = 60 * 60 * 24
+  * 30, show.q = FALSE, show.smooth = FALSE, highlightrecords = " ",
   facet = "multisite", scales = "fixed", wySymbol = FALSE,
   labelDQI = FALSE, printPlot = TRUE)
 }

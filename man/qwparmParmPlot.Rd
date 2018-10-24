@@ -4,10 +4,11 @@
 \alias{qwparmParmPlot}
 \title{Parameter-parameter plot}
 \usage{
-qwparmParmPlot(qw.data, site.selection, xparm, yparm, facet = "multisite",
-  scales = "fixed", new.threshold = 60 * 60 * 24 * 30, show.lm = FALSE,
-  log.scaleY = FALSE, log.scaleX = FALSE, highlightrecords = " ",
-  wySymbol = FALSE, labelDQI = FALSE, printPlot = TRUE)
+qwparmParmPlot(qw.data, site.selection, xparm, yparm,
+  facet = "multisite", scales = "fixed", new.threshold = 60 * 60 * 24
+  * 30, show.lm = FALSE, log.scaleY = FALSE, log.scaleX = FALSE,
+  highlightrecords = " ", wySymbol = FALSE, labelDQI = FALSE,
+  printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}

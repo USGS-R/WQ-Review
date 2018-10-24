@@ -4,14 +4,16 @@
 \alias{dataUpload}
 \title{dataUpload formats files for upload into QWData}
 \usage{
-dataUpload(qwsampletype, labfile, pcodefile, DSN = "NWISCO", env.db = "01",
-  qa.db = "02", writeFiles = FALSE, qwresultname = "qwresult",
-  qwsamplename = "qwsample", qwsamplefile = "", qwsample.begin.date = NA,
+dataUpload(qwsampletype, labfile, pcodefile, DSN = "NWISCO",
+  env.db = "01", qa.db = "02", writeFiles = FALSE,
+  qwresultname = "qwresult", qwsamplename = "qwsample",
+  qwsamplefile = "", qwsample.begin.date = NA,
   qwsample.end.date = NA, censor = FALSE, agencycode = "USGS",
-  labid = NA, projectcode = NA, aquifercode = NA, analysisstatus = NA,
-  analysissource = NA, hydrologiccond = "A", hydrologicevent = 9,
-  tissue = NA, bodypart = NA, labcomment = NA, fieldcomment = NA,
-  timedatum = NA, datumreliability = NA, colagencycode = "USGS")
+  labid = NA, projectcode = NA, aquifercode = NA,
+  analysisstatus = NA, analysissource = NA, hydrologiccond = "A",
+  hydrologicevent = 9, tissue = NA, bodypart = NA, labcomment = NA,
+  fieldcomment = NA, timedatum = NA, datumreliability = NA,
+  colagencycode = "USGS")
 }
 \arguments{
 \item{qwsampletype}{Numeric of type of qwsample file. Options 1: Pull qwsample form NWIS, 2:QWSample from file, 3: batch qwsample file}
