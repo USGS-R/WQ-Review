@@ -270,6 +270,10 @@ flipDQI <- function(STAIDS,
   
   ###Format time to character
   qwSample$start.date <- format(qwSample$start.date,format="%Y%m%d%H%M")
+  
+  #Per QWDATA user manual sect. 3.8, it is suggested that the time datum be left blank
+  # see http://nwis.usgs.gov/nwisdocs5_2/qw/QW_Sect3.8.pdf
+  qwSample$time.datum <- NA
   ###Merge in sample integer and drop UID and recordno columns
   qwResult <- dplyr::left_join(qwSample[c("RECORD_NO","sample.integer")],qwResult,by="RECORD_NO")
   
@@ -298,10 +302,11 @@ flipDQI <- function(STAIDS,
   qwResult$LAB_STD_DEV_VA <- sub('^(-)?[.]', '\\10.', qwResult$LAB_STD_DEV_VA)
   
   #Format date times
-  qwResult$ANL_DT <- format(qwResult$ANL_DT,format="%Y%m%d%H%M")
+  qwResult$ANL_DT <- format(qwResult$ANL_DT,format="%Y%m%d%")
   qwResult$ANL_DT[qwResult$ANL_DT=="NA"] <- NA
-  qwResult$PREP_DT <- format(qwResult$PREP_DT,format="%Y%m%d%H%M")
+  qwResult$PREP_DT <- format(qwResult$PREP_DT,format="%Y%m%d%")
   qwResult$PREP_DT[qwResult$PREP_DT=="NA"] <- NA
+  
   
   if(writeFiles == TRUE)
   {

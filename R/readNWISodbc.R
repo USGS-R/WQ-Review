@@ -444,7 +444,8 @@ readNWISodbc <- function(DSN,
                 PlotTable$RESULT_VA <- as.numeric(PlotTable$RESULT_VA)
         }
         
-        ##Format date times to local sample collection timezone
+        ##Format date times to local sample collection timezone - only start and end time have time zone and daylight savings code
+        ## other dates and times are not converted to be consistent with QWDATA output.
         #SAMPLE_START_DT
         PlotTable$SAMPLE_START_DT <- convertTime(datetime = PlotTable$SAMPLE_START_DT,
                                                  timezone = PlotTable$SAMPLE_START_TZ_CD,
@@ -454,45 +455,45 @@ readNWISodbc <- function(DSN,
         DataTable$SAMPLE_START_DT <- convertTime(datetime = DataTable$SAMPLE_START_DT,
                                                  timezone = DataTable$SAMPLE_START_TZ_CD,
                                                  daylight = DataTable$SAMPLE_START_LOCAL_TM_FG)
-        #RESULT_CR
-        PlotTable$RESULT_CR <- convertTime(datetime = PlotTable$RESULT_CR,
-                                           timezone = PlotTable$SAMPLE_START_TZ_CD,
-                                           daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
-        
-        
-        #RESULT_MD
-        PlotTable$RESULT_MD <- convertTime(datetime = PlotTable$RESULT_MD,
-                                           timezone = PlotTable$SAMPLE_START_TZ_CD,
-                                           daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
-        #SAMPLE_CR
-        PlotTable$SAMPLE_CR <- convertTime(datetime = PlotTable$SAMPLE_CR,
-                                           timezone = PlotTable$SAMPLE_START_TZ_CD,
-                                           daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
-        
-        #SAMPLE_MD
-        PlotTable$SAMPLE_MD <- convertTime(datetime = PlotTable$SAMPLE_MD,
-                                           timezone = PlotTable$SAMPLE_START_TZ_CD,
-                                           daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
+        # #RESULT_CR
+        # PlotTable$RESULT_CR <- convertTime(datetime = PlotTable$RESULT_CR,
+        #                                    timezone = PlotTable$SAMPLE_START_TZ_CD,
+        #                                    daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
+        # 
+        # 
+        # #RESULT_MD
+        # PlotTable$RESULT_MD <- convertTime(datetime = PlotTable$RESULT_MD,
+        #                                    timezone = PlotTable$SAMPLE_START_TZ_CD,
+        #                                    daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
+        # #SAMPLE_CR
+        # PlotTable$SAMPLE_CR <- convertTime(datetime = PlotTable$SAMPLE_CR,
+        #                                    timezone = PlotTable$SAMPLE_START_TZ_CD,
+        #                                    daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
+        # 
+        # #SAMPLE_MD
+        # PlotTable$SAMPLE_MD <- convertTime(datetime = PlotTable$SAMPLE_MD,
+        #                                    timezone = PlotTable$SAMPLE_START_TZ_CD,
+        #                                    daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
         
         #SAMPLE_END_DT
         PlotTable$SAMPLE_END_DT <- convertTime(datetime = PlotTable$SAMPLE_END_DT,
-                                               timezone = PlotTable$SAMPLE_START_TZ_CD,
-                                               daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
+                                               timezone = PlotTable$SAMPLE_END_TZ_CD,
+                                               daylight = PlotTable$SAMPLE_END_LOCAL_TM_FG)
         
         
         DataTable$SAMPLE_END_DT <- convertTime(datetime = DataTable$SAMPLE_END_DT,
                                                timezone = DataTable$SAMPLE_START_TZ_CD,
                                                daylight = DataTable$SAMPLE_START_LOCAL_TM_FG)
         
-        #ANL_DT
-        PlotTable$ANL_DT <- convertTime(datetime = PlotTable$ANL_DT,
-                                        timezone = PlotTable$SAMPLE_START_TZ_CD,
-                                        daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
-        
-        #PREP_DT
-        PlotTable$PREP_DT <- convertTime(datetime = PlotTable$PREP_DT,
-                                         timezone = PlotTable$SAMPLE_START_TZ_CD,
-                                         daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
+        # #ANL_DT
+        # PlotTable$ANL_DT <- convertTime(datetime = PlotTable$ANL_DT,
+        #                                 timezone = PlotTable$SAMPLE_START_TZ_CD,
+        #                                 daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
+        # 
+        # #PREP_DT
+        # PlotTable$PREP_DT <- convertTime(datetime = PlotTable$PREP_DT,
+        #                                  timezone = PlotTable$SAMPLE_START_TZ_CD,
+        #                                  daylight = PlotTable$SAMPLE_START_LOCAL_TM_FG)
         
         ###Get month for seasonal plots and reorder factor levels to match water-year order
         PlotTable$SAMPLE_MONTH <-  factor(format(PlotTable$SAMPLE_START_DT,"%b"),levels=c("Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"))
