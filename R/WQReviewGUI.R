@@ -5,6 +5,7 @@
 #' }
 #' @export
 #' @import shiny
+#' @import shinyBS
 #' @import excel.link
 #' @importFrom DT renderDataTable
 #' @importFrom DT dataTableOutput

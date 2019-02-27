@@ -1,7 +1,7 @@
 Introduction
 ============
 
-This manual describes use of the WQReview 2.0 version. The WQReview R-package allows import of water-quality data from the U.S. Geological Survey’s National Water Information System utilizing ODBC connections. It allows review of those data using a series of interactive graphical interfaces through a graphical user interface (GUI) and tabular output of data. Finally, it allows selection of specific water-quality results for updating of data quality indicator (DQI) codes using QWDATA after data review.
+This manual describes use of the WQReview 2.0 version. The WQReview R-package allows import of water-quality data from the U.S. Geological Surveyâ€™s National Water Information System utilizing ODBC connections. It allows review of those data using a series of interactive graphical interfaces through a graphical user interface (GUI) and tabular output of data. Finally, it allows selection of specific water-quality results for updating of data quality indicator (DQI) codes using QWDATA after data review.
 
 Importing Data Using WQReview
 =============================
@@ -41,9 +41,9 @@ Data import is accessed by choosing the "Import from internal NWIS server" optio
 
 There are three options available to choose data to import. You need to use only one of these options to import data:
 
-1.  **Site number**: This input accepts (a) manually entered site number(s). Type the site number in the box and click "Add" or hit keyboard Enter key. You may add as many site numbers as you would like by typing or copying them into the Site number box. Do not separate with commas; hitting the Enter key after each site number entry separates the site numbers. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry
+1.  **Site number**: This input accepts (a) manually entered site number(s). Type the site number in the box and click "Add" or hit keyboard Enter key. You may add as many site numbers as you would like by typing or copying them into the Site number box. Do not separate with commas; hitting the Enter key after each site number entry separates the site numbers. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry. Site numbers default to sites with a USGS agency code. To specify agency code append the agency code and a dash (-) before the site number (e.g. USEPA-333330112164801) in the site number box.
 
-2.  **Site number file**: This input accepts a file of site numbers. The file must be a single column text file of site numbers. Make sure leading zero's have not been removed if using excel to generate the file.
+2.  **Site number file**: This input accepts a file of site numbers. The file must be a single column text file of site numbers. Make sure leading zeroâ€™s have not been removed if using excel to generate the file. Site numbers default to sites with a USGS agency code. To specify agency code append the agency code and a dash (-) before the site number (e.g. USEPA-333330112164801) in the site number file.
 
 3.  **Project codes**: This input accepts a 9-digit project code (the last nine digits of USGS project numbers) and will select all data associated with this project code.
 
@@ -444,8 +444,8 @@ WQReview
 2.  Review the Excel workbook tables and WQReview plots as part of your result review.
 3.  Copy results that have been reviewed from the Excel "DQI needs review" tab to the "Ready for DQI change".
 4.  Based on your review, add the new DQI code (R, Q, etc.) to the "DQI\_CD\_REVIEWED" column.
-5.  Add any review comments to be added to NWIS in the "RESULT\_CM\_NWIS\_REVIEWED" column.
-6.  Put the comment type (F for field or L for Lab) in the "RESULT\_CM\_TYPE\_REVIEWED" column.
+5.  Add any result level review comments to be added to NWIS in the "RESULT\_CM\_NWIS\_REVIEWED" column.
+6.  Put the comment type (F for field or L for Lab) in the "RESULT\_CM\_TYPE\_REVIEWED" column. **Note that any comments previously stored in NWIS will be overwritten upon batch upload.** Existing comments can be viewed in the *Data by result* tab, *RESULT\_CM\_TX* column.
 7.  Add any additional comments to the "RESULT\_NOTES\_WQREVIEW" column. These will not be uploaded to NWIS, they will only be saved when the Excel workbook is saved.
 8.  Under the WQReview "Generate batch DQI flip files" header, hit the "Generate batch files" button. A qwsample and qwresult tab will be generated in the Excel workbook.
 9.  Using Windows Explorer, create or navigate to a project folder in your mapped home directory on NWIS. Save the Excel workbook here.
