@@ -15,7 +15,7 @@ Toolbox for discrete water-quality data review and exploration. Users are encour
 
 [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues).
 
-You may also contact the maintainer at cpenn@usgs.gov
+You may also contact WQReview Help at gs-w_wqreview_help@usgs.gov 
 
 This package facilitates data review and exploration of discrete water-quality data through rapid and easy-to-use plotting functions and tabular data summaries. Data is imported with user-specified options for single or multiple sites and parameter codes using an ODBC connection to the user's local NWIS server. A graphical user interface allows the user to easily explore their data through a variety of graphical and tabular outputs. 
 

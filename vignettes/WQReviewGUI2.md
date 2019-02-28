@@ -81,7 +81,7 @@ We will start with a basic data import for a single site by parameter groups.
 7.  A Microsoft Excel workbook window will pop-up and populate with tabs of reports.
 8.  Once data have been retrieved, text will be displayed listing the results of the data import. This process can take a few seconds after the Excel workbook populates to show up.
 
-If you encounter issues with the data import, send an email to <cpenn@usgs.gov> and/or post an issue on the WQReview GitHub page at [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues)
+If you encounter issues with the data import, send an email to <gs-w_wqreview_help@usgs.gov> and/or post an issue on the WQReview GitHub page at [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues)
 
 We can now begin to work with the data.
 
