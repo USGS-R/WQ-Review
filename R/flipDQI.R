@@ -302,9 +302,9 @@ flipDQI <- function(STAIDS,
   qwResult$LAB_STD_DEV_VA <- sub('^(-)?[.]', '\\10.', qwResult$LAB_STD_DEV_VA)
   
   #Format date times
-  qwResult$ANL_DT <- format(qwResult$ANL_DT,format="%Y%m%d%")
+  qwResult$ANL_DT <- format(as.Date(qwResult$ANL_DT),format="%Y%m%d")
   qwResult$ANL_DT[qwResult$ANL_DT=="NA"] <- NA
-  qwResult$PREP_DT <- format(qwResult$PREP_DT,format="%Y%m%d%")
+  qwResult$PREP_DT <- format(as.Date(qwResult$PREP_DT),format="%Y%m%d")
   qwResult$PREP_DT[qwResult$PREP_DT=="NA"] <- NA
   
   
