@@ -4,8 +4,8 @@
 \alias{summaryStats}
 \title{Summary stats function}
 \usage{
-summaryStats(qw.data, STAIDS = NULL, parameterCd = NULL, begin.date = NA,
-  end.date = NA)
+summaryStats(qw.data, STAIDS = NULL, parameterCd = NULL,
+  begin.date = NA, end.date = NA)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}

@@ -4,9 +4,9 @@
 \alias{readNWISodbc}
 \title{Function to pull data from NWIS}
 \usage{
-readNWISodbc(DSN, env.db = "01", qa.db = "02", STAIDS, dl.parms = "All",
-  parm.group.check = TRUE, begin.date = NA, end.date = NA,
-  projectCd = NULL, resultAsText = FALSE)
+readNWISodbc(DSN, env.db = "01", qa.db = "02", STAIDS,
+  dl.parms = "All", parm.group.check = TRUE, begin.date = NA,
+  end.date = NA, projectCd = NULL, resultAsText = FALSE)
 }
 \arguments{
 \item{DSN}{A character string containing the DSN for your local server}

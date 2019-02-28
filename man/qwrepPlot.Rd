@@ -4,8 +4,8 @@
 \alias{qwrepPlot}
 \title{Boxplot of replicate relative percent difference}
 \usage{
-qwrepPlot(qw.data, plotparm, site.selection = "All", facet = "multisite",
-  scales = "fixed", printPlot = TRUE)
+qwrepPlot(qw.data, plotparm, site.selection = "All",
+  facet = "multisite", scales = "fixed", printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}

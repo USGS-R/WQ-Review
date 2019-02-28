@@ -4,8 +4,8 @@
 \alias{qwblankPlot}
 \title{Blank sample timeseries}
 \usage{
-qwblankPlot(qw.data, plotparm, site.selection = "All", facet = "multisite",
-  scales = "fixed", printPlot = TRUE)
+qwblankPlot(qw.data, plotparm, site.selection = "All",
+  facet = "multisite", scales = "fixed", printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}

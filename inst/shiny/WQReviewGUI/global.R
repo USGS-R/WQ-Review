@@ -1,5 +1,6 @@
 library(WQReview)
 library(shiny)
+library(shinyBS)
 library(dplyr)
 library(DT)
 library(reshape2)

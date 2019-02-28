@@ -46,9 +46,9 @@ The “Import from internal NWIS server” option has 11 main inputs.
 
 There are three options available to choose data to import.  You need to use only one of these options to import data:
 
-1. **Site number**: This input accepts (a) manually entered site number(s). Type the site number in the box and click "Add" or hit keyboard Enter key. You may add as many site numbers as you would like by typing or copying them into the Site number box.  Do not separate with commas; hitting the Enter key after each site number entry separates the site numbers. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry
+1. **Site number**: This input accepts (a) manually entered site number(s). Type the site number in the box and click "Add" or hit keyboard Enter key. You may add as many site numbers as you would like by typing or copying them into the Site number box.  Do not separate with commas; hitting the Enter key after each site number entry separates the site numbers. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry. Site numbers default to sites with a USGS agency code. To specify agency code append the agency code and a dash (-) before the site number (e.g. USEPA-333330112164801) in the site number box.
     
-1. **Site number file**: This input accepts a file of site numbers. The file must be a single column text file of site numbers. Make sure leading zero’s have not been removed if using excel to generate the file.
+1. **Site number file**: This input accepts a file of site numbers. The file must be a single column text file of site numbers. Make sure leading zero’s have not been removed if using excel to generate the file. Site numbers default to sites with a USGS agency code. To specify agency code append the agency code and a dash (-) before the site number (e.g. USEPA-333330112164801) in the site number file.
 
 1. **Project codes**: This input accepts a 9-digit project code (the last nine digits of USGS project numbers) and will select all data associated with this project code.
 
@@ -84,7 +84,7 @@ We will start with a basic data import for a single site by parameter groups.
 1. A Microsoft Excel workbook window will pop-up and populate with tabs of reports.
 1. Once data have been retrieved, text will be displayed listing the results of the data import. This process can take a few seconds after the Excel workbook populates to show up.
 
-If you encounter issues with the data import, send an email to cpenn@usgs.gov and/or post an issue on the WQReview GitHub page at [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues)
+If you encounter issues with the data import, send an email to gs-w_wqreview_help@usgs.gov and/or post an issue on the WQReview GitHub page at [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues)
 
 We can now begin to work with the data.
 
@@ -409,8 +409,8 @@ For each environmental sample, the cation-anion percent difference was be calcul
 1. Review the Excel workbook tables and WQReview plots as part of your result review.
 1. Copy results that have been reviewed from the Excel "DQI needs review" tab to the "Ready for DQI change".
 1. Based on your review, add the new DQI code (R, Q, etc.) to the "DQI_CD_REVIEWED" column.
-1. Add any review comments to be added to NWIS in the "RESULT_CM_NWIS_REVIEWED" column.
-1. Put the comment type (F for field or L for Lab) in the "RESULT_CM_TYPE_REVIEWED" column.
+1. Add any result level review comments to be added to NWIS in the "RESULT_CM_NWIS_REVIEWED" column. 
+1. Put the comment type (F for field or L for Lab) in the "RESULT_CM_TYPE_REVIEWED" column. **Note that any comments previously stored in NWIS will be overwritten upon batch upload.** Existing comments can be viewed in the *Data by result* tab, *RESULT_CM_TX* column.
 1. Add any additional comments to the "RESULT_NOTES_WQREVIEW" column. These will not be uploaded to NWIS, they will only be saved when the Excel workbook is saved.
 1. Under the WQReview "Generate batch DQI flip files" header, hit the "Generate batch files" button. A qwsample and qwresult tab will be generated in the Excel workbook.
 1. Using Windows Explorer, create or navigate to a project folder in your mapped home directory on NWIS. Save the Excel workbook here.

@@ -12,14 +12,14 @@
 
 <meta name="author" content="T. Joe Mills and Colin Penn" />
 
-<meta name="date" content="2018-10-18" />
+<meta name="date" content="2019-02-28" />
 
 <title>WQReview GUI User Manual</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,7 +55,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -70,7 +92,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">WQReview GUI User Manual</h1>
 <h4 class="author"><em>T. Joe Mills and Colin Penn</em></h4>
-<h4 class="date"><em>2018-10-18</em></h4>
+<h4 class="date"><em>2019-02-28</em></h4>
 
 
 <div id="TOC">
@@ -178,8 +200,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Data import is accessed by choosing the “Import from internal NWIS server” option under the “Import/Save Data” tab at the top of the WQReview GUI. The “Import from internal NWIS server” option has 11 main inputs.</p>
 <p>There are three options available to choose data to import. You need to use only one of these options to import data:</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Site number</strong>: This input accepts (a) manually entered site number(s). Type the site number in the box and click “Add” or hit keyboard Enter key. You may add as many site numbers as you would like by typing or copying them into the Site number box. Do not separate with commas; hitting the Enter key after each site number entry separates the site numbers. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry</p></li>
-<li><p><strong>Site number file</strong>: This input accepts a file of site numbers. The file must be a single column text file of site numbers. Make sure leading zero’s have not been removed if using excel to generate the file.</p></li>
+<li><p><strong>Site number</strong>: This input accepts (a) manually entered site number(s). Type the site number in the box and click “Add” or hit keyboard Enter key. You may add as many site numbers as you would like by typing or copying them into the Site number box. Do not separate with commas; hitting the Enter key after each site number entry separates the site numbers. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry. Site numbers default to sites with a USGS agency code. To specify agency code append the agency code and a dash (-) before the site number (e.g. USEPA-333330112164801) in the site number box.</p></li>
+<li><p><strong>Site number file</strong>: This input accepts a file of site numbers. The file must be a single column text file of site numbers. Make sure leading zero’s have not been removed if using excel to generate the file. Site numbers default to sites with a USGS agency code. To specify agency code append the agency code and a dash (-) before the site number (e.g. USEPA-333330112164801) in the site number file.</p></li>
 <li><p><strong>Project codes</strong>: This input accepts a 9-digit project code (the last nine digits of USGS project numbers) and will select all data associated with this project code.</p></li>
 </ol>
 <p>There are three options to select parameter codes associated with data you will import. You only need one of these options:</p>
@@ -210,7 +232,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>A Microsoft Excel workbook window will pop-up and populate with tabs of reports.</li>
 <li>Once data have been retrieved, text will be displayed listing the results of the data import. This process can take a few seconds after the Excel workbook populates to show up.</li>
 </ol>
-<p>If you encounter issues with the data import, send an email to <a href="mailto:cpenn@usgs.gov">cpenn@usgs.gov</a> and/or post an issue on the WQReview GitHub page at <a href="https://github.com/USGS-R/WQ-Review/issues">WQ-Review Issues</a></p>
+<p>If you encounter issues with the data import, send an email to <a href="mailto:gs-w_wqreview_help@usgs.gov">gs-w_wqreview_help@usgs.gov</a> and/or post an issue on the WQReview GitHub page at <a href="https://github.com/USGS-R/WQ-Review/issues">WQ-Review Issues</a></p>
 <p>We can now begin to work with the data.</p>
 </div>
 </div>
@@ -613,8 +635,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Review the Excel workbook tables and WQReview plots as part of your result review.</li>
 <li>Copy results that have been reviewed from the Excel “DQI needs review” tab to the “Ready for DQI change”.</li>
 <li>Based on your review, add the new DQI code (R, Q, etc.) to the “DQI_CD_REVIEWED” column.</li>
-<li>Add any review comments to be added to NWIS in the “RESULT_CM_NWIS_REVIEWED” column.</li>
-<li>Put the comment type (F for field or L for Lab) in the “RESULT_CM_TYPE_REVIEWED” column.</li>
+<li>Add any result level review comments to be added to NWIS in the “RESULT_CM_NWIS_REVIEWED” column.</li>
+<li>Put the comment type (F for field or L for Lab) in the “RESULT_CM_TYPE_REVIEWED” column. <strong>Note that any comments previously stored in NWIS will be overwritten upon batch upload.</strong> Existing comments can be viewed in the <em>Data by result</em> tab, <em>RESULT_CM_TX</em> column.</li>
 <li>Add any additional comments to the “RESULT_NOTES_WQREVIEW” column. These will not be uploaded to NWIS, they will only be saved when the Excel workbook is saved.</li>
 <li>Under the WQReview “Generate batch DQI flip files” header, hit the “Generate batch files” button. A qwsample and qwresult tab will be generated in the Excel workbook.</li>
 <li>Using Windows Explorer, create or navigate to a project folder in your mapped home directory on NWIS. Save the Excel workbook here.</li>

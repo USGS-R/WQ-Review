@@ -2,7 +2,7 @@ Package: WQReview
 Type: Package
 Title: Discrete water-quality data review and exploration toolbox
 Version: 2.0
-Date: 2018-10-19
+Date: 2019-02-27
 Author: T. Joe Mills <tmills@usgs.gov>
 Maintainer: Colin Penn <cpenn@usgs.gov>
 Description: Facilitates rapid review and exploration of data stored in
@@ -21,6 +21,7 @@ Imports:
     stringr,
     ggplot2,
     shiny,
+    shinyBS,
     lubridate,
     DT,
     gridExtra,
@@ -35,4 +36,4 @@ VignetteBuilder: knitr
 BuildVignettes: true
 BugReports: https://github.com/USGS-R/WQReview/issues
 URL: https://github.com/USGS-R/WQReview
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

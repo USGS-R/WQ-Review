@@ -4,10 +4,10 @@
 \alias{qwcbPlot}
 \title{Chargebalance timeseries plot}
 \usage{
-qwcbPlot(qw.data, site.selection, facet = "multisite", scales = "fixed",
-  new.threshold = 60 * 60 * 24 * 30, show.smooth = FALSE,
-  highlightrecords = NULL, wySymbol = FALSE, labelDQI = FALSE,
-  printPlot = TRUE)
+qwcbPlot(qw.data, site.selection, facet = "multisite",
+  scales = "fixed", new.threshold = 60 * 60 * 24 * 30,
+  show.smooth = FALSE, highlightrecords = NULL, wySymbol = FALSE,
+  labelDQI = FALSE, printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data list generated from readNWISodbc}

@@ -4,9 +4,10 @@
 \alias{qwscSumPlot}
 \title{Sum ions vs conductance plot}
 \usage{
-qwscSumPlot(qw.data, site.selection, facet = "multisite", scales = "fixed",
-  new.threshold = 60 * 60 * 24 * 30, highlightrecords = NULL,
-  wySymbol = FALSE, labelDQI = FALSE, printPlot = TRUE)
+qwscSumPlot(qw.data, site.selection, facet = "multisite",
+  scales = "fixed", new.threshold = 60 * 60 * 24 * 30,
+  highlightrecords = NULL, wySymbol = FALSE, labelDQI = FALSE,
+  printPlot = TRUE)
 }
 \arguments{
 \item{qw.data}{A qw.data object generated from readNWISodbc}

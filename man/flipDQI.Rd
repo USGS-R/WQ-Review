@@ -6,8 +6,8 @@
 \usage{
 flipDQI(STAIDS, records, parameters, dqiCodes, comments = NULL,
   commentType = NULL, DSN = "NWISCO", env.db = "01", qa.db = "02",
-  keepRecordNo = FALSE, writeFiles = FALSE, qwresultname = "qwresult",
-  qwsamplename = "qwsample")
+  keepRecordNo = FALSE, writeFiles = FALSE,
+  qwresultname = "qwresult", qwsamplename = "qwsample")
 }
 \arguments{
 \item{STAIDS}{A vector of station IDs}

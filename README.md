@@ -15,7 +15,7 @@ Toolbox for discrete water-quality data review and exploration. Users are encour
 
 [WQ-Review Issues](https://github.com/USGS-R/WQ-Review/issues).
 
-You may also contact the maintainer at cpenn@usgs.gov
+You may also contact WQReview Help at gs-w_wqreview_help@usgs.gov 
 
 This package facilitates data review and exploration of discrete water-quality data through rapid and easy-to-use plotting functions and tabular data summaries. Data is imported with user-specified options for single or multiple sites and parameter codes using an ODBC connection to the user's local NWIS server. A graphical user interface allows the user to easily explore their data through a variety of graphical and tabular outputs. 
 
@@ -92,16 +92,12 @@ A new dialogue will appear. Click the dropdown box next to "TNS Service Name" an
 
 ![Screenshot](vignettes/screenshots/ODBC/ODBC_SelectDSN.PNG)
 
-If you do not have the driver installed
+If you do not have the driver installed, contact your local IT staff
 ----------
 
 Install the Oracle client by following the instructions here:
 
-https://nwis.usgs.gov/IT/ORACLE/Oracle.client.installation.htm
-
-Then follow the instructions to setup the system DSN
-
-https://nwis.usgs.gov/IT/INSTRUCT/HOWTO/DB_oracle_odbc.html
+http://nwis.usgs.gov/IT/INSTRUCT/HOWTO/DB_oracle_odbc.html
 
 The ODBC connection must be setup for Oracle and in 32-bit mode
 
