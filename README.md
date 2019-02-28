@@ -92,16 +92,12 @@ A new dialogue will appear. Click the dropdown box next to "TNS Service Name" an
 
 ![Screenshot](vignettes/screenshots/ODBC/ODBC_SelectDSN.PNG)
 
-If you do not have the driver installed
+If you do not have the driver installed, contact your local IT staff
 ----------
 
 Install the Oracle client by following the instructions here:
 
-https://nwis.usgs.gov/IT/ORACLE/Oracle.client.installation.htm
-
-Then follow the instructions to setup the system DSN
-
-https://nwis.usgs.gov/IT/INSTRUCT/HOWTO/DB_oracle_odbc.html
+http://nwis.usgs.gov/IT/INSTRUCT/HOWTO/DB_oracle_odbc.html
 
 The ODBC connection must be setup for Oracle and in 32-bit mode
 
