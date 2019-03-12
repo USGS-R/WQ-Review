@@ -51,11 +51,10 @@ Frequently asked questions
 Installation for stand alone application (non-R users)
 ----------
 
-1. Download the install executable from FTP:
+1. Download the install executable from ScienceBase or SCCM:
+Note the executable for version 2.0 has not been released yet. Anyone using 2.0 or 2.0_beta versions should uninstalled when the official WaQI note announcing the release is sent to USGS personnel. 
 
-ftp://ftpint.usgs.gov/private/cr/co/lakewood/WQReview_EXE/
-
-2. Run WQReviewInstall_2.0.exe and follow the installation instructions.
+2. Run WQReviewInstall_X.X.exe and follow the installation instructions.
 
 **DO NOT INSTALL WQ-REVIEW INTO YOUR PROGRAM FILES DIRECTORY OR THE APPLICATION WILL NOT RUN. INSTALL TO C DRIVE OR YOUR DOCUMENTS FOLDER.**
 
