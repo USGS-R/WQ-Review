@@ -12,7 +12,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 #Introduction
-This manual describes use of the WQReview 2.0 version. The WQReview R-package allows import of water-quality data from the U.S. Geological Survey’s National Water Information System utilizing ODBC connections.  It allows review of those data using a series of interactive graphical interfaces through a graphical user interface (GUI) and tabular output of data. Finally, it allows selection of specific water-quality results for updating of data quality indicator (DQI) codes using QWDATA after data review.
+This manual describes use of the WQReview 2.1 version. The WQReview R-package allows import of water-quality data from the U.S. Geological Survey’s National Water Information System utilizing ODBC connections.  It allows review of those data using a series of interactive graphical interfaces through a graphical user interface (GUI) and tabular output of data. Finally, it allows selection of specific water-quality results for updating of data quality indicator (DQI) codes using QWDATA after data review.
 
 #Importing Data Using WQReview
 This section describes the process to import data into the WQReview Graphical User Interface (GUI).
@@ -33,9 +33,9 @@ WQReviewGUI()
 ```
 ##Load WQReview from the desktop or start menu standalone executable
 
-1. This requires the WQReview 2.0 executable setup installer program has previously been run on the local computer
-2. Navigate to the start menu WQReview 2.0 folder or desktop icon
-3. Click (start menu) or double-click (desktop icon) the WQReview 2.0 icon
+1. This requires the WQReview v2.1 executable setup installer program has previously been run on the local computer
+2. Navigate to the start menu WQReview v2.1 folder or desktop icon
+3. Click (start menu) or double-click (desktop icon) the WQReview v2.1 icon
 4. A command window will appear, **Do not close this window, it will disappear when the WQReview browser tab is closed**
 5. The WQReview GUI will launch in an internet browser tab
 

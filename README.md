@@ -1,7 +1,7 @@
 WQReview
 ----------
 
-This is version 2.0 of the WQReview package. This new implementation has several bug fixes, and updated features including:
+This is version 2.1 of the WQReview package. This new implementation has several bug fixes, and updated features including:
 * Ability to auto-generate batch files for changing DQI codes through QWDATA.
 * Modified Shiny GUI to group useful parameter plots into a single webpage.
 * Auto-generated Microsoft Excel workbook with data tables for review, generated from Shiny GUI.
@@ -51,10 +51,10 @@ Frequently asked questions
 Installation for stand alone application (non-R users)
 ----------
 
-1. Download the install executable from ScienceBase or SCCM:
-Note the executable for version 2.0 has not been released yet. Anyone using 2.0 or 2.0_beta versions should uninstalled when the official WaQI note announcing the release is sent to USGS personnel. 
+1. Download the install executable from ScienceBase:
+Link to ScienceBase page for USGS personnel will be available when WMA Technical Note is released. 
 
-2. Run WQReviewInstall_X.X.exe and follow the installation instructions.
+2. Run WQReviewInstall_vX_X.exe and follow the installation instructions.
 
 **DO NOT INSTALL WQ-REVIEW INTO YOUR PROGRAM FILES DIRECTORY OR THE APPLICATION WILL NOT RUN. INSTALL TO C DRIVE OR YOUR DOCUMENTS FOLDER.**
 
@@ -62,6 +62,18 @@ Note the executable for version 2.0 has not been released yet. Anyone using 2.0 
 3. Make sure Google Chrome is set as the system default browser (settings -> Default browser)
 
 4. Launch WQ-Review from the start-menu or desktop icon. A DOS window will appear first and then the application should launch in Google Chrome. **DO NOT CLOSE THIS DOS PROMPT, IT IS PART OF THE APPLICATION**
+
+Installation for R users
+----------
+The WQReview package is available from [GRAN](https://owi.usgs.gov/R/gran.html) or for development versions:  
+```R
+install.packages("devtools")
+devtools::install_github(repo = "USGS-R/WQ-Review")
+```
+### Shiny GUI
+```R
+WQReview::WQReviewGUI()
+```
 
 Guidance for setting up ODBC connection to NWIS
 ----------
