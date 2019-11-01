@@ -165,7 +165,7 @@ blankSummary <- function(qw.data,STAIDS="All",begin.date = NA,end.date=NA,multip
                                 max_detected_value <- suppressWarnings(max(.$RESULT_VA[which(.$REMARK_CD == "Sample")],na.rm=TRUE))
                                 
                                 ##Calculate BD9090 for detections
-                                if(length(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) > 1)
+                                if(length(.$RESULT_VA[which(.$REMARK_CD == "Sample" & !is.na(.$RESULT_VA))]) > 1)
                                 {
                                 sorteddetects <- sort(.$RESULT_VA[which(.$REMARK_CD == "Sample")]) 
                                 BD90.90 <- sorteddetects[qbinom(0.9,length(sorteddetects),0.9)]
