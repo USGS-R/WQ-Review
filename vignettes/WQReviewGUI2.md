@@ -1,7 +1,7 @@
 Introduction
 ============
 
-This manual describes use of the WQReview 2.1 version. The WQReview R-package allows import of water-quality data from the U.S. Geological Surveyâ€™s National Water Information System utilizing ODBC connections. It allows review of those data using a series of interactive graphical interfaces through a graphical user interface (GUI) and tabular output of data. Finally, it allows selection of specific water-quality results for updating of data quality indicator (DQI) codes using QWDATA after data review.
+This manual describes use of WQReview version 2. The WQReview R-package allows import of water-quality data from the U.S. Geological Survey’s National Water Information System utilizing ODBC connections. It allows review of those data using a series of interactive graphical interfaces through a graphical user interface (GUI) and tabular output of data. Finally, it allows selection of specific water-quality results for updating of data quality indicator (DQI) codes using QWDATA after data review.
 
 Importing Data Using WQReview
 =============================
@@ -28,9 +28,9 @@ WQReviewGUI()
 Load WQReview from the desktop or start menu standalone executable
 ------------------------------------------------------------------
 
-1.  This requires the WQReview v2.1 executable setup installer program has previously been run on the local computer
-2.  Navigate to the start menu WQReview v2.1 folder or desktop icon
-3.  Click (start menu) or double-click (desktop icon) the WQReview v2.1 icon
+1.  This requires the WQReview executable setup installer program has previously been run on the local computer
+2.  Navigate to the start menu WQReview 2.X folder or desktop icon
+3.  Click (start menu) or double-click (desktop icon) the WQReview 2.X icon
 4.  A command window will appear, **Do not close this window, it will disappear when the WQReview browser tab is closed**
 5.  The WQReview GUI will launch in an internet browser tab
 
@@ -43,7 +43,7 @@ There are three options available to choose data to import. You need to use only
 
 1.  **Site number**: This input accepts (a) manually entered site number(s). Type the site number in the box and click "Add" or hit keyboard Enter key. You may add as many site numbers as you would like by typing or copying them into the Site number box. Do not separate with commas; hitting the Enter key after each site number entry separates the site numbers. Remove a site number by clicking it and hitting the backspace or delete keys. Alternatively, click in the box and press the backspace key to incrementally remove the numbers starting with the last entry. Site numbers default to sites with a USGS agency code. To specify agency code append the agency code and a dash (-) before the site number (e.g. USEPA-333330112164801) in the site number box.
 
-2.  **Site number file**: This input accepts a file of site numbers. The file must be a single column text file of site numbers. Make sure leading zeroâ€™s have not been removed if using excel to generate the file. Site numbers default to sites with a USGS agency code. To specify agency code append the agency code and a dash (-) before the site number (e.g. USEPA-333330112164801) in the site number file.
+2.  **Site number file**: This input accepts a file of site numbers. The file must be a single column text file of site numbers. Make sure leading zero’s have not been removed if using excel to generate the file. Site numbers default to sites with a USGS agency code. To specify agency code append the agency code and a dash (-) before the site number (e.g. USEPA-333330112164801) in the site number file.
 
 3.  **Project codes**: This input accepts a 9-digit project code (the last nine digits of USGS project numbers) and will select all data associated with this project code.
 

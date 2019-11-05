@@ -1,5 +1,5 @@
 
-shinyUI(fluidPage(theme="theme.css",title="WQReview 2.1",
+shinyUI(fluidPage(theme="theme.css",title="WQReview 2.2",
                   navbarPage(title = img(src="Logo.png", width="100px",height = "40px"),
                              navbarMenu("Import/save Data",
                                         tabPanel("Import from internal NWIS server",
@@ -104,7 +104,7 @@ shinyUI(fluidPage(theme="theme.css",title="WQReview 2.1",
                                                       mainPanel()
                                       )
                              ),
-                             tabPanel(title = "WQReview 2.1 User Guide | FAQ | Additional Info",
+                             tabPanel(title = "WQReview User Guide | FAQ | Additional Info",
                                       helpText(a('User Guide', href="WQReviewGUI.html",target="_blank")),
                                       helpText(a('FAQ', href="faq.html",target="_blank")),
                                       helpText(a("Additional Info: WQReview on USGS-R GitHub",

@@ -1,7 +1,7 @@
 WQReview
 ----------
 
-This is version 2.1 of the WQReview package. This new implementation has several bug fixes, and updated features including:
+This is version 2.2 of the WQReview package. This new implementation has several bug fixes, and updated features including:
 * Ability to auto-generate batch files for changing DQI codes through QWDATA.
 * Modified Shiny GUI to group useful parameter plots into a single webpage.
 * Auto-generated Microsoft Excel workbook with data tables for review, generated from Shiny GUI.
@@ -54,7 +54,7 @@ Installation for stand alone application (non-R users)
 1. Download the install executable from ScienceBase:
 Link to ScienceBase page for USGS personnel will be available when WMA Technical Note is released. 
 
-2. Run WQReviewInstall_vX_X.exe and follow the installation instructions.
+2. Run WQReviewInstall_X_X.exe and follow the installation instructions.
 
 **DO NOT INSTALL WQ-REVIEW INTO YOUR PROGRAM FILES DIRECTORY OR THE APPLICATION WILL NOT RUN. INSTALL TO C DRIVE OR YOUR DOCUMENTS FOLDER.**
 
