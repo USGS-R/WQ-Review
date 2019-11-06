@@ -65,10 +65,9 @@ Link to ScienceBase page for USGS personnel will be available when WMA Technical
 
 Installation for R users
 ----------
-The WQReview package is available from [GRAN](https://owi.usgs.gov/R/gran.html) or for development versions:  
 ```R
-install.packages("devtools")
-devtools::install_github(repo = "USGS-R/WQ-Review")
+install.packages("remotes")
+remotes::install_github(repo = "USGS-R/WQ-Review")
 ```
 ### Shiny GUI
 ```R
