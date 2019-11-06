@@ -1,6 +1,6 @@
 #' Function to flag pesticide samples
 #' @param qw.data A qw.data list generated from readNWISodbc
-#' @param returnAll logical, return dataframe containing all results or only return flagged samples. Defualt is FALSE
+#' @param returnAll logical, return dataframe containing all results or only return flagged samples. Default is FALSE
 #' @details Compares each sample with DQI code of "I","S", or "P" to ranges of all prior approved data ("R","O","A"),
 #' and flags samples that are suspisciously high or low i nnumber of hits for pesticide schedule 2437. 
 #' Definitions of checks can be found at https://internal.cida.usgs.gov/NAWQA/data_checks/docs/files/check30-sql.html
@@ -17,9 +17,8 @@ pestCheck <- function(qw.data, returnAll = FALSE)
 {
         #subset data to schedule 2437 parameters collected after WY2013
         pestData <- subset(qw.data$PlotTable, PARM_CD %in% schedule2437 & 
-                                   waterYear(SAMPLE_START_DT) >= 2013)
-        
-        
+                                   SAMPLE_START_DT >= '2012-10-01')
+
         #Split data into approved and in review
         inReviewData <- subset(pestData, DQI_CD %in% c("I","S","P") &
                                        PARM_SEQ_GRP_CD != "INF" &
@@ -34,11 +33,11 @@ pestCheck <- function(qw.data, returnAll = FALSE)
                 
         #Get max number of hits in approved data at each site
         detects <- subset(approvedData, REMARK_CD != "<")
-        siteStats <- dplyr::summarize(group_by(detects,SITE_NO,RECORD_NO),
+        siteStats <- dplyr::summarize(dplyr::group_by(detects,SITE_NO,RECORD_NO),
                            numHits = length(RESULT_VA)
         )
         
-        siteStats <- dplyr::summarize(group_by(siteStats,SITE_NO),
+        siteStats <- dplyr::summarize(dplyr::group_by(siteStats,SITE_NO),
                            maxHits = max(numHits,na.rm=TRUE),
                            minHits = min(numHits,na.rm=TRUE),
                            N = length(numHits)
@@ -46,7 +45,7 @@ pestCheck <- function(qw.data, returnAll = FALSE)
         
         #Get number of hits for each sample
         detects <- subset(inReviewData, REMARK_CD != "<")
-        sampleHits <- dplyr::summarize(group_by(detects,SITE_NO,RECORD_NO),
+        sampleHits <- dplyr::summarize(dplyr::group_by(detects,SITE_NO,RECORD_NO),
                            numHits = length(RESULT_VA)
         )
         
